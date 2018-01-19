@@ -1,0 +1,4 @@
+#ifndef DIAGRAMELEMENT_H
+#define DIAGRAMELEMENT_H
+
+#endif // DIAGRAMELEMENT_H

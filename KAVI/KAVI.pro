@@ -29,7 +29,43 @@ SOURCES += \
     src/mainwindow.cpp
 
 HEADERS += \
-    include/mainwindow.h
+    include/mainwindow.h \
+    include/KAVIBase.h \
+    include/KAVIEnums.h \
+    include/KAVIMacros.h \
+    include/DiagramElement.h \
+    include/CheckUtils.h \
+    include/Convertor.h \
+    include/DiagramEvents.h \
+    include/DataWidget.h \
+    include/DiagramWidget.h \
+    include/DomainDescDialog.h \
+    include/DrivenEditWidget.h \
+    include/Edge.h \
+    include/DefinitionEdit.h \
+    include/DefinitionClassInfo.h \
+    include/OperatorsEdit.h \
+    include/OperatorsPredicateDialog.h \
+    include/OperatorsVariableDialog.h \
+    include/EdgePoint.h \
+    include/EdgtStructure.h \
+    include/EditWidget.h \
+    include/GraphClass.h \
+    include/InfoPanel.h \
+    include/Node.h \
+    include/NodeStructure.h \
+    include/ProblemsObjectInfo.h \
+    include/OperatorsPredicateInfo.h \
+    include/DefinitionPredicateInfo.h \
+    include/ProblemsPredicateInfo.h \
+    include/ProblemsEdit.h \
+    include/ProblemsObjectDialog.h \
+    include/ProblemsPredicateDialog.h \
+    include/TreeItem.h \
+    include/TreeModel.h \
+    include/OperatorsVariableInfo.h \
+    include/KAVIMainWindow.h \
+    include/XMLUtils.h
 
 FORMS += \
     forms/mainwindow.ui

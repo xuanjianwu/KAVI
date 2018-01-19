@@ -1,0 +1,4 @@
+#ifndef DIAGRAMEVENTS_H
+#define DIAGRAMEVENTS_H
+
+#endif // DIAGRAMEVENTS_H

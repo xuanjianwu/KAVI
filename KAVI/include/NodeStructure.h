@@ -1,0 +1,4 @@
+#ifndef NODESTRUCTURE_H
+#define NODESTRUCTURE_H
+
+#endif // NODESTRUCTURE_H

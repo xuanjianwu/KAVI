@@ -1,0 +1,4 @@
+#ifndef DIAGRAMWIDGET_H
+#define DIAGRAMWIDGET_H
+
+#endif // DIAGRAMWIDGET_H

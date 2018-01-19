@@ -1,0 +1,4 @@
+#ifndef EDGTSTRUCTURE_H
+#define EDGTSTRUCTURE_H
+
+#endif // EDGTSTRUCTURE_H

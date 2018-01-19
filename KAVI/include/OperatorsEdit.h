@@ -1,0 +1,4 @@
+#ifndef OPERATORSEDIT_H
+#define OPERATORSEDIT_H
+
+#endif // OPERATORSEDIT_H
