@@ -153,7 +153,7 @@ private:
     // Id of Node
     int id;
     // event target of Node
-    QOject* eventTarget;
+    QObject* eventTarget;
     // named color layers of Node
     QSet<QString> nodeLayers;
     // size of Node

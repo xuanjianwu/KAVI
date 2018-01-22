@@ -1,3 +1,9 @@
+/*
+ * @author: liYc
+ * @date  : 2018/1/22
+ * @brief : define enums of KAVI
+*/
+
 #ifndef KAVIENUMS_H
 #define KAVIENUMS_H
 
@@ -29,6 +35,15 @@ enum EdgePointShape {
     Point,
     ArrowPos,
     ArrowNeg
+};
+
+/*
+ * specify the orientations of Edge
+*/
+enum EdgeOrientation {
+    Forward,
+    Backward,
+    NoOrientation
 };
 
 #endif // KAVIENUMS_H

@@ -1,3 +1,9 @@
+/*
+ * @author: liYc
+ * @date  : 2018/1/22
+ * @brief : define Edge Point
+*/
+
 #ifndef EDGEPOINT_H
 #define EDGEPOINT_H
 
@@ -21,7 +27,7 @@ public:
     /*
      * move the EdgePoint by vector
      * @params:
-     *      vector - vector the move
+     *      vector - target vector
      * @return: void
     */
     void moveBy(const QPointF& vector);

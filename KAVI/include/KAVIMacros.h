@@ -1,3 +1,9 @@
+/*
+ * @author: liYc
+ * @date  : 2018/1/22
+ * @brief : define macros of KAVI
+*/
+
 #ifndef KAVIMACROS_H
 #define KAVIMACROS_H
 
@@ -10,9 +16,11 @@
 #define KAVI_NS_END }
 
 // common --------------------------------
+
 #define INVALID_ID -1
 
 // Node ----------------------------------
+
 #define INVALID_NODE_ID -1
 #define NODE_Z_VALUE 3
 #define NODE_PADDING 10
@@ -62,12 +70,14 @@
 #define NSTS_GOAL		"goal"
 
 // Edge Point ----------------------------
+
 #define EDGEPOINT_Z_VALUE 6
 #define EDGEPOINT_SIZE 6
 #define EDGEPOINT_ARROW_SIZE (EDGEPOINT_SIZE+4)
 #define ARROW_SIZE 15
 
 // Edge ----------------------------------
+
 const qreal Pi = 3.14159;
 #define EDGE_Z_VALUE 5
 #define EDGE_LINE_WIDTH 3
@@ -75,5 +85,17 @@ const qreal Pi = 3.14159;
 // Edge direction
 #define EDGE_START 	true
 #define EDGE_END	false
+
+// Edge Structure ------------------------
+
+// Edge purpose
+#define DEP_INHERITANCE 2	/* 0000 0010 */
+#define DEP_ASSOCIATION 1	/* 0000 0001 */
+#define DEP_NO_PURPOSE	0	/* 0000 0000 */
+#define DEP_UNKNOWN	252	/* 1111 1100 */
+
+// Edge colors
+#define EC_ASSOCIATION "#5E5F76"
+#define EC_INHERITANCE "#1386CF"
 
 #endif // KAVIMACROS_H

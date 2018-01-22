@@ -1,7 +1,7 @@
 /*
  * @author: liYc
  * @date  : 2018/1/22
- * @brief : define Node structure
+ * @brief : define Node structure base on Node
 */
 
 #ifndef NODESTRUCTURE_H
