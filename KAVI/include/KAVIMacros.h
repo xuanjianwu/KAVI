@@ -1,10 +1,79 @@
 #ifndef KAVIMACROS_H
 #define KAVIMACROS_H
 
+// namespace------------------------------
+
 // namespace begin
 #define KAVI_NS_BEGIN namespace KAVI {
 
 // namespace end
 #define KAVI_NS_END }
+
+// common --------------------------------
+#define INVALID_ID -1
+
+// Node ----------------------------------
+#define INVALID_NODE_ID -1
+#define NODE_Z_VALUE 3
+#define NODE_PADDING 10
+#define NODE_LAYER_CNT 3
+#define NODE_LAYER_WIDTH 5
+
+// Node Structure ------------------------
+
+#define MAX_LABEL_LENGTH 20
+
+// node colors
+#define NC_CLASS "#F8F06F"
+#define NC_VARIABLE "#B1FB3C"
+#define NC_OBJECT "#4ADADC"
+#define NC_PREDICATE "#F7AE22"
+#define NC_INIT_PREDICATE "#75F4AB"
+#define NC_GOAL_PREDICATE "#FA8C80"
+#define NC_DEFAULT "#FFFFFF"
+
+// predicate layer colors
+#define LC_PRECOND "#3CDC84"
+#define LC_EFFECT_POS "#0F74DC"
+#define LC_EFFECT_NEG "#FF5753"
+#define LC_DEFAULT "#FFFFFF"
+
+// defaul node structure ID
+#define NS_DEFAULT_ID		-1
+
+// undefined node structure
+#define NS_UNDEF		0	/*0000 0000*/
+
+// node structure type
+#define NST_CLASS		(char)1		/*0000 0001*/
+#define NST_PREDICATE		(char)2		/*0000 0010*/
+#define NST_VARIABLE		(char)4		/*0000 0100*/
+#define NST_OBJECT		(char)8		/*0000 1000*/
+#define NST_ALL_TYPES		(char)15	/*0000 1111*/
+#define NST_UNKNOWN		(char)240	/*1111 0000*/
+
+// node structure predicate set
+#define NSPS_PRECOND		"precond"
+#define NSPS_EFFECT_POS		"effect+"
+#define NSPS_EFFECT_NEG		"effect-"
+
+// node structure task predicate set
+#define NSTS_INIT		"init"
+#define NSTS_GOAL		"goal"
+
+// Edge Point ----------------------------
+#define EDGEPOINT_Z_VALUE 6
+#define EDGEPOINT_SIZE 6
+#define EDGEPOINT_ARROW_SIZE (EDGEPOINT_SIZE+4)
+#define ARROW_SIZE 15
+
+// Edge ----------------------------------
+const qreal Pi = 3.14159;
+#define EDGE_Z_VALUE 5
+#define EDGE_LINE_WIDTH 3
+
+// Edge direction
+#define EDGE_START 	true
+#define EDGE_END	false
 
 #endif // KAVIMACROS_H

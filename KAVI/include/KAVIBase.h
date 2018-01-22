@@ -7,6 +7,12 @@
 // include macros
 #include "KAVIMacros.h"
 
+
+// include basic
+#include <QtCore>
 #include <QtGui>
+#include <QObject>
+#include <QSet>
+#include <QGraphicsLineItem>
 
 #endif // KAVIBASE_H
