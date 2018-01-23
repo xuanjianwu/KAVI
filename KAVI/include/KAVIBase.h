@@ -24,6 +24,10 @@
 #include <QVariant>
 #include <QString>
 #include <QList>
+#include <QMap>
 #include <QVector>
+#include <QtXml>
+#include <QHash>
+#include <QStringList>
 
 #endif // KAVIBASE_H

@@ -105,7 +105,7 @@ private:
      * @return: void
     */
     void initPolygon();
-}
+};
 
 KAVI_NS_END
 

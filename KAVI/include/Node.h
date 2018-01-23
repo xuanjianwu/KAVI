@@ -174,7 +174,7 @@ private:
      * @return: void
     */
     void drawLayers(QPainter* painter);
-}
+};
 
 KAVI_NS_END
 

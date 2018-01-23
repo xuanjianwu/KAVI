@@ -154,7 +154,7 @@ private:
      * @return: void
     */
     void handleClickEvent(bool isStart, QPointF pos);
-}
+};
 
 KAVI_NS_END
 

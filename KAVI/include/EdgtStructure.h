@@ -48,7 +48,7 @@ struct EdgeStructure {
      * @return: N/A
     */
     void switchOrientation();
-}
+};
 
 KAVI_NS_END
 

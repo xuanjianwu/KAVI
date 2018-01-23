@@ -66,7 +66,7 @@ private:
     int id;
     // the data of item that trigger event
     QVariant eventData;
-}
+};
 
 KAVI_NS_END
 

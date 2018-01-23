@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -65,7 +65,8 @@ HEADERS += \
     include/TreeModel.h \
     include/OperatorsVariableInfo.h \
     include/KAVIMainWindow.h \
-    include/XMLUtils.h
+    include/XMLUtils.h \
+    include/igraph.h
 
 FORMS += \
     forms/mainwindow.ui

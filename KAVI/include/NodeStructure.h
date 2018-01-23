@@ -62,7 +62,7 @@ struct NodeStructure {
 private:
     // specify the content list of node structure
     QHash<ContentType, QVariant> content;
-}
+};
 
 KAVI_NS_END
 

@@ -9,11 +9,17 @@
 
 // namespace------------------------------
 
-// namespace begin
+// namespace KAVI begin
 #define KAVI_NS_BEGIN namespace KAVI {
 
-// namespace end
+// namespace KAVI end
 #define KAVI_NS_END }
+
+// namespace CheckUtils begin
+#define CU_NS_BEGIN namespace CheckUtils {
+
+// namespace CheckUtils end
+#define CU_NS_END }
 
 // common --------------------------------
 
