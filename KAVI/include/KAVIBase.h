@@ -8,7 +8,7 @@
 #define KAVIBASE_H
 
 // include Enums
-#include "KAVIEnums.h"
+#include "KAVITypedefs.h"
 
 // include macros
 #include "KAVIMacros.h"
@@ -23,13 +23,18 @@
 #include <QEvent>
 #include <QVariant>
 #include <QString>
+#include <QStringList>
 #include <QList>
 #include <QMap>
+#include <QHash>
 #include <QVector>
 #include <QtXml>
 #include <QHash>
-#include <QStringList>
 #include <QAbstractItemModel>
 #include <QModelIndex>
+#include <QWidget>
+#include <QDialog>
+#include <QGraphicsScene>
+#include <QMainWindow>
 
 #endif // KAVIBASE_H

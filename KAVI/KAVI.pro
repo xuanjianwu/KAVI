@@ -29,9 +29,7 @@ SOURCES += \
     src/mainwindow.cpp
 
 HEADERS += \
-    include/mainwindow.h \
     include/KAVIBase.h \
-    include/KAVIEnums.h \
     include/KAVIMacros.h \
     include/DiagramElement.h \
     include/CheckUtils.h \
@@ -48,7 +46,6 @@ HEADERS += \
     include/OperatorsPredicateDialog.h \
     include/OperatorsVariableDialog.h \
     include/EdgePoint.h \
-    include/EdgtStructure.h \
     include/EditWidget.h \
     include/GraphClass.h \
     include/InfoPanel.h \
@@ -66,7 +63,9 @@ HEADERS += \
     include/OperatorsVariableInfo.h \
     include/KAVIMainWindow.h \
     include/XMLUtils.h \
-    include/igraph.h
+    include/igraph.h \
+    include/EdgeStructure.h \
+    include/KAVITypedefs.h
 
 FORMS += \
     forms/mainwindow.ui

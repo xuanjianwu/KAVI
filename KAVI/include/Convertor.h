@@ -1,7 +1,9 @@
 /*
  * @author: liYc
  * @date  : 2018/1/25
- * @brief : define the data convertor utilities
+ * @brief : This class handles all the input/output from/to files.
+ *          Only output is supported for the PDDL format.
+ *          In the case of XML both input and output is supported.
 */
 
 #ifndef CONVERTOR_H

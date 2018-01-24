@@ -21,6 +21,21 @@
 // namespace CheckUtils end
 #define CU_NS_END }
 
+// namespace XMLUtils begin
+#define XMLU_NS_BEGIN namespace XMLUtils {
+
+// namespace XMLUtils end
+#define XMLU_NS_END }
+
+// KAVIMainWindow ------------------------
+
+#define VIZ_RECT_NODE 'R'
+#define VIZ_ELLIPSE_NODE 'E'
+
+#define VIZ_LANG_DEF 'L'
+#define VIZ_ACTION_DEF 'A'
+#define VIZ_TASK_DEF 'T'
+
 // common --------------------------------
 
 #define INVALID_ID -1
@@ -33,7 +48,7 @@
 #define NODE_LAYER_CNT 3
 #define NODE_LAYER_WIDTH 5
 
-// Node Structure ------------------------
+// NodeStructure -------------------------
 
 #define MAX_LABEL_LENGTH 20
 
@@ -75,7 +90,7 @@
 #define NSTS_INIT		"init"
 #define NSTS_GOAL		"goal"
 
-// Edge Point ----------------------------
+// EdgePoint -----------------------------
 
 #define EDGEPOINT_Z_VALUE 6
 #define EDGEPOINT_SIZE 6
@@ -92,7 +107,7 @@ const qreal Pi = 3.14159;
 #define EDGE_START 	true
 #define EDGE_END	false
 
-// Edge Structure ------------------------
+// EdgeStructure -------------------------
 
 // Edge purpose
 #define DEP_INHERITANCE 2	/* 0000 0010 */
@@ -104,8 +119,35 @@ const qreal Pi = 3.14159;
 #define EC_ASSOCIATION "#5E5F76"
 #define EC_INHERITANCE "#1386CF"
 
-// tree model ----------------------------
+// TreeModel -----------------------------
 #define LABEL_COLUMN 0
 #define ID_COLUMN 1
+
+// DataWidget ----------------------------
+
+// node types
+#define NT_CLASS "class"
+#define NT_PREDICATE "predicate"
+#define NT_VARIABLE "variable"
+#define NT_OBJECT "object"
+
+// edge purposes
+#define EP_ASSOCIATION "association"
+#define EP_INHERITANCE "inheritance"
+
+// predicate set names
+#define PS_PRECOND "precondition"
+#define PS_EFFECT_POS "effect+"
+#define PS_EFFECT_NEG "effect-"
+
+// DiagramWidget -------------------------
+
+#define TEMP_LINE_COLOR "#00FF00"
+#define TEMP_LINE_WIDTH 3
+#define TEMP_LINE_Z_VALUE 7
+
+// EditWidget ----------------------------
+
+#define INVALID_ARGN 0
 
 #endif // KAVIMACROS_H

@@ -4,8 +4,8 @@
  * @brief : define Edge structure base on Edge
 */
 
-#ifndef EDGTSTRUCTURE_H
-#define EDGTSTRUCTURE_H
+#ifndef EDGESTRUCTURE_H
+#define EDGESTRUCTURE_H
 
 #include "KAVIBase.h"
 #include "Edge.h"
@@ -52,4 +52,4 @@ struct EdgeStructure {
 
 KAVI_NS_END
 
-#endif // EDGTSTRUCTURE_H
+#endif // EDGESTRUCTURE_H
