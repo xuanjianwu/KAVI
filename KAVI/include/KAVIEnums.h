@@ -10,40 +10,40 @@
 /*
  * specify the shapes of Node
 */
-enum NodeShape {
+typedef enum _NodeShape {
     Rectangle,
     Ellipse,
     Undefined
-};
+} NodeShape;
 
 /*
  * specify content types of node structure
 */
-enum ContentType {
+typedef enum _ContentType {
     nodeType,           // specify the node's type
     nodeLabel,          // specify the node's label
     nodePosition,       // specify the node's position
     nodePredicateSet,   // specify the node's operator predicate set
     nodeState,          // specify the node's task state
     nodeClass           // specify the node's class
-};
+} ContentType;
 
 /*
  * specify the shapes of EdgePoint
 */
-enum EdgePointShape {
+typedef enum _EdgePointShape {
     Point,
     ArrowPos,
     ArrowNeg
-};
+} EdgePointShape;
 
 /*
  * specify the orientations of Edge
 */
-enum EdgeOrientation {
+typedef enum _EdgeOrientation {
     Forward,
     Backward,
     NoOrientation
-};
+} EdgeOrientation;
 
 #endif // KAVIENUMS_H
