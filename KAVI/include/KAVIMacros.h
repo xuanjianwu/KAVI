@@ -104,4 +104,8 @@ const qreal Pi = 3.14159;
 #define EC_ASSOCIATION "#5E5F76"
 #define EC_INHERITANCE "#1386CF"
 
+// tree model ----------------------------
+#define LABEL_COLUMN 0
+#define ID_COLUMN 1
+
 #endif // KAVIMACROS_H

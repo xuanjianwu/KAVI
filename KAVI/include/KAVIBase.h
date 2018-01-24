@@ -29,5 +29,7 @@
 #include <QtXml>
 #include <QHash>
 #include <QStringList>
+#include <QAbstractItemModel>
+#include <QModelIndex>
 
 #endif // KAVIBASE_H

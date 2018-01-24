@@ -1,7 +1,8 @@
 /*
  * @author: liYc
  * @date  : 2018/1/23
- * @brief :
+ * @brief : this graphclass is mainly used to offer utilities
+ *          used on the graph structures in KAVI
 */
 
 #ifndef GRAPHCLASS_H
