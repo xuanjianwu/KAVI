@@ -18,11 +18,11 @@ public:
      * construct function
      * @params:
      *      pos     - EdgePoint's position
-     *      isStart - EdgePoint's direction
+     *      isStart - EdgePoint's orientation
      *      parent  - EdgePoint's parent object
      * @return:
     */
-    Edgepoint(const QPointF & pos, bool isStart, QGraphicsItem * parent = 0);
+    EdgePoint(const QPointF& pos, bool isStart, QGraphicsItem* parent = 0);
 
     /*
      * move the EdgePoint by vector
@@ -48,7 +48,7 @@ public:
     void setColor(QColor newColor);
 
     /*
-     * set EdgePoint' shape
+     * set EdgePoint' shape and init arrow vector if necessary
      * @params:
      *      shape - target shape
      * @return: void
@@ -85,22 +85,22 @@ public:
      *      widget  - unused
      * @return: void
     */
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 
 private:
-    // specify the EdgePoint's direction
+    // specify the EdgePoint's orientation
     bool start;
     // specify the EdgePoint's shape
     EdgePointShape edgepointShape;
     // specify the EdgePoint's color
     QColor color;
-    // the vector of edge oint using floating point precision
+    // the vector of the three points in arrow which present as a triangle
     QPolygonF polygon;
     // specify the line angle
     double lineAngle;
 
     /*
-     * init the polygon
+     * init the polygon of the triangle arrow's three points
      * @params: N/A
      * @return: void
     */

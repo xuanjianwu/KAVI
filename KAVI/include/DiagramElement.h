@@ -22,7 +22,8 @@ public:
     DiagramElement(QGraphicsItem* parent = 0);
 
     /*
-     * stick this diagram element to another element
+     * stick/move current diagram element to another element
+     * step by step by the line between this two diagram
      * @params:
      *      another - diagram element
      * @return: void

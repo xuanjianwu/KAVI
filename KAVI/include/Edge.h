@@ -29,7 +29,7 @@ public:
      * @params:
      *      line  - the line to init Edge
      *      id    - Edge ID
-     *      scene - the scene Edge belongs to
+     *      scene - the scene which Edge belongs to
      *      host  - the event target of Edge
      * @return: N/A
     */
@@ -78,7 +78,7 @@ public:
     void setEdgeOrientation(EdgeOrientation orientation);
 
     /*
-     * set Edge Points' color
+     * set EdgePoints' color
      * @params:
      *      color - target color
      * @return: void
@@ -95,7 +95,7 @@ public:
     /*
      * get the connected Node's ID
      * @params:
-     *      is Start - Edge's orientation
+     *      is Start - EdgePoint's orientation
      *      nodeList - the Nodes to search
      * @return: the target Node's ID
     */
@@ -116,9 +116,9 @@ public:
     QRectF boundingRect() const;
 
     // start point of Edge
-    Edgepoint * start;
+    EdgePoint * start;
     // end point of Edge
-    Edgepoint * end;
+    EdgePoint * end;
 
 private:
     // Edge ID
@@ -147,9 +147,9 @@ private:
     bool sceneEventFilter(QGraphicsItem* watched, QEvent* event);
 
     /*
-     * handle click event
+     * handle EdgePoint's click event
      * @params:
-     *      isStart - Edge's orientation
+     *      isStart - EdgePoint's orientation
      *      pos     - position where click occur
      * @return: void
     */

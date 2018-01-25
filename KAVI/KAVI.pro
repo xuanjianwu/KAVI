@@ -26,7 +26,10 @@ INCLUDEPATH += . include
 
 SOURCES += \
     src/main.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    view/EdgePoint.cpp \
+    view/DiagramElement.cpp \
+    view/Edge.cpp
 
 HEADERS += \
     include/KAVIBase.h \
