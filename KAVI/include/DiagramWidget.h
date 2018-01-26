@@ -22,8 +22,21 @@ class DiagramWidget: public QGraphicsScene {
     Q_OBJECT
 
 public:
+    /*
+    * construct function
+    * @params:
+    *       width   - this scene rect's width
+    *       height  - this scene rect's height
+    *       parent  - parent object
+    * @return: N/A
+    */
     DiagramWidget(int width, int height, QWidget* parent = 0);
 
+    /*
+    * reset and clear nodes, edges
+    * @params: N/A
+    * @return: N/A
+    */
     void reset();
 
     void setDiagramMode(DiagramMode mode);
@@ -49,29 +62,74 @@ private:
     QString layerColor(QString predicateSet);
     QString stateColor(QString predicateState);
 
+    // the hash table of current scene diagram's Node <nodeID, node*>
     typedef QHash<int, Node*> NodeContainer;
+
+    // the hash table of current scene diagran's edge <edgeID, edge*>
     typedef QHash<int, Edge*> EdgeContainer;
 
     int newNodeID();
     int newEdgeID();
 
+    // container of diagram widget nodes
     NodeContainer dgwNodes;
+
+    // container of diagram widget edges
     EdgeContainer dgwEdges;
 
+    // the current mode of operating diagram
     DiagramMode myMode;
 
-
+    // the temp line while inserting edge
     QGraphicsLineItem* tempLine;
 
+    /*
+    * handle the left click in the diagram scene and occur relevant
+    * event: DiagramLeftClick, EdgeLeftClick, NodeLeftClick
+    * @params:
+    *       pos - the click's positin
+    * @return: N/A
+    */
     void leftClick(QPointF pos);
+
+    /*
+    * handle the right click in the diagram scene and occur relevant
+    * event: DiagramRightClick, EdgeRightClick, NodeRightClick
+    * @params:
+    *       pos - the click's positin
+    * @return: N/A
+    */
     void rightClick(QPointF pos);
 
     int collidingNodeID(QPointF coord);
     int collidingEdgeID(QPointF coord);
 
 protected:
+    /*
+    * handle mouse press event in diagram scene, considering the diagram
+    * mode, in detail, to left click or right click
+    * @params:
+    *       event - the mouse event
+    * @return: N/A
+    */
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
+
+    /*
+    * handle mouse release event in diagram scene, considering the InsertLine
+    * mode, it will occur a EdgeDefined event
+    * @params:
+    *       event - the mouse event
+    * @return: N/A
+    */
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event);
+
+    /*
+    * handle mouse move event in diagram scene, considering the InsertLine
+    * mode, it will update the temp line
+    * @params:
+    *       event - the mouse event
+    * @return: N/A
+    */
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
 }
 

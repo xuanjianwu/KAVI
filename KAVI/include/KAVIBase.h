@@ -36,5 +36,6 @@
 #include <QDialog>
 #include <QGraphicsScene>
 #include <QMainWindow>
+#include <QtDebug>
 
 #endif // KAVIBASE_H

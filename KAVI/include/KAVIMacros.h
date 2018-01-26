@@ -57,6 +57,8 @@
 #define NC_VARIABLE "#B1FB3C"
 #define NC_OBJECT "#4ADADC"
 #define NC_PREDICATE "#F7AE22"
+
+// state colors
 #define NC_INIT_PREDICATE "#75F4AB"
 #define NC_GOAL_PREDICATE "#FA8C80"
 #define NC_DEFAULT "#FFFFFF"

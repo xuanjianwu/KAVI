@@ -58,7 +58,7 @@ SOURCES += \
     utils/XMLUtils.cpp \
     utils/igraph.cpp \
     utils/GraphClass.cpp \
-    view/DiagramEvent.cpp
+    view/DiagramEvents.cpp
 
 HEADERS += \
     include/KAVIBase.h \

@@ -4,7 +4,9 @@
 
 KAVI_NS_BEGIN
 
-EdgePoint::EdgePoint(const QPointF& pos, bool isStart, QGraphicsItem* parent) {
+EdgePoint::EdgePoint(const QPointF& pos, bool isStart, QGraphicsItem* parent)
+    :DiagramElement(parent)
+{
     start = isStart;
     setPos(pos);
     color = Qt::green;
