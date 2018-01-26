@@ -1,7 +1,7 @@
 /*
  * @author: liYc
  * @date  : 2018/1/22
- * @brief : define Edge Point
+ * @brief : define Edge Point, include the property of diagram
 */
 
 #ifndef EDGEPOINT_H

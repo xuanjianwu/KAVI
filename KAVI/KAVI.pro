@@ -25,11 +25,40 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += . include
 
 SOURCES += \
-    src/main.cpp \
-    src/mainwindow.cpp \
     view/EdgePoint.cpp \
     view/DiagramElement.cpp \
-    view/Edge.cpp
+    view/Edge.cpp \
+    view/DiagramWidget.cpp \
+    model/DataWidget.cpp \
+    view/Node.cpp \
+    view/EdgeStructure.cpp \
+    view/NodeStructure.cpp \
+    gui/DefinitionClassInfo.cpp \
+    gui/DefinitionPredicateInfo.cpp \
+    gui/DomainDescDialog.cpp \
+    gui/InfoPanel.cpp \
+    src/KAVIMainWindow.cpp \
+    gui/OperatorsPredicateDialog.cpp \
+    gui/OperatorsPredicateInfo.cpp \
+    gui/OperatorsVariableDialog.cpp \
+    gui/OperatorsVariableInfo.cpp \
+    gui/ProblemsObjectDialog.cpp \
+    gui/ProblemsObjectInfo.cpp \
+    gui/ProblemsPredicateDialog.cpp \
+    gui/ProblemsPredicateInfo.cpp \
+    controller/EditWidget.cpp \
+    controller/DrivenEditWidget.cpp \
+    controller/DefinitionEdit.cpp \
+    controller/OperatorsEdit.cpp \
+    controller/ProblemsEdit.cpp \
+    gui/TreeItem.cpp \
+    gui/TreeModel.cpp \
+    utils/CheckUtils.cpp \
+    utils/Convertor.cpp \
+    utils/XMLUtils.cpp \
+    utils/igraph.cpp \
+    utils/GraphClass.cpp \
+    view/DiagramEvent.cpp
 
 HEADERS += \
     include/KAVIBase.h \

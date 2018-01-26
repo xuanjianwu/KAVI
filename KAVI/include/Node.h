@@ -1,7 +1,8 @@
 /*
  * @author: liYc
  * @date  : 2018/1/22
- * @brief : define the basic node function
+ * @brief : define the basic node, only include the basic
+ *          property of diagram
 */
 
 #ifndef NODE_H
@@ -69,7 +70,7 @@ public:
     const QString getLabel();
 
     /*
-     * set the label of Node
+     * set the label of Node and update node's size
      * @params:
      *      label - target label
      * @return: void
@@ -154,11 +155,11 @@ private:
     int id;
     // event target of Node
     QObject* eventTarget;
-    // named color layers of Node
+    // named color layers of Node/color's format in string
     QSet<QString> nodeLayers;
     // size of Node
     QSize nodeSize;
-    // Node label
+    // Node's label
     QGraphicsSimpleTextItem* nodeLabel;
     // shape of Node
     NodeShape nodeShape;

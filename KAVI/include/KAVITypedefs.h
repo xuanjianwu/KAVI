@@ -25,6 +25,7 @@ typedef enum _NodeShape {
  * specify content types of node structure
 */
 typedef enum _ContentType {
+    nodeID,             // specify the node's ID
     nodeType,           // specify the node's type
     nodeLabel,          // specify the node's label
     nodePosition,       // specify the node's position

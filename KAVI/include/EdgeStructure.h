@@ -1,7 +1,8 @@
 /*
  * @author: liYc
  * @date  : 2018/1/22
- * @brief : define Edge structure base on Edge
+ * @brief : define Edge structure base on Edge, adding
+ *          the user application's infomation
 */
 
 #ifndef EDGESTRUCTURE_H

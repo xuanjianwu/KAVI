@@ -1,7 +1,8 @@
 /*
  * @author: liYc
  * @date  : 2018/1/22
- * @brief : define Node structure base on Node
+ * @brief : define Node structure base on Node, adding
+ *          the user application's infomation
 */
 
 #ifndef NODESTRUCTURE_H

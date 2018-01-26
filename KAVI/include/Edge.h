@@ -1,7 +1,8 @@
 /*
  * @author: liYc
  * @date  : 2018/1/22
- * @brief : define Edge base on Edge Point, Node, DiagramElement
+ * @brief : define Edge base on Edge Point, Node, DiagramElement,
+ *          only include the basic property of diagram.
 */
 
 #ifndef EDGE_H
