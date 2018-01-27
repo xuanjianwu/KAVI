@@ -59,13 +59,32 @@ public:
     const DataWidget* xmlDataPointer();
 
 signals:
+    /*
+    * this signal is occur by EditWidget and its inheritor,
+    * this signal is handled by the KAVIMainWindow class, such
+    * as on_definitionEdit_sceneChanged(int changeCode);
+    * @params:
+    *       changeCode - the changeCode carried by signal
+    * @return: void
+    */
     void sceneChanged(int changeCode);
+
+    /*
+    * this signal is occur by EditWidget's inheritor,
+    * this signal is handled by the KAVIMainWindow class, such
+    * as on_definitionEdit_updateInfoPanel(QWidget * infoWidget);
+    * @params:
+    *       infoWidget - the new infoWidget
+    * @return: void
+    */
     void updateInfoPanel(QWidget* infoWidget);
 
 public slots:
 
     /*
     * set the changed value
+    * this slot is called by handleExternChange, and the KAVIMainWindow
+    * class, such as ui.definitionEdit->setChanged(false);
     * @params:
     *       value - specified value
     * @return: void
@@ -74,6 +93,7 @@ public slots:
 
     /*
     * handle extern change and set the changed value
+    * this slot is called by the connect from InfoPanel's signal:madeChange
     * @params:
     *       changeCode - specified changeCode
     * @return: void
@@ -113,7 +133,7 @@ protected:
     //
     char allowedEdgeMask;
 
-    // specify
+    // specify if the EditWidget has catch change
     bool changed;
 
     bool event(QEvent* event);
