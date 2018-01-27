@@ -2,7 +2,7 @@
  * @author: liYc
  * @date  : 2018/1/25
  * @brief : The EditWidget class is inherited from the QGraphicsView class,
- *          serves as the controller in MVC.
+ *          serves as the Controller in MVC.
 */
 
 #ifndef EDITWIDGET_H
@@ -20,11 +20,42 @@ class EditWidget: public QGraphicsView {
     Q_OBJECT
 
 public:
+
+    /*
+    * construct function
+    * @params:
+    *       parent - parent object
+    * @return: N/A
+    */
     EditWidget(QWidget* parent = 0);
 
+    /*
+    * reset DataWidget, changed value, and DataWidget will reset DiagramWidget
+    * @params: N/A
+    * @return: N/A
+    */
     void reset();
+
+    /*
+    * return the changed value
+    * @params: N/A
+    * @return: is changed? bool
+    */
     bool wasChanged();
+
+    /*
+    * set the edit mode, it will also set the diagram mode
+    * @params:
+    *       mode - specified edit mode
+    * @return: void
+    */
     void setEditMode(EditMode mode);
+
+    /*
+    * get the pointer of DataWidget
+    * @params: N/A
+    * @return: DataWidget's pointer
+    */
     const DataWidget* xmlDataPointer();
 
 signals:
@@ -32,10 +63,30 @@ signals:
     void updateInfoPanel(QWidget* infoWidget);
 
 public slots:
+
+    /*
+    * set the changed value
+    * @params:
+    *       value - specified value
+    * @return: void
+    */
     void setChanged(bool value);
+
+    /*
+    * handle extern change and set the changed value
+    * @params:
+    *       changeCode - specified changeCode
+    * @return: void
+    */
     void handleExternChange(int changeCode);
 
-    void loadXMLdata(QDomDocument diagramElement);
+    /*
+    * load XML data to DataWidget and reset changed value
+    * @params:
+    *       diagramDocuement - specified XML document
+    * @return: void
+    */
+    void loadXMLdata(QDomDocument diagramDocument);
 
 protected:
 
@@ -45,16 +96,24 @@ protected:
         PosAssocChange
     };
 
+    // current edit mode
     EditMode editMode;
 
+    // the associated Model of MVC
     DataWidget* xmlData;
+
+    // the associated View of MVC
     DiagramWidget* diagram;
 
+    // the name matching using regular expressions
     QRegExp nameChecker;
 
+    //
     char allowedNodeMask;
+    //
     char allowedEdgeMask;
 
+    // specify
     bool changed;
 
     bool event(QEvent* event);

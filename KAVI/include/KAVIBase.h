@@ -21,6 +21,7 @@
 #include <QSet>
 #include <QGraphicsLineItem>
 #include <QEvent>
+#include <QFile>
 #include <QVariant>
 #include <QString>
 #include <QStringList>

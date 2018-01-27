@@ -152,4 +152,7 @@ const qreal Pi = 3.14159;
 
 #define INVALID_ARGN 0
 
+// the size of diagram scene
+#define DIAGRAM_SIZE 1000
+
 #endif // KAVIMACROS_H

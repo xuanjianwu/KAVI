@@ -2,7 +2,7 @@
  * @author: liYc
  * @date  : 2018/1/25
  * @brief : This class inherits from QGraphicsScene and it is
- *          an implementation of the View, serves as the view
+ *          an implementation of the View, serves as the View
  *          in MVC.
 */
 
