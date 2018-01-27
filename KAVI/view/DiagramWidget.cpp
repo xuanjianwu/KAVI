@@ -417,7 +417,7 @@ void DiagramWidget::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
             qDebug() << "$DiagramWidget::mouseReleaseEvent : edge defined";
             DiagramEvent myEvent(EdgeDefined, newEdgeID(), QVariant(package));
-            QApplication::sendEvent(parent(), &myEvent);
+            QApplication::sendEvent(this->parent(), &myEvent);
         }
     }
 

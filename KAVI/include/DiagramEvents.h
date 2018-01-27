@@ -13,27 +13,27 @@ KAVI_NS_BEGIN
 
 // custom events
 
-// left click on diagram
+// left click on diagram, occur from DiagramWidget
 extern QEvent::Type DiagramLeftClick;
-// right click on diagram
+// right click on diagram, occur from DiagramWidget
 extern QEvent::Type DiagramRightClick;
-// left click on node
+// left click on node, occur from DiagramWidget
 extern QEvent::Type NodeLeftClick;
-// right click on node
+// right click on node, occur from DiagramWidget
 extern QEvent::Type NodeRightClick;
-// left click on edge
+// left click on edge, occur from DiagramWidget
 extern QEvent::Type EdgeLeftClick;
-// right click on edge
+// right click on edge, occur from DiagramWidget
 extern QEvent::Type EdgeRightClick;
-// node moves
+// node moves, occur from Node
 extern QEvent::Type NodeMoved;
-// edge moves
+// edge moves, occur from Edge
 extern QEvent::Type EdgeMoved;
-// node drags
+// node drags, occur from Node
 extern QEvent::Type NodeDrag;
-// define edge
+// define edge, occur from DiagramWidget
 extern QEvent::Type EdgeDefined;
-// reshape node
+// reshape node, occur from Node
 extern QEvent::Type NodeReshaped;
 
 class DiagramEvent: public QEvent {

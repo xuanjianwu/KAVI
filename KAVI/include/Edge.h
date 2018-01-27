@@ -148,7 +148,7 @@ private:
     bool sceneEventFilter(QGraphicsItem* watched, QEvent* event);
 
     /*
-     * handle EdgePoint's click event
+     * handle EdgePoint's click event and may occur a EdgeMoved event
      * @params:
      *      isStart - EdgePoint's orientation
      *      pos     - position where click occur

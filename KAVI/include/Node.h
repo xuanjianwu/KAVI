@@ -70,7 +70,8 @@ public:
     const QString getLabel();
 
     /*
-     * set the label of Node and update node's size
+     * set the label of Node and update node's size,
+     * occuring a NodeReshaped event
      * @params:
      *      label - target label
      * @return: void
@@ -118,7 +119,7 @@ public:
 
 protected:
     /*
-     * handle mouse move event
+     * handle mouse move event and may occur a NodeDrag event
      * @params:
      *      event - QGraphicsSceneMouseEvent
      * @return: void
@@ -134,7 +135,7 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
     /*
-     * handle mouse release event
+     * handle mouse release event and may occur a NodeMoved event
      * @params:
      *      event - QGraphicsSceneMouseEvent
      * @return: void
