@@ -59,7 +59,8 @@ typedef enum _EdgeOrientation {
 
 // DataWidget ---------------------------
 
-typedef QPair<int,bool> DataEdgepoint;
+// <connected edge's ID, connected edgepoint's orientation>
+typedef QPair<int, bool> DataEdgepoint;
 
 // InfoPanel ----------------------------
 

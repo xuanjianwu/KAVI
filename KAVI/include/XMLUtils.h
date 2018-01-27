@@ -11,6 +11,7 @@
 
 XMLU_NS_BEGIN
 
+    // the connected nodes' ID <startNode's ID, endNode's ID> of edge
     typedef QPair<int, int> EdgeDefinition;
 
     int	getIntAttribute(const QDomElement& elem, QString attrName);
