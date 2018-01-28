@@ -19,7 +19,6 @@
 #include <QtGui>
 #include <QObject>
 #include <QSet>
-#include <QGraphicsLineItem>
 #include <QEvent>
 #include <QFile>
 #include <QVariant>
@@ -35,8 +34,15 @@
 #include <QModelIndex>
 #include <QWidget>
 #include <QDialog>
+#include <QGraphicsItem>
+#include <QGraphicsLineItem>
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QMainWindow>
 #include <QtDebug>
+#include <QInputDialog>
+#include <QApplication>
+#include <QGraphicsSceneMouseEvent>
+#include <QMessageBox>
 
 #endif // KAVIBASE_H

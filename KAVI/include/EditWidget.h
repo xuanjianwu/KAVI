@@ -3,6 +3,7 @@
  * @date  : 2018/1/25
  * @brief : The EditWidget class is inherited from the QGraphicsView class,
  *          serves as the Controller in MVC.
+ *          Mainly handle the events distribution.
 */
 
 #ifndef EDITWIDGET_H
@@ -92,7 +93,7 @@ public slots:
     void setChanged(bool value);
 
     /*
-    * handle extern change and set the changed value
+    * handle extern change from InfoPanel and set the changed value
     * this slot is called by the connect from InfoPanel's signal:madeChange
     * @params:
     *       changeCode - specified changeCode
@@ -128,9 +129,9 @@ protected:
     // the name matching using regular expressions
     QRegExp nameChecker;
 
-    //
+    // the allowed node's mask in associated Edit View
     char allowedNodeMask;
-    //
+    // the allowed edge's mask in associated Edit View
     char allowedEdgeMask;
 
     // specify if the EditWidget has catch change
@@ -185,6 +186,7 @@ protected:
     * and reset edge in DiagramWidget; (2) edge move only causes that edgepoint moves in the node,
     * so only change edge position in DataWidget; (3) edge move causes change connection, need to
     * delete old connection and make new connection in DataWidget
+    * problems: when changeConnection, has not change edge position
     * @params:
     *       id      - move edge's ID
     *       isStart - edge's orientation
@@ -236,7 +238,7 @@ protected:
     char determineEdgePurpose(char startType, char endType);
 
     /*
-    * verify the edge, only allowed edge can pass the verify. In case of diagram,
+    * verify the edge's purpose, only allowed edge can pass the verify. In case of diagram,
     * the edge's orientation between predicate and class,variable,object does not
     * matter, by default, such edge should start from predicate, otherwise switch
     * orientation.
