@@ -136,20 +136,115 @@ protected:
     // specify if the EditWidget has catch change
     bool changed;
 
+    /*
+    * This function receives events to an object and should return true if the event was recognized and processed.
+    * The event() function can be reimplemented to customize the behavior of an object.
+    * Make sure you call the parent event class implementation for all the events you did not handle.
+    * handle the events from the DiagramWidget, for example:
+    *   DiagramEvent myEvent(DiagramRightClick, INVALID_ID, pos);
+    *   QApplication::sendEvent(this->parent(), &myEvent);
+    * @params:
+    *       event - specified eventt
+    * @return: the state of handling event
+    */
     bool event(QEvent* event);
+
+    /*
+    * handle node reshape, stick the connected edge to the after-reshape node
+    * in the DiagramWidget, but because the node's position does not change,
+    * so it is no need to update DataWidget
+    * @params:
+    *       id - specified node's ID
+    * @return: void
+    */
     void handleNodeReshape(int id);
+
+    /*
+    * handle node move, change the node position and connected edges' position
+    * in DataWidget
+    * @params:
+    *       id      - specified node's ID
+    *       vector  - vector of move
+    * @return: void
+    */
     void handleNodeMove(int id, QPointF vector);
+
+    /*
+    * handle node drag, node drag is the process before node move, during the
+    * node drag, no need to update position in DataWidget, update position will
+    * be done while node move occurs, just translate connected edges in DiagramWidget
+    * @params:
+    *       id      - specified node's ID
+    *       vector  - vector of drag
+    * @return: void
+    */
     void handleNodeDrag(int id, QPointF vector);
+
+    /*
+    * handle edge move, after edge move: (1): edge move means nothing or is not allowed, nochange
+    * and reset edge in DiagramWidget; (2) edge move only causes that edgepoint moves in the node,
+    * so only change edge position in DataWidget; (3) edge move causes change connection, need to
+    * delete old connection and make new connection in DataWidget
+    * @params:
+    *       id      - move edge's ID
+    *       isStart - edge's orientation
+    *       vector  - vector of move
+    * @return: void
+    */
     void handleEdgeMove(int id, bool isStart, QPointF vector);
+
+    /*
+    * define a new edge, after verify, make new connection in DataWidget
+    * @params:
+    *       startID    - start node ID
+    *       endID      - end node ID
+    *       startPoint - start node position
+    *       endPoint   - end node position
+    *       newID      - ID for new edge
+    * @return: void
+    */
     void defineEdge(int startID, int endID, QPointF startPoint, QPointF endPoint, int newID);
     virtual void defineRectangleNode(QPointF pos, int newID) = 0;
     virtual void defineEllipseNode(QPointF pos, int newID) = 0;
+
+    /*
+    * delete node and associated edges in DataWidget
+    * emit associated sceneChanged signal with changeCode
+    * @params:
+    *       nodeID - delete node's ID
+    * @return: void
+    */
     void deleteNode(int nodeID);
+
+    /*
+    * delete edge in DataWidget
+    * emit associated sceneChanged signal with changeCode
+    * @params:
+    *       edgeID - delete edge's ID
+    * @return: void
+    */
     void deleteEdge(int edgeID);
     virtual void displayInfo(int nodeID) = 0;
 
+    /*
+    * determine the purpose of edge
+    * @params:
+    *       startType - type of start node
+    *       endType   - type of end node
+    * @return: edge purpose
+    */
     char determineEdgePurpose(char startType, char endType);
 
+    /*
+    * verify the edge, only allowed edge can pass the verify. In case of diagram,
+    * the edge's orientation between predicate and class,variable,object does not
+    * matter, by default, such edge should start from predicate, otherwise switch
+    * orientation.
+    * @params:
+    *       edge   - the edge to verify
+    *       argNum - unused arg number
+    * @return: void
+    */
     virtual bool verifyEdge(EdgeStructure& edge, int& argNum);
     virtual ReconnectionValue verifyReconnection(EdgeStructure& edge,
                                                  int newNode, bool startMoved, int& argNum) = 0;

@@ -447,7 +447,7 @@ void DataWidget::changeEdgePos(int id, bool isStart, const QPointF &vector)
 
     Q_ASSERT(!position.isNull());
 
-    addVector(position,vector);
+    addVector(position, vector);
 }
 
 void DataWidget::changeEdgeAssociation(int id, bool isStart, int toNode)
