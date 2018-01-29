@@ -206,6 +206,18 @@ protected:
     * @return: void
     */
     void defineEdge(int startID, int endID, QPointF startPoint, QPointF endPoint, int newID);
+
+    /*
+    * renumber the order of predicate's argument, now it just minus 1（-1）
+    * of the specified argument element, and update the number of the next
+    * sibling Element in order
+    * used after disconnectEdgeFromNode
+    * @params:
+    *       toRenumber - the specified argument element to renumber
+    * @return: void
+    */
+    void renumberPredicateArguments(QDomElement toRenumber);
+
     virtual void defineRectangleNode(QPointF pos, int newID) = 0;
     virtual void defineEllipseNode(QPointF pos, int newID) = 0;
 

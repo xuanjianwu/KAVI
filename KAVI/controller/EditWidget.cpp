@@ -345,6 +345,21 @@ void EditWidget::defineEdge(int startID, int endID, QPointF startPoint, QPointF 
     }
 }
 
+void EditWidget::renumberPredicateArguments(QDomElement toRenumber)
+{
+    if ( toRenumber.isNull() || (toRenumber.tagName() != "starts") )
+        return;
+
+    int value = getIntAttribute(toRenumber, "argn");
+    value--;
+    while ( !toRenumber.isNull() )
+    {
+        setIntAttribute(toRenumber, "argn", value);
+        value ++;
+        toRenumber = toRenumber.nextSiblingElement("starts");
+    }
+}
+
 void EditWidget::deleteNode(int nodeID)
 {
     char nodeType = xmlData->readNodeType(nodeID);

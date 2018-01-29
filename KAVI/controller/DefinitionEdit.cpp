@@ -103,6 +103,7 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
     emit sceneChanged(EllipseNodeAdded);
 }
 
+/*
 void DefinitionEdit::renumberPredicateArguments(QDomElement toRenumber)
 {
     if ( toRenumber.isNull() || (toRenumber.tagName() != "starts") )
@@ -117,6 +118,7 @@ void DefinitionEdit::renumberPredicateArguments(QDomElement toRenumber)
         toRenumber = toRenumber.nextSiblingElement("starts");
     }
 }
+*/
 
 void DefinitionEdit::displayInfo(int nodeID)
 {
@@ -149,8 +151,8 @@ void DefinitionEdit::makeConnection(EdgeStructure &edge, int &argNum)
     if ( edge.purpose == DEP_INHERITANCE )
     {
         xmlData->addDataEdge(edge);
-        xmlData->connectEdgeToNode(edge.id, true, edge.startNodeID);
-        xmlData->connectEdgeToNode(edge.id, false, edge.endNodeID);
+        xmlData->connectEdgeToNode(edge.id, EDGE_START, edge.startNodeID);
+        xmlData->connectEdgeToNode(edge.id, EDGE_END, edge.endNodeID);
 
         emit sceneChanged(InherEdgeAdded);
         return;
@@ -161,10 +163,10 @@ void DefinitionEdit::makeConnection(EdgeStructure &edge, int &argNum)
     if ( edge.purpose == DEP_ASSOCIATION )
     {
         xmlData->addDataEdge(edge);
-        QDomElement connEl = xmlData->connectEdgeToNode(edge.id, true, edge.startNodeID);
+        QDomElement connEl = xmlData->connectEdgeToNode(edge.id, EDGE_START, edge.startNodeID);
 
         setIntAttribute(connEl, "argn", argNum);
-        xmlData->connectEdgeToNode(edge.id, false, edge.endNodeID);
+        xmlData->connectEdgeToNode(edge.id, EDGE_END, edge.endNodeID);
 
         emit sceneChanged(AssocEdgeAdded);
         return;

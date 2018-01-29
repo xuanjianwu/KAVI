@@ -155,4 +155,8 @@ const qreal Pi = 3.14159;
 // the size of diagram scene
 #define DIAGRAM_SIZE 1000
 
+// DrivenEditWidget ----------------------
+
+#define NO_POSITION (-1)
+
 #endif // KAVIMACROS_H

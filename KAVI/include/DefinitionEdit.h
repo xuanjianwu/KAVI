@@ -55,8 +55,9 @@ private:
     * @params:
     *       toRenumber - the specified argument element to renumber
     * @return: void
-    */
+    *
     void renumberPredicateArguments(QDomElement toRenumber);
+    */
 
     /*
     * create the associated InfoPanel for node with DataWidget's Data
@@ -69,6 +70,7 @@ private:
 
     /*
     * make connection, update edge and associated nodes in DataWidget
+    * hanle two types of connections:
     * emit sceneChanged(InherEdgeAdded)
     * emit sceneChanged(AssocEdgeAdded)
     * @params:
@@ -80,6 +82,7 @@ private:
 
     /*
     * change connection, update edge and associated nodes in DataWidget
+    * hanle two types of connections:
     * emit sceneChanged(AssocEdgeReconnected)
     * emit sceneChanged(InherEdgeReconnected)
     * @params:
@@ -93,6 +96,7 @@ private:
 
     /*
     * delete connection, update edge and associated nodes in DataWidget
+    * handle two types of connections:
     * emit sceneChanged(AssocEdgeDeleted)
     * emit sceneChanged(InherEdgeDeleted)
     * @params:
