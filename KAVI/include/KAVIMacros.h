@@ -159,4 +159,22 @@ const qreal Pi = 3.14159;
 
 #define NO_POSITION (-1)
 
+// DefinitionPredicateInfo ---------------
+
+// the column index of class
+#define CLASS_COLUMN 0
+// the count of columns in the table
+#define COLUMN_COUNT 1
+
+// OperatorsPredicateInfo ----------------
+
+// the column index of class
+#define CLASS_COLUMN 0
+// the column index of variable
+#define VARIABLE_COLUMN 1
+// the count of columns in the table
+#define COLUMN_COUNT 2
+// the default argument variable
+#define EMPTY_ARGUMENT "EMPTY"
+
 #endif // KAVIMACROS_H

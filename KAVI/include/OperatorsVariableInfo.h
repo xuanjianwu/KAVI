@@ -17,16 +17,42 @@ class OperatorsVariableInfo: public InfoPanel {
     Q_OBJECT
 
 public:
+    /*
+    * construct function, set the contents of InfoPanel
+    * @params:
+    *       data          - the dependent DataWidget
+    *       definition    - the defintion DataWidget
+    *       variableID    - the selected variable's ID
+    *       definitionID  - the selected variable's associated class's ID in definition
+    *       parent        - parent object
+    * @return:
+    */
     OperatorsVariableInfo(DataWidget* data, const DataWidget* definition, int variableID, int definitionID, QWidget* parent = 0);
 
 private slots:
 
+    /*
+    * handle the current index changed of class combobox
+    * madeChange(NodeClassChanged)
+    * @params:
+    *       newClass - the new class type for selected variable
+    * @return: void
+    */
     void on_classComboBox_currentIndexChanged(QString newClass);
 
 private:
+    // the dependent definition DataWidget
     const DataWidget* xmlDefinition;
+
+    // the variable's associated class's element in the xmlDefinition
     QDomElement variableDef;
 
+    /*
+    * init the combobox for selected variable, and set selected variable as current index of
+    * combobox
+    * @params: N/A
+    * @return: void
+    */
     void initComboBox();
 
     Ui::OperatorsVariableInfo ui;

@@ -44,5 +44,8 @@
 #include <QApplication>
 #include <QGraphicsSceneMouseEvent>
 #include <QMessageBox>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QTableWidgetItem>
 
 #endif // KAVIBASE_H
