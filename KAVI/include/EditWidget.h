@@ -141,7 +141,7 @@ protected:
     * This function receives events to an object and should return true if the event was recognized and processed.
     * The event() function can be reimplemented to customize the behavior of an object.
     * Make sure you call the parent event class implementation for all the events you did not handle.
-    * handle the events from the DiagramWidget, for example:
+    * handle the events from the DiagramWidget, and set the changed flag, for example:
     *   DiagramEvent myEvent(DiagramRightClick, INVALID_ID, pos);
     *   QApplication::sendEvent(this->parent(), &myEvent);
     * @params:

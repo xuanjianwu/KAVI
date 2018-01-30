@@ -103,7 +103,119 @@ bool DrivenEditWidget::verifyEdge(EdgeStructure &edge, int &argNum)
 
 EditWidget::ReconnectionValue DrivenEditWidget::verifyReconnection(EdgeStructure &edge, int newNodeID, bool startMoved, int &argNum)
 {
+    if ( newNodeID <= 0)
+    {
+        qWarning() << "No target for edge reconnection";
+        return NoChange;
+    }
 
+    // the node's ID for node which is connected by the move edgepoint
+    int fromNodeID;
+    // the node's ID for node which is connected by the no-move edgepoint
+    int stableEndID;
+
+    if ( startMoved )
+    {
+        fromNodeID = edge.startNodeID;
+        stableEndID = edge.endNodeID;
+    }
+    else
+    {
+        fromNodeID = edge.endNodeID;
+        stableEndID = edge.startNodeID;
+    }
+
+    // edge connect the same node
+    if ( stableEndID == newNodeID )
+    {
+        qWarning() << "Edge has to connect two different nodes";
+        return NoChange;
+    }
+
+    // edgepoint does not move outside the origial node
+    if ( fromNodeID == newNodeID )
+        return PosChange;
+
+    char toNodeType = xmlData->readNodeType(newNodeID);
+    char stableEndType = xmlData->readNodeType(stableEndID);
+
+    char newEdgePurpose;
+
+    // get the purpose of the expected new edge
+    if (startMoved)
+        newEdgePurpose = determineEdgePurpose(toNodeType, stableEndType);
+    else
+        newEdgePurpose = determineEdgePurpose(stableEndType, toNodeType);
+
+    // only association edges are allowed
+    if ( newEdgePurpose != DEP_ASSOCIATION )
+    {
+        qWarning() << "Only association edges are allowed.";
+        return NoChange;
+    }
+
+    QDomElement targetNode = xmlData->findNode(newNodeID);
+
+    QDomElement stableNode;
+
+    if (startMoved)
+        stableNode = xmlData->findNode(edge.endNodeID);
+    else
+        stableNode = xmlData->findNode(edge.startNodeID);
+
+    QString predicateLabel;
+    QString argumentClass;
+
+    if ( verifyNodeType(targetNode, NST_PREDICATE) )
+    {
+        qDebug() << "$DrivenEditWidget::verifyReconnection : reconnection target is predicate";
+        predicateLabel = subelementTagValue(targetNode, "label");
+        argumentClass = subelementTagValue(stableNode, "class");
+
+        QHash<int, QString> instArg = predicateArguments(targetNode);
+
+        argNum = findArgPosition(predicateLabel, argumentClass, instArg);
+
+        if ( argNum == INVALID_ARGN )
+        {
+            qWarning() << "Reconnection not allowed.";
+            return NoChange;
+        }
+    }
+
+    if ( verifyNodeType(targetNode, NST_VARIABLE) || verifyNodeType(targetNode, NST_OBJECT) )
+    {
+        predicateLabel = subelementTagValue(stableNode, "label");
+        argumentClass = subelementTagValue(targetNode, "class");
+
+        int changedArgNum = getArgNumber(stableNode, edge.id);
+
+        QHash<int, QString> instArg = predicateArguments(stableNode);
+
+        instArg.remove(changedArgNum);
+
+        int sugestedArgNum = findArgPosition(predicateLabel, argumentClass, instArg);
+
+        if ( sugestedArgNum == INVALID_ARGN )
+        {
+            qWarning() << "Reconnection not allowed.";
+            return NoChange;
+        }
+
+        // example:
+        // predicate: on ?a - box ?b - pen ?c - cake
+        // operator:  on ?a - box ?b - pen .........
+        //            missing the third argument, now drag the edge connected pen to the third
+        //            variable cake, then this case occurs.
+        if ( sugestedArgNum != changedArgNum )
+        {
+            qWarning() << "Could not verify edge reconnection - you may delete this edge and add a new one instead.";
+            return NoChange;
+        }
+    }
+
+    qDebug() << "$DrivenEditWidget::verifyReconnection : All Pass. argNum =" << argNum;
+    return EditWidget::PosAssocChange;
 }
 
 int DrivenEditWidget::findArgPosition(const QString &predicate, const QString &argument, const QHash<int, QString> &instArg)

@@ -120,7 +120,7 @@ private:
     * (2) PosChange, cancel the reconnection and update the edgepoint's position
     * (3) PosAssocChange, pass the reconnection and update DataWidget
     * @params:
-    *       edge       - the edge old old connection
+    *       edge       - the edge of old connection
     *       newNodeID  - the new node connected by the move edgepoint
     *       startMoved - the moved edgepoint's orientation
     *       argNum     - set the new argument number
