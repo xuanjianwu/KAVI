@@ -108,12 +108,11 @@ void OperatorsPredicateInfo::on_effectNegCheck_toggled(bool checked)
 
 void OperatorsPredicateInfo::fillArgumentTable()
 {
-    ui.argumentsTable->setColumnCount(COLUMN_COUNT);
+    ui.argumentsTable->setColumnCount(OP_COLUMN_COUNT);
     ui.argumentsTable->setHorizontalHeaderLabels(QStringList() << "Argument class" << "Variable");
 
     QDomElement connections = predicateDef.firstChildElement("connections");
     QDomElement localConn = selectedNode.firstChildElement("connections");
-
 
     QStringList verticalLabels;
 
@@ -141,14 +140,14 @@ void OperatorsPredicateInfo::fillArgumentTable()
 
             QPair<int, int> nodeLoc = xmlData->associatedNodes(locEdgeID);
 
-            ui.argumentsTable->setItem(i, VARIABLE_COLUMN,
+            ui.argumentsTable->setItem(i, OP_VARIABLE_COLUMN,
                 new QTableWidgetItem(xmlData->getNodeData(nodeLoc.second, "label"), QTableWidgetItem::Type));
         }
         else
         {
             // this argument type does not associate with any variable
-            ui.argumentsTable->setItem(i, VARIABLE_COLUMN,
-                new QTableWidgetItem(EMPTY_ARGUMENT, QTableWidgetItem::Type));
+            ui.argumentsTable->setItem(i, OP_VARIABLE_COLUMN,
+                new QTableWidgetItem(OP_EMPTY_ARGUMENT, QTableWidgetItem::Type));
         }
 
         int defEdgeID = getIntValue(argList.at(i).toElement());
@@ -161,7 +160,7 @@ void OperatorsPredicateInfo::fillArgumentTable()
         newItem->setBackground(QBrush(Qt::lightGray));
 
         // set the content for argument class
-        ui.argumentsTable->setItem(i, CLASS_COLUMN, newItem);
+        ui.argumentsTable->setItem(i, OP_CLASS_COLUMN, newItem);
     }
 
     ui.argumentsTable->setVerticalHeaderLabels(verticalLabels);
@@ -201,19 +200,19 @@ void OperatorsPredicateInfo::moveCurrentRow(RowMoveDirection direction)
     {
     case MoveUp:
         if ( ((targetIndex = current->row() - 1) >= 0) &&
-             (current->column() == VARIABLE_COLUMN) )
+             (current->column() == OP_VARIABLE_COLUMN) )
         {
             swapConnections(current->row(), targetIndex);
-            swapTableItems(current, ui.argumentsTable->item(targetIndex, VARIABLE_COLUMN));
+            swapTableItems(current, ui.argumentsTable->item(targetIndex, OP_VARIABLE_COLUMN));
         }
 
         break;
     case MoveDown:
         if ( ((targetIndex = current->row() + 1) < ui.argumentsTable->rowCount()) &&
-             (current->column() == VARIABLE_COLUMN) )
+             (current->column() == OP_VARIABLE_COLUMN) )
         {
             swapConnections(current->row(),targetIndex);
-            swapTableItems(current, ui.argumentsTable->item(targetIndex, VARIABLE_COLUMN));
+            swapTableItems(current, ui.argumentsTable->item(targetIndex, OP_VARIABLE_COLUMN));
         }
         break;
     }

@@ -162,19 +162,30 @@ const qreal Pi = 3.14159;
 // DefinitionPredicateInfo ---------------
 
 // the column index of class
-#define CLASS_COLUMN 0
+#define DE_CLASS_COLUMN 0
 // the count of columns in the table
-#define COLUMN_COUNT 1
+#define DE_COLUMN_COUNT 1
 
 // OperatorsPredicateInfo ----------------
 
 // the column index of class
-#define CLASS_COLUMN 0
+#define OP_CLASS_COLUMN 0
 // the column index of variable
-#define VARIABLE_COLUMN 1
+#define OP_VARIABLE_COLUMN 1
 // the count of columns in the table
-#define COLUMN_COUNT 2
+#define OP_COLUMN_COUNT 2
 // the default argument variable
-#define EMPTY_ARGUMENT "EMPTY"
+#define OP_EMPTY_ARGUMENT "EMPTY"
+
+// ProblemsPredicateInfo -----------------
+
+// the column index of class
+#define PR_CLASS_COLUMN 0
+// the column index of object
+#define PR_OBJECT_COLUMN 1
+// the count of columns in the table
+#define PR_COLUMN_COUNT 2
+// the default argument object
+#define PR_EMPTY_ARGUMENT "EMPTY"
 
 #endif // KAVIMACROS_H

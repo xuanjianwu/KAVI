@@ -59,6 +59,7 @@ private slots:
     /*
     * handle precondition check toggle, update predicate's set in DataWidget
     * and refresh the predicate node in DiagramWidget
+    * emit madeChange(PredicateSetChanged)
     * @params:
     *       checked - check flag
     * @return: void
@@ -68,6 +69,7 @@ private slots:
     /*
     * handle effect positive check toggle, update predicate's set in DataWidget
     * and refresh the predicate node in DiagramWidget
+    * emit madeChange(PredicateSetChanged)
     * @params:
     *       checked - check flag
     * @return: void
@@ -77,6 +79,7 @@ private slots:
     /*
     * handle effect negative check toggle, update predicate's set in DataWidget
     * and refresh the predicate node in DiagramWidget
+    * emit madeChange(PredicateSetChanged)
     * @params:
     *       checked - check flag
     * @return: void
@@ -140,8 +143,9 @@ private:
 
     /*
     * remove set from the selected predicate
-    * @params: N/A
-    * @return: N/A
+    * @params:
+    *       set - the removed set
+    * @return: void
     */
     void excludeFromSet(QString set);
 

@@ -60,7 +60,7 @@ void DefinitionPredicateInfo::on_moveUp_pressed()
 
 void DefinitionPredicateInfo::fillArgumentTable()
 {
-    ui.argumentsTable->setColumnCount(COLUMN_COUNT);
+    ui.argumentsTable->setColumnCount(DE_COLUMN_COUNT);
     ui.argumentsTable->setHorizontalHeaderLabels(QStringList("Argument class"));
 
     QDomElement connections = selectedNode.firstChildElement("connections");
@@ -84,7 +84,7 @@ void DefinitionPredicateInfo::fillArgumentTable()
 
         QPair<int, int> nodes = xmlData->associatedNodes(edgeID);
 
-        ui.argumentsTable->setItem(i, CLASS_COLUMN,
+        ui.argumentsTable->setItem(i, DE_CLASS_COLUMN,
                 new QTableWidgetItem(xmlData->getNodeData(nodes.second, "label"), QTableWidgetItem::Type));
     }
 
@@ -99,18 +99,18 @@ void DefinitionPredicateInfo::moveCurrentRow(RowMoveDirection direction)
     {
     case MoveUp:
         if ( ((targetIndex = current->row() - 1) >= 0) &&
-             (current->column() == CLASS_COLUMN) )
+             (current->column() == DE_CLASS_COLUMN) )
         {
             swapConnections(current->row(), targetIndex);
-            swapTableItems(current, ui.argumentsTable->item(targetIndex, CLASS_COLUMN));
+            swapTableItems(current, ui.argumentsTable->item(targetIndex, DE_CLASS_COLUMN));
         }
         break;
     case MoveDown:
         if ( ((targetIndex = current->row() + 1) < ui.argumentsTable->rowCount()) &&
-             (current->column() == CLASS_COLUMN) )
+             (current->column() == DE_CLASS_COLUMN) )
         {
             swapConnections(current->row(), targetIndex);
-            swapTableItems(current, ui.argumentsTable->item(targetIndex, CLASS_COLUMN));
+            swapTableItems(current, ui.argumentsTable->item(targetIndex, DE_CLASS_COLUMN));
         }
         break;
     }

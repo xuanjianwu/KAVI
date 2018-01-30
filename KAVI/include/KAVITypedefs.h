@@ -105,7 +105,7 @@ typedef enum _ChangeCode {
     NodeClassChanged = 12,
     NodeLabelChanged = 13,
     PredicateSetChanged = 14,
-    ObjectStateChanged = 15
+    PredicateStateChanged = 15
 } ChangeCode;
 
 // ProblemEdit ---------------------------

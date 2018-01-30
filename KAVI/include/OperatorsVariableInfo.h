@@ -33,7 +33,7 @@ private slots:
 
     /*
     * handle the current index changed of class combobox
-    * madeChange(NodeClassChanged)
+    * emit madeChange(NodeClassChanged)
     * @params:
     *       newClass - the new class type for selected variable
     * @return: void
