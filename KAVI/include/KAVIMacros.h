@@ -188,4 +188,9 @@ const qreal Pi = 3.14159;
 // the default argument object
 #define PR_EMPTY_ARGUMENT "EMPTY"
 
+// DomainDescDialog ----------------------
+
+// the max length of domain's name
+#define MAX_DOMAIN_NAME_LENGTH (int)50
+
 #endif // KAVIMACROS_H
