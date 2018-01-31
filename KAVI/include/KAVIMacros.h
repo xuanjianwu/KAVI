@@ -124,6 +124,7 @@ const qreal Pi = 3.14159;
 // TreeModel -----------------------------
 #define LABEL_COLUMN 0
 #define ID_COLUMN 1
+#define COLUMN_CNT 1
 
 // DataWidget ----------------------------
 
@@ -192,5 +193,7 @@ const qreal Pi = 3.14159;
 
 // the max length of domain's name
 #define MAX_DOMAIN_NAME_LENGTH (int)50
+
+
 
 #endif // KAVIMACROS_H

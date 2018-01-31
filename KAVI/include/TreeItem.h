@@ -23,7 +23,7 @@ public:
     TreeItem(const QVector<QVariant>& data, TreeItem* parent = 0);
 
     /*
-     * deconstruct function
+     * deconstruct function, release all child items
      * @params: N/A
      * @return: N/A
     */
