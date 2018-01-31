@@ -16,10 +16,10 @@ struct NodeStructure;
 
 CU_NS_BEGIN
    /*
-    * get the arguments from predicate
+    * get the arguments of predicate
     * @params:
     *       predicate - target predicate
-    * @return: <argID, argName>
+    * @return: hash table of <argument number, argument's class>
     */
     QHash<int, QString> predicateArguments(const QDomElement& predicate);
 
