@@ -6,7 +6,6 @@
 XMLU_NS_BEGIN
 
 
-
 int getIntAttribute(const QDomElement &elem, QString attrName)
 {
     Q_ASSERT(!elem.isNull());
