@@ -30,7 +30,7 @@ void OperatorsEdit::defineRectangleNode(QPointF pos, int newID)
 
     if ( availableClasses.count() == 0 )
     {
-        QMessageBox::information(this, tr("VIZ"),
+        QMessageBox::information(this, tr("KAVI"),
         tr("Variable have to belong to some class - there are no class defined yet."));
         return;
     }
@@ -41,14 +41,14 @@ void OperatorsEdit::defineRectangleNode(QPointF pos, int newID)
     {
         if ( dialog->variableName().isEmpty() )
         {
-            QMessageBox::information(this, tr("VIZ"), tr("Variable name can't be empty."));
+            QMessageBox::information(this, tr("KAVI"), tr("Variable name can't be empty."));
             delete dialog;
             return;
         }
 
         if ( !nameChecker.exactMatch(dialog->variableName()) )
         {
-            QMessageBox::warning(this, tr("VIZ"),
+            QMessageBox::warning(this, tr("KAVI"),
             tr("Name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
             delete dialog;
             return;
@@ -57,7 +57,7 @@ void OperatorsEdit::defineRectangleNode(QPointF pos, int newID)
         QStringList definedVariables = xmlData->getNodeLabelList(NST_VARIABLE);
         if ( definedVariables.contains(dialog->variableName(), Qt::CaseInsensitive) )
         {
-            QMessageBox::warning(this, tr("VIZ"), tr("Variable name must be unique in action scope."));
+            QMessageBox::warning(this, tr("KAVI"), tr("Variable name must be unique in action scope."));
             delete dialog;
             return;
         }
@@ -86,7 +86,7 @@ void OperatorsEdit::defineEllipseNode(QPointF pos, int newID)
 
     if ( availablePredicates.size() == 0 )
     {
-        QMessageBox::information(this, tr("VIZ"), tr("There are no predicates defined yet."));
+        QMessageBox::information(this, tr("KAVI"), tr("There are no predicates defined yet."));
         return;
     }
 

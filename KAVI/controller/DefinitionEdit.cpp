@@ -32,7 +32,7 @@ void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
 
     if ( newClassName.isEmpty() )
     {
-        QMessageBox::information(this, tr("VIZ"), tr("Class name can't be empty."));
+        QMessageBox::information(this, tr("KAVI"), tr("Class name can't be empty."));
         return;
     }
 
@@ -40,19 +40,19 @@ void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
 
     if ( definedClasses.contains(newClassName, Qt::CaseInsensitive) )
     {
-        QMessageBox::warning(this, tr("VIZ"), tr("Class name must be unique."));
+        QMessageBox::warning(this, tr("KAVI"), tr("Class name must be unique."));
         return;
     }
 
     if ( newClassName.toLower() == "object" )
     {
-        QMessageBox::warning(this, tr("VIZ"), tr("Name \"object\" is reserved."));
+        QMessageBox::warning(this, tr("KAVI"), tr("Name \"object\" is reserved."));
         return;
     }
 
     if ( !nameChecker.exactMatch(newClassName) )
     {
-        QMessageBox::warning(this, tr("VIZ"),
+        QMessageBox::warning(this, tr("KAVI"),
         tr("Name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
         return;
     }
@@ -80,13 +80,13 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
 
     if ( newPredicateName.isEmpty() )
     {
-        QMessageBox::information(this, tr("VIZ"), tr("Predicate name can't be empty."));
+        QMessageBox::information(this, tr("KAVI"), tr("Predicate name can't be empty."));
         return;
     }
 
     if ( !nameChecker.exactMatch(newPredicateName) )
     {
-        QMessageBox::warning(this, tr("VIZ"),
+        QMessageBox::warning(this, tr("KAVI"),
         tr("Name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
         return;
     }

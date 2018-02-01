@@ -32,7 +32,7 @@ void DomainDescDialog::on_buttonBox_accepted()
         domainEl.setAttribute("name", name);
     }
     else
-        QMessageBox::warning(this, tr("VIZ"), tr("Domain name not updated - wrong format.\n- only letters and digits allowed"));
+        QMessageBox::warning(this, tr("KAVI"), tr("Domain name not updated - wrong format.\n- only letters and digits allowed"));
 
     QDomElement description = domainEl.firstChildElement("description");
 

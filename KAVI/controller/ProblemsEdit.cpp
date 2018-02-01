@@ -66,7 +66,7 @@ void ProblemsEdit::defineRectangleNode(QPointF pos, int newID)
 
     if ( availableClasses.count() == 0 )
     {
-        QMessageBox::information(this, tr("VIZ"),
+        QMessageBox::information(this, tr("KAVI"),
         tr("Object class has to be defined - there are no classes defined yet."));
         return;
     }
@@ -77,14 +77,14 @@ void ProblemsEdit::defineRectangleNode(QPointF pos, int newID)
     {
         if ( dialog->objectName().isEmpty() )
         {
-            QMessageBox::information(this, tr("VIZ"), tr("Object name can't be empty."));
+            QMessageBox::information(this, tr("KAVI"), tr("Object name can't be empty."));
             delete dialog;
             return;
         }
 
         if ( !nameChecker.exactMatch(dialog->objectName()) )
         {
-            QMessageBox::warning(this, tr("VIZ"),
+            QMessageBox::warning(this, tr("KAVI"),
             tr("Name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
             delete dialog;
             return;
@@ -93,7 +93,7 @@ void ProblemsEdit::defineRectangleNode(QPointF pos, int newID)
         QStringList definedObjects = xmlData->getNodeLabelList(NST_OBJECT);
         if ( definedObjects.contains(dialog->objectName(), Qt::CaseInsensitive) )
         {
-            QMessageBox::warning(this, tr("VIZ"), tr("Object name must be unique in problem scope."));
+            QMessageBox::warning(this, tr("KAVI"), tr("Object name must be unique in problem scope."));
             delete dialog;
             return;
         }
@@ -127,7 +127,7 @@ void ProblemsEdit::defineEllipseNode(QPointF pos, int newID)
 
     if ( availablePredicates.size() == 0 )
     {
-        QMessageBox::information(this, tr("VIZ"), tr("There are no predicates defined yet."));
+        QMessageBox::information(this, tr("KAVI"), tr("There are no predicates defined yet."));
         return;
     }
 

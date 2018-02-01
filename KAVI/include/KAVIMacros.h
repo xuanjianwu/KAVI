@@ -194,6 +194,9 @@ const qreal Pi = 3.14159;
 // the max length of domain's name
 #define MAX_DOMAIN_NAME_LENGTH (int)50
 
+// Convertor -----------------------------
 
+// the output indent configure
+#define OUTPUT_INDENT 4
 
 #endif // KAVIMACROS_H
