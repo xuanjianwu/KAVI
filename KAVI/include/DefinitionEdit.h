@@ -128,7 +128,7 @@ private:
     */
     ReconnectionValue verifyReconnection(EdgeStructure& edge, int newNodeID,
                                 bool startMoved, int& argNum);
-}
+};
 
 KAVI_NS_END
 

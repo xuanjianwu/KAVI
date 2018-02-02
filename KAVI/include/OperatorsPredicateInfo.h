@@ -150,7 +150,7 @@ private:
     void excludeFromSet(QString set);
 
     Ui::OperatorsPredicateInfo ui;
-}
+};
 
 KAVI_NS_END
 

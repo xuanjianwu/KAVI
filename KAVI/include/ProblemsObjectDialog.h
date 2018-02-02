@@ -42,7 +42,7 @@ public:
 private:
 
     Ui::ProblemsObjectDialog ui;
-}
+};
 
 KAVI_NS_END
 

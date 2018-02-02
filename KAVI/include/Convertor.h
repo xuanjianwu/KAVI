@@ -217,7 +217,7 @@ private:
     * @return: parameters string
     */
     QString getActionParameters(QDomElement diagram);
-}
+};
 
 KAVI_NS_END
 

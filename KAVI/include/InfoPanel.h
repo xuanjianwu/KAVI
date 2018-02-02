@@ -58,7 +58,7 @@ protected:
 
     // the selected Node to show InfoPanel
     QDomElement selectedNode;
-}
+};
 
 KAVI_NS_END
 

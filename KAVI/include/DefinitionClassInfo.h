@@ -31,7 +31,7 @@ public:
 
 private:
     Ui::DefinitionClassInfo ui;
-}
+};
 
 KAVI_NS_END
 

@@ -57,7 +57,7 @@ private:
     void initComboBox();
 
     Ui::ProblemsObjectInfo ui;
-}
+};
 
 KAVI_NS_END
 

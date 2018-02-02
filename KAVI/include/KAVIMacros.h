@@ -101,7 +101,8 @@
 
 // Edge ----------------------------------
 
-const qreal Pi = 3.14159;
+//const qreal Pi = 3.14159;
+const double Pi = 3.14159;
 #define EDGE_Z_VALUE 5
 #define EDGE_LINE_WIDTH 3
 

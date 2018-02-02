@@ -56,7 +56,7 @@ private:
     void initComboBox();
 
     Ui::OperatorsVariableInfo ui;
-}
+};
 
 KAVI_NS_END
 

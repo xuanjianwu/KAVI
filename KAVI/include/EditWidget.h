@@ -266,7 +266,7 @@ protected:
     virtual void makeConnection(EdgeStructure& edge, int& argNum) = 0;
     virtual void changeConnection(EdgeStructure& edge, bool isStart, int toNode, int& argNum) = 0;
     virtual void deleteConnection(int edgeID) = 0;
-}
+};
 
 KAVI_NS_END
 

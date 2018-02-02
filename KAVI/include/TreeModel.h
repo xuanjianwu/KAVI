@@ -108,7 +108,7 @@ private:
 
     // map from class node's ID to class node's label
     QMap<int, QString> modelMap;
-}
+};
 
 KAVI_NS_END
 

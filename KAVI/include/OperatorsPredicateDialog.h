@@ -67,7 +67,7 @@ private slots:
 
 private:
     Ui::OperatorsPredicateDialog ui;
-}
+};
 
 KAVI_NS_END
 

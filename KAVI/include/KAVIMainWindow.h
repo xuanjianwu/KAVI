@@ -122,7 +122,7 @@ private:
     void centerContents(QGraphicsView* view);
 
     Ui::MainWindow ui;
-}
+};
 
 KAVI_NS_END
 

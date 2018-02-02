@@ -132,7 +132,7 @@ private:
     void setPredicateState(QString newState);
 
     Ui::ProblemsPredicateInfo ui;
-}
+};
 
 KAVI_NS_END
 

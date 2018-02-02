@@ -89,7 +89,7 @@ private:
     void swapConnections(int firstArg, int secondArg);
 
     Ui::DefinitionPredicateInfo ui;
-}
+};
 
 KAVI_NS_END
 

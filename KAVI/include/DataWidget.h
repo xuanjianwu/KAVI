@@ -23,6 +23,9 @@ struct EdgeStructure;
 
 using namespace XMLUtils;
 
+// <connected edge's ID, connected edgepoint's orientation>
+typedef QPair<int, bool> DataEdgepoint;
+
 class DataWidget {
 public:
     /*
@@ -320,7 +323,7 @@ private:
     * @return: edge structure
     */
     const EdgeStructure loadEdge(const QDomElement& elem) const;
-}
+};
 
 KAVI_NS_END
 

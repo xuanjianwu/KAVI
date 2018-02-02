@@ -39,7 +39,7 @@ private:
     QDomElement domainEl;
 
     Ui::DomainDescDialog ui;
-}
+};
 
 KAVI_NS_END
 

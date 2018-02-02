@@ -131,7 +131,7 @@ protected:
     * @return: N/A
     */
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
-}
+};
 
 KAVI_NS_END
 

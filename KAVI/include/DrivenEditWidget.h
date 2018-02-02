@@ -109,7 +109,7 @@ private:
     */
     int findArgPosition(const QString& predicate, const QString& argument,
                         const QHash<int, QString>& instArg);
-}
+};
 
 KAVI_NS_END
 

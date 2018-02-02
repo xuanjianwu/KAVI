@@ -41,7 +41,7 @@ public:
     QString taskState();
 private:
     Ui::ProblemsPredicateDialog ui;
-}
+};
 
 KAVI_NS_END
 

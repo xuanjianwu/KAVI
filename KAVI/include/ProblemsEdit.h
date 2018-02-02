@@ -76,7 +76,7 @@ private:
     * @return: void
     */
     void displayInfo(int nodeID);
-}
+};
 
 KAVI_NS_END
 

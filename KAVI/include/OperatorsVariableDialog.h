@@ -42,7 +42,7 @@ public:
 private:
 
     Ui::OperatorsVariableDialog ui;
-}
+};
 
 KAVI_NS_END
 
