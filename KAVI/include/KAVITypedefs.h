@@ -13,8 +13,8 @@
  * specify the shapes of Node
 */
 typedef enum _NodeShape {
-    Rectangle,
-    Ellipse,
+    RectangleShape,
+    EllipseShape,
     Undefined
 } NodeShape;
 

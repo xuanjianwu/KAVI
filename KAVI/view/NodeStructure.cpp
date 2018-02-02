@@ -93,9 +93,9 @@ NodeShape NodeStructure::shape() const
     case NST_CLASS:
     case NST_VARIABLE:
     case NST_OBJECT:
-        return Rectangle;
+        return RectangleShape;
     case NST_PREDICATE:
-        return Ellipse;
+        return EllipseShape;
     default:
         return Undefined;
     }

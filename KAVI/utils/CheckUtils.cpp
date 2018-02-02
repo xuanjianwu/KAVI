@@ -549,7 +549,7 @@ QStringList classFamily(const QString &className, const GraphClass *structure, c
     return structure->pathToRoot(classID);
 }
 
-bool nodeMatches(const QDomElement &probedNode, const NodeStructure &patternNode)
+bool nodeMatches(const QDomElement &probedNode, const KAVI::NodeStructure &patternNode)
 {
     Q_ASSERT(!probedNode.isNull());
 
@@ -593,7 +593,7 @@ bool nodeMatches(const QDomElement &probedNode, const NodeStructure &patternNode
     return true;
 }
 
-int getMatchingNodeID(const QDomElement &root, const NodeStructure &nodeTemplate)
+int getMatchingNodeID(const QDomElement &root, const KAVI::NodeStructure &nodeTemplate)
 {
     QList<int> candidates = selectMatchingIDList(root, nodeTemplate);
 
@@ -609,7 +609,7 @@ int getMatchingNodeID(const QDomElement &root, const NodeStructure &nodeTemplate
     return candidates.first();
 }
 
-QList<int> selectMatchingIDList(const QDomElement &root, const NodeStructure &nodeTemplate)
+QList<int> selectMatchingIDList(const QDomElement &root, const KAVI::NodeStructure &nodeTemplate)
 {
     Q_ASSERT(!root.isNull());
 
@@ -628,7 +628,7 @@ QList<int> selectMatchingIDList(const QDomElement &root, const NodeStructure &no
     return result;
 }
 
-QList<QDomElement> selectMatchingElementList(const QDomElement &root, const NodeStructure &nodeTemplate)
+QList<QDomElement> selectMatchingElementList(const QDomElement &root, const KAVI::NodeStructure &nodeTemplate)
 {
     Q_ASSERT(!root.isNull());
 

@@ -91,14 +91,14 @@ QRectF Node::boundingRect() const
 
     switch(nodeShape)
     {
-    case Ellipse:
+    case EllipseShape:
         result.setRect(-(nodeSize.width()/2)-diff,
                        -(nodeSize.height()/2)-diff,
                        nodeSize.width()+(2*diff),
                        nodeSize.height()+(2*diff)
                        );
         break;
-    case Rectangle:
+    case RectangleShape:
         result.setRect(-(nodeSize.width()/2),
                        -(nodeSize.height()/2),
                        nodeSize.width(),
@@ -117,10 +117,10 @@ QPainterPath Node::shape() const
 
     switch(nodeShape)
     {
-    case Ellipse:
+    case EllipseShape:
         path.addEllipse(boundingRect());
         break;
-    case Rectangle:
+    case RectangleShape:
         path.addRect(boundingRect());
         break;
     default:
@@ -140,12 +140,12 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     switch(nodeShape)
     {
-    case Ellipse:
+    case EllipseShape:
         painter->drawEllipse(boundingRect());
         if(!nodeLayers.isEmpty())
             drawLayers(painter);
         break;
-    case Rectangle:
+    case RectangleShape:
         painter->drawRect(boundingRect());
         break;
     default:
