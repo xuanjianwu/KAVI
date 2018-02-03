@@ -101,5 +101,4 @@ HEADERS += \
 
 FORMS +=
 
-RESOURCES += \
-    res/kaviresources.qrc
+RESOURCES +=
