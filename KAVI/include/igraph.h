@@ -216,6 +216,7 @@ typedef int igraph_integer_t;
 typedef neimode igraph_neimode_t;
 bool IGRAPH_DIRECTED = true;
 bool IGRAPH_UNDIRECTED = false;
+bool IGRAPH_NO_LOOPS = false;
 
 void igraph_vector_init(igraph_vector_t& vector, igraph_integer_t size) {
     vector.resize(size);

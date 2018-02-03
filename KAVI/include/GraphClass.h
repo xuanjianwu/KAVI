@@ -18,22 +18,22 @@ using namespace KAVIGraph;
 class GraphClass {
 public:
     /*
-    * construct function
+    * construct function, set the graphData and init an empty graph
     * @params:
-    *       diagram - the diagarm to construct graphclass
+    *       diagram - the diagarm element to construct graphclass
     * @return: N/A
     */
     GraphClass(QDomElement diagram);
 
     /*
-    * deconstruct function
+    * deconstruct function, destory the graph
     * @params: N/A
     * @return: N/A
     */
     ~GraphClass();
 
     /*
-    * init the graph using diagram
+    * init the graph with diagram element data
     * @params:
     *       nodeMask - the expected node type mask
     *       edgeMask - the expected edge type mask
@@ -128,7 +128,7 @@ private:
     * @params: N/A
     * @return: root vertices'ID of connected components
     */
-    QList<int> selectComponentReprezentants();
+    QList<int> selectComponentRootNodes();
 
     /*
     * get the adjacent vertices from parent
@@ -142,7 +142,7 @@ private:
     QDomElement graphData;
 
     // mapping XML Node'ID to graph vertex'ID
-    QMap<int,int> idMap;
+    QMap<int, int> idMap;
 
     // the graph instance of graphclass
     igraph_t graph;

@@ -47,5 +47,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QTableWidgetItem>
+#include <QtGlobal>
+#include <QTextStream>
 
 #endif // KAVIBASE_H
