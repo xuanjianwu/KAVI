@@ -99,6 +99,9 @@ HEADERS += \
     include/EdgeStructure.h \
     include/KAVITypedefs.h
 
-FORMS +=
+FORMS += \
+    forms/KAVIMainWindow.ui
 
-RESOURCES +=
+RESOURCES += \
+    res/KAVIIcons.qrc \
+    res/KAVIImages.qrc
