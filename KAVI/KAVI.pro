@@ -101,3 +101,6 @@ HEADERS += \
 
 FORMS += \
     forms/mainwindow.ui
+
+RESOURCES += \
+    res/kaviresources.qrc
