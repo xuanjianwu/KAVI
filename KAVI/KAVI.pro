@@ -100,7 +100,18 @@ HEADERS += \
     include/KAVITypedefs.h
 
 FORMS += \
-    forms/KAVIMainWindow.ui
+    forms/KAVIMainWindow.ui \
+    forms/DefinitionClassInfo.ui \
+    forms/DefinitionPredicateInfo.ui \
+    forms/DomainDescDialog.ui \
+    forms/OperatorsPredicateDialog.ui \
+    forms/OperatorsPredicateInfo.ui \
+    forms/OperatorsVariableDialog.ui \
+    forms/OperatorsVariableInfo.ui \
+    forms/ProblemsObjectDialog.ui \
+    forms/ProblemsObjectInfo.ui \
+    forms/ProblemsPredicateDialog.ui \
+    forms/ProblemsPredicateInfo.ui
 
 RESOURCES += \
     res/KAVIIcons.qrc \

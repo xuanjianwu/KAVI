@@ -6,32 +6,156 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>700</height>
+    <width>1100</width>
+    <height>750</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>700</width>
-    <height>500</height>
+    <width>600</width>
+    <height>450</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1280</width>
-    <height>720</height>
+    <width>1440</width>
+    <height>900</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>KAVI</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowNestedDocks|QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>500</width>
+     <height>300</height>
+    </size>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>400</width>
+        <height>200</height>
+       </size>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="definitionTab">
+       <attribute name="title">
+        <string>Language</string>
+       </attribute>
+       <attribute name="toolTip">
+        <string>Diagram used for language definition</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="DefinitionEdit" name="definitionEdit"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="actionTab">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="title">
+        <string>Operators</string>
+       </attribute>
+       <attribute name="toolTip">
+        <string>Diagram used for definition of operators</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QComboBox" name="actionSelector">
+          <property name="insertPolicy">
+           <enum>QComboBox::InsertAfterCurrent</enum>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="OperatorsEdit" name="actionEdit"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="taskTab">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="title">
+        <string>Problems</string>
+       </attribute>
+       <attribute name="toolTip">
+        <string>Diagram used for problem definition</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QComboBox" name="taskSelector"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="taskState">
+          <property name="title">
+           <string>Visible state</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="initCheckBox">
+             <property name="text">
+              <string>Init</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QCheckBox" name="goalCheckBox">
+             <property name="text">
+              <string>Goal</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="ProblemsEdit" name="taskEdit"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1100</width>
      <height>23</height>
     </rect>
    </property>
@@ -39,29 +163,29 @@
     <property name="title">
      <string>File(&amp;F)</string>
     </property>
-    <widget class="QMenu" name="menuExport_E_2">
+    <widget class="QMenu" name="menuExport_E">
      <property name="title">
       <string>Export(&amp;E)</string>
      </property>
      <addaction name="actionDomain_PDDL"/>
-     <addaction name="actionProblems_PDDL"/>
+     <addaction name="actionProblem_PDDL"/>
     </widget>
     <addaction name="actionNew_N"/>
     <addaction name="actionOpen_O"/>
     <addaction name="separator"/>
     <addaction name="actionSave_As_A"/>
-    <addaction name="menuExport_E_2"/>
+    <addaction name="menuExport_E"/>
     <addaction name="separator"/>
     <addaction name="actionExit_X"/>
    </widget>
-   <widget class="QMenu" name="menuTools">
+   <widget class="QMenu" name="menuOptions_O">
     <property name="title">
-     <string>Tools(&amp;O)</string>
+     <string>Options(&amp;O)</string>
     </property>
-    <addaction name="actionProperties_P"/>
-    <addaction name="actionClear_log_C"/>
-    <addaction name="actionDomain_summary_D"/>
+    <addaction name="actionEdit_Properties_P"/>
+    <addaction name="actionDomain_Summary_S"/>
     <addaction name="separator"/>
+    <addaction name="actionClear_Log_C"/>
    </widget>
    <widget class="QMenu" name="menuHelp_H">
     <property name="title">
@@ -70,10 +194,137 @@
     <addaction name="actionAbout_A"/>
    </widget>
    <addaction name="menuFile_F"/>
-   <addaction name="menuTools"/>
+   <addaction name="menuOptions_O"/>
    <addaction name="menuHelp_H"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QDockWidget" name="classDock">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>93</width>
+     <height>116</height>
+    </size>
+   </property>
+   <property name="floating">
+    <bool>false</bool>
+   </property>
+   <property name="features">
+    <set>QDockWidget::AllDockWidgetFeatures</set>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Class tree</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="classDockCont">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QTreeView" name="classTreeView">
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="propertyEditorDock">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>155</width>
+     <height>116</height>
+    </size>
+   </property>
+   <property name="floating">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Property editor</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="propertyDockCont">
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QDockWidget" name="logDock">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>93</width>
+     <height>116</height>
+    </size>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string>Program log</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QTextEdit" name="logTextEdit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>846</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="undoRedoEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
@@ -87,18 +338,18 @@
    <addaction name="actionNew_N"/>
    <addaction name="actionOpen_O"/>
    <addaction name="actionSave_As_A"/>
+   <addaction name="actionEdit_Properties_P"/>
    <addaction name="separator"/>
-   <addaction name="actionProperties_P"/>
-   <addaction name="actionClear_log_C"/>
-   <addaction name="actionDomain_summary_D"/>
+   <addaction name="actionDomain_Summary_S"/>
+   <addaction name="actionClear_Log_C"/>
    <addaction name="separator"/>
    <addaction name="actionAddEllipseNode"/>
    <addaction name="actionAddRectNode"/>
    <addaction name="actionAddEdge"/>
    <addaction name="actionDelete"/>
    <addaction name="separator"/>
-   <addaction name="actionCreateOperator"/>
-   <addaction name="actionDeleteOperator"/>
+   <addaction name="actionCreateAction"/>
+   <addaction name="actionDeleteAction"/>
    <addaction name="separator"/>
    <addaction name="actionCreateProblem"/>
    <addaction name="actionDeleteProblem"/>
@@ -136,66 +387,6 @@
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="actionProperties_P">
-   <property name="icon">
-    <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/editcopy.png</normaloff>:/images/images/editcopy.png</iconset>
-   </property>
-   <property name="text">
-    <string>Properties(&amp;P)</string>
-   </property>
-   <property name="toolTip">
-    <string>Edit Domain properties</string>
-   </property>
-   <property name="statusTip">
-    <string>Edit current domain's properties</string>
-   </property>
-  </action>
-  <action name="actionClear_log_C">
-   <property name="icon">
-    <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/editcut.png</normaloff>:/images/images/editcut.png</iconset>
-   </property>
-   <property name="text">
-    <string>Clear log(&amp;C)</string>
-   </property>
-   <property name="toolTip">
-    <string>Clear Application log</string>
-   </property>
-   <property name="statusTip">
-    <string>Clear the application's log</string>
-   </property>
-  </action>
-  <action name="actionDomain_summary_D">
-   <property name="icon">
-    <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/editpaste.png</normaloff>:/images/images/editpaste.png</iconset>
-   </property>
-   <property name="text">
-    <string>Domain summary(&amp;D)</string>
-   </property>
-   <property name="toolTip">
-    <string>Check Domain summary</string>
-   </property>
-   <property name="statusTip">
-    <string>Print the domain report to application log</string>
-   </property>
-  </action>
-  <action name="actionAbout_A">
-   <property name="icon">
-    <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/help.png</normaloff>:/images/images/help.png</iconset>
-   </property>
-   <property name="text">
-    <string>About(&amp;A)</string>
-   </property>
-   <property name="statusTip">
-    <string>About this application</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+H</string>
-   </property>
-  </action>
   <action name="actionSave_As_A">
    <property name="icon">
     <iconset resource="../res/KAVIImages.qrc">
@@ -209,6 +400,30 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionDomain_PDDL">
+   <property name="icon">
+    <iconset resource="../res/KAVIImages.qrc">
+     <normaloff>:/images/images/document-save.png</normaloff>:/images/images/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Domain PDDL</string>
+   </property>
+   <property name="statusTip">
+    <string>Export domain as PDDL file</string>
+   </property>
+  </action>
+  <action name="actionProblem_PDDL">
+   <property name="icon">
+    <iconset resource="../res/KAVIImages.qrc">
+     <normaloff>:/images/images/document-save.png</normaloff>:/images/images/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Problem PDDL</string>
+   </property>
+   <property name="statusTip">
+    <string>Export problem as PDDL file</string>
    </property>
   </action>
   <action name="actionExit_X">
@@ -226,40 +441,55 @@
     <string>Ctrl+W</string>
    </property>
   </action>
-  <action name="actionDomain_PDDL">
+  <action name="actionAbout_A">
    <property name="icon">
     <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/document-save.png</normaloff>:/images/images/document-save.png</iconset>
+     <normaloff>:/images/images/help.png</normaloff>:/images/images/help.png</iconset>
    </property>
    <property name="text">
-    <string>Domain PDDL</string>
-   </property>
-   <property name="toolTip">
-    <string>Export Domain PDDL</string>
+    <string>About(&amp;A)</string>
    </property>
    <property name="statusTip">
-    <string>Export current domain to PDDL file</string>
+    <string>About this application</string>
    </property>
   </action>
-  <action name="actionProblems_PDDL">
+  <action name="actionEdit_Properties_P">
    <property name="icon">
     <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/document-save.png</normaloff>:/images/images/document-save.png</iconset>
+     <normaloff>:/images/images/editcopy.png</normaloff>:/images/images/editcopy.png</iconset>
    </property>
    <property name="text">
-    <string>Problems PDDL</string>
-   </property>
-   <property name="toolTip">
-    <string>Export Problems PDDL</string>
+    <string>Edit Properties(&amp;P)</string>
    </property>
    <property name="statusTip">
-    <string>Export current problems to PDDL files</string>
+    <string>Edit the domain properties</string>
+   </property>
+  </action>
+  <action name="actionDomain_Summary_S">
+   <property name="icon">
+    <iconset resource="../res/KAVIImages.qrc">
+     <normaloff>:/images/images/editpaste.png</normaloff>:/images/images/editpaste.png</iconset>
+   </property>
+   <property name="text">
+    <string>Domain Summary(&amp;S)</string>
+   </property>
+   <property name="statusTip">
+    <string>Check and print the domain report to log</string>
+   </property>
+  </action>
+  <action name="actionClear_Log_C">
+   <property name="icon">
+    <iconset resource="../res/KAVIImages.qrc">
+     <normaloff>:/images/images/editcut.png</normaloff>:/images/images/editcut.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clear Log(&amp;C)</string>
+   </property>
+   <property name="statusTip">
+    <string>Clear the application log</string>
    </property>
   </action>
   <action name="actionAddEllipseNode">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../res/KAVIIcons.qrc">
      <normaloff>:/icons/icons/addEllipseNode.xpm</normaloff>:/icons/icons/addEllipseNode.xpm</iconset>
@@ -273,14 +503,8 @@
    <property name="statusTip">
     <string>Switch predicate insert mode</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+1</string>
-   </property>
   </action>
   <action name="actionAddRectNode">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../res/KAVIIcons.qrc">
      <normaloff>:/icons/icons/addRectNode.xpm</normaloff>:/icons/icons/addRectNode.xpm</iconset>
@@ -294,14 +518,8 @@
    <property name="statusTip">
     <string>Switch class/variable/object insert mode</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+2</string>
-   </property>
   </action>
   <action name="actionAddEdge">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../res/KAVIIcons.qrc">
      <normaloff>:/icons/icons/addEdge.xpm</normaloff>:/icons/icons/addEdge.xpm</iconset>
@@ -315,14 +533,8 @@
    <property name="statusTip">
     <string>Switch edge insert mode</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+3</string>
-   </property>
   </action>
   <action name="actionDelete">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../res/KAVIIcons.qrc">
      <normaloff>:/icons/icons/delete.xpm</normaloff>:/icons/icons/delete.xpm</iconset>
@@ -336,17 +548,14 @@
    <property name="statusTip">
     <string>Switch delete mode</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+4</string>
-   </property>
   </action>
-  <action name="actionCreateOperator">
+  <action name="actionCreateAction">
    <property name="icon">
     <iconset resource="../res/KAVIIcons.qrc">
      <normaloff>:/icons/icons/createAction.xpm</normaloff>:/icons/icons/createAction.xpm</iconset>
    </property>
    <property name="text">
-    <string>CreateOperator</string>
+    <string>CreateAction</string>
    </property>
    <property name="toolTip">
     <string>Define new operator</string>
@@ -355,13 +564,13 @@
     <string>Start definition of new action</string>
    </property>
   </action>
-  <action name="actionDeleteOperator">
+  <action name="actionDeleteAction">
    <property name="icon">
     <iconset resource="../res/KAVIIcons.qrc">
      <normaloff>:/icons/icons/deleteAction.xpm</normaloff>:/icons/icons/deleteAction.xpm</iconset>
    </property>
    <property name="text">
-    <string>DeleteOperator</string>
+    <string>DeleteAction</string>
    </property>
    <property name="toolTip">
     <string>Delete selected operator</string>
@@ -431,9 +640,43 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DefinitionEdit</class>
+   <extends>QGraphicsView</extends>
+   <header>DefinitionEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>OperatorsEdit</class>
+   <extends>QGraphicsView</extends>
+   <header>OperatorsEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ProblemsEdit</class>
+   <extends>QGraphicsView</extends>
+   <header>ProblemsEdit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../res/KAVIImages.qrc"/>
   <include location="../res/KAVIIcons.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>tabWidget</sender>
+   <signal>selected(QString)</signal>
+   <receiver>statusBar</receiver>
+   <slot>showMessage(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>253</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>103</x>
+     <y>589</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
