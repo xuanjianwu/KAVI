@@ -1,6 +1,6 @@
 #include "InfoPanel.h"
 
-KAVI_NS_BEGIN
+
 
 
 
@@ -19,4 +19,4 @@ InfoPanel::InfoPanel(DataWidget *data, int nodeID, QWidget *parent): QWidget(par
 
 
 
-KAVI_NS_END
+

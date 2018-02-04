@@ -9,7 +9,7 @@
 
 #include "KAVIBase.h"
 
-KAVI_NS_BEGIN
+
 
 class TreeItem {
 public:
@@ -128,6 +128,6 @@ private:
     TreeItem* parentItem;
 };
 
-KAVI_NS_END
+
 
 #endif // TREEITEM_H

@@ -9,7 +9,7 @@
 
 #include "KAVIBase.h"
 
-KAVI_NS_BEGIN
+
 
 class DiagramElement : public QGraphicsItem {
 public:
@@ -39,6 +39,6 @@ protected:
     virtual QPainterPath shape() const = 0;
 };
 
-KAVI_NS_END
+
 
 #endif // DIAGRAMELEMENT_H

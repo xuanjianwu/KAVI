@@ -11,7 +11,7 @@
 #include "KAVIBase.h"
 #include "DiagramElement.h"
 
-KAVI_NS_BEGIN
+
 
 class Node: public DiagramElement {
 public:
@@ -178,6 +178,6 @@ private:
     void drawLayers(QPainter* painter);
 };
 
-KAVI_NS_END
+
 
 #endif // NODE_H

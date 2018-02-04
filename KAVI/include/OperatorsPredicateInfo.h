@@ -11,7 +11,7 @@
 #include "InfoPanel.h"
 #include "ui_OperatorsPredicateInfo.h"
 
-KAVI_NS_BEGIN
+
 
 class DataWidget;
 
@@ -152,6 +152,6 @@ private:
     Ui::OperatorsPredicateInfo ui;
 };
 
-KAVI_NS_END
+
 
 #endif // OPERATORSPREDICATEINFO_H

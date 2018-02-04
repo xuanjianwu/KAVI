@@ -10,7 +10,7 @@
 
 #include "KAVIBase.h"
 
-KAVI_NS_BEGIN
+
 
 class Node;
 class DiagramElement;
@@ -157,6 +157,6 @@ private:
     void handleClickEvent(bool isStart, QPointF pos);
 };
 
-KAVI_NS_END
+
 
 #endif // EDGE_H

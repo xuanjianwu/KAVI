@@ -10,7 +10,7 @@
 #include "KAVIBase.h"
 #include "DiagramElement.h"
 
-KAVI_NS_BEGIN
+
 
 class EdgePoint: public DiagramElement {
 public:
@@ -107,6 +107,6 @@ private:
     void initPolygon();
 };
 
-KAVI_NS_END
+
 
 #endif // EDGEPOINT_H

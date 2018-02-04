@@ -12,7 +12,7 @@
 #include "KAVIBase.h"
 #include "XMLUtils.h"
 
-KAVI_NS_BEGIN
+
 
 class QWidget;
 
@@ -219,6 +219,6 @@ private:
     QString getActionParameters(QDomElement diagram);
 };
 
-KAVI_NS_END
+
 
 #endif // CONVERTOR_H

@@ -134,7 +134,7 @@ CU_NS_BEGIN
     *       patternNode - the specified node structure template
     * @return: match succeed or not
     */
-    bool nodeMatches(const QDomElement& probedNode, const KAVI::NodeStructure& patternNode);
+    bool nodeMatches(const QDomElement& probedNode, const NodeStructure& patternNode);
 
     /*
     * get the first of the matching nodes' ID
@@ -143,7 +143,7 @@ CU_NS_BEGIN
     *       nodeTemplate - the matching template
     * @return: the matching node's ID
     */
-    int getMatchingNodeID(const QDomElement& root, const KAVI::NodeStructure& nodeTemplate);
+    int getMatchingNodeID(const QDomElement& root, const NodeStructure& nodeTemplate);
 
     /*
     * get the set of the matching nodes' ID
@@ -152,7 +152,7 @@ CU_NS_BEGIN
     *       nodeTemplate - the matching template
     * @return: the set of matching nodes' ID
     */
-    QList<int> selectMatchingIDList(const QDomElement& root, const KAVI::NodeStructure& nodeTemplate);
+    QList<int> selectMatchingIDList(const QDomElement& root, const NodeStructure& nodeTemplate);
 
     /*
     * get the set of the matching nodes' element
@@ -161,7 +161,7 @@ CU_NS_BEGIN
     *       nodeTemplate - the matching template
     * @return: the set of matching nodes' element
     */
-    QList<QDomElement> selectMatchingElementList(const QDomElement& root, const KAVI::NodeStructure& nodeTemplate);
+    QList<QDomElement> selectMatchingElementList(const QDomElement& root, const NodeStructure& nodeTemplate);
 
 CU_NS_END
 

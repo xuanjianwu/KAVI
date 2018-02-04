@@ -11,7 +11,7 @@
 #include "XMLUtils.h"
 #include "ui_DomainDescDialog.h"
 
-KAVI_NS_BEGIN
+
 
 class DomainDescDialog: public QDialog {
     Q_OBJECT
@@ -41,6 +41,6 @@ private:
     Ui::DomainDescDialog ui;
 };
 
-KAVI_NS_END
+
 
 #endif // DOMAINDESCDIALOG_H

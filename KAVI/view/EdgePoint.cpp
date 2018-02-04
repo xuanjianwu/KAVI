@@ -2,7 +2,7 @@
 #include "DiagramEvents.h"
 #include <math.h>
 
-KAVI_NS_BEGIN
+const double Pi = 3.14159;
 
 EdgePoint::EdgePoint(const QPointF& pos, bool isStart, QGraphicsItem* parent)
     :DiagramElement(parent)
@@ -156,4 +156,4 @@ void EdgePoint::initPolygon()
     polygon << arrowP0 << arrowP1 << arrowP2;
 }
 
-KAVI_NS_END
+

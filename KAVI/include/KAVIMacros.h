@@ -102,7 +102,7 @@
 // Edge ----------------------------------
 
 //const qreal Pi = 3.14159;
-const double Pi = 3.14159;
+//const double Pi = 3.14159;
 #define EDGE_Z_VALUE 5
 #define EDGE_LINE_WIDTH 3
 
@@ -199,5 +199,7 @@ const double Pi = 3.14159;
 
 // the output indent configure
 #define OUTPUT_INDENT 4
+
+
 
 #endif // KAVIMACROS_H

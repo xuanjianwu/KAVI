@@ -3,7 +3,7 @@
 #include "NodeStructure.h"
 #include "EditWidget.h"
 
-KAVI_NS_BEGIN
+
 
 using namespace XMLUtils;
 
@@ -39,4 +39,4 @@ void OperatorsVariableInfo::initComboBox()
 
 
 
-KAVI_NS_END
+

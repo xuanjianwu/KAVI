@@ -4,7 +4,7 @@
 #include "GraphClass.h"
 #include "DiagramEvents.h"
 
-KAVI_NS_BEGIN
+
 
 
 
@@ -236,4 +236,4 @@ QModelIndex TreeModel::recursiveSearch(const QModelIndex &parent, QString label)
 
 
 
-KAVI_NS_END
+

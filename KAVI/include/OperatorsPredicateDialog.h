@@ -10,7 +10,7 @@
 #include "KAVIBase.h"
 #include "ui_OperatorsPredicateDialog.h"
 
-KAVI_NS_BEGIN
+
 
 class OperatorsPredicateDialog: public QDialog {
     Q_OBJECT
@@ -69,6 +69,6 @@ private:
     Ui::OperatorsPredicateDialog ui;
 };
 
-KAVI_NS_END
+
 
 #endif // OPERATORSPREDICATEDIALOG_H

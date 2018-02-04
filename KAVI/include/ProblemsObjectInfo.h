@@ -11,7 +11,7 @@
 #include "InfoPanel.h"
 #include "ui_ProblemsObjectInfo.h"
 
-KAVI_NS_BEGIN
+
 
 class DataWidget;
 
@@ -59,6 +59,6 @@ private:
     Ui::ProblemsObjectInfo ui;
 };
 
-KAVI_NS_END
+
 
 #endif // PROBLEMSOBJECTINFO_H

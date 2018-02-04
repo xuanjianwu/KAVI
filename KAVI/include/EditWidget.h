@@ -13,7 +13,7 @@
 #include "DiagramWidget.h"
 #include "DataWidget.h"
 
-KAVI_NS_BEGIN
+
 
 struct EdgeStructure;
 
@@ -268,6 +268,6 @@ protected:
     virtual void deleteConnection(int edgeID) = 0;
 };
 
-KAVI_NS_END
+
 
 #endif // EDITWIDGET_H

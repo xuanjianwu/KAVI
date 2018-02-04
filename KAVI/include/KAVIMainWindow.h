@@ -10,7 +10,7 @@
 #include "KAVIBase.h"
 #include "ui_KAVIMainWindow.h"
 
-KAVI_NS_BEGIN
+
 
 struct NodeStructure;
 struct EdgeStructure;
@@ -29,53 +29,7 @@ public:
     void crash();
 
 public slots:
-    // Menu File
-    void on_actionNew_triggered();
-    void on_actionOpen_triggered();
-    void on_actionSave_triggered();
-    void on_actionExit_triggered();
 
-    void on_actionProperties_triggered();
-    void on_actionExportDomain_triggered();
-    void on_actionExportProblems_triggered();
-
-    // Menu Tools
-    void on_actionClearLog_triggered();
-    void on_actionDomainSummary_triggered();
-
-    // Toolbar
-    void on_actionAddRectNode_toggled(bool checked);
-    void on_actionAddEllipseNode_toggled(bool checked);
-    void on_actionAddEdge_toggled(bool checked);
-    void on_actionDelete_toggled(bool checked);
-
-    void on_createAction_triggered();
-    void on_deleteAction_triggered();
-
-    void on_createProblem_triggered();
-    void on_deleteProblem_triggered();
-
-    void on_actionSavePNG_triggered();
-    void on_actionCheckDiagram_triggered();
-
-    // Other
-    void on_tabWidget_currentChanged(int index);
-
-    void on_actionSelector_currentIndexChanged(const QString& text);
-    void on_taskSelector_currentIndexChanged(const QString& text);
-
-    void on_initCheckBox_toggled(bool checked);
-    void on_goalCheckBox_toggled(bool checked);
-
-    void on_definitionEdit_sceneChanged(int changeCode);
-    void on_actionEdit_sceneChanged(int changeCode);
-    void on_taskEdit_sceneChanged(int changeCode);
-
-    void on_definitionEdit_updateInfoPanel(QWidget* infoWidget);
-    void on_actionEdit_updateInfoPanel(QWidget* infoWidget);
-    void on_taskEdit_updateInfoPanel(QWidget* infoWidget);
-
-    void on_classTreeView_clicked(const QModelIndex& index);
 
 private:
     bool domainChanged;
@@ -124,6 +78,6 @@ private:
     Ui::MainWindow ui;
 };
 
-KAVI_NS_END
+
 
 #endif // KAVIMAINWINDOW_H

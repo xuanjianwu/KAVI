@@ -1,6 +1,6 @@
 #include "OperatorsVariableDialog.h"
 
-KAVI_NS_BEGIN
+
 
 
 
@@ -24,4 +24,4 @@ QString OperatorsVariableDialog::variableName()
 
 
 
-KAVI_NS_END
+

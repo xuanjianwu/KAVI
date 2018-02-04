@@ -8,7 +8,6 @@
 CU_NS_BEGIN
 
 using namespace XMLUtils;
-using namespace KAVI;
 
 QHash<int, QString> predicateArguments(const QDomElement &predicate)
 {
@@ -549,7 +548,7 @@ QStringList classFamily(const QString &className, const GraphClass *structure, c
     return structure->pathToRoot(classID);
 }
 
-bool nodeMatches(const QDomElement &probedNode, const KAVI::NodeStructure &patternNode)
+bool nodeMatches(const QDomElement &probedNode, const NodeStructure &patternNode)
 {
     Q_ASSERT(!probedNode.isNull());
 
@@ -593,7 +592,7 @@ bool nodeMatches(const QDomElement &probedNode, const KAVI::NodeStructure &patte
     return true;
 }
 
-int getMatchingNodeID(const QDomElement &root, const KAVI::NodeStructure &nodeTemplate)
+int getMatchingNodeID(const QDomElement &root, const NodeStructure &nodeTemplate)
 {
     QList<int> candidates = selectMatchingIDList(root, nodeTemplate);
 
@@ -609,7 +608,7 @@ int getMatchingNodeID(const QDomElement &root, const KAVI::NodeStructure &nodeTe
     return candidates.first();
 }
 
-QList<int> selectMatchingIDList(const QDomElement &root, const KAVI::NodeStructure &nodeTemplate)
+QList<int> selectMatchingIDList(const QDomElement &root, const NodeStructure &nodeTemplate)
 {
     Q_ASSERT(!root.isNull());
 
@@ -628,7 +627,7 @@ QList<int> selectMatchingIDList(const QDomElement &root, const KAVI::NodeStructu
     return result;
 }
 
-QList<QDomElement> selectMatchingElementList(const QDomElement &root, const KAVI::NodeStructure &nodeTemplate)
+QList<QDomElement> selectMatchingElementList(const QDomElement &root, const NodeStructure &nodeTemplate)
 {
     Q_ASSERT(!root.isNull());
 

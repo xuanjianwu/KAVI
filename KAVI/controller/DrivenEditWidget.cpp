@@ -5,7 +5,7 @@
 #include "CheckUtils.h"
 #include "GraphClass.h"
 
-KAVI_NS_BEGIN
+
 
 using namespace XMLUtils;
 using namespace CheckUtils;
@@ -297,4 +297,4 @@ int DrivenEditWidget::findArgPosition(const QString &predicate, const QString &a
 
 
 
-KAVI_NS_END
+

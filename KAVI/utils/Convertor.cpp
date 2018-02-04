@@ -7,7 +7,7 @@
 #include "igraph.h"
 
 
-KAVI_NS_BEGIN
+
 
 using namespace XMLUtils;
 using namespace CheckUtils;
@@ -28,8 +28,8 @@ QDomDocument Convertor::readFromXML(QFile &input)
 
     if ( !domainData.setContent(&input, &errorMsg, &errorLine, &errorColumn) )
     {
-        QMessageBox::critical (ownerWidget, "KAVI",
-                    QObject::tr("Error in XML syntax on line: %1 column: %2").arg(errorLine).arg(errorColumn));
+        QString errMessage = QObject::tr("Error in XML syntax on line: %1 column: %2").arg(errorLine).arg(errorColumn);
+        //QMessageBox::critical (ownerWidget, "KAVI", errMessage);
         qCritical() << "Error in XML syntax on line:" << errorLine << "column:" << errorColumn;
         return QDomDocument();
     }
@@ -280,8 +280,8 @@ void Convertor::writeTask(QDomElement &diagram, const QString &name, const QStri
 
     if ( !outfile.open(QIODevice::Truncate | QIODevice::WriteOnly) )
     {
-        QMessageBox::critical(ownerWidget, QObject::tr("Error"),
-                QObject::tr("Can't open file:\n%1").arg(fileName.join("")));
+        //QMessageBox::critical(ownerWidget, QObject::tr("Error"), QObject::tr("Can't open file:\n%1").arg(fileName.join("")));
+        qCritical() << "Can't open file:\n" << fileName.join("");
         return;
     }
 
@@ -645,4 +645,4 @@ QString Convertor::getActionParameters(QDomElement diagram)
 
 
 
-KAVI_NS_END
+

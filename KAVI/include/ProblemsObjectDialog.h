@@ -10,7 +10,7 @@
 #include "KAVIBase.h"
 #include "ui_ProblemsObjectDialog.h"
 
-KAVI_NS_BEGIN
+
 
 class ProblemsObjectDialog: public QDialog {
     Q_OBJECT
@@ -44,6 +44,6 @@ private:
     Ui::ProblemsObjectDialog ui;
 };
 
-KAVI_NS_END
+
 
 #endif // PROBLEMSOBJECTDIALOG_H

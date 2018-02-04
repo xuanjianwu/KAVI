@@ -9,7 +9,7 @@
 #include "ProblemsPredicateInfo.h"
 
 
-KAVI_NS_BEGIN
+
 
 using namespace XMLUtils;
 
@@ -192,4 +192,4 @@ void ProblemsEdit::displayInfo(int nodeID)
 
 
 
-KAVI_NS_END
+

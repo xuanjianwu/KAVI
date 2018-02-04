@@ -11,7 +11,7 @@
 #include "InfoPanel.h"
 #include "ui_ProblemsPredicateInfo.h"
 
-KAVI_NS_BEGIN
+
 
 class DataWidget;
 
@@ -134,6 +134,6 @@ private:
     Ui::ProblemsPredicateInfo ui;
 };
 
-KAVI_NS_END
+
 
 #endif // PROBLEMSPREDICATEINFO_H

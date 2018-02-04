@@ -11,7 +11,7 @@
 #include "KAVIBase.h"
 #include "Node.h"
 
-KAVI_NS_BEGIN
+
 
 struct NodeStructure {
     /*
@@ -65,6 +65,6 @@ private:
     QHash<ContentType, QVariant> content;
 };
 
-KAVI_NS_END
+
 
 #endif // NODESTRUCTURE_H

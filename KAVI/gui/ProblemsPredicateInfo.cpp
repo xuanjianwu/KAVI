@@ -4,7 +4,7 @@
 #include "CheckUtils.h"
 #include "EditWidget.h"
 
-KAVI_NS_BEGIN
+
 
 using namespace XMLUtils;
 using namespace CheckUtils;
@@ -248,4 +248,4 @@ void ProblemsPredicateInfo::setPredicateState(QString newState)
 
 
 
-KAVI_NS_END
+

@@ -4,7 +4,7 @@
 #include "EdgeStructure.h"
 #include "CheckUtils.h"
 
-KAVI_NS_BEGIN
+
 
 using namespace CheckUtils;
 
@@ -622,4 +622,4 @@ const EdgeStructure DataWidget::loadEdge(const QDomElement &elem) const
 
 
 
-KAVI_NS_END
+

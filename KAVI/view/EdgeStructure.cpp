@@ -1,7 +1,7 @@
 #include "EdgeStructure.h"
 #include "EdgePoint.h"
 
-KAVI_NS_BEGIN
+
 
 EdgeOrientation EdgeStructure::orientation() const
 {
@@ -38,4 +38,4 @@ void EdgeStructure::switchOrientation()
     endNodeID = tempID;
 }
 
-KAVI_NS_END
+

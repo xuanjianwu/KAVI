@@ -5,7 +5,7 @@
 #include "DiagramEvents.h"
 
 
-KAVI_NS_BEGIN
+
 
 
 
@@ -464,4 +464,4 @@ bool EditWidget::verifyEdge(EdgeStructure &edge, int &argNum)
 }
 
 
-KAVI_NS_END
+

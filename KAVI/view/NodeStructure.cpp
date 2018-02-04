@@ -1,6 +1,6 @@
 #include "NodeStructure.h"
 
-KAVI_NS_BEGIN
+
 
 NodeStructure::NodeStructure()
 {
@@ -132,4 +132,4 @@ QColor NodeStructure::color() const
 
 
 
-KAVI_NS_END
+

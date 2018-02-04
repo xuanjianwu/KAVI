@@ -1,7 +1,7 @@
 #include "DefinitionClassInfo.h"
 #include "DataWidget.h"
 
-KAVI_NS_BEGIN
+
 
 
 
@@ -15,4 +15,4 @@ DefinitionClassInfo::DefinitionClassInfo(DataWidget *data, int classID, QWidget 
 
 
 
-KAVI_NS_END
+

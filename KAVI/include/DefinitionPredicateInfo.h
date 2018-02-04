@@ -11,7 +11,7 @@
 #include "InfoPanel.h"
 #include "ui_DefinitionPredicateInfo.h"
 
-KAVI_NS_BEGIN
+
 
 class DataWidget;
 
@@ -91,6 +91,6 @@ private:
     Ui::DefinitionPredicateInfo ui;
 };
 
-KAVI_NS_END
+
 
 #endif // DEFINITIONPREDICATEINFO_H

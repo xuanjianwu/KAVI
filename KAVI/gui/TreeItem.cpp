@@ -1,6 +1,6 @@
 #include "TreeItem.h"
 
-KAVI_NS_BEGIN
+
 
 
 
@@ -112,4 +112,4 @@ bool TreeItem::setData(int column, const QVariant &value)
 
 
 
-KAVI_NS_END
+

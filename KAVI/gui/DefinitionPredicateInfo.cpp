@@ -3,7 +3,7 @@
 #include "NodeStructure.h"
 #include "EditWidget.h"
 
-KAVI_NS_BEGIN
+
 
 using namespace XMLUtils;
 
@@ -147,4 +147,4 @@ void DefinitionPredicateInfo::swapConnections(int firstArg, int secondArg)
 
 
 
-KAVI_NS_END
+

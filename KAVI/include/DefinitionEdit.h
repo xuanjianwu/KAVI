@@ -10,7 +10,7 @@
 #include "KAVIBase.h"
 #include "EditWidget.h"
 
-KAVI_NS_BEGIN
+
 
 class DefinitionEdit: public EditWidget {
     Q_OBJECT
@@ -130,6 +130,6 @@ private:
                                 bool startMoved, int& argNum);
 };
 
-KAVI_NS_END
+
 
 #endif // DEFINITIONEDIT_H

@@ -11,7 +11,7 @@
 #include "KAVIBase.h"
 #include "EditWidget.h"
 
-KAVI_NS_BEGIN
+
 
 class DrivenEditWidget: public EditWidget {
     Q_OBJECT
@@ -111,6 +111,6 @@ private:
                         const QHash<int, QString>& instArg);
 };
 
-KAVI_NS_END
+
 
 #endif // DRIVENEDITWIDGET_H

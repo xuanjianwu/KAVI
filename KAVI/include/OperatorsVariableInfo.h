@@ -11,7 +11,7 @@
 #include "InfoPanel.h"
 #include "ui_OperatorsVariableInfo.h"
 
-KAVI_NS_BEGIN
+
 
 class OperatorsVariableInfo: public InfoPanel {
     Q_OBJECT
@@ -58,6 +58,6 @@ private:
     Ui::OperatorsVariableInfo ui;
 };
 
-KAVI_NS_END
+
 
 #endif // OPERATORSVARIABLEINFO_H

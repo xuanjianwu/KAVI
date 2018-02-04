@@ -6,7 +6,7 @@
 #include "Edge.h"
 #include "DiagramEvents.h"
 
-KAVI_NS_BEGIN
+
 
 
 
@@ -448,4 +448,4 @@ void DiagramWidget::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 
 
-KAVI_NS_END
+

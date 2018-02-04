@@ -9,7 +9,7 @@
 
 #include "KAVIBase.h"
 
-KAVI_NS_BEGIN
+
 
 class TreeItem;
 class GraphClass;
@@ -110,6 +110,6 @@ private:
     QMap<int, QString> modelMap;
 };
 
-KAVI_NS_END
+
 
 #endif // TREEMODEL_H

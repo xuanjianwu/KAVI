@@ -11,7 +11,7 @@
 #include "KAVIBase.h"
 #include "Edge.h"
 
-KAVI_NS_BEGIN
+
 
 struct EdgeStructure {
     // Edge structure ID
@@ -51,6 +51,6 @@ struct EdgeStructure {
     void switchOrientation();
 };
 
-KAVI_NS_END
+
 
 #endif // EDGESTRUCTURE_H

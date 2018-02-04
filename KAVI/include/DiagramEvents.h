@@ -9,7 +9,7 @@
 
 #include "KAVIBase.h"
 
-KAVI_NS_BEGIN
+
 
 // custom events
 
@@ -68,6 +68,6 @@ private:
     QVariant eventData;
 };
 
-KAVI_NS_END
+
 
 #endif // DIAGRAMEVENTS_H

@@ -24,6 +24,7 @@ bool igraph_t::init(int nVertex, bool directed)
     for(int i = 0; i < this->nVertex; i++) {
         this->vertices.insert(i);
     }
+    return true;
 }
 
 void igraph_t::deInit()
@@ -105,7 +106,7 @@ bool igraph_t::removeEdge(int sVertex, int eVertex)
     }
 }
 
-bool igraph_t::degree(QVector<int> &res, QVector<int> vertices, neimode mode)
+bool igraph_t::degree(QVector<int> &res, QVector<int> vertices, neimode mode) const
 {
     for (int i = 0; i < vertices.size(); i++)
     {
@@ -162,7 +163,7 @@ bool igraph_t::degree(QVector<int> &res, QVector<int> vertices, neimode mode)
     }
 }
 
-void igraph_t::calNeighborhood(int rootVertex, int currentOrder, QVector<int> &res, neimode mode, QVector<bool> &visited)
+void igraph_t::calNeighborhood(int rootVertex, int currentOrder, QVector<int> &res, neimode mode, QVector<bool> &visited) const
 {
     res.push_back(rootVertex);
     visited[rootVertex] = true;
@@ -183,7 +184,7 @@ void igraph_t::calNeighborhood(int rootVertex, int currentOrder, QVector<int> &r
     }
 }
 
-bool igraph_t::neighborhood(QVector<QVector<int> > &res, QVector<int> vertices, int order, neimode mode)
+bool igraph_t::neighborhood(QVector<QVector<int> > &res, QVector<int> vertices, int order, neimode mode) const
 {
     for (int i = 0; i < vertices.size(); i++)
     {
@@ -210,7 +211,7 @@ bool igraph_t::neighborhood(QVector<QVector<int> > &res, QVector<int> vertices, 
     return true;
 }
 
-void igraph_t::calComponent(QVector<int> &res, int rootVertex, neimode mode, QVector<bool> &visited)
+void igraph_t::calComponent(QVector<int> &res, int rootVertex, neimode mode, QVector<bool> &visited) const
 {
     res.push_back(rootVertex);
 
@@ -227,7 +228,7 @@ void igraph_t::calComponent(QVector<int> &res, int rootVertex, neimode mode, QVe
     }
 }
 
-bool igraph_t::subcomponent(QVector<int> &res, int rootVertex, neimode mode)
+bool igraph_t::subcomponent(QVector<int> &res, int rootVertex, neimode mode) const
 {
     if ( !this->vertices.contains(rootVertex) )
     {
@@ -246,7 +247,7 @@ bool igraph_t::subcomponent(QVector<int> &res, int rootVertex, neimode mode)
     return true;
 }
 
-bool igraph_t::neighbors(QVector<int> &res, int rootVertex, neimode mode)
+bool igraph_t::neighbors(QVector<int> &res, int rootVertex, neimode mode) const
 {
     if ( !this->vertices.contains(rootVertex) )
     {
@@ -304,24 +305,125 @@ bool igraph_t::neighbors(QVector<int> &res, int rootVertex, neimode mode)
     }
 }
 
-QSet<int> igraph_t::getVertices()
+QSet<int> igraph_t::getVertices() const
 {
     return this->vertices;
 }
 
-bool igraph_t::isDirected()
+bool igraph_t::isDirected() const
 {
     return this->directed;
 }
 
-int igraph_t::getVertexCount()
+int igraph_t::getVertexCount() const
 {
     return this->nVertex;
 }
 
-int igraph_t::getEdgeCount()
+int igraph_t::getEdgeCount() const
 {
     return this->nEdge;
+}
+
+
+void igraph_vector_init(igraph_vector_t &vector, igraph_integer_t size) {
+    vector.resize(size);
+}
+
+igraph_integer_t igraph_vector_size(const igraph_vector_t vector) {
+    return vector.size();
+}
+
+igraph_integer_t igraph_vector_e(const igraph_vector_t &vector, igraph_integer_t index) {
+    return vector[index];
+}
+
+void igraph_vector_destroy(igraph_vector_t &vector) {
+    vector.clear();
+}
+
+void igraph_vector_ptr_init(igraph_vector_ptr_t &vector, igraph_integer_t size) {
+    vector.resize(size);
+}
+
+igraph_vector_t igraph_vector_ptr_e(const igraph_vector_ptr_t &vector, igraph_integer_t index) {
+    return vector[index];
+}
+
+void igraph_vector_ptr_destroy(igraph_vector_ptr_t &vector) {
+    for (igraph_vector_t v : vector) {
+        v.clear();
+    }
+    vector.clear();
+}
+
+void igraph_empty(igraph_t &graph, igraph_integer_t vertices, bool directed) {
+    graph.init(vertices, directed);
+}
+
+void igraph_destroy(igraph_t &graph) {
+    graph.deInit();
+}
+
+void igraph_add_edge(igraph_t &graph, igraph_integer_t sVertex, igraph_integer_t eVertex) {
+    graph.addEdge(sVertex, eVertex);
+}
+
+void igraph_add_edges(igraph_t &graph, igraph_vector_t &vector, void *attr) {
+    Q_UNUSED(attr);
+    graph.addEdges(vector);
+}
+
+void igraph_delete_edges(igraph_t &graph, igraph_integer_t sVertex, igraph_integer_t eVertex) {
+    graph.removeEdge(sVertex, eVertex);
+}
+
+igraph_vector_t igraph_vss_1(const igraph_t &graph, igraph_integer_t id) {
+    igraph_vector_t res;
+    QSet<int> tmp = graph.getVertices();
+    if (tmp.find(id) != tmp.end()) {
+        res.push_back(id);
+    }
+    return res;
+}
+
+igraph_vector_t igraph_vss_all(const igraph_t &graph) {
+    igraph_vector_t res;
+    QSet<int> tmp = graph.getVertices();
+    QSet<int>::iterator iter;
+    for (iter = tmp.begin(); iter != tmp.end(); iter++) {
+        res.push_back(*iter);
+    }
+    return res;
+}
+
+void igraph_degree(const igraph_t &graph, igraph_vector_t &res, igraph_vector_t vids, igraph_neimode_t mode, bool loops) {
+    Q_UNUSED(loops);
+    graph.degree(res, vids, mode);
+}
+
+void igraph_neighborhood(const igraph_t &graph, igraph_vector_ptr_t &res, igraph_vector_t vids, igraph_integer_t order, igraph_neimode_t mode) {
+    graph.neighborhood(res, vids, order, mode);
+}
+
+bool igraph_is_directed(const igraph_t &graph) {
+    return graph.isDirected();
+}
+
+void igraph_subcomponent(const igraph_t &graph, igraph_vector_t &res, igraph_integer_t rootVertex, igraph_neimode_t mode) {
+    graph.subcomponent(res, rootVertex, mode);
+}
+
+void igraph_neighbors(const igraph_t &graph, igraph_vector_t &res, igraph_integer_t rootVertex, igraph_neimode_t mode) {
+    graph.neighbors(res, rootVertex, mode);
+}
+
+igraph_integer_t igraph_vcount(const igraph_t &graph) {
+    return graph.getVertexCount();
+}
+
+igraph_integer_t igraph_ecount(const igraph_t &graph) {
+    return graph.getEdgeCount();
 }
 
 

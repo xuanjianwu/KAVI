@@ -1,6 +1,6 @@
 #include "DiagramEvents.h"
 
-KAVI_NS_BEGIN
+
 
 QEvent::Type DiagramLeftClick = (QEvent::Type)QEvent::registerEventType(QEvent::User);
 QEvent::Type DiagramRightClick = (QEvent::Type)QEvent::registerEventType(QEvent::User + 1);
@@ -34,4 +34,4 @@ QVariant DiagramEvent::data() const
 
 
 
-KAVI_NS_END
+

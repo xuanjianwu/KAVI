@@ -4,8 +4,8 @@
 #include "EdgePoint.h"
 #include <math.h>
 
-KAVI_NS_BEGIN
 
+const double Pi = 3.14159;
 
 Edge::Edge()
 {
@@ -307,4 +307,4 @@ void Edge::handleClickEvent(bool isStart, QPointF pos)
 
 
 
-KAVI_NS_END
+

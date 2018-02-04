@@ -37,7 +37,6 @@ SOURCES += \
     gui/DefinitionPredicateInfo.cpp \
     gui/DomainDescDialog.cpp \
     gui/InfoPanel.cpp \
-    src/KAVIMainWindow.cpp \
     gui/OperatorsPredicateDialog.cpp \
     gui/OperatorsPredicateInfo.cpp \
     gui/OperatorsVariableDialog.cpp \
@@ -58,7 +57,9 @@ SOURCES += \
     utils/XMLUtils.cpp \
     utils/igraph.cpp \
     utils/GraphClass.cpp \
-    view/DiagramEvents.cpp
+    view/DiagramEvents.cpp \
+    src/main.cpp \
+    gui/KAVIMainWindow.cpp
 
 HEADERS += \
     include/KAVIBase.h \

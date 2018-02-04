@@ -1,6 +1,6 @@
 #include "DiagramElement.h"
 
-KAVI_NS_BEGIN
+
 
 DiagramElement::DiagramElement(QGraphicsItem* parent)
     : QGraphicsItem(parent)
@@ -30,4 +30,4 @@ void DiagramElement::stick(const DiagramElement* another)
     }
 }
 
-KAVI_NS_END
+

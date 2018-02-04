@@ -11,7 +11,7 @@
 #include "XMLUtils.h"
 #include "DataWidget.h"
 
-KAVI_NS_BEGIN
+
 
 class InfoPanel: public QWidget {
     Q_OBJECT
@@ -60,6 +60,6 @@ protected:
     QDomElement selectedNode;
 };
 
-KAVI_NS_END
+
 
 #endif // INFOPANEL_H

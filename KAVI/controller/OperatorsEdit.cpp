@@ -8,7 +8,7 @@
 #include "OperatorsPredicateInfo.h"
 #include "OperatorsVariableInfo.h"
 
-KAVI_NS_BEGIN
+
 
 using namespace XMLUtils;
 
@@ -151,4 +151,4 @@ void OperatorsEdit::displayInfo(int nodeID)
 
 
 
-KAVI_NS_END
+

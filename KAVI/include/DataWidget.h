@@ -13,7 +13,7 @@
 #include "KAVIBase.h"
 #include "XMLUtils.h"
 
-KAVI_NS_BEGIN
+
 
 class DiagramWidget;
 class TreeModel;
@@ -325,6 +325,6 @@ private:
     const EdgeStructure loadEdge(const QDomElement& elem) const;
 };
 
-KAVI_NS_END
+
 
 #endif // DATAWIDGET_H

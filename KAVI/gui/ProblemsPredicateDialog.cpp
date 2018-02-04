@@ -2,7 +2,7 @@
 #include "NodeStructure.h"
 
 
-KAVI_NS_BEGIN
+
 
 
 
@@ -31,4 +31,4 @@ QString ProblemsPredicateDialog::taskState()
 
 
 
-KAVI_NS_END
+

@@ -11,7 +11,7 @@
 #include "InfoPanel.h"
 #include "ui_DefinitionClassInfo.h"
 
-KAVI_NS_BEGIN
+
 
 class DataWidget;
 
@@ -33,6 +33,6 @@ private:
     Ui::DefinitionClassInfo ui;
 };
 
-KAVI_NS_END
+
 
 #endif // DEFINITIONCLASSINFO_H

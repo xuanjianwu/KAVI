@@ -4,7 +4,7 @@
 #include "CheckUtils.h"
 #include "EditWidget.h"
 
-KAVI_NS_BEGIN
+
 
 using namespace CheckUtils;
 using namespace XMLUtils;
@@ -284,4 +284,4 @@ void OperatorsPredicateInfo::excludeFromSet(QString set)
 
 
 
-KAVI_NS_END
+

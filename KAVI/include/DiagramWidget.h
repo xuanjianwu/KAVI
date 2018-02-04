@@ -11,7 +11,7 @@
 
 #include "KAVIBase.h"
 
-KAVI_NS_BEGIN
+
 
 class Node;
 class Edge;
@@ -133,6 +133,6 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
 };
 
-KAVI_NS_END
+
 
 #endif // DIAGRAMWIDGET_H

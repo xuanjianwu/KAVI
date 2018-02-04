@@ -11,7 +11,7 @@
 #include "KAVIBase.h"
 #include "igraph.h"
 
-KAVI_NS_BEGIN
+
 
 using namespace KAVIGraph;
 
@@ -151,6 +151,6 @@ private:
     bool directedHasCycle;
 };
 
-KAVI_NS_END
+
 
 #endif // GRAPHCLASS_H

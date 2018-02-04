@@ -9,7 +9,7 @@
 #include "DefinitionClassInfo.h"
 #include "igraph.h"
 
-KAVI_NS_BEGIN
+
 
 using namespace XMLUtils;
 using namespace CheckUtils;
@@ -407,4 +407,4 @@ EditWidget::ReconnectionValue DefinitionEdit::verifyReconnection(EdgeStructure &
 
 
 
-KAVI_NS_END
+

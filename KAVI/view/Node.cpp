@@ -1,7 +1,7 @@
 #include "Node.h"
 #include "DiagramEvents.h"
 
-KAVI_NS_BEGIN
+
 
 extern QEvent::Type NodeReshaped;
 
@@ -224,4 +224,4 @@ void Node::drawLayers(QPainter *painter)
 
 
 
-KAVI_NS_END
+

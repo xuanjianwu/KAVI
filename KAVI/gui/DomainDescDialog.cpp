@@ -1,6 +1,6 @@
 #include "DomainDescDialog.h"
 
-KAVI_NS_BEGIN
+
 
 
 using namespace XMLUtils;
@@ -48,4 +48,4 @@ void DomainDescDialog::on_buttonBox_accepted()
 
 
 
-KAVI_NS_END
+

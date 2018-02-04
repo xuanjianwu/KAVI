@@ -1,6 +1,6 @@
 #include "ProblemsObjectDialog.h"
 
-KAVI_NS_BEGIN
+
 
 
 
@@ -24,4 +24,4 @@ QString ProblemsObjectDialog::objectName()
 
 
 
-KAVI_NS_END
+

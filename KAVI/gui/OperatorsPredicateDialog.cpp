@@ -1,7 +1,7 @@
 #include "OperatorsPredicateDialog.h"
 #include "NodeStructure.h"
 
-KAVI_NS_BEGIN
+
 
 
 
@@ -51,4 +51,4 @@ void OperatorsPredicateDialog::on_effectNegCheck_toggled(bool checked)
 }
 
 
-KAVI_NS_END
+
