@@ -200,6 +200,21 @@
 // the output indent configure
 #define OUTPUT_INDENT 4
 
+// KAVIMainWindow ------------------------
 
+#define MAX_NAME_LENGTH 30
+
+// the margin for saving PNG
+#define IMAGE_MARGIN 20
+
+// the default indexs of tabWidget
+#define TAB_INDEX_DEFINITION 0
+#define TAB_INDEX_OPERATORS	 1
+#define TAB_INDEX_PROBLEMS	 2
+
+// main ----------------------------------
+
+// the prefix of message that would not append to logTextEdit
+#define PREFIX '$'
 
 #endif // KAVIMACROS_H

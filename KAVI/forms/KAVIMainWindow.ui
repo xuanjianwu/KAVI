@@ -193,8 +193,14 @@
     </property>
     <addaction name="actionAbout_A"/>
    </widget>
+   <widget class="QMenu" name="menuView_V">
+    <property name="title">
+     <string>View(&amp;V)</string>
+    </property>
+   </widget>
    <addaction name="menuFile_F"/>
    <addaction name="menuOptions_O"/>
+   <addaction name="menuView_V"/>
    <addaction name="menuHelp_H"/>
   </widget>
   <widget class="QDockWidget" name="classDock">

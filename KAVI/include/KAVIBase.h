@@ -49,5 +49,6 @@
 #include <QTableWidgetItem>
 #include <QtGlobal>
 #include <QTextStream>
+#include <QFileDialog>
 
 #endif // KAVIBASE_H

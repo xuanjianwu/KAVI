@@ -75,7 +75,7 @@ CU_NS_BEGIN
     bool checkDependentDiagram(const QDomElement& diagramRoot, const QDomElement& definitionRoot, char rectType, bool verbose);
 
     /*
-    * broken all diagrams in operators and problems to single action diagram element or task diagram
+    * broken all diagrams in operators or problems to single action diagram element or task diagram
     * element, then check the single diagram with definition by checkDependentDiagram. according to
     * the check result, put the action's name or task's name to correct or incorrect
     * @params:
