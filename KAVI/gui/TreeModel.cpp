@@ -33,7 +33,7 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
     {
         qWarning() << "$TreeModel::data : invalid index";
-            return QVariant();
+        return QVariant();
     }
 
     if (role == Qt::UserRole )
@@ -114,14 +114,14 @@ bool TreeModel::setData(const QModelIndex &index, const QVariant &value, int rol
         item = getItem(index);
         lastInserted = value.toString();
         return item->setData(index.column(), value);
-    break;
+        break;
     case Qt::UserRole:
         Q_ASSERT( !lastInserted.isEmpty() );
 
         modelMap.insert(value.toInt(), lastInserted);
         lastInserted = QString();
         return true;
-    break;
+        break;
     default:
         return false;
     }
@@ -167,7 +167,7 @@ bool TreeModel::removeRow(int id)
     if ( removedItem->childCount() > 0 )
         return false;
 
-    return removeRows(removedIndex.row(),1,removedIndex.parent());
+    return removeRows(removedIndex.row(), 1, removedIndex.parent());
 }
 
 void TreeModel::initClasses(TreeItem *parent, int parentID)
@@ -178,6 +178,14 @@ void TreeModel::initClasses(TreeItem *parent, int parentID)
 
     if ( childCnt <= 0)
         return;
+
+    /*
+    graphData->print();
+    qWarning() << "childrens of " << graphData->nodeLabel(parentID) << ":";
+    foreach (int ccc, children) {
+        qWarning() << graphData->nodeLabel(ccc) << " ";
+    }
+    */
 
     parent->insertChildren(0, childCnt, COLUMN_CNT);
 
@@ -213,7 +221,7 @@ QModelIndex TreeModel::getItemIndex(int id)
 
 QModelIndex TreeModel::recursiveSearch(const QModelIndex &parent, QString label)
 {
-    if ( data(parent,Qt::EditRole).toString() == label)
+    if ( data(parent, Qt::EditRole).toString() == label)
         return parent;
 
     TreeItem * actItem = getItem(parent);

@@ -76,9 +76,15 @@ QString GraphClass::nodeLabel(int nodeID) const
 {
     QDomElement node = findSubelementAttr(graphData, "node", "id", QString().setNum(nodeID));
 
-    Q_ASSERT(!node.isNull());
-
-    return subelementTagValue(node, "label");
+    //Q_ASSERT(!node.isNull());
+    if (!node.isNull())
+    {
+        return subelementTagValue(node, "label");
+    }
+    else
+    {
+        return QString();
+    }
 }
 
 int GraphClass::nodeParentID(int nodeID) const
@@ -213,6 +219,25 @@ QList<int> GraphClass::selectComponentRootNodes()
         igraph_vector_t degrees;
         igraph_vector_init(degrees, vertexCnt);
         igraph_degree(graph, degrees, igraph_vss_all(graph), IGRAPH_IN, IGRAPH_NO_LOOPS);
+
+        /*
+        QMap<int, int>::iterator a;
+        for(a = idMap.begin(); a != idMap.end(); a++) {
+            QVector<int> temp, temp2;
+            temp2.push_back(a.value());
+            igraph_degree(graph, temp, temp2, IGRAPH_IN, IGRAPH_NO_LOOPS);
+            qWarning() << "nodeID: " << a.key() << " vertexID: " << a.value() << " label: " << nodeLabel(a.key())
+                       << " in degree: " << temp[0];
+        }
+
+        foreach (int temp, vertices) {
+            qWarning() << temp;
+        }
+        foreach (int temp, degrees) {
+            qWarning() << temp;
+        }
+        */
+
 
         igraph_integer_t rootVertex;
 

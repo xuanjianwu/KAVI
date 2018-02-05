@@ -13,6 +13,7 @@
 #include <QMultiMap>
 #include <QVector>
 #include <QList>
+#include <QtAlgorithms>
 
 namespace KAVIGraph {
 

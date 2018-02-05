@@ -385,6 +385,7 @@ igraph_vector_t igraph_vss_1(const igraph_t &graph, igraph_integer_t id) {
     if (tmp.find(id) != tmp.end()) {
         res.push_back(id);
     }
+    qSort(res.begin(), res.end());
     return res;
 }
 
@@ -395,6 +396,11 @@ igraph_vector_t igraph_vss_all(const igraph_t &graph) {
     for (iter = tmp.begin(); iter != tmp.end(); iter++) {
         res.push_back(*iter);
     }
+    qSort(res.begin(), res.end());
+    /*
+    for (int i = 0; i < res.size(); i++)
+        qWarning() << res[i];
+        */
     return res;
 }
 
