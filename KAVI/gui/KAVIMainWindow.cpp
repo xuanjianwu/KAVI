@@ -72,7 +72,7 @@ void KAVIMainWindow::appendToLog(bool prefixed, const QString &text, QColor text
 {
     ui.logTextEdit->setTextColor(textColor);
 
-    if ( !prefixed )
+    if (prefixed )
     {
         ui.logTextEdit->append(text);
     }
@@ -228,14 +228,14 @@ void KAVIMainWindow::on_actionDomain_Summary_S_triggered()
     QList<QDomElement> definedClasses = selectMatchingElementList(definitionDiagram, tempNode);
 
     if (definedClasses.isEmpty())
-        qDebug() << "No classes defined.";
+        qDebug() << "@No classes defined.";
     else
     {
-        qDebug() << "Defined classes:";
+        qDebug() << "@Defined classes:";
 
         foreach(QDomElement actClass, definedClasses)
         {
-            qDebug() << subelementTagValue(actClass, "label");
+            qDebug() << "@" << subelementTagValue(actClass, "label");
         }
     }
 
@@ -250,10 +250,10 @@ void KAVIMainWindow::on_actionDomain_Summary_S_triggered()
 
     QSet<QString> processed;
     if (definedPredicates.isEmpty())
-        qDebug() << "No predicates defined.";
+        qDebug() << "@No predicates defined.";
     else
     {
-        qDebug() << "Defined predicates:";
+        qDebug() << "@Defined predicates:";
 
         foreach(QDomElement actPred, definedPredicates)
         {
@@ -266,12 +266,12 @@ void KAVIMainWindow::on_actionDomain_Summary_S_triggered()
             // all the overloaded predicate have equal count of arguments
             if(checkPredicateDefinition(actPred, false))
             {
-                qDebug() << predName;
+                qDebug() << "@" << predName;
                 processed.insert(predName);
             }
             else
             {
-                qWarning() << predName;
+                qWarning() << "@" << predName;
                 ++invalidPredCnt;
                 processed.insert(predName);
             }
@@ -290,24 +290,24 @@ void KAVIMainWindow::on_actionDomain_Summary_S_triggered()
 
     if (correctOper.size() > 0)
     {
-        qDebug() << "Defined operators:";
+        qDebug() << "@Defined operators:";
         foreach(QString op, correctOper)
         {
-            qDebug() << op;
+            qDebug() << "@" << op;
         }
     }
 
     if ( incorrectOper.size() > 0 )
     {
-        qDebug() << "Incorrect operators:";
+        qDebug() << "@Incorrect operators:";
         foreach(QString op, incorrectOper)
         {
-            qWarning() << op;
+            qWarning() << "@" << op;
         }
     }
 
     if ( (correctOper.size() + incorrectOper.size()) == 0)
-        qDebug() << "No operators defined.";
+        qDebug() << "@No operators defined.";
 
 
 
@@ -323,44 +323,44 @@ void KAVIMainWindow::on_actionDomain_Summary_S_triggered()
 
     if (correctProb.size() > 0)
     {
-        qDebug() << "Defined problems:";
+        qDebug() << "@Defined problems:";
         foreach(QString prob, correctProb)
         {
-            qDebug() << prob;
+            qDebug() << "@" << prob;
         }
     }
 
     if ( incorrectProb.size() > 0)
     {
-        qDebug() << "Incorrect problems:";
+        qDebug() << "@Incorrect problems:";
 
         foreach(QString prob, incorrectProb)
         {
-            qWarning() << prob;
+            qWarning() << "@" << prob;
         }
     }
 
     if ((correctProb.size() + incorrectProb.size()) == 0)
-        qDebug() << "No problems defined.";
+        qDebug() << "@No problems defined.";
 
-    qDebug() << "---------Summary---------";
-    qDebug() << "#classes: " << definedClasses.count();
+    qDebug() << "@---------Summary---------";
+    qDebug() << "@#classes: " << definedClasses.count();
 
     if (invalidPredCnt > 0)
-        qWarning() << "#predicates: " << (processed.count() - invalidPredCnt) << "/" << invalidPredCnt
+        qWarning() << "@#predicates: " << (processed.count() - invalidPredCnt) << "/" << invalidPredCnt
                << " (valid/invalid)";
     else
-        qDebug() << "#predicates: " << processed.count();
+        qDebug() << "@#predicates: " << processed.count();
 
     if (incorrectOper.size() > 0)
-        qWarning() << "#operators: " << correctOper.size() << "+" << incorrectOper.count() << "(correct + incorrect)";
+        qWarning() << "@#operators: " << correctOper.size() << "+" << incorrectOper.count() << "(correct + incorrect)";
     else
-        qDebug() << "#operators: " << correctOper.size();
+        qDebug() << "@#operators: " << correctOper.size();
 
     if (incorrectProb.size() > 0)
-        qWarning() << "#problems: " << correctProb.size() << "+" << incorrectProb.count() << "(correct + incorrect)";
+        qWarning() << "@#problems: " << correctProb.size() << "+" << incorrectProb.count() << "(correct + incorrect)";
     else
-        qDebug() << "#problems: " << correctProb.size();
+        qDebug() << "@#problems: " << correctProb.size();
 }
 
 void KAVIMainWindow::on_actionClear_Log_C_triggered()
@@ -577,14 +577,14 @@ void KAVIMainWindow::on_actionCheckDiagram_triggered()
     QDomElement definitionDiagram = definitionDocument.firstChildElement("diagram");
     if (currentTab == TAB_INDEX_DEFINITION)
     {
-        qDebug() << "Checking definition.";
+        qDebug() << "@Checking definition.";
         checkDefinition(definitionDiagram, true);
         return;
     }
 
     if (currentTab == TAB_INDEX_OPERATORS)
     {
-        qDebug() << "Checking operator" << recentActionName << ".";
+        qDebug() << "@Checking operator" << recentActionName << ".";
         QDomElement actionDiagram = actionDocument.firstChildElement("diagram");
         checkDependentDiagram(actionDiagram, definitionDiagram, NST_VARIABLE, true);
         return;
@@ -592,7 +592,7 @@ void KAVIMainWindow::on_actionCheckDiagram_triggered()
 
     if (currentTab == TAB_INDEX_PROBLEMS)
     {
-        qDebug() << "Checking problem" << recentTaskName << ".";
+        qDebug() << "@Checking problem" << recentTaskName << ".";
         QDomElement taskDiagram = taskDocument.firstChildElement("diagram");
         checkDependentDiagram(taskDiagram, definitionDiagram, NST_OBJECT, true);
         return;
@@ -603,7 +603,7 @@ void KAVIMainWindow::on_actionCheckDiagram_triggered()
 
 void KAVIMainWindow::on_actionSavePNG_triggered()
 {
-    qDebug() << "Saving Image";
+    qDebug() << "@Saving Image";
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save Image"), ".", tr("Images (*.png)"));
 
@@ -720,18 +720,18 @@ void KAVIMainWindow::on_definitionEdit_sceneChanged(int changeCode)
     switch(changeCode)
     {
     case RectNodeAdded:
-        qDebug() << "Class defined.";
+        qDebug() << "@Class defined.";
         reloadClassTree();
         break;
     case EllipseNodeAdded:
-        qDebug() << "Predicate defined.";
+        qDebug() << "@Predicate defined.";
         break;
     case AssocEdgeAdded:
-        qDebug() << "Predicate argument defined.";
+        qDebug() << "@Predicate argument defined.";
         updatePropertyEditor();
         break;
     case RectNodeDeleted:
-        qDebug() << "Class deleted.";
+        qDebug() << "@Class deleted.";
         if (ui.actionSelector->count() > 0)
             checkOperators = true;
         if (ui.taskSelector->count() > 0)
@@ -740,7 +740,7 @@ void KAVIMainWindow::on_definitionEdit_sceneChanged(int changeCode)
         resetPropertyEditor();
         break;
     case EllipseNodeDeleted:
-        qDebug() << "Predicate deleted.";
+        qDebug() << "@Predicate deleted.";
         if (ui.actionSelector->count() > 0)
             checkOperators = true;
         if (ui.taskSelector->count() > 0)
@@ -748,12 +748,12 @@ void KAVIMainWindow::on_definitionEdit_sceneChanged(int changeCode)
         resetPropertyEditor();
         break;
     case AssocEdgeDeleted:
-        qDebug() << "Predicate argument removed.";
-        qWarning() << "Domain should be checked.";
+        qDebug() << "@Predicate argument removed.";
+        qWarning() << "@Domain should be checked.";
         updatePropertyEditor();
         break;
     case AssocEdgeReconnected:
-        qDebug() << "Predicate argument redefined.";
+        qDebug() << "@Predicate argument redefined.";
         if (ui.actionSelector->count() > 0)
             checkOperators = true;
         if (ui.taskSelector->count() > 0)
@@ -761,25 +761,25 @@ void KAVIMainWindow::on_definitionEdit_sceneChanged(int changeCode)
         updatePropertyEditor();
         break;
     case InherEdgeAdded:
-        qDebug() << "Class inheritance defined.";
+        qDebug() << "@Class inheritance defined.";
         reloadClassTree();
         break;
     case InherEdgeDeleted:
-        qDebug() << "Class inheritance removed.";
-        qWarning() << "Domain should be checked.";
+        qDebug() << "@Class inheritance removed.";
+        qWarning() << "@Domain should be checked.";
         reloadClassTree();
         break;
     case InherEdgeReconnected:
-        qDebug() << "Class inheritance redefined.";
+        qDebug() << "@Class inheritance redefined.";
         if (ui.actionSelector->count() > 0)
             checkOperators = true;
         if (ui.taskSelector->count() > 0)
             checkProblems = true;
-        qWarning() << "Domain should be checked.";
+        qWarning() << "@Domain should be checked.";
         reloadClassTree();
         break;
     case ArgumentOrderChanged:
-        qDebug() << "Argument order changed.";
+        qDebug() << "@Argument order changed.";
         if (ui.actionSelector->count() > 0)
             checkOperators = true;
         if (ui.taskSelector->count() > 0)
@@ -800,9 +800,9 @@ void KAVIMainWindow::on_definitionEdit_sceneChanged(int changeCode)
 
         if (incorrectOper.count() > 0)
         {
-            qWarning() << "Following operators are now inconsistent:";
+            qWarning() << "@Following operators are now inconsistent:";
             foreach(QString op, incorrectOper)
-                qWarning() << op;
+                qWarning() << "@" <<op;
         }
     }
 
@@ -818,9 +818,9 @@ void KAVIMainWindow::on_definitionEdit_sceneChanged(int changeCode)
 
         if (incorrectProb.count() > 0)
         {
-            qWarning() << "Following problems are now inconsistent:";
+            qWarning() << "@Following problems are now inconsistent:";
             foreach(QString prob, incorrectProb)
-                qWarning() << prob;
+                qWarning() << "@" << prob;
         }
     }
 
@@ -859,7 +859,7 @@ void KAVIMainWindow::on_actionSelector_currentIndexChanged(const QString &arg1)
 
     updateDocument(demandedAction, actionDocument);
 
-    qDebug() << "Loading operator:" << arg1;
+    qDebug() << "@Loading operator:" << arg1;
     ui.actionEdit->loadXMLdata(actionDocument);
 
     recentActionName = arg1;
@@ -877,33 +877,33 @@ void KAVIMainWindow::on_actionEdit_sceneChanged(int changeCode)
     switch(changeCode)
     {
     case RectNodeAdded:
-        qDebug() << "Variable defined.";
+        qDebug() << "@Variable defined.";
         break;
     case EllipseNodeAdded:
-        qDebug() << "Predicate added.";
+        qDebug() << "@Predicate added.";
         break;
     case AssocEdgeAdded:
-        qDebug() << "Association defined.";
+        qDebug() << "@Association defined.";
         updatePropertyEditor();
         break;
     case RectNodeDeleted:
-        qDebug() << "Variable deleted.";
+        qDebug() << "@Variable deleted.";
         resetPropertyEditor();
         break;
     case EllipseNodeDeleted:
-        qDebug() << "Predicate deleted.";
+        qDebug() << "@Predicate deleted.";
         resetPropertyEditor();
         break;
     case AssocEdgeDeleted:
-        qDebug() << "Association deleted.";
+        qDebug() << "@Association deleted.";
         updatePropertyEditor();
         break;
     case AssocEdgeReconnected:
-        qDebug() << "Association changed.";
+        qDebug() << "@Association changed.";
         updatePropertyEditor();
         break;
     case ArgumentOrderChanged:
-        qDebug() << "Argument order changed.";
+        qDebug() << "@Argument order changed.";
         runCheck = true;
         break;
     default:
@@ -919,7 +919,7 @@ void KAVIMainWindow::on_actionEdit_sceneChanged(int changeCode)
         Q_ASSERT(!actionDiagram.isNull());
 
         if( !checkDependentDiagram(actionDiagram, definitionDiagram, NST_VARIABLE, false) )
-            qWarning() << "Predicate is inconsistent.";
+            qWarning() << "@Predicate is inconsistent.";
     }
 
     domainChanged = true;
@@ -953,7 +953,7 @@ void KAVIMainWindow::on_taskSelector_currentIndexChanged(const QString &arg1)
 
     updateDocument(demandedTask, taskDocument);
 
-    qDebug() << "Loading problem:" << arg1;
+    qDebug() << "@Loading problem:" << arg1;
     ui.taskEdit->loadXMLdata(taskDocument);
 
     recentTaskName = arg1;
@@ -1015,37 +1015,37 @@ void KAVIMainWindow::on_taskEdit_sceneChanged(int changeCode)
     switch(changeCode)
     {
     case RectNodeAdded:
-        qDebug() << "Object defined.";
+        qDebug() << "@Object defined.";
         break;
     case EllipseNodeAdded:
-        qDebug() << "Predicate added.";
+        qDebug() << "@Predicate added.";
         break;
     case AssocEdgeAdded:
-        qDebug() << "Association defined.";
+        qDebug() << "@Association defined.";
         updatePropertyEditor();
         break;
     case RectNodeDeleted:
-        qDebug() << "Object deleted.";
+        qDebug() << "@Object deleted.";
         resetPropertyEditor();
         break;
     case EllipseNodeDeleted:
-        qDebug() << "Predicate deleted.";
+        qDebug() << "@Predicate deleted.";
         resetPropertyEditor();
         break;
     case AssocEdgeDeleted:
-        qDebug() << "Association deleted.";
+        qDebug() << "@Association deleted.";
         updatePropertyEditor();
         break;
     case AssocEdgeReconnected:
-        qDebug() << "Association changed.";
+        qDebug() << "@Association changed.";
         updatePropertyEditor();
         break;
     case ArgumentOrderChanged:
-        qDebug() << "Argument order changed.";
+        qDebug() << "@Argument order changed.";
         runCheck = true;
         break;
     case PredicateStateChanged:
-        qDebug() << "Predicate State changed.";
+        qDebug() << "@Predicate State changed.";
         runCheck = true;
         on_initCheckBox_toggled(ui.initCheckBox->isChecked());
         on_goalCheckBox_toggled(ui.goalCheckBox->isChecked());
@@ -1063,7 +1063,7 @@ void KAVIMainWindow::on_taskEdit_sceneChanged(int changeCode)
         Q_ASSERT(!taskDiagram.isNull());
 
         if( !checkDependentDiagram(taskDiagram, definitionDiagram, NST_VARIABLE, false) )
-            qWarning() << "Predicate is inconsistent.";
+            qWarning() << "@Predicate is inconsistent.";
     }
     domainChanged = true;
 }
@@ -1212,12 +1212,12 @@ void KAVIMainWindow::initOperators()
 
     if ( recentActionName.isNull() )
     {
-        qDebug() << "No operator defined in this domain.";
+        qDebug() << "@No operator defined in this domain.";
         ui.actionTab->setEnabled(false);
     }
     else
     {
-        qDebug() << "Count of defined operators in this domain:" << ui.actionSelector->count();
+        qDebug() << "@Count of defined operators in this domain:" << ui.actionSelector->count();
         ui.actionTab->setEnabled(true);
     }
 }
@@ -1242,12 +1242,12 @@ void KAVIMainWindow::initProblems()
 
     if ( recentTaskName.isNull() )
     {
-        qDebug() << "No problem defined in this domain";
+        qDebug() << "@No problem defined in this domain";
         ui.taskTab->setEnabled(false);
     }
     else
     {
-        qDebug() << "Count of defined problems in this domain:" << ui.taskSelector->count();
+        qDebug() << "@Count of defined problems in this domain:" << ui.taskSelector->count();
         ui.taskTab->setEnabled(true);
     }
 }
@@ -1363,7 +1363,7 @@ void KAVIMainWindow::registerSubelement(QDomElement sub, QComboBox *listWidget)
                 addSubelement(sub, "diagram");
 
             listWidget->addItem(subName);
-            qDebug() << subName << "registered";
+            qDebug() << "@" << subName << "registered";
         }
         else
             qWarning() << "$KAVIMainWindow::registerSubelement :" << subName << "is not unique name.";

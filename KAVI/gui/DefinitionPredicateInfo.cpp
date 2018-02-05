@@ -37,7 +37,7 @@ void DefinitionPredicateInfo::on_moveDown_pressed()
     }
     else
     {
-        qWarning() << "Please select one argument.";
+        qWarning() << "@Please select one argument.";
     }
 
     //emit madeChange(ArgumentOrderChanged);
@@ -52,7 +52,7 @@ void DefinitionPredicateInfo::on_moveUp_pressed()
     }
     else
     {
-        qWarning() << "Please select one argument.";
+        qWarning() << "@Please select one argument.";
     }
 
     //emit madeChange(ArgumentOrderChanged);

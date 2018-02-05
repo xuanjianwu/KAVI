@@ -217,4 +217,7 @@
 // the prefix of message that would not append to logTextEdit
 #define PREFIX '$'
 
+// the prefix of message that would append to logTextEdit
+#define KAVIPREFIX '@'
+
 #endif // KAVIMACROS_H

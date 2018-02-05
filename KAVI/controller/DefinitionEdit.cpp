@@ -250,7 +250,7 @@ bool DefinitionEdit::verifyEdge(EdgeStructure &edge, int &argNum)
 
         if ( inheritanceStructure->edgeCnt(edge.endNodeID, IGRAPH_IN) > 0 )
         {
-            qWarning() << "Multiple inheritance is not allowed.";
+            qWarning() << "@Multiple inheritance is not allowed.";
             delete inheritanceStructure;
             return false;
         }
@@ -260,7 +260,7 @@ bool DefinitionEdit::verifyEdge(EdgeStructure &edge, int &argNum)
 
         if ( inheritanceStructure->containsCycle() )
         {
-            qWarning() << "Cyclic inheritance is not allowed.";
+            qWarning() << "@Cyclic inheritance is not allowed.";
             delete inheritanceStructure;
             return false;
         }
@@ -293,7 +293,7 @@ bool DefinitionEdit::verifyEdge(EdgeStructure &edge, int &argNum)
 
             if ( (argCnt + 1) > (maxArgNum + 1) )
             {
-                qWarning() << "All overloaded predicates must be updated at once.";
+                qWarning() << "@All overloaded predicates must be updated at once.";
                 return false;
             }
 
@@ -314,7 +314,7 @@ EditWidget::ReconnectionValue DefinitionEdit::verifyReconnection(EdgeStructure &
 {
     if ( newNodeID <= 0)
     {
-        qWarning() << "No target for edge reconnection";
+        qWarning() << "@No target for edge reconnection";
         return NoChange;
     }
 
@@ -337,7 +337,7 @@ EditWidget::ReconnectionValue DefinitionEdit::verifyReconnection(EdgeStructure &
     // edge connect the same node
     if ( stableEndID == newNodeID )
     {
-        qWarning() << "Edge has to connect two different nodes";
+        qWarning() << "@Edge has to connect two different nodes";
         return NoChange;
     }
 
@@ -359,7 +359,7 @@ EditWidget::ReconnectionValue DefinitionEdit::verifyReconnection(EdgeStructure &
     // edge's purpose can not change
     if ( newEdgePurpose != edge.purpose )
     {
-        qWarning() << "Change of edge purpose through reconnection is not allowed";
+        qWarning() << "@Change of edge purpose through reconnection is not allowed";
         return NoChange;
     }
 
@@ -370,7 +370,7 @@ EditWidget::ReconnectionValue DefinitionEdit::verifyReconnection(EdgeStructure &
 
         if ( !startMoved && inheritanceStructure->edgeCnt(newNodeID, IGRAPH_IN) > 0 )
         {
-            qWarning() << "Multiple inheritance is not allowed.";
+            qWarning() << "@Multiple inheritance is not allowed.";
             delete inheritanceStructure;
             return NoChange;
         }
@@ -386,7 +386,7 @@ EditWidget::ReconnectionValue DefinitionEdit::verifyReconnection(EdgeStructure &
 
         if ( inheritanceStructure->containsCycle() )
         {
-            qWarning() << "Cyclic inheritance is not allowed.";
+            qWarning() << "@Cyclic inheritance is not allowed.";
             delete inheritanceStructure;
             return NoChange;
         }

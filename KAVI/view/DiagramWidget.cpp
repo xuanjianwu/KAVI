@@ -62,7 +62,7 @@ void DiagramWidget::setEdgeVisible(int edgeID, bool visible)
 
     if (target == NULL)
     {
-        qDebug() << "DiaramWidget::setEdgeVisible : edge not found";
+        qDebug() << "@DiaramWidget::setEdgeVisible : edge not found";
         return;
     }
 

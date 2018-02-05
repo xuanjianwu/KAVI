@@ -72,9 +72,9 @@ bool checkPredicateDefinition(const QDomElement &predicate, bool verbose)
     if (verbose)
     {
         if ( duplicities.size() > 1 )
-            qDebug() << predLabel << " (overloaded)";
+            qDebug() << "@" << predLabel << " (overloaded)";
         else
-            qDebug() << predLabel;
+            qDebug() << "@" << predLabel;
     }
 
     bool equalArgCnt = true;
@@ -95,13 +95,13 @@ bool checkPredicateDefinition(const QDomElement &predicate, bool verbose)
                 equalArgCnt = (argCnt == arguments.count());
 
             if (arguments.isEmpty())
-                qDebug() << "No arguments defined";
+                qDebug() << "@No arguments defined";
             else
             {
                 for (int i=1; i <= arguments.size(); ++i)
-                    qDebug() << i << ":" << arguments.value(i);
+                    qDebug() << "@" << i << ":" << arguments.value(i);
             }
-            qDebug() << "----------------";
+            qDebug() << "@----------------";
         }
         else
         {
@@ -118,7 +118,7 @@ bool checkPredicateDefinition(const QDomElement &predicate, bool verbose)
     if ( !equalArgCnt )
     {
         if (verbose)
-            qWarning() << "All versions of overloaded predicate should have equal number of arguments.";
+            qWarning() << "@All versions of overloaded predicate should have equal number of arguments.";
 
         return false;
     }
@@ -138,7 +138,7 @@ bool checkPredicateInstance(const QDomElement &predicate, const QDomElement &def
     if ( predDefinition.isNull() )
     {
         if (verbose)
-            qWarning() << "No suitable definition found for" << predLabel;
+            qWarning() << "@No suitable definition found for" << predLabel;
         return false;
     }
 
@@ -148,14 +148,14 @@ bool checkPredicateInstance(const QDomElement &predicate, const QDomElement &def
     if ( instArgCnt > defArgCnt )
     {
         if (verbose)
-            qWarning() << predLabel << "has too many arguments";
+            qWarning() << "@" << predLabel << "has too many arguments";
         return false;
     }
 
     if ( instArgCnt < defArgCnt )
     {
         if (verbose)
-            qWarning() << predLabel << "has some arguments missing.";
+            qWarning() << "@" << predLabel << "has some arguments missing.";
         return false;
     }
 
@@ -173,15 +173,15 @@ bool checkPredicateInstance(const QDomElement &predicate, const QDomElement &def
             qWarning() << predLabel << "has no state defined.";
          */
         if (verbose && stateDefinition.isNull())
-            qWarning() << predLabel << "has no state defined.";
+            qWarning() << "@" << predLabel << "has no state defined.";
         if (verbose && setDefinition.isNull())
-            qWarning() << predLabel << "has no set defined.";
+            qWarning() << "@" << predLabel << "has no set defined.";
 
         return false;
     }
 
     if (verbose)
-        qDebug() << predLabel << "is OK.";
+        qDebug() << "@" << predLabel << "is OK.";
 
     return true;
 }
@@ -203,14 +203,14 @@ bool checkClassInstance(const QDomElement &instance, const QDomElement &definiti
     if ( defID != INVALID_ID )
     {
         if (verbose)
-            qDebug() << instLabel << "is OK";
+            qDebug() << "@" << instLabel << "is OK";
 
         return true;
     }
     else
     {
         if (verbose)
-            qWarning() << instLabel << "has invalid class (" << instClass << ")";
+            qWarning() << "@" << instLabel << "has invalid class (" << instClass << ")";
         return false;
     }
 }
@@ -226,15 +226,15 @@ bool checkDefinition(const QDomElement &diagramRoot, bool verbose)
     QList<QDomElement> classList = selectMatchingElementList(diagramRoot, tempNode);
     if (verbose)
     {
-        qDebug() << "Defined classes:";
+        qDebug() << "@Defined classes:";
         foreach(QDomElement actClass, classList)
         {
-            qDebug() << subelementTagValue(actClass, "label");
+            qDebug() << "@" << subelementTagValue(actClass, "label");
         }
     }
 
     if (verbose)
-        qDebug() << "Defined predicates:";
+        qDebug() << "@Defined predicates:";
 
     tempNode.setData(nodeType, NST_PREDICATE);
 
@@ -268,16 +268,16 @@ bool checkDefinition(const QDomElement &diagramRoot, bool verbose)
 
     if(verbose)
     {
-        qDebug() << "------------------------";
-        qDebug() << "#classes:" << classList.count();
+        qDebug() << "@------------------------";
+        qDebug() << "@#classes:" << classList.count();
 
         if ( predKO > 0)
         {
-            qDebug() << "#predicates:" << predOK << "+" << predKO << "(valid + invalid)";
-            qWarning() << "There are invalid predicates in definition! - check failed";
+            qDebug() << "@#predicates:" << predOK << "+" << predKO << "(valid + invalid)";
+            qWarning() << "@There are invalid predicates in definition! - check failed";
         }
         else
-            qDebug() << "#predicates:" << predOK;
+            qDebug() << "@#predicates:" << predOK;
     }
 
     if ( predKO > 0)
@@ -302,10 +302,10 @@ bool checkDependentDiagram(const QDomElement &diagramRoot, const QDomElement &de
         switch(rectType)
         {
         case NST_VARIABLE:
-            qDebug() << "Defined variables:";
+            qDebug() << "@Defined variables:";
             break;
         case NST_OBJECT:
-            qDebug() << "Defined objects:";
+            qDebug() << "@Defined objects:";
             break;
         }
     }
@@ -324,7 +324,7 @@ bool checkDependentDiagram(const QDomElement &diagramRoot, const QDomElement &de
     }
 
     if (verbose)
-        qDebug() << "Defined predicates:";
+        qDebug() << "@Defined predicates:";
 
     tempNode.setData(nodeType, NST_PREDICATE);
 
@@ -343,45 +343,45 @@ bool checkDependentDiagram(const QDomElement &diagramRoot, const QDomElement &de
 
     if (verbose)
     {
-        qDebug() << "------------------";
+        qDebug() << "@------------------";
 
         if ( rectKO > 0 )
         {
             if(rectType == NST_VARIABLE)
             {
-                qDebug() << "#variables:" << rectOK << "+" << rectKO << "(valid + invalid)";
-                qWarning() << "There are invalid variables (!)";
+                qDebug() << "@#variables:" << rectOK << "+" << rectKO << "(valid + invalid)";
+                qWarning() << "@There are invalid variables (!)";
             }
             if(rectType == NST_OBJECT)
             {
-                qDebug() << "#objects:" << rectOK << "+" << rectKO << "(valid + invalid)";
-                qWarning() << "There are invalid objects (!)";
+                qDebug() << "@#objects:" << rectOK << "+" << rectKO << "(valid + invalid)";
+                qWarning() << "@There are invalid objects (!)";
             }
 
         }
         else
         {
             if(rectType == NST_VARIABLE)
-                qDebug() << "#variables:" << rectOK;
+                qDebug() << "@#variables:" << rectOK;
             if(rectType == NST_OBJECT)
-                qDebug() << "#objects:" << rectOK;
+                qDebug() << "@#objects:" << rectOK;
         }
 
         if ( predKO > 0 )
         {
-            qDebug() << "#predicates:" << predOK << "+" << predKO << "(valid + invalid)";
-            qWarning() << "There are invalid predicates (!)";
+            qDebug() << "@#predicates:" << predOK << "+" << predKO << "(valid + invalid)";
+            qWarning() << "@There are invalid predicates (!)";
         }
         else
         {
-            qDebug() << "#predicates:" << predOK;
+            qDebug() << "@#predicates:" << predOK;
         }
     }
 
     if ( (predKO > 0) || (rectKO > 0) )
     {
         if (verbose)
-            qWarning() << "Check failed.";
+            qWarning() << "@Check failed.";
         return false;
     }
     else

@@ -13,26 +13,27 @@ KAVIMainWindow *msgCatcher;
 void msgHandler(QtMsgType type, const QMessageLogContext &context, const QString & msg)
 {
     QString text(msg);
-    bool prefixed = (text.at(0) == PREFIX);
+    //bool prefixed = (text.at(0) == PREFIX);
+    bool prefixed = (text.at(0) == KAVIPREFIX);
     if (prefixed)
         text = text.remove(0, 1);
 
     switch (type)
     {
     case QtDebugMsg:
-        if (prefixed)
+        if (!prefixed)
             msgCatcher->appendToLog(prefixed, text, Qt::cyan);
         else
             msgCatcher->appendToLog(prefixed, text, Qt::green);
         break;
     case QtWarningMsg:
-        if (prefixed)
+        if (!prefixed)
             msgCatcher->appendToLog(prefixed, text, Qt::red);
         else
             msgCatcher->appendToLog(prefixed, text, Qt::blue);
         break;
     case QtCriticalMsg:
-        if (prefixed)
+        if (!prefixed)
             msgCatcher->appendToLog(prefixed, text, Qt::yellow);
         else
             msgCatcher->appendToLog(prefixed, text, Qt::darkYellow);

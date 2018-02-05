@@ -384,7 +384,7 @@ void DataWidget::delDataNode(int id)
         diagramScene->removeNode(id);
     }
     else
-        qWarning() << "DataWidget::delDataNode : node id:" << id << "not found.";
+        qWarning() << "@DataWidget::delDataNode : node id:" << id << "not found.";
 }
 
 EdgeDefinition DataWidget::delDataEdge(int id)

@@ -176,7 +176,7 @@ void ProblemsEdit::displayInfo(int nodeID)
         matchingDefinitions = xmlDefinition->selectMatchingIDList(tempNode);
 
         if ( matchingDefinitions.count() > 1 )
-            qWarning() << "TaskEdit::displayInfo : too many definitions for clicked node";
+            qWarning() << "@TaskEdit::displayInfo : too many definitions for clicked node";
 
         infoWidget = new ProblemsObjectInfo(xmlData, xmlDefinition, nodeID, matchingDefinitions.first());
         break;

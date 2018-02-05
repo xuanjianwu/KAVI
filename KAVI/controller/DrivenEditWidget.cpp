@@ -91,7 +91,7 @@ bool DrivenEditWidget::verifyEdge(EdgeStructure &edge, int &argNum)
 
     if ( argNum == INVALID_ARGN )
     {
-        qWarning() 	<< "Node of class:"
+        qWarning() 	<< "@Node of class:"
                 << argumentClass
                 << "is not compatible with" << predicateLabel
                 << "in this context.";
@@ -105,7 +105,7 @@ EditWidget::ReconnectionValue DrivenEditWidget::verifyReconnection(EdgeStructure
 {
     if ( newNodeID <= 0)
     {
-        qWarning() << "No target for edge reconnection";
+        qWarning() << "@No target for edge reconnection";
         return NoChange;
     }
 
@@ -128,7 +128,7 @@ EditWidget::ReconnectionValue DrivenEditWidget::verifyReconnection(EdgeStructure
     // edge connect the same node
     if ( stableEndID == newNodeID )
     {
-        qWarning() << "Edge has to connect two different nodes";
+        qWarning() << "@Edge has to connect two different nodes";
         return NoChange;
     }
 
@@ -150,7 +150,7 @@ EditWidget::ReconnectionValue DrivenEditWidget::verifyReconnection(EdgeStructure
     // only association edges are allowed
     if ( newEdgePurpose != DEP_ASSOCIATION )
     {
-        qWarning() << "Only association edges are allowed.";
+        qWarning() << "@Only association edges are allowed.";
         return NoChange;
     }
 
@@ -178,7 +178,7 @@ EditWidget::ReconnectionValue DrivenEditWidget::verifyReconnection(EdgeStructure
 
         if ( argNum == INVALID_ARGN )
         {
-            qWarning() << "Reconnection not allowed.";
+            qWarning() << "@Reconnection not allowed.";
             return NoChange;
         }
     }
@@ -198,7 +198,7 @@ EditWidget::ReconnectionValue DrivenEditWidget::verifyReconnection(EdgeStructure
 
         if ( sugestedArgNum == INVALID_ARGN )
         {
-            qWarning() << "Reconnection not allowed.";
+            qWarning() << "@Reconnection not allowed.";
             return NoChange;
         }
 
@@ -209,7 +209,7 @@ EditWidget::ReconnectionValue DrivenEditWidget::verifyReconnection(EdgeStructure
         //            variable cake, then this case occurs.
         if ( sugestedArgNum != changedArgNum )
         {
-            qWarning() << "Could not verify edge reconnection - you may delete this edge and add a new one instead.";
+            qWarning() << "@Could not verify edge reconnection - you may delete this edge and add a new one instead.";
             return NoChange;
         }
     }
@@ -233,7 +233,7 @@ int DrivenEditWidget::findArgPosition(const QString &predicate, const QString &a
     QList<QDomElement> definitions = xmlDefinition->selectMatchingElementList(tempNode);
     if ( definitions.isEmpty() )
     {
-        qWarning() << "No predicate definition available for: " << predicate;
+        qWarning() << "@No predicate definition available for: " << predicate;
         return result;
     }
 

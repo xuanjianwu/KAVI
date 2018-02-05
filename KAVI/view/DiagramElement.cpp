@@ -13,7 +13,7 @@ void DiagramElement::stick(const DiagramElement* another)
     Q_ASSERT(another != 0);
 
     QLineF wayLine(scenePos(),another->pos());
-    qDebug() << "wayLine" << scenePos() << another->pos();
+    qDebug() << "@wayLine" << scenePos() << another->pos();
 
     qreal delta = 0;
 

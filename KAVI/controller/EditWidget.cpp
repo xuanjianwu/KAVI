@@ -244,12 +244,12 @@ void EditWidget::handleNodeReshape(int id)
     int actID;
     bool actBool;
 
-    qDebug() << "handleNodeReshape for:" << id;
+    qDebug() << "@handleNodeReshape for:" << id;
     foreach(DataEdgepoint point, edgepoints)
     {
         actID = point.first;
         actBool = point.second;
-        qDebug() << "edge:" << actID;
+        qDebug() << "@edge:" << actID;
         diagram->stickEdgeToNode(actID, actBool, id);
     }
 }
@@ -456,7 +456,7 @@ bool EditWidget::verifyEdge(EdgeStructure &edge, int &argNum)
 
     if ( !(edge.purpose & allowedEdgeMask) )
     {
-        qWarning() << "This edge is not allowed here.";
+        qWarning() << "@This edge is not allowed here.";
         return false;
     }
 

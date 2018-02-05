@@ -125,7 +125,7 @@ QColor NodeStructure::color() const
         else
             return QColor(NC_PREDICATE);
     default:
-        qWarning() << "NodeStructure::color : can't determine color - undefined node type";
+        qWarning() << "@NodeStructure::color : can't determine color - undefined node type";
         return QColor("#FFFFFF");
     }
 }

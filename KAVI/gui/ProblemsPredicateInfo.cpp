@@ -42,7 +42,7 @@ void ProblemsPredicateInfo::on_moveDown_pressed()
     }
     else
     {
-        qWarning() << "Please select one argument.";
+        qWarning() << "@Please select one argument.";
     }
 
     //emit madeChange(ArgumentOrderChanged);
@@ -57,7 +57,7 @@ void ProblemsPredicateInfo::on_moveUp_pressed()
     }
     else
     {
-        qWarning() << "Please select one argument.";
+        qWarning() << "@Please select one argument.";
     }
 
     //emit madeChange(ArgumentOrderChanged);

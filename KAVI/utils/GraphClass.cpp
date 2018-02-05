@@ -188,7 +188,7 @@ QSet<int> GraphClass::getDescendants(int parent)
 
 void GraphClass::print()
 {
-    qDebug() << "GraphClass::print : node cnt:" << (int)igraph_vcount(graph)
+    qDebug() << "@GraphClass::print : node cnt:" << (int)igraph_vcount(graph)
              << "edge cnt:" << (int)igraph_ecount(graph) << '\n';
 }
 

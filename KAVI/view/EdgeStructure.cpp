@@ -23,7 +23,7 @@ QPen EdgeStructure::pen() const
     if (purpose == DEP_INHERITANCE)
             return QPen(QColor(EC_INHERITANCE), EDGE_LINE_WIDTH, Qt::DashLine);
 
-    qWarning() << "EdgeStructure::pen : can't decide edge pen - invalid edge purpose specification";
+    qWarning() << "@EdgeStructure::pen : can't decide edge pen - invalid edge purpose specification";
     return QPen();
 }
 

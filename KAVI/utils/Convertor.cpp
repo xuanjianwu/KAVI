@@ -30,13 +30,13 @@ QDomDocument Convertor::readFromXML(QFile &input)
     {
         QString errMessage = QObject::tr("Error in XML syntax on line: %1 column: %2").arg(errorLine).arg(errorColumn);
         //QMessageBox::critical (ownerWidget, "KAVI", errMessage);
-        qCritical() << "Error in XML syntax on line:" << errorLine << "column:" << errorColumn;
+        qCritical() << "@Error in XML syntax on line:" << errorLine << "column:" << errorColumn;
         return QDomDocument();
     }
 
     if ( !basicStructureCheck(domainData) )
     {
-        qCritical() << "Basic Structure check failed";
+        qCritical() << "@Basic Structure check failed";
         return QDomDocument();
     }
 
@@ -47,20 +47,20 @@ void Convertor::writeToXML(const QDomDocument &doc, QFile &output)
 {
     if (!basicStructureCheck(doc))
     {
-        qCritical() << "Error while saving document.";
+        qCritical() << "@Error while saving document.";
         return;
     }
 
     QTextStream saveStream(&output);
     currentDoc.save(saveStream, OUTPUT_INDENT);
-    qDebug() << "Domain succesfully saved.";
+    qDebug() << "@Domain succesfully saved.";
 }
 
 void Convertor::writeDomainToPDDL(const QDomDocument &doc, QFile &output)
 {
     if (!basicStructureCheck(doc))
     {
-        qCritical() << "Error while exporting document.";
+        qCritical() << "@Error while exporting document.";
         return;
     }
 
@@ -106,7 +106,7 @@ void Convertor::writeProblemsToPDDL(const QDomDocument &doc, QString &targetDir)
 {
     if (!basicStructureCheck(doc))
     {
-        qCritical() << "Error while exporting document.";
+        qCritical() << "@Error while exporting document.";
         return;
     }
 
@@ -145,7 +145,7 @@ bool Convertor::basicStructureCheck(const QDomDocument &domainDocument)
 
     if ( definitionElement.isNull() || operatorsElement.isNull() || problemsElement.isNull() )
     {
-        qCritical() << "Document syntax error";
+        qCritical() << "@Document syntax error";
         return false;
     }
     else
@@ -179,7 +179,7 @@ void Convertor::writeAction(int indent, QDomElement diagram, QString name)
 
     if (diagram.isNull())
     {
-        qWarning() << "Action" << name << "is empty.";
+        qWarning() << "@Action" << name << "is empty.";
         writeLine(indent, ")");
         return;
     }
@@ -281,7 +281,7 @@ void Convertor::writeTask(QDomElement &diagram, const QString &name, const QStri
     if ( !outfile.open(QIODevice::Truncate | QIODevice::WriteOnly) )
     {
         //QMessageBox::critical(ownerWidget, QObject::tr("Error"), QObject::tr("Can't open file:\n%1").arg(fileName.join("")));
-        qCritical() << "Can't open file:\n" << fileName.join("");
+        qCritical() << "@Can't open file:\n" << fileName.join("");
         return;
     }
 
@@ -389,7 +389,7 @@ QString Convertor::getDefinedTypes()
     qDebug() << "$Convertor::getDefinedTypes : queue processed.";
     if (result.isEmpty())
     {
-        qWarning() << "There are no types defined in this domain";
+        qWarning() << "@There are no types defined in this domain";
         return QString();
     }
     else
