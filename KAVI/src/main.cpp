@@ -2,6 +2,9 @@
 #include "KAVIMainWindow.h"
 
 #include <iostream>
+#include "igraph.h"
+
+using namespace KAVIGraph;
 
 using namespace std;
 
@@ -40,6 +43,7 @@ void msgHandler(QtMsgType type, const QMessageLogContext &context, const QString
     }
 }
 
+
 int main(int argc, char ** argv)
 {
     QApplication app(argc, argv);
@@ -53,3 +57,21 @@ int main(int argc, char ** argv)
     mainWindow.show();
     return app.exec();
 }
+
+
+/*
+int main()
+{
+    igraph_t graph;
+    graph.init(7, IGRAPH_DIRECTED);
+    QVector<int> edges;
+    edges << 1 << 2 << 2 << 3 << 4 << 2 << 2 << 5 << 5 << 7 << 5 << 6
+          << 6 << 7;
+    graph.addEdges(edges);
+    QSet<int> vertices = graph.getVertices();
+    cout << graph.getVertexCount() << endl;
+    cout << graph.getEdgeCount() << endl;
+
+    return 0;
+}
+*/

@@ -903,6 +903,7 @@ void KAVIMainWindow::on_actionEdit_sceneChanged(int changeCode)
         updatePropertyEditor();
         break;
     case ArgumentOrderChanged:
+        qDebug() << "Argument order changed.";
         runCheck = true;
         break;
     default:
@@ -1040,7 +1041,14 @@ void KAVIMainWindow::on_taskEdit_sceneChanged(int changeCode)
         updatePropertyEditor();
         break;
     case ArgumentOrderChanged:
+        qDebug() << "Argument order changed.";
         runCheck = true;
+        break;
+    case PredicateStateChanged:
+        qDebug() << "Predicate State changed.";
+        runCheck = true;
+        on_initCheckBox_toggled(ui.initCheckBox->isChecked());
+        on_goalCheckBox_toggled(ui.goalCheckBox->isChecked());
         break;
     default:
         qDebug() << "$changeCode =" << changeCode;

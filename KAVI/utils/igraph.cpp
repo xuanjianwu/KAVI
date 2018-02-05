@@ -214,6 +214,7 @@ bool igraph_t::neighborhood(QVector<QVector<int> > &res, QVector<int> vertices, 
 void igraph_t::calComponent(QVector<int> &res, int rootVertex, neimode mode, QVector<bool> &visited) const
 {
     res.push_back(rootVertex);
+    visited[rootVertex] = true;
 
     QVector<int> rootNeighbors;
     neighbors(rootNeighbors, rootVertex, mode);
@@ -222,7 +223,7 @@ void igraph_t::calComponent(QVector<int> &res, int rootVertex, neimode mode, QVe
     {
         if (visited[rootNeighbors[i]] == false)
         {
-            visited[rootNeighbors[i]] = true;
+            //visited[rootNeighbors[i]] = true;
             calComponent(res, rootNeighbors[i], mode, visited);
         }
     }

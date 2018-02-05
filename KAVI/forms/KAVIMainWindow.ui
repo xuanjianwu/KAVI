@@ -496,6 +496,9 @@
    </property>
   </action>
   <action name="actionAddEllipseNode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../res/KAVIIcons.qrc">
      <normaloff>:/icons/icons/addEllipseNode.xpm</normaloff>:/icons/icons/addEllipseNode.xpm</iconset>
@@ -511,6 +514,9 @@
    </property>
   </action>
   <action name="actionAddRectNode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../res/KAVIIcons.qrc">
      <normaloff>:/icons/icons/addRectNode.xpm</normaloff>:/icons/icons/addRectNode.xpm</iconset>
@@ -526,6 +532,9 @@
    </property>
   </action>
   <action name="actionAddEdge">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../res/KAVIIcons.qrc">
      <normaloff>:/icons/icons/addEdge.xpm</normaloff>:/icons/icons/addEdge.xpm</iconset>
@@ -541,6 +550,9 @@
    </property>
   </action>
   <action name="actionDelete">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../res/KAVIIcons.qrc">
      <normaloff>:/icons/icons/delete.xpm</normaloff>:/icons/icons/delete.xpm</iconset>
@@ -664,8 +676,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../res/KAVIImages.qrc"/>
   <include location="../res/KAVIIcons.qrc"/>
+  <include location="../res/KAVIImages.qrc"/>
  </resources>
  <connections>
   <connection>

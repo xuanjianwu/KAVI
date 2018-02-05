@@ -50,5 +50,6 @@
 #include <QtGlobal>
 #include <QTextStream>
 #include <QFileDialog>
+#include <QLineEdit>
 
 #endif // KAVIBASE_H
