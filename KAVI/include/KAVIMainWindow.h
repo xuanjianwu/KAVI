@@ -69,6 +69,19 @@ public slots:
 
     void on_actionEdit_Properties_P_triggered();
 
+    /*
+    * first, globalSave(), summary the classes in the definitionDocument, the same as the domainData.
+    * then, summary the predicates in the definitionDocument. then, summary all the operators and problems
+    * in the domainData with checking the definitionDocument: checking all the class instances and predicate
+    * instances.
+    * The difference between on_actionDomain_Summary_S_triggered and on_actionCheckDiagram_triggered:
+    * checkDiagram only check the current diagram in actionDocument or taskDocument with the definitionDocument.
+    * but, domainSummaru will save all the actions and tasks in actionTab and taskTab to the domainData, then
+    * broken them into single diagram, finally, check the single diagram with the definitionDocument like the
+    * checkDiagram do.
+    * @params: N/A
+    * @return: void
+    */
     void on_actionDomain_Summary_S_triggered();
 
     void on_actionClear_Log_C_triggered();
@@ -99,6 +112,13 @@ public slots:
 
     // toolbar: utilities
 
+    /*
+    * in definition tab, check the definition itself, classes, and overloaded predicates' argument count.
+    * in action tab, check the current diagram in actionDocument with the definitionDocument
+    * in task tab, chekc the current diagram in taskDocument with the definitionDocument
+    * @params: N/A
+    * @return: void
+    */
     void on_actionCheckDiagram_triggered();
 
     void on_actionSavePNG_triggered();
@@ -116,6 +136,13 @@ public slots:
 
     // tagWidget: actionTab
 
+    /*
+    * handle the update of actionDocument according to the domainData.
+    * load actionDocument to actionEdit
+    * @params:
+    *       arg1 - the current selected text
+    * @return: void
+    */
     void on_actionSelector_currentIndexChanged(const QString &arg1);
 
     void on_actionEdit_sceneChanged(int changeCode);
@@ -124,6 +151,13 @@ public slots:
 
     // tagWidget: taskTab
 
+    /*
+    * handle the update of taskDocument according to the domainData.
+    * load taskDocument to taskEdit
+    * @params:
+    *       arg1 - the current selected text
+    * @return: void
+    */
     void on_taskSelector_currentIndexChanged(const QString &arg1);
 
     void on_goalCheckBox_toggled(bool checked);
