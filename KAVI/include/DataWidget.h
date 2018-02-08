@@ -85,6 +85,8 @@ public:
     */
     QString getNodeData(int id, QString tagName) const;
 
+    QPointF getNodePos(int id) const;
+
     /*
     * get the edge description in EdgeStructure
     * @params:

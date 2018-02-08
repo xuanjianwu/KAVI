@@ -220,4 +220,9 @@
 // the prefix of message that would append to logTextEdit
 #define KAVIPREFIX '@'
 
+// DefinitionEdit ------------------------
+
+#define CLASSKBFILE "../KAVI/classKB.xml"
+#define PREDICATEKBFILE "../KAVI/predicateKB.xml"
+
 #endif // KAVIMACROS_H

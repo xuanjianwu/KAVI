@@ -37,6 +37,11 @@ int Node::getID()
     return id;
 }
 
+QSize Node::getSize()
+{
+    return nodeSize;
+}
+
 const QColor &Node::getColor()
 {
     return color;

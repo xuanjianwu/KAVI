@@ -111,6 +111,16 @@ QString DataWidget::getNodeData(int id, QString tagName) const
     return subelementTagValue(node, tagName);
 }
 
+QPointF DataWidget::getNodePos(int id) const
+{
+    QDomElement node = findNode(id);
+
+    Q_ASSERT(!node.isNull());
+
+    QDomElement posElement = node.firstChildElement("pos");
+    return getPosValue(posElement);
+}
+
 const EdgeStructure DataWidget::getEdgeDescription(int id) const
 {
     QDomElement edge = findEdge(id);

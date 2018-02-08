@@ -1,5 +1,6 @@
 #include "KAVIPredicateKB.h"
 
+
 KAVIPredicateKB::KAVIPredicateKB()
 {
 
@@ -13,12 +14,11 @@ KAVIPredicateKB::~KAVIPredicateKB()
 bool KAVIPredicateKB::loadKB(QFile &baseFile)
 {
     this->predicates.clear();
-    if ( !baseFile.open(QFile::ReadOnly | QFile::Text) )
+    if ( !baseFile.open(QFile::ReadOnly | QFile::Text ))
     {
         qDebug()<< "@Error: cannot open file: " << baseFile.fileName();
         return false;
     }
-
     QXmlStreamReader xmlStream;
     xmlStream.setDevice(&baseFile);
 
@@ -30,7 +30,7 @@ bool KAVIPredicateKB::loadKB(QFile &baseFile)
         {
             if (xmlStream.name() == "predicate")
             {
-                predicates.append(xmlStream.readElementText());
+                this->predicates.append(xmlStream.readElementText());
             }
         }
     }
@@ -53,7 +53,7 @@ bool KAVIPredicateKB::saveKB(QFile &baseFile)
     QFile::remove(baseFile.fileName());
     QFile newBaseFile(fileName);
 
-    if ( !newBaseFile.open(QFile::WriteOnly | QFile::Text) )
+    if ( !newBaseFile.open(QFile::WriteOnly | QFile::Text ))
     {
         qDebug()<< "@Error: cannot open file: " << newBaseFile.fileName();
         return false;
@@ -64,8 +64,9 @@ bool KAVIPredicateKB::saveKB(QFile &baseFile)
     xmlStream.setAutoFormatting(true);
     xmlStream.writeStartDocument();
     xmlStream.writeStartElement("predicates");
-    foreach (QString preSign, predicates) {
-        xmlStream.writeTextElement("predicate", preSign);
+    foreach (QString predicateSign, this->predicates) {
+        xmlStream.writeTextElement("predicate", predicateSign);
+
     }
     xmlStream.writeEndElement();
     xmlStream.writeEndDocument();
@@ -87,24 +88,34 @@ bool KAVIPredicateKB::readBasetoCache()
     cachedPredicates = predicates;
 }
 
-void KAVIPredicateKB::testAddPredicates(QStringList list)
+QStringList KAVIPredicateKB::getPredicates() const
 {
-    foreach (QString str, list) {
-        if (! cachedPredicates.contains(str))
-        {
-            cachedPredicates.append(str);
-        }
-    }
-    refreshCachetoBase();
+    return cachedPredicates;
 }
 
-void KAVIPredicateKB::testDeletePredicates(QStringList list)
+bool KAVIPredicateKB::addPredicate(QString predicateSign)
 {
-    foreach (QString str, list) {
-        if (cachedPredicates.contains(str))
-        {
-            cachedPredicates.removeAt(cachedPredicates.indexOf(str));
-        }
+    if (!cachedPredicates.contains(predicateSign, Qt::CaseInsensitive))
+    {
+        cachedPredicates.append(predicateSign);
+        return true;
     }
-    refreshCachetoBase()
+    else
+    {
+        return false;
+    }
+}
+
+bool KAVIPredicateKB::removePredicate(QString predicateSign)
+{
+    if (cachedPredicates.contains(predicateSign, Qt::CaseInsensitive))
+    {
+        // if case does not match , will it remove?
+        cachedPredicates.removeAt(cachedPredicates.indexOf(predicateSign));
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

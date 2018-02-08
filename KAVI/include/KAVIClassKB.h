@@ -12,8 +12,9 @@ public:
     bool saveKB(QFile &baseFile);
     bool refreshCachetoBase();
     bool readBasetoCache();
-    void testAddClasses(QStringList list);
-    void testDeleteClasses(QStringList list);
+    QStringList getClasses() const;
+    bool addClass(QString className);
+    bool removeClass(QString className);
 private:    
     QStringList cachedClasses;
 };

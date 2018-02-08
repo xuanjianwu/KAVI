@@ -62,8 +62,9 @@ SOURCES += \
     gui/KAVIMainWindow.cpp \
     knowledgeBase/KAVIKB.cpp \
     knowledgeBase/KAVIClassKB.cpp \
-    knowledgeBase/KAVIPredicateKB.cpp \
-    include/DefinitionClassDialog.cpp
+    knowledgeBase/KAVIPredicateKB.cpp \    
+    gui/DefinitionClassDialog.cpp \
+    gui/DefinitionPredicateDialog.cpp
 
 HEADERS += \
     include/KAVIBase.h \
@@ -106,7 +107,8 @@ HEADERS += \
     include/KAVIKB.h \
     include/KAVIPredicateKB.h \
     include/KAVIClassKB.h \
-    include/DefinitionClassDialog.h
+    include/DefinitionClassDialog.h \
+    include/DefinitionPredicateDialog.h
 
 FORMS += \
     forms/KAVIMainWindow.ui \
@@ -120,7 +122,9 @@ FORMS += \
     forms/ProblemsObjectDialog.ui \
     forms/ProblemsObjectInfo.ui \
     forms/ProblemsPredicateDialog.ui \
-    forms/ProblemsPredicateInfo.ui
+    forms/ProblemsPredicateInfo.ui \
+    forms/DefinitionPredicateDialog.ui \
+    forms/DefinitionClassDialog.ui
 
 RESOURCES += \
     res/KAVIIcons.qrc \

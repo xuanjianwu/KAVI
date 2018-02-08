@@ -29,7 +29,7 @@ bool KAVIClassKB::loadKB(QFile &baseFile)
         {
             if (xmlStream.name() == "class")
             {
-                classes.append(xmlStream.readElementText());
+                this->classes.append(xmlStream.readElementText());
             }
         }
     }
@@ -63,7 +63,7 @@ bool KAVIClassKB::saveKB(QFile &baseFile)
     xmlStream.setAutoFormatting(true);
     xmlStream.writeStartDocument();
     xmlStream.writeStartElement("classes");
-    foreach (QString classSign, classes) {
+    foreach (QString classSign, this->classes) {
         xmlStream.writeTextElement("class", classSign);
 
     }
@@ -87,24 +87,34 @@ bool KAVIClassKB::readBasetoCache()
     cachedClasses = classes;
 }
 
-void KAVIClassKB::testAddClasses(QStringList list)
+QStringList KAVIClassKB::getClasses() const
 {
-    foreach (QString str, list) {
-        if (! cachedClasses.contains(str))
-        {
-            cachedClasses.append(str);
-        }
-    }
-    refreshCachetoBase();
+    return cachedClasses;
 }
 
-void KAVIClassKB::testDeleteClasses(QStringList list)
+bool KAVIClassKB::addClass(QString className)
 {
-    foreach (QString str, list) {
-        if (cachedClasses.contains(str))
-        {
-            cachedClasses.removeAt(cachedClasses.indexOf(str));
-        }
+    if (!cachedClasses.contains(className, Qt::CaseInsensitive))
+    {
+        cachedClasses.append(className);
+        return true;
     }
-    refreshCachetoBase();
+    else
+    {
+        return false;
+    }
+}
+
+bool KAVIClassKB::removeClass(QString className)
+{
+    if (cachedClasses.contains(className, Qt::CaseInsensitive))
+    {
+        // if case does not match , will it remove?
+        cachedClasses.removeAt(cachedClasses.indexOf(className));
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

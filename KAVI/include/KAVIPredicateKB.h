@@ -4,7 +4,7 @@
 #include "KAVIBase.h"
 #include "KAVIKB.h"
 
-class KAVIPredicateKB: KAVIKB {
+class KAVIPredicateKB: public KAVIKB {
 public:
     KAVIPredicateKB();
     ~KAVIPredicateKB();
@@ -12,11 +12,11 @@ public:
     bool saveKB(QFile &baseFile);
     bool refreshCachetoBase();
     bool readBasetoCache();
-    void testAddPredicates(QStringList list);
-    void testDeletePredicates(QStringList list);
+    QStringList getPredicates() const;
+    bool addPredicate(QString predicateSign);
+    bool removePredicate(QString predicateSign);
 private:
     QStringList cachedPredicates;
-}
-
+};
 
 #endif // KAVIPREDICATEKB_H

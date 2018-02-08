@@ -9,7 +9,8 @@
 
 #include "KAVIBase.h"
 #include "EditWidget.h"
-
+#include "KAVIClassKB.h"
+#include "KAVIPredicateKB.h"
 
 
 class DefinitionEdit: public EditWidget {
@@ -24,7 +25,12 @@ public:
     */
     DefinitionEdit(QWidget* parent = 0);
 
+    void saveKB();
+
 private:
+    KAVIClassKB *classKB;
+    KAVIPredicateKB *predicateKB;
+
     /*
     * define a new class node, add new node data to DataWidget,
     * and DataWidget will add it to DiagramWidget

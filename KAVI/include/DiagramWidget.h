@@ -55,6 +55,10 @@ public:
     void stickEdgeToNode(int edgeID, bool start, int nodeID);
     int collidingNodeID(int edgeID, bool start);
 
+    int newNodeID();
+    int newEdgeID();
+    QPointF newNodePos(QPointF root);
+
 private:
     Node* nodeAt(const QPointF& pos);
     Edge* edgeAt(const QPointF& pos);
@@ -67,9 +71,6 @@ private:
 
     // the hash table of current scene diagran's edge <edgeID, edge*>
     typedef QHash<int, Edge*> EdgeContainer;
-
-    int newNodeID();
-    int newEdgeID();
 
     // container of diagram widget nodes
     NodeContainer dgwNodes;

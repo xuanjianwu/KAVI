@@ -40,7 +40,6 @@ public:
     QString variableName();
 
 private:
-
     Ui::OperatorsVariableDialog ui;
 };
 

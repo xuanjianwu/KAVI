@@ -48,6 +48,13 @@ public:
     int getID();
 
     /*
+    * get the size of Node
+    * @params: N/A
+    * @return: size
+    */
+    QSize getSize();
+
+    /*
      * get the color of Node
      * @params: N/A
      * @return: Qcolor

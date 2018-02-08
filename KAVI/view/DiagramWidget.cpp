@@ -269,6 +269,16 @@ int DiagramWidget::newEdgeID()
     return newId;
 }
 
+QPointF DiagramWidget::newNodePos(QPointF root)
+{
+    int resX = 0, resY = 0;
+    foreach (Node* node, dgwNodes) {
+        resX = ( resX + (node->pos().x() + root.x()) / 2 ) / 2;
+        resY = ( resY + (node->pos().y() + root.y()) / 2 ) / 2;
+    }
+    return QPointF(resX, resY);
+}
+
 void DiagramWidget::leftClick(QPointF pos)
 {
     QTransform transform;

@@ -5,10 +5,11 @@
 #include "XMLUtils.h"
 #include "CheckUtils.h"
 #include "InfoPanel.h"
+#include "DefinitionPredicateDialog.h"
 #include "DefinitionPredicateInfo.h"
+#include "DefinitionClassDialog.h"
 #include "DefinitionClassInfo.h"
 #include "igraph.h"
-
 
 
 using namespace XMLUtils;
@@ -19,8 +20,67 @@ DefinitionEdit::DefinitionEdit(QWidget *parent)
 {
     allowedEdgeMask = DEP_INHERITANCE | DEP_ASSOCIATION;
     allowedNodeMask = NST_CLASS | NST_PREDICATE;
+
+    classKB = new KAVIClassKB();
+    //QFile classBaseFile(CLASSKBFILE);
+    QFileInfo classBaseFileInfo(CLASSKBFILE);
+    if (classBaseFileInfo.exists())
+    {
+        QFile classBaseFile(CLASSKBFILE);
+        classKB->loadKB(classBaseFile);
+    }
+    else{
+        QFile *createdClassBaseFile = new QFile(CLASSKBFILE);
+        classKB->loadKB(*createdClassBaseFile);
+    }
+
+    predicateKB = new KAVIPredicateKB();
+    //QFile predicateBaseFile(PREDICATEKBFILE);
+    QFileInfo predicateBaseFileInfo(PREDICATEKBFILE);
+    if (predicateBaseFileInfo.exists())
+    {
+        QFile predicateBaseFile(PREDICATEKBFILE);
+        predicateKB->loadKB(predicateBaseFile);
+    }
+    else
+    {
+        QFile *createdPredicateBaseFile = new QFile(PREDICATEKBFILE);
+        predicateKB->loadKB(*createdPredicateBaseFile);
+    }
 }
 
+void DefinitionEdit::saveKB()
+{
+    QStringList definedClasses = xmlData->getNodeLabelList(NST_CLASS);
+    foreach (QString str, definedClasses) {
+        classKB->addClass(str);
+    }
+    QFile classBaseFile(CLASSKBFILE);
+    classKB->saveKB(classBaseFile);
+
+
+    NodeStructure predicateNode;
+    predicateNode.setData(nodeType, NST_PREDICATE);
+    QList<QDomElement> predicatesElement = xmlData->selectMatchingElementList(predicateNode);
+    foreach (QDomElement predicate, predicatesElement) {
+        QHash<int, QString> arguments = predicateArguments(predicate);
+        QString predicateName = subelementTagValue(predicate, "label");
+        QString predicateSign;
+        predicateSign.append(predicateName);
+        QList<int> argNumbers = arguments.keys();
+        qSort(argNumbers.begin(), argNumbers.end());
+        for (int i = 0; i < argNumbers.size(); i++)
+        {
+            predicateSign.append(" ");
+            predicateSign.append(arguments.value(argNumbers[i]));
+        }
+        predicateKB->addPredicate(predicateSign);
+    }
+    QFile predicateBaseFile(PREDICATEKBFILE);
+    predicateKB->saveKB(predicateBaseFile);
+}
+
+/*
 void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
 {
     bool ok;
@@ -68,7 +128,50 @@ void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
 
     emit sceneChanged(RectNodeAdded);
 }
+*/
 
+void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
+{
+    DefinitionClassDialog *dialog = new DefinitionClassDialog(classKB, this);
+
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        QString newClassName = dialog->className();
+        QStringList definedClasses = xmlData->getNodeLabelList(NST_CLASS);
+
+        if ( definedClasses.contains(newClassName, Qt::CaseInsensitive) )
+        {
+            QMessageBox::warning(this, tr("KAVI"), tr("Class name must be unique."));
+            return;
+        }
+
+        if ( newClassName.toLower() == "object" )
+        {
+            QMessageBox::warning(this, tr("KAVI"), tr("Name \"object\" is reserved."));
+            return;
+        }
+
+        if ( !nameChecker.exactMatch(newClassName) )
+        {
+            QMessageBox::warning(this, tr("KAVI"),
+            tr("Name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
+            return;
+        }
+
+        NodeStructure newNode;
+
+        newNode.setData(nodePosition, pos);
+        newNode.setData(nodeID, newID);
+        newNode.setData(nodeLabel, newClassName);
+        newNode.setData(nodeType, NST_CLASS);
+
+        xmlData->addDataNode(newNode);
+
+        emit sceneChanged(RectNodeAdded);
+    }
+}
+
+/*
 void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
 {
     bool ok;
@@ -101,6 +204,94 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
     xmlData->addDataNode(newNode);
 
     emit sceneChanged(EllipseNodeAdded);
+}
+*/
+
+void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
+{
+    DefinitionPredicateDialog *dialog = new DefinitionPredicateDialog(predicateKB, this);
+
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        QString predicateSign = dialog->predicateSign();
+        QStringList predicateSignList = predicateSign.split(" ");
+        QString newPredicateName = predicateSignList[0];
+
+        if ( newPredicateName.isEmpty() )
+        {
+            QMessageBox::information(this, tr("KAVI"), tr("Predicate name can't be empty."));
+            return;
+        }
+
+        if ( !nameChecker.exactMatch(newPredicateName) )
+        {
+            QMessageBox::warning(this, tr("KAVI"),
+            tr("Name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
+            return;
+        }
+
+        NodeStructure newNode;
+
+        newNode.setData(nodePosition, pos);
+        newNode.setData(nodeID, newID);
+        newNode.setData(nodeLabel, newPredicateName);
+        newNode.setData(nodeType, NST_PREDICATE);
+
+        xmlData->addDataNode(newNode);
+
+
+        QStringList definedClasses = xmlData->getNodeLabelList(NST_CLASS);
+
+        for (int i = 1; i < predicateSignList.size(); i++)
+        {
+            if (definedClasses.contains(predicateSignList[i], Qt::CaseInsensitive))
+            {
+                NodeStructure oldNode;
+
+                oldNode.setData(nodeLabel, predicateSignList[i]);
+                oldNode.setData(nodeType, NST_CLASS);
+
+                int oldNodeID = xmlData->getMatchingNodeID(oldNode);
+                QPointF oldNodePos = xmlData->getNodePos(oldNodeID);
+
+                EdgeStructure newEdge;
+                newEdge.id = diagram->newEdgeID();
+                newEdge.startPos = pos;
+                newEdge.endPos = oldNodePos;
+                newEdge.startNodeID = newID;
+                newEdge.endNodeID = oldNodeID;
+                newEdge.purpose = DEP_ASSOCIATION;
+
+                makeConnection(newEdge, i);
+            }
+            else
+            {
+                QPointF newNodePos = diagram->newNodePos(pos);
+                int newNodeID = diagram->newNodeID();
+                QString newNodelabel = predicateSignList[i];
+
+                newNode.setData(nodePosition, newNodePos);
+                newNode.setData(nodeID, newNodeID);
+                newNode.setData(nodeLabel, newNodelabel);
+                newNode.setData(nodeType, NST_CLASS);
+
+                xmlData->addDataNode(newNode);
+
+                EdgeStructure newEdge;
+                newEdge.id = diagram->newEdgeID();
+                newEdge.startPos = pos;
+                newEdge.endPos = newNodePos;
+                newEdge.startNodeID = newID;
+                newEdge.endNodeID = newNodeID;
+                newEdge.purpose = DEP_ASSOCIATION;
+
+                makeConnection(newEdge, i);
+            }
+        }
+
+
+        emit sceneChanged(EllipseNodeAdded);
+    }
 }
 
 /*

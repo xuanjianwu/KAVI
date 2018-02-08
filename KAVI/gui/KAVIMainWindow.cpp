@@ -1280,6 +1280,7 @@ void KAVIMainWindow::globalSave()
     if ( ui.definitionEdit->wasChanged() )
     {
         saveDefinition();
+        ui.definitionEdit->saveKB();
         ui.definitionEdit->setChanged(false);
     }
 

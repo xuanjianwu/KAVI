@@ -53,5 +53,9 @@
 #include <QLineEdit>
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
+#include <QStringListModel>
+#include <QCompleter>
+#include <QFileInfo>
+#include <QtAlgorithms>
 
 #endif // KAVIBASE_H
