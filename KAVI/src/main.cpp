@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "igraph.h"
+#include "KAVIClassKB.h"
 
 using namespace KAVIGraph;
 
@@ -61,7 +62,7 @@ int main(int argc, char ** argv)
 
 
 /*
-int main()
+int main3()
 {
     igraph_t graph;
     graph.init(7, IGRAPH_DIRECTED);
@@ -76,3 +77,4 @@ int main()
     return 0;
 }
 */
+

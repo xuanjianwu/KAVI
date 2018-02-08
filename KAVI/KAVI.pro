@@ -59,7 +59,11 @@ SOURCES += \
     utils/GraphClass.cpp \
     view/DiagramEvents.cpp \
     src/main.cpp \
-    gui/KAVIMainWindow.cpp
+    gui/KAVIMainWindow.cpp \
+    knowledgeBase/KAVIKB.cpp \
+    knowledgeBase/KAVIClassKB.cpp \
+    knowledgeBase/KAVIPredicateKB.cpp \
+    include/DefinitionClassDialog.cpp
 
 HEADERS += \
     include/KAVIBase.h \
@@ -99,7 +103,10 @@ HEADERS += \
     include/igraph.h \
     include/EdgeStructure.h \
     include/KAVITypedefs.h \
-    include/KAVIKB.h
+    include/KAVIKB.h \
+    include/KAVIPredicateKB.h \
+    include/KAVIClassKB.h \
+    include/DefinitionClassDialog.h
 
 FORMS += \
     forms/KAVIMainWindow.ui \
@@ -113,9 +120,7 @@ FORMS += \
     forms/ProblemsObjectDialog.ui \
     forms/ProblemsObjectInfo.ui \
     forms/ProblemsPredicateDialog.ui \
-    forms/ProblemsPredicateInfo.ui \
-    forms/DefinitionClassDialog.ui \
-    forms/DefinitionPredicateDialog.ui
+    forms/ProblemsPredicateInfo.ui
 
 RESOURCES += \
     res/KAVIIcons.qrc \

@@ -51,5 +51,7 @@
 #include <QTextStream>
 #include <QFileDialog>
 #include <QLineEdit>
+#include <QXmlStreamWriter>
+#include <QXmlStreamReader>
 
 #endif // KAVIBASE_H
