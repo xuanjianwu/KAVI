@@ -98,7 +98,8 @@ HEADERS += \
     include/XMLUtils.h \
     include/igraph.h \
     include/EdgeStructure.h \
-    include/KAVITypedefs.h
+    include/KAVITypedefs.h \
+    include/KAVIKB.h
 
 FORMS += \
     forms/KAVIMainWindow.ui \
@@ -112,7 +113,9 @@ FORMS += \
     forms/ProblemsObjectDialog.ui \
     forms/ProblemsObjectInfo.ui \
     forms/ProblemsPredicateDialog.ui \
-    forms/ProblemsPredicateInfo.ui
+    forms/ProblemsPredicateInfo.ui \
+    forms/DefinitionClassDialog.ui \
+    forms/DefinitionPredicateDialog.ui
 
 RESOURCES += \
     res/KAVIIcons.qrc \
