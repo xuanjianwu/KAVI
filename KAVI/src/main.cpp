@@ -50,6 +50,7 @@ int main(int argc, char ** argv)
 {
     QApplication app(argc, argv);
     KAVIMainWindow mainWindow;
+    //mainWindow.setWindowFlags(mainWindow.windowFlags() & Qt::WindowMaximizeButtonHint& Qt::WindowMinimizeButtonHint);
 
     msgCatcher = &mainWindow;
 

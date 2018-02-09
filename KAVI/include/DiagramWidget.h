@@ -59,6 +59,8 @@ public:
     int newEdgeID();
     QPointF newNodePos(QPointF root);
 
+    Node* getNode(int nodeID);
+
 private:
     Node* nodeAt(const QPointF& pos);
     Edge* edgeAt(const QPointF& pos);

@@ -80,56 +80,6 @@ void DefinitionEdit::saveKB()
     predicateKB->saveKB(predicateBaseFile);
 }
 
-/*
-void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
-{
-    bool ok;
-    QString newClassName = QInputDialog::getText(this, tr("Define new class"),
-    tr("Class name:"), QLineEdit::Normal, QString(), &ok);
-
-    if ( !ok )
-        return;
-
-    if ( newClassName.isEmpty() )
-    {
-        QMessageBox::information(this, tr("KAVI"), tr("Class name can't be empty."));
-        return;
-    }
-
-    QStringList definedClasses = xmlData->getNodeLabelList(NST_CLASS);
-
-    if ( definedClasses.contains(newClassName, Qt::CaseInsensitive) )
-    {
-        QMessageBox::warning(this, tr("KAVI"), tr("Class name must be unique."));
-        return;
-    }
-
-    if ( newClassName.toLower() == "object" )
-    {
-        QMessageBox::warning(this, tr("KAVI"), tr("Name \"object\" is reserved."));
-        return;
-    }
-
-    if ( !nameChecker.exactMatch(newClassName) )
-    {
-        QMessageBox::warning(this, tr("KAVI"),
-        tr("Name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
-        return;
-    }
-
-    NodeStructure newNode;
-
-    newNode.setData(nodePosition, pos);
-    newNode.setData(nodeID, newID);
-    newNode.setData(nodeLabel, newClassName);
-    newNode.setData(nodeType, NST_CLASS);
-
-    xmlData->addDataNode(newNode);
-
-    emit sceneChanged(RectNodeAdded);
-}
-*/
-
 void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
 {
     DefinitionClassDialog *dialog = new DefinitionClassDialog(classKB, this);
@@ -171,42 +121,6 @@ void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
     }
 }
 
-/*
-void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
-{
-    bool ok;
-    QString newPredicateName = QInputDialog::getText(this, tr("Define new predicate"),
-    tr("Predicate name:"), QLineEdit::Normal, QString(), &ok);
-
-    if ( !ok )
-        return;
-
-    if ( newPredicateName.isEmpty() )
-    {
-        QMessageBox::information(this, tr("KAVI"), tr("Predicate name can't be empty."));
-        return;
-    }
-
-    if ( !nameChecker.exactMatch(newPredicateName) )
-    {
-        QMessageBox::warning(this, tr("KAVI"),
-        tr("Name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
-        return;
-    }
-
-    NodeStructure newNode;
-
-    newNode.setData(nodePosition, pos);
-    newNode.setData(nodeID, newID);
-    newNode.setData(nodeLabel, newPredicateName);
-    newNode.setData(nodeType, NST_PREDICATE);
-
-    xmlData->addDataNode(newNode);
-
-    emit sceneChanged(EllipseNodeAdded);
-}
-*/
-
 void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
 {
     DefinitionPredicateDialog *dialog = new DefinitionPredicateDialog(predicateKB, this);
@@ -238,6 +152,7 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
         newNode.setData(nodeType, NST_PREDICATE);
 
         xmlData->addDataNode(newNode);
+        emit sceneChanged(EllipseNodeAdded);
 
 
         QStringList definedClasses = xmlData->getNodeLabelList(NST_CLASS);
@@ -254,10 +169,22 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
                 int oldNodeID = xmlData->getMatchingNodeID(oldNode);
                 QPointF oldNodePos = xmlData->getNodePos(oldNodeID);
 
+                int sX = oldNodePos.x() > pos.x()? (pos.x() + diagram->getNode(newID)->getSize().width()/2) :
+                                                  (pos.x() - diagram->getNode(newID)->getSize().width()/2);
+                int sY = oldNodePos.y() > pos.y()? (pos.y() + diagram->getNode(newID)->getSize().height()/2) :
+                                                  (pos.y() - diagram->getNode(newID)->getSize().height()/2);
+                QPointF sPoint(sX, sY);
+
+                int eX = pos.x() > oldNodePos.x()? (oldNodePos.x() + diagram->getNode(oldNodeID)->getSize().width()/2) :
+                                              (oldNodePos.x() - diagram->getNode(oldNodeID)->getSize().width()/2);
+                int eY = pos.y() > oldNodePos.y()? (oldNodePos.y() + diagram->getNode(oldNodeID)->getSize().height()/2) :
+                                              (oldNodePos.y() - diagram->getNode(oldNodeID)->getSize().height()/2);
+                QPointF ePoint(eX, eY);
+
                 EdgeStructure newEdge;
                 newEdge.id = diagram->newEdgeID();
-                newEdge.startPos = pos;
-                newEdge.endPos = oldNodePos;
+                newEdge.startPos = sPoint;
+                newEdge.endPos = ePoint;
                 newEdge.startNodeID = newID;
                 newEdge.endNodeID = oldNodeID;
                 newEdge.purpose = DEP_ASSOCIATION;
@@ -276,21 +203,32 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
                 newNode.setData(nodeType, NST_CLASS);
 
                 xmlData->addDataNode(newNode);
+                emit sceneChanged(RectNodeAdded);
+
+
+                int sX = newNodePos.x() > pos.x()? (pos.x() + diagram->getNode(newID)->getSize().width()/2) :
+                                                  (pos.x() - diagram->getNode(newID)->getSize().width()/2);
+                int sY = newNodePos.y() > pos.y()? (pos.y() + diagram->getNode(newID)->getSize().height()/2) :
+                                                  (pos.y() - diagram->getNode(newID)->getSize().height()/2);
+                QPointF sPoint(sX, sY);
+
+                int eX = pos.x() > newNodePos.x()? (newNodePos.x() + diagram->getNode(newNodeID)->getSize().width()/2) :
+                                              (newNodePos.x() - diagram->getNode(newNodeID)->getSize().width()/2);
+                int eY = pos.y() > newNodePos.y()? (newNodePos.y() + diagram->getNode(newNodeID)->getSize().height()/2) :
+                                              (newNodePos.y() - diagram->getNode(newNodeID)->getSize().height()/2);
+                QPointF ePoint(eX, eY);
 
                 EdgeStructure newEdge;
                 newEdge.id = diagram->newEdgeID();
-                newEdge.startPos = pos;
-                newEdge.endPos = newNodePos;
+                newEdge.startPos = sPoint;
+                newEdge.endPos = ePoint;
                 newEdge.startNodeID = newID;
                 newEdge.endNodeID = newNodeID;
                 newEdge.purpose = DEP_ASSOCIATION;
 
                 makeConnection(newEdge, i);
             }
-        }
-
-
-        emit sceneChanged(EllipseNodeAdded);
+        }       
     }
 }
 

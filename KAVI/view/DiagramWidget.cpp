@@ -279,6 +279,11 @@ QPointF DiagramWidget::newNodePos(QPointF root)
     return QPointF(resX, resY);
 }
 
+Node *DiagramWidget::getNode(int nodeID)
+{
+    return dgwNodes.value(nodeID);
+}
+
 void DiagramWidget::leftClick(QPointF pos)
 {
     QTransform transform;
