@@ -26,6 +26,7 @@ public:
     DefinitionEdit(QWidget* parent = 0);
 
     void saveKB();
+    bool createFile(QString filePath, QString fileName);
 
 private:
     KAVIClassKB *classKB;

@@ -222,7 +222,8 @@
 
 // DefinitionEdit ------------------------
 
-#define CLASSKBFILE "../KAVI/classKB.xml"
-#define PREDICATEKBFILE "../KAVI/predicateKB.xml"
+#define KBDIR "../KAVI/KBFile"
+#define CLASSKBFILE "classKB.xml"
+#define PREDICATEKBFILE "predicateKB.xml"
 
 #endif // KAVIMACROS_H

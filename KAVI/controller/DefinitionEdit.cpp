@@ -22,31 +22,18 @@ DefinitionEdit::DefinitionEdit(QWidget *parent)
     allowedNodeMask = NST_CLASS | NST_PREDICATE;
 
     classKB = new KAVIClassKB();
-    //QFile classBaseFile(CLASSKBFILE);
-    QFileInfo classBaseFileInfo(CLASSKBFILE);
-    if (classBaseFileInfo.exists())
-    {
-        QFile classBaseFile(CLASSKBFILE);
-        classKB->loadKB(classBaseFile);
-    }
-    else{
-        QFile *createdClassBaseFile = new QFile(CLASSKBFILE);
-        classKB->loadKB(*createdClassBaseFile);
-    }
+    createFile(KBDIR, CLASSKBFILE);
+    QString filePath;
+    filePath.append(KBDIR).append(CLASSKBFILE);
+    QFile classBaseFile(filePath);
+    classKB->loadKB(classBaseFile);
 
     predicateKB = new KAVIPredicateKB();
-    //QFile predicateBaseFile(PREDICATEKBFILE);
-    QFileInfo predicateBaseFileInfo(PREDICATEKBFILE);
-    if (predicateBaseFileInfo.exists())
-    {
-        QFile predicateBaseFile(PREDICATEKBFILE);
-        predicateKB->loadKB(predicateBaseFile);
-    }
-    else
-    {
-        QFile *createdPredicateBaseFile = new QFile(PREDICATEKBFILE);
-        predicateKB->loadKB(*createdPredicateBaseFile);
-    }
+    createFile(KBDIR, PREDICATEKBFILE);
+    filePath.clear();
+    filePath.append(KBDIR).append(PREDICATEKBFILE);
+    QFile predicateBaseFile(filePath);
+    predicateKB->loadKB(predicateBaseFile);
 }
 
 void DefinitionEdit::saveKB()
@@ -78,6 +65,42 @@ void DefinitionEdit::saveKB()
     }
     QFile predicateBaseFile(PREDICATEKBFILE);
     predicateKB->saveKB(predicateBaseFile);
+}
+
+bool DefinitionEdit::createFile(QString filePath, QString fileName)
+{
+    QDir tempDir;
+    //临时保存程序当前路径
+    QString currentDir = tempDir.currentPath();
+    //如果filePath路径不存在，创建它
+    if(!tempDir.exists(filePath))
+    {
+        //qDebug()<<"不存在该路径"<<endl;
+        tempDir.mkpath(filePath);
+    }
+    QFile *tempFile = new QFile;
+    //将程序的执行路径设置到filePath下
+    tempDir.setCurrent(filePath);
+    //qDebug()<<tempDir.currentPath();
+    //检查filePath路径下是否存在文件fileName,如果停止操作。
+    if(tempFile->exists(fileName))
+    {
+        //qDebug()<<"文件存在";
+        return true;
+    }
+    //此时，路径下没有fileName文件，使用下面代码在当前路径下创建文件
+    tempFile->setFileName(fileName);
+    if(!tempFile->open(QIODevice::WriteOnly|QIODevice::Text))
+    {
+        //qDebug()<<"打开失败";
+        return false;
+    }
+    tempFile->close();
+    //将程序当前路径设置为原来的路径
+    tempDir.setCurrent(currentDir);
+    //qDebug()<<tempDir.currentPath();
+
+    return true;
 }
 
 void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
