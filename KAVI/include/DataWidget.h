@@ -85,6 +85,12 @@ public:
     */
     QString getNodeData(int id, QString tagName) const;
 
+    /*
+    * get the specified node's position
+    * @params:
+    *       id - the expected node's ID
+    * @return: the expected node's position
+    */
     QPointF getNodePos(int id) const;
 
     /*

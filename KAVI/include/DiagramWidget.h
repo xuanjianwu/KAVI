@@ -57,8 +57,21 @@ public:
 
     int newNodeID();
     int newEdgeID();
+
+    /*
+    * get a new node position against the root
+    * @params:
+    *       root - the specified position to against
+    * @return: the new position
+    */
     QPointF newNodePos(QPointF root);
 
+    /*
+    * get the specified Node*
+    * @params:
+    *       nodeId - the expected node's ID
+    * @return: the expected Node*
+    */
     Node* getNode(int nodeID);
 
 private:

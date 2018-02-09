@@ -57,5 +57,6 @@
 #include <QCompleter>
 #include <QFileInfo>
 #include <QtAlgorithms>
+#include <QDir>
 
 #endif // KAVIBASE_H

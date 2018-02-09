@@ -21,35 +21,40 @@ DefinitionEdit::DefinitionEdit(QWidget *parent)
     allowedEdgeMask = DEP_INHERITANCE | DEP_ASSOCIATION;
     allowedNodeMask = NST_CLASS | NST_PREDICATE;
 
-    classKB = new KAVIClassKB();
-    createFile(KBDIR, CLASSKBFILE);
+    // init the class knowledgeBase from file
     QString filePath;
-    filePath.append(KBDIR).append(CLASSKBFILE);
-    QFile classBaseFile(filePath);
+    filePath.append(QDir::currentPath()).append(KBDIR);
+    classKB = new KAVIClassKB();
+    createFile(filePath, CLASSKBFILE);
+    QFile classBaseFile(filePath + CLASSKBFILE);
     classKB->loadKB(classBaseFile);
 
+    // init the predicate knowledgeBase from file
     predicateKB = new KAVIPredicateKB();
-    createFile(KBDIR, PREDICATEKBFILE);
-    filePath.clear();
-    filePath.append(KBDIR).append(PREDICATEKBFILE);
-    QFile predicateBaseFile(filePath);
+    createFile(filePath, PREDICATEKBFILE);
+    QFile predicateBaseFile(filePath + PREDICATEKBFILE);
     predicateKB->loadKB(predicateBaseFile);
 }
 
 void DefinitionEdit::saveKB()
 {
+    // update the classes from definition to class knowledge base
     QStringList definedClasses = xmlData->getNodeLabelList(NST_CLASS);
     foreach (QString str, definedClasses) {
         classKB->addClass(str);
     }
-    QFile classBaseFile(CLASSKBFILE);
+    QString filePath;
+    filePath.append(QDir::currentPath()).append(KBDIR);
+    createFile(filePath, CLASSKBFILE);
+    QFile classBaseFile(filePath + CLASSKBFILE);
     classKB->saveKB(classBaseFile);
 
-
+    // update the predicates from definition to class knowledge base
     NodeStructure predicateNode;
     predicateNode.setData(nodeType, NST_PREDICATE);
     QList<QDomElement> predicatesElement = xmlData->selectMatchingElementList(predicateNode);
     foreach (QDomElement predicate, predicatesElement) {
+        // build the string of predicate sign
         QHash<int, QString> arguments = predicateArguments(predicate);
         QString predicateName = subelementTagValue(predicate, "label");
         QString predicateSign;
@@ -63,42 +68,41 @@ void DefinitionEdit::saveKB()
         }
         predicateKB->addPredicate(predicateSign);
     }
-    QFile predicateBaseFile(PREDICATEKBFILE);
+    createFile(filePath, PREDICATEKBFILE);
+    QFile predicateBaseFile(filePath + PREDICATEKBFILE);
     predicateKB->saveKB(predicateBaseFile);
 }
 
 bool DefinitionEdit::createFile(QString filePath, QString fileName)
 {
     QDir tempDir;
-    //临时保存程序当前路径
+    // absolute path of the application's current directory
     QString currentDir = tempDir.currentPath();
-    //如果filePath路径不存在，创建它
+
+    // if filePath not exists, create it
     if(!tempDir.exists(filePath))
     {
-        //qDebug()<<"不存在该路径"<<endl;
         tempDir.mkpath(filePath);
     }
     QFile *tempFile = new QFile;
-    //将程序的执行路径设置到filePath下
+    // Sets the application's current working directory to filePath
     tempDir.setCurrent(filePath);
-    //qDebug()<<tempDir.currentPath();
-    //检查filePath路径下是否存在文件fileName,如果停止操作。
+
+    // if the expected file exists, return true
     if(tempFile->exists(fileName))
     {
-        //qDebug()<<"文件存在";
         return true;
     }
-    //此时，路径下没有fileName文件，使用下面代码在当前路径下创建文件
+    // if the expected file not exists, create it
     tempFile->setFileName(fileName);
+
     if(!tempFile->open(QIODevice::WriteOnly|QIODevice::Text))
     {
-        //qDebug()<<"打开失败";
         return false;
     }
     tempFile->close();
-    //将程序当前路径设置为原来的路径
+    // restore the application's working directory
     tempDir.setCurrent(currentDir);
-    //qDebug()<<tempDir.currentPath();
 
     return true;
 }
@@ -167,6 +171,7 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
             return;
         }
 
+        // add the specified predicate node of the predicate sign
         NodeStructure newNode;
 
         newNode.setData(nodePosition, pos);
@@ -177,11 +182,12 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
         xmlData->addDataNode(newNode);
         emit sceneChanged(EllipseNodeAdded);
 
-
+        // add the associated argument class nodes of the predicate sign, add edges between the new predicate node and arguments class node
         QStringList definedClasses = xmlData->getNodeLabelList(NST_CLASS);
 
         for (int i = 1; i < predicateSignList.size(); i++)
         {
+            // the the associated argument class nodes already exists, just add assocaition edges
             if (definedClasses.contains(predicateSignList[i], Qt::CaseInsensitive))
             {
                 NodeStructure oldNode;
@@ -192,6 +198,7 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
                 int oldNodeID = xmlData->getMatchingNodeID(oldNode);
                 QPointF oldNodePos = xmlData->getNodePos(oldNodeID);
 
+                // adjust the edgepoint's position between predicate node and class node so that edgepoint does not mask the node label
                 int sX = oldNodePos.x() > pos.x()? (pos.x() + diagram->getNode(newID)->getSize().width()/2) :
                                                   (pos.x() - diagram->getNode(newID)->getSize().width()/2);
                 int sY = oldNodePos.y() > pos.y()? (pos.y() + diagram->getNode(newID)->getSize().height()/2) :
@@ -215,6 +222,7 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
                 makeConnection(newEdge, i);
             }
             else
+            // the the associated argument class nodes not exists, add class nodes and add assocaition edges
             {
                 QPointF newNodePos = diagram->newNodePos(pos);
                 int newNodeID = diagram->newNodeID();
@@ -228,7 +236,7 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
                 xmlData->addDataNode(newNode);
                 emit sceneChanged(RectNodeAdded);
 
-
+                // adjust the edgepoint's position between predicate node and class node so that edgepoint does not mask the node label
                 int sX = newNodePos.x() > pos.x()? (pos.x() + diagram->getNode(newID)->getSize().width()/2) :
                                                   (pos.x() - diagram->getNode(newID)->getSize().width()/2);
                 int sY = newNodePos.y() > pos.y()? (pos.y() + diagram->getNode(newID)->getSize().height()/2) :

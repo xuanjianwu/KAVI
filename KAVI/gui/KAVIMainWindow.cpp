@@ -689,6 +689,7 @@ void KAVIMainWindow::on_tabWidget_currentChanged(int index)
         Q_ASSERT(false);
     }
 
+    /*
     if ( ui.definitionEdit->wasChanged() )
     {
         saveDefinition();
@@ -706,6 +707,9 @@ void KAVIMainWindow::on_tabWidget_currentChanged(int index)
         saveDiagram("task", ui.taskSelector->currentText(), "problems", taskDocument);
         ui.taskEdit->setChanged(false);
     }
+    */
+
+    globalSave();
 
     resetPropertyEditor();
 }
@@ -1277,10 +1281,12 @@ bool KAVIMainWindow::askForSave(const QString &text)
 
 void KAVIMainWindow::globalSave()
 {
+    // save the knowledge base
+    ui.definitionEdit->saveKB();
+
     if ( ui.definitionEdit->wasChanged() )
     {
         saveDefinition();
-        ui.definitionEdit->saveKB();
         ui.definitionEdit->setChanged(false);
     }
 

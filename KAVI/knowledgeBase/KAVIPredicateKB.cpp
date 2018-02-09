@@ -1,6 +1,5 @@
 #include "KAVIPredicateKB.h"
 
-
 KAVIPredicateKB::KAVIPredicateKB()
 {
 
@@ -49,6 +48,7 @@ bool KAVIPredicateKB::saveKB(QFile &baseFile)
 {
     refreshCachetoBase();
 
+    // remove the old file and new one
     QString fileName = baseFile.fileName();
     QFile::remove(baseFile.fileName());
     QFile newBaseFile(fileName);
@@ -80,12 +80,14 @@ bool KAVIPredicateKB::refreshCachetoBase()
 {
     predicates.clear();
     predicates = cachedPredicates;
+    return true;
 }
 
 bool KAVIPredicateKB::readBasetoCache()
 {
     cachedPredicates.clear();
     cachedPredicates = predicates;
+    return true;
 }
 
 QStringList KAVIPredicateKB::getPredicates() const
@@ -108,9 +110,10 @@ bool KAVIPredicateKB::addPredicate(QString predicateSign)
 
 bool KAVIPredicateKB::removePredicate(QString predicateSign)
 {
-    if (cachedPredicates.contains(predicateSign, Qt::CaseInsensitive))
+    if (cachedPredicates.contains(predicateSign, Qt::CaseSensitive))
     {
-        // if case does not match , will it remove?
+        // if predicate sign does not match , will it remove? so set CaseSensitive to
+        // remove the CaseSensitive matched predicate sign
         cachedPredicates.removeAt(cachedPredicates.indexOf(predicateSign));
         return true;
     }

@@ -48,6 +48,7 @@ bool KAVIClassKB::saveKB(QFile &baseFile)
 {
     refreshCachetoBase();
 
+    // remove the old file and new one
     QString fileName = baseFile.fileName();
     QFile::remove(baseFile.fileName());
     QFile newBaseFile(fileName);
@@ -79,12 +80,14 @@ bool KAVIClassKB::refreshCachetoBase()
 {
     classes.clear();
     classes = cachedClasses;
+    return true;
 }
 
 bool KAVIClassKB::readBasetoCache()
 {
     cachedClasses.clear();
     cachedClasses = classes;
+    return true;
 }
 
 QStringList KAVIClassKB::getClasses() const
@@ -107,9 +110,10 @@ bool KAVIClassKB::addClass(QString className)
 
 bool KAVIClassKB::removeClass(QString className)
 {
-    if (cachedClasses.contains(className, Qt::CaseInsensitive))
+    if (cachedClasses.contains(className, Qt::CaseSensitive))
     {
-        // if case does not match , will it remove?
+        // if case does not match , will it remove? so set CaseSensitive to
+        // remove the CaseSensitive matched class
         cachedClasses.removeAt(cachedClasses.indexOf(className));
         return true;
     }
