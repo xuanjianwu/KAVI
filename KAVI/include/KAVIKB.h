@@ -15,6 +15,7 @@ public:
     ~KAVIKB();
     virtual bool loadKB(QFile &baseFile) = 0;
     virtual bool saveKB(QFile &baseFile) = 0;
+
 protected:
     // the stable class knowledge base
     QStringList classes;
