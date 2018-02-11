@@ -32,15 +32,6 @@ public:
     */
     void saveKB();
 
-    /*
-    * create file in the specified path, if already exists return directly
-    * @params:
-    *       filePath - the specified path
-    *       fileName - the expected file
-    * @return: create file success or file already exists or create failed
-    */
-    bool createFile(QString filePath, QString fileName);
-
 private:
     // the dependent class knowledgeBase
     KAVIClassKB *classKB;

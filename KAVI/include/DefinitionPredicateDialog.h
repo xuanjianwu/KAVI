@@ -1,3 +1,9 @@
+/*
+ * @author: liYc
+ * @date  : 2018/2/8
+ * @brief : the predicate dialog in definition view, dependent on knowledge base
+*/
+
 #ifndef DEFINITIONPREDICATEDIALOG_H
 #define DEFINITIONPREDICATEDIALOG_H
 

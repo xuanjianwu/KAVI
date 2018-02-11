@@ -1,3 +1,9 @@
+/*
+ * @author: liYc
+ * @date  : 2018/2/8
+ * @brief : the specified knowledge base for predicates' sign, offer cached base
+*/
+
 #ifndef KAVIPREDICATEKB_H
 #define KAVIPREDICATEKB_H
 
@@ -22,19 +28,17 @@ public:
 
     /*
     * load knowledge base from file to stable base, and write to the cached base
-    * @params:
-    *       baseFile - the specified file
+    * @params: N/A
     * @return: success or not
     */
-    bool loadKB(QFile &baseFile);
+    bool loadKB();
 
     /*
     * refresh cached base to stable base, and save stable base to file
-    * @params:
-    *       baseFile - the specified file
+    * @params: N/A
     * @return: success or not
     */
-    bool saveKB(QFile &baseFile);
+    bool saveKB();
 
     /*
     * refresh cached base to stable base

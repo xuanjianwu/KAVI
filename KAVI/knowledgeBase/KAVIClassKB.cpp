@@ -10,14 +10,24 @@ KAVIClassKB::~KAVIClassKB()
     this->cachedClasses.clear();
 }
 
-bool KAVIClassKB::loadKB(QFile &baseFile)
+bool KAVIClassKB::loadKB()
 {
     this->classes.clear();
+
+    QString filePath;
+    filePath.append(QDir::currentPath()).append(KBDIR);
+    if (createFile(filePath, CLASSKBFILE) == false)
+    {
+        return false;
+    }
+    QFile baseFile(filePath.append(CLASSKBFILE));
+
     if ( !baseFile.open(QFile::ReadOnly | QFile::Text ))
     {
         qDebug()<< "@Error: cannot open file: " << baseFile.fileName();
         return false;
     }
+
     QXmlStreamReader xmlStream;
     xmlStream.setDevice(&baseFile);
 
@@ -44,9 +54,17 @@ bool KAVIClassKB::loadKB(QFile &baseFile)
     return true;
 }
 
-bool KAVIClassKB::saveKB(QFile &baseFile)
+bool KAVIClassKB::saveKB()
 {
     refreshCachetoBase();
+
+    QString filePath;
+    filePath.append(QDir::currentPath()).append(KBDIR);
+    if (createFile(filePath, CLASSKBFILE) == false)
+    {
+        return false;
+    }
+    QFile baseFile(filePath.append(CLASSKBFILE));
 
     // remove the old file and new one
     QString fileName = baseFile.fileName();

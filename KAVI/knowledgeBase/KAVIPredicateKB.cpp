@@ -10,9 +10,18 @@ KAVIPredicateKB::~KAVIPredicateKB()
     this->cachedPredicates.clear();
 }
 
-bool KAVIPredicateKB::loadKB(QFile &baseFile)
+bool KAVIPredicateKB::loadKB()
 {
     this->predicates.clear();
+
+    QString filePath;
+    filePath.append(QDir::currentPath()).append(KBDIR);
+    if (createFile(filePath, PREDICATEKBFILE) == false)
+    {
+        return false;
+    }
+    QFile baseFile(filePath.append(PREDICATEKBFILE));
+
     if ( !baseFile.open(QFile::ReadOnly | QFile::Text ))
     {
         qDebug()<< "@Error: cannot open file: " << baseFile.fileName();
@@ -44,9 +53,17 @@ bool KAVIPredicateKB::loadKB(QFile &baseFile)
     return true;
 }
 
-bool KAVIPredicateKB::saveKB(QFile &baseFile)
+bool KAVIPredicateKB::saveKB()
 {
     refreshCachetoBase();
+
+    QString filePath;
+    filePath.append(QDir::currentPath()).append(KBDIR);
+    if (createFile(filePath, PREDICATEKBFILE) == false)
+    {
+        return false;
+    }
+    QFile baseFile(filePath.append(PREDICATEKBFILE));
 
     // remove the old file and new one
     QString fileName = baseFile.fileName();

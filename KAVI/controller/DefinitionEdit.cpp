@@ -22,18 +22,12 @@ DefinitionEdit::DefinitionEdit(QWidget *parent)
     allowedNodeMask = NST_CLASS | NST_PREDICATE;
 
     // init the class knowledgeBase from file
-    QString filePath;
-    filePath.append(QDir::currentPath()).append(KBDIR);
     classKB = new KAVIClassKB();
-    createFile(filePath, CLASSKBFILE);
-    QFile classBaseFile(filePath + CLASSKBFILE);
-    classKB->loadKB(classBaseFile);
+    classKB->loadKB();
 
     // init the predicate knowledgeBase from file
     predicateKB = new KAVIPredicateKB();
-    createFile(filePath, PREDICATEKBFILE);
-    QFile predicateBaseFile(filePath + PREDICATEKBFILE);
-    predicateKB->loadKB(predicateBaseFile);
+    predicateKB->loadKB();
 }
 
 void DefinitionEdit::saveKB()
@@ -43,11 +37,7 @@ void DefinitionEdit::saveKB()
     foreach (QString str, definedClasses) {
         classKB->addClass(str);
     }
-    QString filePath;
-    filePath.append(QDir::currentPath()).append(KBDIR);
-    createFile(filePath, CLASSKBFILE);
-    QFile classBaseFile(filePath + CLASSKBFILE);
-    classKB->saveKB(classBaseFile);
+    classKB->saveKB();
 
     // update the predicates from definition to class knowledge base
     NodeStructure predicateNode;
@@ -68,43 +58,7 @@ void DefinitionEdit::saveKB()
         }
         predicateKB->addPredicate(predicateSign);
     }
-    createFile(filePath, PREDICATEKBFILE);
-    QFile predicateBaseFile(filePath + PREDICATEKBFILE);
-    predicateKB->saveKB(predicateBaseFile);
-}
-
-bool DefinitionEdit::createFile(QString filePath, QString fileName)
-{
-    QDir tempDir;
-    // absolute path of the application's current directory
-    QString currentDir = tempDir.currentPath();
-
-    // if filePath not exists, create it
-    if(!tempDir.exists(filePath))
-    {
-        tempDir.mkpath(filePath);
-    }
-    QFile *tempFile = new QFile;
-    // Sets the application's current working directory to filePath
-    tempDir.setCurrent(filePath);
-
-    // if the expected file exists, return true
-    if(tempFile->exists(fileName))
-    {
-        return true;
-    }
-    // if the expected file not exists, create it
-    tempFile->setFileName(fileName);
-
-    if(!tempFile->open(QIODevice::WriteOnly|QIODevice::Text))
-    {
-        return false;
-    }
-    tempFile->close();
-    // restore the application's working directory
-    tempDir.setCurrent(currentDir);
-
-    return true;
+    predicateKB->saveKB();
 }
 
 void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)

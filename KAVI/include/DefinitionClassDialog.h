@@ -1,3 +1,9 @@
+/*
+ * @author: liYc
+ * @date  : 2018/2/8
+ * @brief : the class dialog in definition view, dependent on knowledge base
+*/
+
 #ifndef DEFINITIONCLASSDIALOG_H
 #define DEFINITIONCLASSDIALOG_H
 
