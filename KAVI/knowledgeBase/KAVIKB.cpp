@@ -36,6 +36,7 @@ bool KAVIKB::createFile(QString filePath, QString fileName)
     // if the expected file exists, return true
     if(tempFile->exists(fileName))
     {
+        // restore the application's working directory
         tempDir.setCurrent(currentDir);
         return true;
     }
@@ -45,6 +46,8 @@ bool KAVIKB::createFile(QString filePath, QString fileName)
     if(!tempFile->open(QIODevice::WriteOnly|QIODevice::Text))
     {
         qDebug() << "@Error: can not open file: " << tempFile->fileName() << " in path: " << filePath;
+
+        // restore the application's working directory
         tempDir.setCurrent(currentDir);
         return false;
     }
