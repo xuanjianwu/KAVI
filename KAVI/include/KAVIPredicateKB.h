@@ -59,7 +59,7 @@ public:
     * @params: N/A
     * @return: string list of predicates' sign
     */
-    QStringList getPredicates() const;
+    QStringList getData() const;
 
     /*
     * add predicate sign to cached base

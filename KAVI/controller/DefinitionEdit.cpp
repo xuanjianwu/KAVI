@@ -11,6 +11,7 @@
 #include "DefinitionClassInfo.h"
 #include "igraph.h"
 
+#include "KnowledgeBaseEdit.h"
 
 using namespace XMLUtils;
 using namespace CheckUtils;
@@ -28,6 +29,8 @@ DefinitionEdit::DefinitionEdit(QWidget *parent)
     // init the predicate knowledgeBase from file
     predicateKB = new KAVIPredicateKB();
     predicateKB->loadKB();
+
+    //new KnowledgeBaseEdit(classKB, predicateKB, this);
 }
 
 void DefinitionEdit::saveKB()
@@ -59,6 +62,24 @@ void DefinitionEdit::saveKB()
         predicateKB->addPredicate(predicateSign);
     }
     predicateKB->saveKB();
+}
+
+KAVIClassKB *DefinitionEdit::getClassKB() const
+{
+    if (classKB != NULL)
+    {
+        return classKB;
+    }
+    return NULL;
+}
+
+KAVIPredicateKB *DefinitionEdit::getPredicateKB() const
+{
+    if (predicateKB != NULL)
+    {
+        return predicateKB;
+    }
+    return NULL;
 }
 
 void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)

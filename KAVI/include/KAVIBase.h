@@ -58,5 +58,6 @@
 #include <QFileInfo>
 #include <QtAlgorithms>
 #include <QDir>
+#include <QListWidget>
 
 #endif // KAVIBASE_H

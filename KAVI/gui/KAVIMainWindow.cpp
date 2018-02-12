@@ -10,6 +10,7 @@
 #include "Convertor.h"
 #include "EditWidget.h"
 #include "InfoPanel.h"
+#include "KnowledgeBaseEdit.h"
 
 #include "DomainDescDialog.h"
 
@@ -371,6 +372,11 @@ void KAVIMainWindow::on_actionClear_Log_C_triggered()
 void KAVIMainWindow::on_actionAbout_A_triggered()
 {
 
+}
+
+void KAVIMainWindow::on_actionKnowledge_Base_K_triggered()
+{
+    KnowledgeBaseEdit* knowledgeBaseEdit = new KnowledgeBaseEdit(ui.definitionEdit->getClassKB(), ui.definitionEdit->getPredicateKB(), this);
 }
 
 void KAVIMainWindow::on_actionAddEllipseNode_toggled(bool arg1)

@@ -12,7 +12,7 @@ DefinitionClassDialog::DefinitionClassDialog(KAVIClassKB *classKB, QWidget *pare
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     completer->setCompletionMode(QCompleter::PopupCompletion);
 
-    listModel = new QStringListModel(this->classKB->getClasses(), this);
+    listModel = new QStringListModel(this->classKB->getData(), this);
     completer->setModel(listModel);
 
     ui->classNameEdit->setCompleter(completer);
@@ -23,6 +23,8 @@ DefinitionClassDialog::DefinitionClassDialog(KAVIClassKB *classKB, QWidget *pare
 
 DefinitionClassDialog::~DefinitionClassDialog()
 {
+    //delete classKB;
+    //delete listModel;
     delete ui;
 }
 
@@ -39,7 +41,7 @@ void DefinitionClassDialog::editComplete()
     {
         if (this->classKB->addClass(text))
         {
-            listModel->setStringList(this->classKB->getClasses());
+            listModel->setStringList(this->classKB->getData());
         }
     }
 }

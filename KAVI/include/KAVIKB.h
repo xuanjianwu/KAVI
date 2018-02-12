@@ -36,6 +36,7 @@ public:
 
     virtual bool loadKB() = 0;
     virtual bool saveKB() = 0;
+    virtual QStringList getData() const = 0;
 protected:
     // the stable class knowledge base
     QStringList classes;

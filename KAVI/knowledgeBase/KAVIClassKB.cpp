@@ -108,7 +108,7 @@ bool KAVIClassKB::readBasetoCache()
     return true;
 }
 
-QStringList KAVIClassKB::getClasses() const
+QStringList KAVIClassKB::getData() const
 {
     return cachedClasses;
 }

@@ -156,7 +156,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile_F">
@@ -198,9 +198,16 @@
      <string>View(&amp;V)</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuDeveloper_D">
+    <property name="title">
+     <string>Developer(&amp;D)</string>
+    </property>
+    <addaction name="actionKnowledge_Base_K"/>
+   </widget>
    <addaction name="menuFile_F"/>
    <addaction name="menuOptions_O"/>
    <addaction name="menuView_V"/>
+   <addaction name="menuDeveloper_D"/>
    <addaction name="menuHelp_H"/>
   </widget>
   <widget class="QDockWidget" name="classDock">
@@ -215,8 +222,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>93</width>
-     <height>116</height>
+     <width>98</width>
+     <height>120</height>
     </size>
    </property>
    <property name="floating">
@@ -291,8 +298,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>93</width>
-     <height>116</height>
+     <width>98</width>
+     <height>120</height>
     </size>
    </property>
    <property name="allowedAreas">
@@ -655,6 +662,21 @@
    </property>
    <property name="statusTip">
     <string>Save current diagram as .png image</string>
+   </property>
+  </action>
+  <action name="actionKnowledge_Base_K">
+   <property name="icon">
+    <iconset resource="../res/KAVIImages.qrc">
+     <normaloff>:/images/images/edit-find.png</normaloff>:/images/images/edit-find.png</iconset>
+   </property>
+   <property name="text">
+    <string>Knowledge Base</string>
+   </property>
+   <property name="toolTip">
+    <string>View and Edit Knowledge Base</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
    </property>
   </action>
  </widget>

@@ -32,6 +32,20 @@ public:
     */
     void saveKB();
 
+    /*
+    * get the current dependent class knowledge base
+    * @params: N/A
+    * @return: knowleage base
+    */
+    KAVIClassKB *getClassKB() const;
+
+    /*
+    * get the current dependent predicate knowledge base
+    * @params: N/A
+    * @return: knowledge base
+    */
+    KAVIPredicateKB *getPredicateKB() const;
+
 private:
     // the dependent class knowledgeBase
     KAVIClassKB *classKB;

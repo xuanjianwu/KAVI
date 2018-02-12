@@ -12,7 +12,7 @@ DefinitionPredicateDialog::DefinitionPredicateDialog(KAVIPredicateKB *predicateK
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     completer->setCompletionMode(QCompleter::PopupCompletion);
 
-    listModel = new QStringListModel(this->predicateKB->getPredicates(), this);
+    listModel = new QStringListModel(this->predicateKB->getData(), this);
     completer->setModel(listModel);
 
     ui->predicateNameEdit->setCompleter(completer);
@@ -23,6 +23,8 @@ DefinitionPredicateDialog::DefinitionPredicateDialog(KAVIPredicateKB *predicateK
 
 DefinitionPredicateDialog::~DefinitionPredicateDialog()
 {
+    //delete predicateKB;
+    //delete listModel;
     delete ui;
 }
 
@@ -39,7 +41,7 @@ void DefinitionPredicateDialog::editComplete()
     {
         if (this->predicateKB->addPredicate(text))
         {
-            listModel->setStringList(this->predicateKB->getPredicates());
+            listModel->setStringList(this->predicateKB->getData());
         }
     }
 }

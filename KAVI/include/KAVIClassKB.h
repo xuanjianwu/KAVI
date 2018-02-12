@@ -59,7 +59,7 @@ public:
     * @params: N/A
     * @return: string list of classes' name
     */
-    QStringList getClasses() const;
+    QStringList getData() const;
 
     /*
     * add class to cached base

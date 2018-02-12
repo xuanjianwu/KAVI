@@ -107,7 +107,7 @@ bool KAVIPredicateKB::readBasetoCache()
     return true;
 }
 
-QStringList KAVIPredicateKB::getPredicates() const
+QStringList KAVIPredicateKB::getData() const
 {
     return cachedPredicates;
 }

@@ -92,6 +92,10 @@ public slots:
     void on_actionAbout_A_triggered();
 
 
+    // menubar : Developer
+    void on_actionKnowledge_Base_K_triggered();
+
+
     // toolbar: edit configure
 
     void on_actionAddEllipseNode_toggled(bool arg1);
