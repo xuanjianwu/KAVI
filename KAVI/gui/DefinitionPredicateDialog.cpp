@@ -18,7 +18,7 @@ DefinitionPredicateDialog::DefinitionPredicateDialog(KAVIPredicateKB *predicateK
     ui->predicateNameEdit->setCompleter(completer);
     ui->predicateNameEdit->setFocus();
 
-    connect(ui->predicateNameEdit, SIGNAL(editingFinished()), this, SLOT(editComplete()));
+    //connect(ui->predicateNameEdit, SIGNAL(editingFinished()), this, SLOT(editComplete()));
 }
 
 DefinitionPredicateDialog::~DefinitionPredicateDialog()
@@ -30,7 +30,7 @@ DefinitionPredicateDialog::~DefinitionPredicateDialog()
 
 QString DefinitionPredicateDialog::predicateSign() const
 {
-    return ui->predicateNameEdit->text();
+    return ui->predicateNameEdit->text().simplified();
 }
 
 void DefinitionPredicateDialog::editComplete()

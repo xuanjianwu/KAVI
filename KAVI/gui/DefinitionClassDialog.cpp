@@ -18,7 +18,7 @@ DefinitionClassDialog::DefinitionClassDialog(KAVIClassKB *classKB, QWidget *pare
     ui->classNameEdit->setCompleter(completer);
     ui->classNameEdit->setFocus();
 
-    connect(ui->classNameEdit, SIGNAL(editingFinished()), this, SLOT(editComplete()));
+    //connect(ui->classNameEdit, SIGNAL(editingFinished()), this, SLOT(editComplete()));
 }
 
 DefinitionClassDialog::~DefinitionClassDialog()
@@ -30,7 +30,7 @@ DefinitionClassDialog::~DefinitionClassDialog()
 
 QString DefinitionClassDialog::className() const
 {
-    return ui->classNameEdit->text();
+    return ui->classNameEdit->text().simplified();
 }
 
 void DefinitionClassDialog::editComplete()

@@ -14,5 +14,5 @@ KnowledgeBaseClassEditDialog::~KnowledgeBaseClassEditDialog()
 
 QString KnowledgeBaseClassEditDialog::className() const
 {
-    return ui->className->text();
+    return ui->className->text().simplified();
 }

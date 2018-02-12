@@ -14,5 +14,5 @@ KnowledgeBasePredicateEditDialog::~KnowledgeBasePredicateEditDialog()
 
 QString KnowledgeBasePredicateEditDialog::predicateSign() const
 {
-    return ui->predicateSign->text();
+    return ui->predicateSign->text().simplified();
 }

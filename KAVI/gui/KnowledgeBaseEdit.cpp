@@ -44,6 +44,12 @@ void KnowledgeBaseEdit::editBase(QListWidgetItem *item)
             QString newClassName = dialog->className();
             QStringList definedClasses = classKB->getData();
 
+            if ( newClassName.isEmpty() )
+            {
+                QMessageBox::information(this, tr("KAVI"), tr("Class name can't be empty."));
+                return;
+            }
+
             if ( definedClasses.contains(newClassName, Qt::CaseInsensitive) )
             {
                 QMessageBox::warning(this, tr("KAVI"), tr("Class name must be unique."));
@@ -89,6 +95,12 @@ void KnowledgeBaseEdit::editBase(QListWidgetItem *item)
             QStringList predicateSignList = newPredicate.split(" ");
             QString newPredicateName = predicateSignList[0];
 
+            if ( newPredicateName.isEmpty() )
+            {
+                QMessageBox::information(this, tr("KAVI"), tr("Predicate name can't be empty."));
+                return;
+            }
+
             if ( !nameChecker.exactMatch(newPredicateName) )
             {
                 QMessageBox::warning(this, tr("KAVI"),
@@ -98,6 +110,12 @@ void KnowledgeBaseEdit::editBase(QListWidgetItem *item)
 
             for (int i = 1; i < predicateSignList.size(); i++)
             {
+                if ( QString(predicateSignList[i]).isEmpty())
+                {
+                    QMessageBox::information(this, tr("KAVI"), tr("Argument name can't be empty."));
+                    return;
+                }
+
                 if ( QString(predicateSignList[i]).toLower() == "object" )
                 {
                     QMessageBox::warning(this, tr("KAVI"), tr("Name \"object\" is reserved."));
@@ -129,6 +147,12 @@ void KnowledgeBaseEdit::on_buttonAdd_clicked()
         {
             QString newClassName = dialog->className();
             QStringList definedClasses = classKB->getData();
+
+            if ( newClassName.isEmpty() )
+            {
+                QMessageBox::information(this, tr("KAVI"), tr("Class name can't be empty."));
+                return;
+            }
 
             if ( definedClasses.contains(newClassName, Qt::CaseInsensitive) )
             {
@@ -173,6 +197,12 @@ void KnowledgeBaseEdit::on_buttonAdd_clicked()
             QStringList predicateSignList = newPredicate.split(" ");
             QString newPredicateName = predicateSignList[0];
 
+            if ( newPredicateName.isEmpty() )
+            {
+                QMessageBox::information(this, tr("KAVI"), tr("Predicate name can't be empty."));
+                return;
+            }
+
             if ( !nameChecker.exactMatch(newPredicateName) )
             {
                 QMessageBox::warning(this, tr("KAVI"),
@@ -182,6 +212,12 @@ void KnowledgeBaseEdit::on_buttonAdd_clicked()
 
             for (int i = 1; i < predicateSignList.size(); i++)
             {
+                if ( QString(predicateSignList[i]).isEmpty())
+                {
+                    QMessageBox::information(this, tr("KAVI"), tr("Argument name can't be empty."));
+                    return;
+                }
+
                 if ( QString(predicateSignList[i]).toLower() == "object" )
                 {
                     QMessageBox::warning(this, tr("KAVI"), tr("Name \"object\" is reserved."));
@@ -204,8 +240,15 @@ void KnowledgeBaseEdit::on_buttonAdd_clicked()
 
 void KnowledgeBaseEdit::on_buttonEdit_clicked()
 {
+
     if (ui->tabWidget->currentIndex() == TAB_INDEX_CLASS)
     {
+        if (ui->classList->selectedItems().count() <= 0)
+        {
+            qDebug() << "@Please select one item";
+            return;
+        }
+
         QString oldClassName = ui->classList->currentItem()->text();
         KnowledgeBaseClassEditDialog *dialog = new KnowledgeBaseClassEditDialog(oldClassName, this);
 
@@ -213,6 +256,12 @@ void KnowledgeBaseEdit::on_buttonEdit_clicked()
         {
             QString newClassName = dialog->className();
             QStringList definedClasses = classKB->getData();
+
+            if ( newClassName.isEmpty() )
+            {
+                QMessageBox::information(this, tr("KAVI"), tr("Class name can't be empty."));
+                return;
+            }
 
             if ( definedClasses.contains(newClassName, Qt::CaseInsensitive) )
             {
@@ -240,6 +289,12 @@ void KnowledgeBaseEdit::on_buttonEdit_clicked()
     }
     if (ui->tabWidget->currentIndex() == TAB_INDEX_PREDICATE)
     {
+        if (ui->predicateList->selectedItems().count() <= 0)
+        {
+            qDebug() << "@Please select one item";
+            return;
+        }
+
         QString oldPredicate = ui->predicateList->currentItem()->text();
         KnowledgeBasePredicateEditDialog *dialog = new KnowledgeBasePredicateEditDialog(oldPredicate, this);
 
@@ -259,6 +314,12 @@ void KnowledgeBaseEdit::on_buttonEdit_clicked()
             QStringList predicateSignList = newPredicate.split(" ");
             QString newPredicateName = predicateSignList[0];
 
+            if ( newPredicateName.isEmpty() )
+            {
+                QMessageBox::information(this, tr("KAVI"), tr("Predicate name can't be empty."));
+                return;
+            }
+
             if ( !nameChecker.exactMatch(newPredicateName) )
             {
                 QMessageBox::warning(this, tr("KAVI"),
@@ -268,6 +329,12 @@ void KnowledgeBaseEdit::on_buttonEdit_clicked()
 
             for (int i = 1; i < predicateSignList.size(); i++)
             {
+                if ( QString(predicateSignList[i]).isEmpty())
+                {
+                    QMessageBox::information(this, tr("KAVI"), tr("Argument name can't be empty."));
+                    return;
+                }
+
                 if ( QString(predicateSignList[i]).toLower() == "object" )
                 {
                     QMessageBox::warning(this, tr("KAVI"), tr("Name \"object\" is reserved."));

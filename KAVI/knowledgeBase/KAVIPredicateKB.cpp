@@ -122,6 +122,7 @@ bool KAVIPredicateKB::addPredicate(QString predicateSign)
         for(int i = 1; i < predicateSignList.size(); i++)
         {
             classKB->addClass(predicateSignList[i]);
+
         }
 
         return true;

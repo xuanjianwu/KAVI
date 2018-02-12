@@ -88,14 +88,11 @@ void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
         QString newClassName = dialog->className();
         QStringList definedClasses = xmlData->getNodeLabelList(NST_CLASS);
 
-        /* this case is included in the exactMatch case
         if ( newClassName.isEmpty() )
         {
             QMessageBox::information(this, tr("KAVI"), tr("Class name can't be empty."));
-            classKB->removeClass(newClassName);
             return;
         }
-        */
 
         if ( definedClasses.contains(newClassName, Qt::CaseInsensitive) )
         {
@@ -106,7 +103,6 @@ void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
         if ( newClassName.toLower() == "object" )
         {
             QMessageBox::warning(this, tr("KAVI"), tr("Name \"object\" is reserved."));
-            classKB->removeClass(newClassName);
             return;
         }
 
@@ -114,9 +110,9 @@ void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
         {
             QMessageBox::warning(this, tr("KAVI"),
             tr("Class name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
-            classKB->removeClass(newClassName);
             return;
         }
+        classKB->addClass(newClassName);
 
         NodeStructure newNode;
 
@@ -141,38 +137,30 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
         QStringList predicateSignList = predicateSign.split(" ");
         QString newPredicateName = predicateSignList[0];
 
-        /* this case is included in exactMatch case
         if ( newPredicateName.isEmpty() )
         {
             QMessageBox::information(this, tr("KAVI"), tr("Predicate name can't be empty."));
-            predicateKB->removePredicate(predicateSign);
             return;
         }
-        */
 
         if ( !nameChecker.exactMatch(newPredicateName) )
         {
             QMessageBox::warning(this, tr("KAVI"),
             tr("Predicate name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
-            predicateKB->removePredicate(predicateSign);
             return;
         }
 
         for (int i = 1; i < predicateSignList.size(); i++)
         {
-            /* this case is included in exactMatch case
             if ( QString(predicateSignList[i]).isEmpty())
             {
-                QMessageBox::information(this, tr("KAVI"), tr("Class name can't be empty."));
-                predicateKB->removePredicate(predicateSign);
+                QMessageBox::information(this, tr("KAVI"), tr("Argument name can't be empty."));
                 return;
             }
-            */
 
             if ( QString(predicateSignList[i]).toLower() == "object" )
             {
                 QMessageBox::warning(this, tr("KAVI"), tr("Name \"object\" is reserved."));
-                predicateKB->removePredicate(predicateSign);
                 return;
             }
 
@@ -180,10 +168,10 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
             {
                 QMessageBox::warning(this, tr("KAVI"),
                 tr("Argument name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
-                predicateKB->removePredicate(predicateSign);
                 return;
             }
         }
+        predicateKB->addPredicate(predicateSign);
 
         // add the specified predicate node of the predicate sign
         NodeStructure newNode;
