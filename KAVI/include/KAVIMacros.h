@@ -226,4 +226,10 @@
 #define CLASSKBFILE "classKB.xml"
 #define PREDICATEKBFILE "predicateKB.xml"
 
+// KnowledgeBaseEdit ---------------------
+
+// the default index of tabWidget
+#define TAB_INDEX_CLASS 0
+#define TAB_INDEX_PREDICATE	 1
+
 #endif // KAVIMACROS_H

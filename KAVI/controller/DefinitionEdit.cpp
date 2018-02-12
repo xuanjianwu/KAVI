@@ -11,8 +11,6 @@
 #include "DefinitionClassInfo.h"
 #include "igraph.h"
 
-#include "KnowledgeBaseEdit.h"
-
 using namespace XMLUtils;
 using namespace CheckUtils;
 
@@ -27,10 +25,9 @@ DefinitionEdit::DefinitionEdit(QWidget *parent)
     classKB->loadKB();
 
     // init the predicate knowledgeBase from file
-    predicateKB = new KAVIPredicateKB();
+    predicateKB = new KAVIPredicateKB(classKB);
     predicateKB->loadKB();
 
-    //new KnowledgeBaseEdit(classKB, predicateKB, this);
 }
 
 void DefinitionEdit::saveKB()
@@ -91,6 +88,15 @@ void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
         QString newClassName = dialog->className();
         QStringList definedClasses = xmlData->getNodeLabelList(NST_CLASS);
 
+        /* this case is included in the exactMatch case
+        if ( newClassName.isEmpty() )
+        {
+            QMessageBox::information(this, tr("KAVI"), tr("Class name can't be empty."));
+            classKB->removeClass(newClassName);
+            return;
+        }
+        */
+
         if ( definedClasses.contains(newClassName, Qt::CaseInsensitive) )
         {
             QMessageBox::warning(this, tr("KAVI"), tr("Class name must be unique."));
@@ -100,13 +106,15 @@ void DefinitionEdit::defineRectangleNode(QPointF pos, int newID)
         if ( newClassName.toLower() == "object" )
         {
             QMessageBox::warning(this, tr("KAVI"), tr("Name \"object\" is reserved."));
+            classKB->removeClass(newClassName);
             return;
         }
 
         if ( !nameChecker.exactMatch(newClassName) )
         {
             QMessageBox::warning(this, tr("KAVI"),
-            tr("Name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
+            tr("Class name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
+            classKB->removeClass(newClassName);
             return;
         }
 
@@ -133,17 +141,48 @@ void DefinitionEdit::defineEllipseNode(QPointF pos, int newID)
         QStringList predicateSignList = predicateSign.split(" ");
         QString newPredicateName = predicateSignList[0];
 
+        /* this case is included in exactMatch case
         if ( newPredicateName.isEmpty() )
         {
             QMessageBox::information(this, tr("KAVI"), tr("Predicate name can't be empty."));
+            predicateKB->removePredicate(predicateSign);
             return;
         }
+        */
 
         if ( !nameChecker.exactMatch(newPredicateName) )
         {
             QMessageBox::warning(this, tr("KAVI"),
-            tr("Name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
+            tr("Predicate name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
+            predicateKB->removePredicate(predicateSign);
             return;
+        }
+
+        for (int i = 1; i < predicateSignList.size(); i++)
+        {
+            /* this case is included in exactMatch case
+            if ( QString(predicateSignList[i]).isEmpty())
+            {
+                QMessageBox::information(this, tr("KAVI"), tr("Class name can't be empty."));
+                predicateKB->removePredicate(predicateSign);
+                return;
+            }
+            */
+
+            if ( QString(predicateSignList[i]).toLower() == "object" )
+            {
+                QMessageBox::warning(this, tr("KAVI"), tr("Name \"object\" is reserved."));
+                predicateKB->removePredicate(predicateSign);
+                return;
+            }
+
+            if ( !nameChecker.exactMatch(predicateSignList[i]) )
+            {
+                QMessageBox::warning(this, tr("KAVI"),
+                tr("Argument name has wrong format.\n- only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n- must start with letter"));
+                predicateKB->removePredicate(predicateSign);
+                return;
+            }
         }
 
         // add the specified predicate node of the predicate sign

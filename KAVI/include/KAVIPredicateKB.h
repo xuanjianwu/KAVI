@@ -9,15 +9,17 @@
 
 #include "KAVIBase.h"
 #include "KAVIKB.h"
+#include "KAVIClassKB.h"
 
 class KAVIPredicateKB: public KAVIKB {
 public:
     /*
     * construct function
-    * @params: N/A
+    * @params:
+    *       classKB - the dependent class knowledge base
     * @return: N/A
     */
-    KAVIPredicateKB();
+    KAVIPredicateKB(KAVIClassKB *classKB);
 
     /*
     * deconstruct function
@@ -77,6 +79,9 @@ public:
     */
     bool removePredicate(QString predicateSign);
 private:
+    // the dependent class knowledge base, used to update classes to class knowledge base from
+    // the new added predicate's arguments
+    KAVIClassKB *classKB;
     // the cached predicate knowledge base
     QStringList cachedPredicates;
 };

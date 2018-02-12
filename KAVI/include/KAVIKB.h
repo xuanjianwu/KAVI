@@ -33,7 +33,6 @@ public:
     * @return: create file success or file already exists or create failed
     */
     bool createFile(QString filePath, QString fileName);
-
     virtual bool loadKB() = 0;
     virtual bool saveKB() = 0;
     virtual QStringList getData() const = 0;

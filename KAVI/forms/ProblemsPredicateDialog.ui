@@ -14,7 +14,7 @@
    <enum>Qt::TabFocus</enum>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Add predicate</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" colspan="2">

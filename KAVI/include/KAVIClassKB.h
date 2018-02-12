@@ -76,6 +76,7 @@ public:
     * @return: success or not
     */
     bool removeClass(QString className);
+
 private:
     // the cached class knowledge base
     QStringList cachedClasses;

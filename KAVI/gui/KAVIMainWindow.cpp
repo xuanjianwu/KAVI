@@ -377,6 +377,7 @@ void KAVIMainWindow::on_actionAbout_A_triggered()
 void KAVIMainWindow::on_actionKnowledge_Base_K_triggered()
 {
     KnowledgeBaseEdit* knowledgeBaseEdit = new KnowledgeBaseEdit(ui.definitionEdit->getClassKB(), ui.definitionEdit->getPredicateKB(), this);
+    knowledgeBaseEdit->exec();
 }
 
 void KAVIMainWindow::on_actionAddEllipseNode_toggled(bool arg1)

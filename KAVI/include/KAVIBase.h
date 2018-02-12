@@ -59,5 +59,10 @@
 #include <QtAlgorithms>
 #include <QDir>
 #include <QListWidget>
+#include <QListWidgetItem>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include <QToolButton>
+
 
 #endif // KAVIBASE_H

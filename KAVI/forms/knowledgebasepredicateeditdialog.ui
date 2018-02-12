@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DefinitionPredicateDialog</class>
- <widget class="QDialog" name="DefinitionPredicateDialog">
+ <class>KnowledgeBasePredicateEditDialog</class>
+ <widget class="QDialog" name="KnowledgeBasePredicateEditDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,21 +11,24 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Define predicate</string>
+   <string>Edit predicate</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
       <string>Predicate: (Tip: must splited by one space )</string>
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QLineEdit" name="predicateNameEdit"/>
+   <item row="1" column="0">
+    <widget class="QLineEdit" name="predicateSign"/>
    </item>
-   <item>
+   <item row="2" column="0">
     <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
@@ -38,32 +41,32 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DefinitionPredicateDialog</receiver>
+   <receiver>KnowledgeBasePredicateEditDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>295</x>
-     <y>75</y>
+     <x>248</x>
+     <y>254</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>48</y>
+     <x>157</x>
+     <y>274</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DefinitionPredicateDialog</receiver>
+   <receiver>KnowledgeBasePredicateEditDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>295</x>
-     <y>75</y>
+     <x>316</x>
+     <y>260</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>48</y>
+     <x>286</x>
+     <y>274</y>
     </hint>
    </hints>
   </connection>

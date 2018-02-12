@@ -1,8 +1,8 @@
 #include "KAVIPredicateKB.h"
 
-KAVIPredicateKB::KAVIPredicateKB()
+KAVIPredicateKB::KAVIPredicateKB(KAVIClassKB *classKB)
 {
-
+    this->classKB = classKB;
 }
 
 KAVIPredicateKB::~KAVIPredicateKB()
@@ -117,6 +117,13 @@ bool KAVIPredicateKB::addPredicate(QString predicateSign)
     if (!cachedPredicates.contains(predicateSign, Qt::CaseInsensitive))
     {
         cachedPredicates.append(predicateSign);
+
+        QStringList predicateSignList = predicateSign.split(" ");
+        for(int i = 1; i < predicateSignList.size(); i++)
+        {
+            classKB->addClass(predicateSignList[i]);
+        }
+
         return true;
     }
     else
