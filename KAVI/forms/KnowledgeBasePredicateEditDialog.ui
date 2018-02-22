@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Predicate: (Tip: must splited by spaces )</string>
+      <string>Predicate: (Tip: must splited by spaces)</string>
      </property>
     </widget>
    </item>

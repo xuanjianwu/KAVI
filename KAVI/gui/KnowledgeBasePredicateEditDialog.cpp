@@ -5,6 +5,10 @@ KnowledgeBasePredicateEditDialog::KnowledgeBasePredicateEditDialog(QString conte
 {
     ui->setupUi(this);
     ui->predicateSign->setText(content);
+    if (QString::compare(content, QString("")) == 0)
+    {
+        setWindowTitle("Add predicate");
+    }
 }
 
 KnowledgeBasePredicateEditDialog::~KnowledgeBasePredicateEditDialog()

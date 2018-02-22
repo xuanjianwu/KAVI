@@ -5,6 +5,10 @@ KnowledgeBaseClassEditDialog::KnowledgeBaseClassEditDialog(QString content, QWid
 {
     ui->setupUi(this);
     ui->className->setText(content);
+    if (QString::compare(content, QString("")) == 0)
+    {
+        setWindowTitle("Add class");
+    }
 }
 
 KnowledgeBaseClassEditDialog::~KnowledgeBaseClassEditDialog()
