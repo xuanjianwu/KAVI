@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1100</width>
+    <width>1150</width>
     <height>750</height>
    </rect>
   </property>
@@ -155,8 +155,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1100</width>
-     <height>22</height>
+     <width>1150</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile_F">
@@ -698,25 +698,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../res/KAVIIcons.qrc"/>
   <include location="../res/KAVIImages.qrc"/>
+  <include location="../res/KAVIIcons.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>tabWidget</sender>
-   <signal>selected(QString)</signal>
-   <receiver>statusBar</receiver>
-   <slot>showMessage(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>253</x>
-     <y>51</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>103</x>
-     <y>589</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
