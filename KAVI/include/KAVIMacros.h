@@ -220,17 +220,25 @@
 // the prefix of message that would append to logTextEdit
 #define KAVIPREFIX '@'
 
-// DefinitionEdit ------------------------
+// KAVIKB --------------------------------
 
-#define KBDIR_RELEASE "/KAVIKBFile/"
-#define KBDIR_DEBUG "/KAVI/KAVIKBFile/"
-#define CLASSKBFILE "classKB.xml"
-#define PREDICATEKBFILE "predicateKB.xml"
+#define KB_DIR_RELEASE "/KAVIKBFile/"
+#define KB_DIR_DEBUG "/KAVI/KAVIKBFile/"
+#define CLASSKB_FILE "classKB.xml"
+#define PREDICATEKB_FILE "predicateKB.xml"
 
 // KnowledgeBaseEdit ---------------------
 
 // the default index of tabWidget
 #define TAB_INDEX_CLASS 0
 #define TAB_INDEX_PREDICATE	 1
+
+// SolutionSettingsDialog ----------------
+
+#define PLANNERS_CONFIGS_DIR_RELEASE "/KAVIConfigs/planners/"
+#define PLANNERS_CONFIGS_DIR_DEBUG "/KAVI/KAVIConfigs/planners/"
+#define KAVIPLANNERS_FILE "KAVIPlanners.xml"
+
+#define PLANNER_PARAMETERS_TABLE_COLUMN_COUNT 5
 
 #endif // KAVIMACROS_H

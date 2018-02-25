@@ -34,6 +34,25 @@ XMLU_NS_BEGIN
     void setIntAttribute(QDomElement elem, const QString& attrName, int newContent);
 
     /*
+    * get the attribute's content with string datatype
+    * @params:
+    *       elem     - the specified element to get attribute's content
+    *       attrName - the expected attribute's name
+    * @return: attribute's content
+    */
+    QString getStrAttribute(const QDomElement& elem, QString attrName);
+
+    /*
+    * set the attribute's content with string datatype
+    * @params:
+    *       elem       - the specified element to set attribute's content
+    *       attrName   - the expected attribute's name
+    *       newContent - the new attribute content
+    * @return: void
+    */
+    void setStrAttribute(QDomElement elem, const QString& attrName, QString newContent);
+
+    /*
     * get the element's content with int datatype
     * @params:
     *       elem - the specified element

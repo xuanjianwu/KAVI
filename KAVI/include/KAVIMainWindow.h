@@ -177,6 +177,9 @@ public slots:
 
     void on_classTreeView_clicked(const QModelIndex &index);
 
+private slots:
+    void on_actionSolution_Settings_triggered();
+
 private:
     // specified the domain changed or not
     bool domainChanged;

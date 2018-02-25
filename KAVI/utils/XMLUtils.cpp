@@ -410,6 +410,26 @@ int associatedNodeID(const QDomElement &edge, bool start)
     return getIntAttribute(edgepoint, "nid");
 }
 
+QString getStrAttribute(const QDomElement &elem, QString attrName)
+{
+    Q_ASSERT(!elem.isNull());
+
+    if ( !elem.hasAttribute(attrName) )
+    {
+        qWarning() << "$XMLh::getStrAttribute : attribute" << attrName << "not found in element:" << elem.tagName();
+        return QString();
+    }
+
+    QString result = elem.attribute(attrName);
+
+    return result;
+}
+
+void setStrAttribute(QDomElement elem, const QString &attrName, QString newContent)
+{
+    elem.setAttribute(attrName, newContent);
+}
+
 
 
 XMLU_NS_END

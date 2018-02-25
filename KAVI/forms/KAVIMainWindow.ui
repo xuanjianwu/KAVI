@@ -203,6 +203,7 @@
      <string>Developer(&amp;D)</string>
     </property>
     <addaction name="actionKnowledge_Base_K"/>
+    <addaction name="actionSolution_Settings"/>
    </widget>
    <addaction name="menuFile_F"/>
    <addaction name="menuOptions_O"/>
@@ -474,6 +475,9 @@
    <property name="text">
     <string>Edit Properties(&amp;P)</string>
    </property>
+   <property name="toolTip">
+    <string>Edit properties(P)</string>
+   </property>
    <property name="statusTip">
     <string>Edit the domain properties</string>
    </property>
@@ -485,6 +489,9 @@
    </property>
    <property name="text">
     <string>Domain Summary(&amp;S)</string>
+   </property>
+   <property name="toolTip">
+    <string>Domain summary(S)</string>
    </property>
    <property name="statusTip">
     <string>Check and print the domain report to log</string>
@@ -673,10 +680,22 @@
     <string>Knowledge Base</string>
    </property>
    <property name="toolTip">
-    <string>View and Edit Knowledge Base</string>
+    <string>View and edit Knowledge Base</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+K</string>
+   </property>
+  </action>
+  <action name="actionSolution_Settings">
+   <property name="icon">
+    <iconset resource="../res/KAVIImages.qrc">
+     <normaloff>:/images2/images2/engine.png</normaloff>:/images2/images2/engine.png</iconset>
+   </property>
+   <property name="text">
+    <string>Solution Settings</string>
+   </property>
+   <property name="toolTip">
+    <string>View and edit solution settings</string>
    </property>
   </action>
  </widget>

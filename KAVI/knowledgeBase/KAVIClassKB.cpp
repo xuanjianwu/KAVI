@@ -23,20 +23,20 @@ bool KAVIClassKB::loadKB()
     tmpDir.setCurrent(currentPath);
     switch (KAVIRunMode) {
     case Debug:       
-        filePath.append(upPath).append(KBDIR_DEBUG);
+        filePath.append(upPath).append(KB_DIR_DEBUG);
         break;
     case Release:
-        filePath.append(currentPath).append(KBDIR_RELEASE);
+        filePath.append(currentPath).append(KB_DIR_RELEASE);
         break;
     default:
         break;
     }
 
-    if (createFile(filePath, CLASSKBFILE) == false)
+    if (createFile(filePath, CLASSKB_FILE) == false)
     {
         return false;
     }
-    QFile baseFile(filePath.append(CLASSKBFILE));
+    QFile baseFile(filePath.append(CLASSKB_FILE));
 
     if ( !baseFile.open(QFile::ReadOnly | QFile::Text ))
     {
@@ -83,20 +83,20 @@ bool KAVIClassKB::saveKB()
     tmpDir.setCurrent(currentPath);
     switch (KAVIRunMode) {
     case Debug:
-        filePath.append(upPath).append(KBDIR_DEBUG);
+        filePath.append(upPath).append(KB_DIR_DEBUG);
         break;
     case Release:
-        filePath.append(currentPath).append(KBDIR_RELEASE);
+        filePath.append(currentPath).append(KB_DIR_RELEASE);
         break;
     default:
         break;
     }
 
-    if (createFile(filePath, CLASSKBFILE) == false)
+    if (createFile(filePath, CLASSKB_FILE) == false)
     {
         return false;
     }
-    QFile baseFile(filePath.append(CLASSKBFILE));
+    QFile baseFile(filePath.append(CLASSKB_FILE));
 
     // remove the old file and new one
     QString fileName = baseFile.fileName();

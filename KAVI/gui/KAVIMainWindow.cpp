@@ -11,6 +11,7 @@
 #include "EditWidget.h"
 #include "InfoPanel.h"
 #include "KnowledgeBaseEdit.h"
+#include "SolutionSettingsDialog.h"
 
 #include "DomainDescDialog.h"
 
@@ -1426,4 +1427,10 @@ void KAVIMainWindow::centerContents(QGraphicsView *view)
 {
     QRectF	boundingRect = view->scene()->itemsBoundingRect();
     view->centerOn(boundingRect.center());
+}
+
+void KAVIMainWindow::on_actionSolution_Settings_triggered()
+{
+    SolutionSettingsDialog* dialog = new SolutionSettingsDialog(this);
+    dialog->exec();
 }
