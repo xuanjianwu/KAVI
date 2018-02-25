@@ -105,8 +105,8 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../res/KAVIIcons.qrc">
-              <normaloff>:/icons/icons/arrowDown.xpm</normaloff>:/icons/icons/arrowDown.xpm</iconset>
+             <iconset resource="../res/KAVIImages.qrc">
+              <normaloff>:/images2/images2/arrowDown2.png</normaloff>:/images2/images2/arrowDown2.png</iconset>
             </property>
            </widget>
           </item>
@@ -116,8 +116,8 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="../res/KAVIIcons.qrc">
-              <normaloff>:/icons/icons/arrowUp.xpm</normaloff>:/icons/icons/arrowUp.xpm</iconset>
+             <iconset resource="../res/KAVIImages.qrc">
+              <normaloff>:/images2/images2/arrowUp2.png</normaloff>:/images2/images2/arrowUp2.png</iconset>
             </property>
            </widget>
           </item>
@@ -144,7 +144,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../res/KAVIIcons.qrc"/>
+  <include location="../res/KAVIImages.qrc"/>
  </resources>
  <connections/>
 </ui>

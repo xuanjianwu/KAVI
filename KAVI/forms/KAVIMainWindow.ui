@@ -403,7 +403,7 @@
   <action name="actionSave_As_A">
    <property name="icon">
     <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/document-save-as.png</normaloff>:/images/images/document-save-as.png</iconset>
+     <normaloff>:/images2/images2/saveAs.png</normaloff>:/images2/images2/saveAs.png</iconset>
    </property>
    <property name="text">
     <string>Save As...(&amp;A)</string>
@@ -418,7 +418,7 @@
   <action name="actionDomain_PDDL">
    <property name="icon">
     <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/document-save.png</normaloff>:/images/images/document-save.png</iconset>
+     <normaloff>:/images2/images2/export.png</normaloff>:/images2/images2/export.png</iconset>
    </property>
    <property name="text">
     <string>Domain PDDL</string>
@@ -430,7 +430,7 @@
   <action name="actionProblem_PDDL">
    <property name="icon">
     <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/document-save.png</normaloff>:/images/images/document-save.png</iconset>
+     <normaloff>:/images2/images2/export.png</normaloff>:/images2/images2/export.png</iconset>
    </property>
    <property name="text">
     <string>Problem PDDL</string>
@@ -457,7 +457,7 @@
   <action name="actionAbout_A">
    <property name="icon">
     <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/help.png</normaloff>:/images/images/help.png</iconset>
+     <normaloff>:/images2/images2/ucpos.png</normaloff>:/images2/images2/ucpos.png</iconset>
    </property>
    <property name="text">
     <string>About(&amp;A)</string>
@@ -469,7 +469,7 @@
   <action name="actionEdit_Properties_P">
    <property name="icon">
     <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/editcopy.png</normaloff>:/images/images/editcopy.png</iconset>
+     <normaloff>:/images2/images2/details.png</normaloff>:/images2/images2/details.png</iconset>
    </property>
    <property name="text">
     <string>Edit Properties(&amp;P)</string>
@@ -493,7 +493,7 @@
   <action name="actionClear_Log_C">
    <property name="icon">
     <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/editcut.png</normaloff>:/images/images/editcut.png</iconset>
+     <normaloff>:/images2/images2/Trash Empty.png</normaloff>:/images2/images2/Trash Empty.png</iconset>
    </property>
    <property name="text">
     <string>Clear Log(&amp;C)</string>
@@ -667,7 +667,7 @@
   <action name="actionKnowledge_Base_K">
    <property name="icon">
     <iconset resource="../res/KAVIImages.qrc">
-     <normaloff>:/images/images/edit-find.png</normaloff>:/images/images/edit-find.png</iconset>
+     <normaloff>:/images2/images2/searchdatabase.png</normaloff>:/images2/images2/searchdatabase.png</iconset>
    </property>
    <property name="text">
     <string>Knowledge Base</string>
@@ -698,8 +698,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../res/KAVIImages.qrc"/>
   <include location="../res/KAVIIcons.qrc"/>
+  <include location="../res/KAVIImages.qrc"/>
  </resources>
  <connections/>
 </ui>
