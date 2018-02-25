@@ -15,7 +15,23 @@ bool KAVIClassKB::loadKB()
     this->classes.clear();
 
     QString filePath;
-    filePath.append(QDir::currentPath()).append(KBDIR);
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:       
+        filePath.append(upPath).append(KBDIR_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(KBDIR_RELEASE);
+        break;
+    default:
+        break;
+    }
+
     if (createFile(filePath, CLASSKBFILE) == false)
     {
         return false;
@@ -59,7 +75,23 @@ bool KAVIClassKB::saveKB()
     refreshCachetoBase();
 
     QString filePath;
-    filePath.append(QDir::currentPath()).append(KBDIR);
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:
+        filePath.append(upPath).append(KBDIR_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(KBDIR_RELEASE);
+        break;
+    default:
+        break;
+    }
+
     if (createFile(filePath, CLASSKBFILE) == false)
     {
         return false;

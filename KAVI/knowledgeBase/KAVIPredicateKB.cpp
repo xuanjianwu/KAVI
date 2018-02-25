@@ -15,7 +15,23 @@ bool KAVIPredicateKB::loadKB()
     this->predicates.clear();
 
     QString filePath;
-    filePath.append(QDir::currentPath()).append(KBDIR);
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:
+        filePath.append(upPath).append(KBDIR_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(KBDIR_RELEASE);
+        break;
+    default:
+        break;
+    }
+
     if (createFile(filePath, PREDICATEKBFILE) == false)
     {
         return false;
@@ -58,7 +74,23 @@ bool KAVIPredicateKB::saveKB()
     refreshCachetoBase();
 
     QString filePath;
-    filePath.append(QDir::currentPath()).append(KBDIR);
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:
+        filePath.append(upPath).append(KBDIR_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(KBDIR_RELEASE);
+        break;
+    default:
+        break;
+    }
+
     if (createFile(filePath, PREDICATEKBFILE) == false)
     {
         return false;

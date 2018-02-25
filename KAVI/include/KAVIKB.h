@@ -41,6 +41,9 @@ protected:
     QStringList classes;
     // the stable predicate knowledge base
     QStringList predicates;
+
+    // specified the running mode of KAVI: Debug or Release;
+    RunMode KAVIRunMode;
 };
 
 #endif // KAVIKB_H

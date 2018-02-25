@@ -222,7 +222,8 @@
 
 // DefinitionEdit ------------------------
 
-#define KBDIR "/KAVIKBFile/"
+#define KBDIR_RELEASE "/KAVIKBFile/"
+#define KBDIR_DEBUG "/KAVI/KAVIKBFile/"
 #define CLASSKBFILE "classKB.xml"
 #define PREDICATEKBFILE "predicateKB.xml"
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classes>
-    <class>desk</class>
-    <class>pen</class>
-    <class>man</class>
+    <class>boy</class>
+    <class>girl</class>
     <class>Box</class>
     <class>Robot</class>
+    <class>faker</class>
+    <class>lol</class>
 </classes>

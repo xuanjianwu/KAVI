@@ -116,4 +116,11 @@ typedef enum _PredicateState {
     NoState
 } PredicateState;
 
+// KAVI Global ---------------------------
+
+typedef enum _RunMode {
+    Debug,
+    Release
+} RunMode;
+
 #endif // KAVITYPEDEFS_H
