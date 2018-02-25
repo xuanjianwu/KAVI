@@ -4,10 +4,10 @@
 		<name>KAVI</name>
 		<version>1.0</version>
 	</toolInformation>
-    <settings>
-        <timeout enabled="true">1800</timeout>
-        <planValidation enabled="true"/>
-    </settings>
+		<settings>
+			<timeout enabled="true">1800</timeout>
+			<planValidation enabled="true"/>
+		</settings>
 	<planners>
 		<planner id="1">
 			<name>Metric-FF</name>
@@ -95,8 +95,8 @@
 						<description>switch on optimization expression (default is plan length)</description>
 					</argument>
 				</arguments>
-                <timeout enabled="false">600</timeout>
-                <runAllComparison enabled="true"/>
+								<timeout enabled="false">600</timeout>
+								<runAllComparison enabled="true"/>
 			</settings>
 		</planner>
 		<planner id="2">
@@ -278,8 +278,8 @@
 						To get options for particular solvers (e.g. walksat) try blackbox -help -solver walksat</description>
 					</argument>
 				</arguments>
-                <timeout enabled="false">600</timeout>
-                <runAllComparison enabled="true"/>
+								<timeout enabled="false">600</timeout>
+								<runAllComparison enabled="true"/>
 			</settings>
 		</planner>
 		<planner id="3">
@@ -371,8 +371,8 @@
 						<description>Specifies the maximum CPU-time (in seconds) after which termination of the planning process is forced. The default value is 1800 (30 minutes).</description>
 					</argument>
 				</arguments>
-                <timeout enabled="false">600</timeout>
-                <runAllComparison enabled="true"/>
+								<timeout enabled="false">600</timeout>
+								<runAllComparison enabled="true"/>
 			</settings>
 		</planner>
 	</planners>
