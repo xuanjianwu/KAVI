@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<predicates>
+    <predicate>on desk pen</predicate>
+    <predicate>hit man</predicate>
+    <predicate>on Box Box</predicate>
+    <predicate>empty Robot</predicate>
+    <predicate>holding Robot Box</predicate>
+    <predicate>clear Box</predicate>
+    <predicate>onground Box</predicate>
+</predicates>
