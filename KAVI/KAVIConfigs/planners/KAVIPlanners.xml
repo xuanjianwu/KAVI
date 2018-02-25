@@ -22,21 +22,21 @@
 			</platform>
 			<requirements>
 				<adl />
-                <mdp />
-                <typing />
-                <rewards />
-                <strips />
-                <fluents />
-                <equality />
-                <conditional-effects />
-                <disjunctive-preconditions />
-                <duration-inequalities />
-                <durative-actions />
-                <existential-preconditions />
-                <negative-preconditions />
-                <numeric-fluents />
-                <quantified-preconditions />
-                <universal-preconditions />
+                                <mdp />
+                                <typing />
+                                <rewards />
+                                <strips />
+                                <fluents />
+                                <equality />
+                                <conditional-effects />
+                                <disjunctive-preconditions />
+                                <duration-inequalities />
+                                <durative-actions />
+                                <existential-preconditions />
+                                <negative-preconditions />
+                                <numeric-fluents />
+                                <quantified-preconditions />
+                                <universal-preconditions />
 			</requirements>
 			<settings>
 				<filePath>KAVIPlanners/metric-ff.exe</filePath>
@@ -112,14 +112,14 @@
 			</platform>
 			<requirements>
 				<adl />
-				<mdp />
-				<typing />
-                <rewards />
-                <strips />
-                <equality />
-                <conditional-effects />
-                <disjunctive-preconditions />
-                <negative-preconditions />
+                                <mdp />
+                                <typing />
+                                <rewards />
+                                <strips />
+                                <equality />
+                                <conditional-effects />
+                                <disjunctive-preconditions />
+                                <negative-preconditions />
 			</requirements>
 			<settings>
 				<filePath>KAVIPlanners/blackbox.exe</filePath>
@@ -295,27 +295,27 @@
 			</platform>
 			<requirements>
 				<adl />
-                <mdp />
-                <typing />
-                <rewards />
-                <strips />
-                <fluents />
-                <equality />
-                <conditional-effects />
-                <constraints />
-                <continuous-effects />
-                <derived-predicates />
-                <disjunctive-preconditions />
-                <duration-inequalities />
-                <durative-actions />
-                <existential-preconditions />
-                <negative-preconditions />
-                <numeric-fluents />
-                <preferences />
-				<probabilistic-effects />
-                <quantified-preconditions />
-                <timed-initial-literals />
-                <universal-preconditions />
+                                <mdp />
+                                <typing />
+                                <rewards />
+                                <strips />
+                                <fluents />
+                                <equality />
+                                <conditional-effects />
+                                <constraints />
+                                <continuous-effects />
+                                <derived-predicates />
+                                <disjunctive-preconditions />
+                                <duration-inequalities />
+                                <durative-actions />
+                                <existential-preconditions />
+                                <negative-preconditions />
+                                <numeric-fluents />
+                                <preferences />
+                                <probabilistic-effects />
+                                <quantified-preconditions />
+                                <timed-initial-literals />
+                                <universal-preconditions />
 			</requirements>
 			<settings>
 				<filePath>KAVIPlanners/lpg-td-1.0.exe</filePath>
