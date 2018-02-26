@@ -2,7 +2,6 @@
 #include "ui_SolutionSettingsDialog.h"
 
 using namespace XMLUtils;
-using namespace CheckUtils;
 
 SolutionSettingsDialog::SolutionSettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -65,6 +64,28 @@ QString SolutionSettingsDialog::getXMLFilePath()
     }
 
     return filePath;
+}
+
+bool SolutionSettingsDialog::writeToXMLFile()
+{
+    QString filePath = getXMLFilePath();
+    QFile xmlFile(filePath.append(KAVIPLANNERS_FILE));
+
+    QString fileName = xmlFile.fileName();
+    if (QFile::exists(fileName))
+    {
+        QFile::remove(fileName);
+    }
+    QFile newXmlFile(fileName);
+
+    if ( !newXmlFile.open(QFile::WriteOnly | QFile::Text ))
+    {
+        qDebug()<< "@Error: cannot open file: " << newXmlFile.fileName();
+        return false;
+    }
+    QTextStream saveStream(&newXmlFile);
+    xmlData.save(saveStream, OUTPUT_INDENT);
+    qDebug() << "@KAVI planners xml file succesfully saved.";
 }
 
 void SolutionSettingsDialog::setAllSettings()
@@ -168,7 +189,7 @@ void SolutionSettingsDialog::savePlannerSettings()
         return;
     }
 
-    savePlannerParameters(selectdPlanner);
+    savePlannerParameters();
 
     QDomElement settingsElement = selectdPlanner.firstChildElement("settings");
     QDomElement timeoutElement = settingsElement.firstChildElement("timeout");
@@ -182,6 +203,8 @@ void SolutionSettingsDialog::savePlannerSettings()
         setStrAttribute(timeoutElement, "enabled", "false");
     }
     setStrValue(timeoutElement, ui->TimeoutValue_2->text());
+
+    selectdPlanner.clear();
 }
 
 void SolutionSettingsDialog::initPlannerParametersTable()
@@ -200,9 +223,9 @@ void SolutionSettingsDialog::initPlannerParametersTable()
     ui->ParameterTable->verticalHeader()->setHidden(true);
 }
 
-void SolutionSettingsDialog::fillPlannerParametersTable(QDomElement planner)
+void SolutionSettingsDialog::fillPlannerParametersTable()
 {
-    QDomElement settingsElement = planner.firstChildElement("settings");
+    QDomElement settingsElement = selectdPlanner.firstChildElement("settings");
     QDomElement arguments = settingsElement.firstChildElement("arguments");
     QDomElement argument = arguments.firstChild().toElement();
 
@@ -228,6 +251,7 @@ void SolutionSettingsDialog::fillPlannerParametersTable(QDomElement planner)
 
         ui->ParameterTable->setItem(argumentRowIndex, 3, new QTableWidgetItem(value, QTableWidgetItem::Type));
         ui->ParameterTable->setItem(argumentRowIndex, 4, new QTableWidgetItem(description, QTableWidgetItem::Type));
+        ui->ParameterTable->item(argumentRowIndex, 4)->setToolTip(description);
 
         ui->ParameterTable->item(argumentRowIndex, 0)->setFlags((Qt::ItemFlags) 0);
         ui->ParameterTable->item(argumentRowIndex, 1)->setFlags((Qt::ItemFlags) 0);
@@ -239,9 +263,9 @@ void SolutionSettingsDialog::fillPlannerParametersTable(QDomElement planner)
     }
 }
 
-void SolutionSettingsDialog::savePlannerParameters(QDomElement planner)
+void SolutionSettingsDialog::savePlannerParameters()
 {
-    QDomElement settingsElement = planner.firstChildElement("settings");
+    QDomElement settingsElement = selectdPlanner.firstChildElement("settings");
     QDomElement arguments = settingsElement.firstChildElement("arguments");
     QDomElement argument = arguments.firstChild().toElement();
 
@@ -252,6 +276,8 @@ void SolutionSettingsDialog::savePlannerParameters(QDomElement planner)
         QDomElement valueElement = argument.firstChildElement("value");
         setStrValue(enableElement, enableComboBox->currentText());
         setStrValue(valueElement, ui->ParameterTable->item(i, 3)->text());
+
+        argument = argument.nextSibling().toElement();
     }
 }
 
@@ -278,7 +304,7 @@ void SolutionSettingsDialog::on_PlannerSelected_currentIndexChanged(int index)
     {
         return;
     }
-    fillPlannerParametersTable(selectdPlanner);
+    fillPlannerParametersTable();
 
     ui->UseSpecificTimeout->setEnabled(true);
     ui->TimeoutValue_2->setEnabled(true);
@@ -320,10 +346,19 @@ void SolutionSettingsDialog::on_PlannerSelected_currentIndexChanged(int index)
     // set the specific timeout value
     QString timeoutValue = getStrValue(timeoutElement);
     ui->TimeoutValue_2->setText(timeoutValue);
+
+    selectdPlanner.clear();
 }
 
 
 void SolutionSettingsDialog::on_saveButton_clicked()
 {
     saveAllSettings();
+}
+
+void SolutionSettingsDialog::on_buttonBox_accepted()
+{
+    saveAllSettings();
+    writeToXMLFile();
+    this->accept();
 }

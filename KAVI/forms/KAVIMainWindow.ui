@@ -680,7 +680,10 @@
     <string>Knowledge Base</string>
    </property>
    <property name="toolTip">
-    <string>View and edit Knowledge Base</string>
+    <string>View and edit knowledge base</string>
+   </property>
+   <property name="statusTip">
+    <string>View and edit knowledge base</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+K</string>
@@ -695,6 +698,9 @@
     <string>Solution Settings</string>
    </property>
    <property name="toolTip">
+    <string>View and edit solution settings</string>
+   </property>
+   <property name="statusTip">
     <string>View and edit solution settings</string>
    </property>
   </action>
@@ -717,8 +723,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../res/KAVIIcons.qrc"/>
   <include location="../res/KAVIImages.qrc"/>
+  <include location="../res/KAVIIcons.qrc"/>
  </resources>
  <connections/>
 </ui>
