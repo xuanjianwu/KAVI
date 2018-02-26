@@ -12,6 +12,7 @@
 #include "InfoPanel.h"
 #include "KnowledgeBaseEdit.h"
 #include "SolutionSettingsDialog.h"
+#include "PlanningDialog.h"
 
 #include "DomainDescDialog.h"
 
@@ -1432,5 +1433,11 @@ void KAVIMainWindow::centerContents(QGraphicsView *view)
 void KAVIMainWindow::on_actionSolution_Settings_triggered()
 {
     SolutionSettingsDialog* dialog = new SolutionSettingsDialog(this);
+    dialog->exec();
+}
+
+void KAVIMainWindow::on_actionPlanning_triggered()
+{
+    PlanningDialog* dialog = new PlanningDialog(this);
     dialog->exec();
 }

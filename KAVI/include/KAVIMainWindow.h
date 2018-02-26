@@ -180,6 +180,8 @@ public slots:
 private slots:
     void on_actionSolution_Settings_triggered();
 
+    void on_actionPlanning_triggered();
+
 private:
     // specified the domain changed or not
     bool domainChanged;
