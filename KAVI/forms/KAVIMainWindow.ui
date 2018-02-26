@@ -205,9 +205,16 @@
     <addaction name="actionKnowledge_Base_K"/>
     <addaction name="actionSolution_Settings"/>
    </widget>
+   <widget class="QMenu" name="menuBuild_B">
+    <property name="title">
+     <string>Build(&amp;B)</string>
+    </property>
+    <addaction name="actionBuild_Planning"/>
+   </widget>
    <addaction name="menuFile_F"/>
    <addaction name="menuOptions_O"/>
    <addaction name="menuView_V"/>
+   <addaction name="menuBuild_B"/>
    <addaction name="menuDeveloper_D"/>
    <addaction name="menuHelp_H"/>
   </widget>
@@ -356,6 +363,8 @@
    <addaction name="separator"/>
    <addaction name="actionDomain_Summary_S"/>
    <addaction name="actionClear_Log_C"/>
+   <addaction name="separator"/>
+   <addaction name="actionBuild_Planning"/>
    <addaction name="separator"/>
    <addaction name="actionAddEllipseNode"/>
    <addaction name="actionAddRectNode"/>
@@ -704,6 +713,21 @@
     <string>View and edit solution settings</string>
    </property>
   </action>
+  <action name="actionBuild_Planning">
+   <property name="icon">
+    <iconset resource="../res/KAVIImages.qrc">
+     <normaloff>:/images2/images2/play.png</normaloff>:/images2/images2/play.png</iconset>
+   </property>
+   <property name="text">
+    <string>Build Planning</string>
+   </property>
+   <property name="toolTip">
+    <string>Build and run planning</string>
+   </property>
+   <property name="statusTip">
+    <string>Build and run planning</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -723,8 +747,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../res/KAVIImages.qrc"/>
   <include location="../res/KAVIIcons.qrc"/>
+  <include location="../res/KAVIImages.qrc"/>
  </resources>
  <connections/>
 </ui>
