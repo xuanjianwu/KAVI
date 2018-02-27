@@ -37,8 +37,9 @@ bool SolutionSettingsDialog::getXMLDocument()
     if (!xmlData.setContent(&xmlFile, false, &error, &row, &column))
     {
         QMessageBox::information(NULL, QString("Error"), QString("Parsing xml file failed at line row and column ") + QString::number(row, 10) + QString(",") + QString::number(column, 10));
-        //return false;
+        return false;
     }
+    xmlFile.close();
 
     return true;
 }
@@ -85,6 +86,8 @@ bool SolutionSettingsDialog::writeToXMLFile()
     }
     QTextStream saveStream(&newXmlFile);
     xmlData.save(saveStream, OUTPUT_INDENT);
+    newXmlFile.close();
+
     qDebug() << "@KAVI planners xml file succesfully saved.";
 }
 

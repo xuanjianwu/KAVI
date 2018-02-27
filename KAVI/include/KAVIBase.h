@@ -64,6 +64,9 @@
 #include <QTableWidgetItem>
 #include <QToolButton>
 #include <QSysInfo>
+#include <QThread>
+#include <QProcess>
+#include <QTime>
 
 
 #endif // KAVIBASE_H

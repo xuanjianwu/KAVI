@@ -111,7 +111,7 @@ private:
     QList<QDomElement> suggestedPlanners;
     // the discarded planner
     QList<QDomElement> discardedPlanners;
-}
+};
 
 
 #endif // PLANNERSUGGESTION_H

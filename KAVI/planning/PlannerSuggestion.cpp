@@ -39,12 +39,13 @@ void PlannerSuggestion::initialPlannerSelection(QFile &domainPDDL, QDomElement p
     discardedPlanners.clear();
 
     QDomNodeList planners = plannersElement.firstChildElement("planners").childNodes();
-    foreach (QDomNode plannerNode, planners) {
-        QDomElement plannerElement = plannerNode.toElement();
+    for (int i = 0; i < planners.size(); i++) {
+        QDomElement plannerElement = planners.at(i).toElement();
         QDomNodeList plannerRequirements = plannerElement.firstChildElement("requirements").childNodes();
         QList<QDomElement> plannerRequirementsElements;
-        foreach (QDomNode plannerRequirement, plannerRequirements) {
-            plannerRequirementsElements.append(plannerRequirement.toElement());
+
+        for (int j = 0; j < plannerRequirements.size(); j++) {
+            plannerRequirementsElements.append(plannerRequirements.at(j).toElement());
         }
         if (containsRequirements(plannerRequirementsElements, domainPDDL) && checkOperatingSystemCompatibility(plannerElement))
         {
@@ -103,7 +104,7 @@ QList<QString> PlannerSuggestion::getPDDLRequirements(QFile &PDDL)
     QStringList itemsList = requirementsLine.split(" ");
     for (int i = 1; i < itemsList.size(); i++)
     {
-        QString item = dynamic_cast<QString>(itemsList.at(i));
+        QString item = itemsList.at(i);
         res.append(item.remove(0, 1));
     }
     return res;

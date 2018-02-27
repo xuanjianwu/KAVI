@@ -241,4 +241,11 @@
 
 #define PLANNER_PARAMETERS_TABLE_COLUMN_COUNT 5
 
+// ExecPlanner ---------------------------
+
+#define KAVIPLANNERS_FOLDER "KAVIPlanners/"
+#define PLANNERS_DIR_RELEASE "/"
+#define PLANNERS_DIR_DEBUG "/KAVI/"
+#define DEFAULTPLAN_FILE "DefaultPlan.xml"
+
 #endif // KAVIMACROS_H

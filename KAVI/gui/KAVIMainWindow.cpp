@@ -131,6 +131,8 @@ void KAVIMainWindow::on_actionOpen_O_triggered()
 
     ui.tabWidget->setCurrentIndex(TAB_INDEX_DEFINITION);
     centerContents(ui.definitionEdit);
+
+    domainFile.close();
 }
 
 void KAVIMainWindow::on_actionSave_As_A_triggered()
