@@ -69,7 +69,8 @@ SOURCES += \
     gui/KnowledgeBaseClassEditDialog.cpp \
     gui/KnowledgeBasePredicateEditDialog.cpp \
     gui/SolutionSettingsDialog.cpp \
-    gui/PlanningDialog.cpp
+    gui/PlanningDialog.cpp \
+    planning/PlannerSuggestion.cpp
 
 HEADERS += \
     include/KAVIBase.h \
@@ -118,7 +119,8 @@ HEADERS += \
     include/KnowledgeBaseClassEditDialog.h \
     include/KnowledgeBasePredicateEditDialog.h \
     include/SolutionSettingsDialog.h \
-    include/PlanningDialog.h
+    include/PlanningDialog.h \
+    include/PlannerSuggestion.h
 
 FORMS += \
     forms/KAVIMainWindow.ui \

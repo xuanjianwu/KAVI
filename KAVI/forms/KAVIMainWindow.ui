@@ -727,6 +727,9 @@
    <property name="statusTip">
     <string>Edit and run planning</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+F5</string>
+   </property>
   </action>
  </widget>
  <customwidgets>
