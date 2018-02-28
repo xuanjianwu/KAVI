@@ -218,7 +218,7 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
     commandArguments.append(plannerFilePath);
 
     QFile plannerFile(plannerFilePath);
-    plannerRunFile = plannerFile;
+    //plannerRunFile = plannerFile;
     bool plannerFileExists = true;
     if (!plannerFile.exists())
     {
@@ -339,7 +339,7 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
                 if ( !theOutputFile.open(QFile::ReadOnly | QFile::Text ))
                 {
                     qDebug()<< "@Error: cannot open file: " << theOutputFile.fileName();
-                    return false;
+                    return QStringList();
                 }
 
                 // get output

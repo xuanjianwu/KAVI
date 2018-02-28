@@ -133,3 +133,11 @@
 /build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/debug/moc_SolutionSettingsDialog.o
 /build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/debug/SolutionSettingsDialog.o
 /build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/ui_SolutionSettingsDialog.h
+/build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/debug/ExecPlanner.o
+/build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/debug/moc_ExecPlanner.cpp
+/build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/debug/moc_ExecPlanner.o
+/build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/debug/moc_PlanningDialog.cpp
+/build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/debug/moc_PlanningDialog.o
+/build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/debug/PlannerSuggestion.o
+/build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/debug/PlanningDialog.o
+/build-KAVI-Desktop_Qt_5_10_1_MinGW_32bit-Debug/ui_PlanningDialog.h

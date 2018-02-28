@@ -101,7 +101,7 @@ private:
     QDomDocument planDocument;
     QDomElement thePlan;
 
-    QFile plannerRunFile;
+    //QFile plannerRunFile;
 
     // the running mode of KAVI: Debug or Release
     RunMode KAVIRunMode;
