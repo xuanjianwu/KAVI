@@ -71,7 +71,8 @@ SOURCES += \
     gui/SolutionSettingsDialog.cpp \
     gui/PlanningDialog.cpp \
     planning/PlannerSuggestion.cpp \
-    planning/ExecPlanner.cpp
+    planning/ExecPlanner.cpp \
+    planning/PlanAnalyzer.cpp
 
 HEADERS += \
     include/KAVIBase.h \
@@ -122,7 +123,8 @@ HEADERS += \
     include/SolutionSettingsDialog.h \
     include/PlanningDialog.h \
     include/PlannerSuggestion.h \
-    include/ExecPlanner.h
+    include/ExecPlanner.h \
+    include/PlanAnalyzer.h
 
 FORMS += \
     forms/KAVIMainWindow.ui \

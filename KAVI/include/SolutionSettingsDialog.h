@@ -35,6 +35,8 @@ public:
     */
     ~SolutionSettingsDialog();
 
+    QDomElement getRootElement();
+
 private slots:
     /*
     * handle the current index changed of the planner combobox and set the associated settings

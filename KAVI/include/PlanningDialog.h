@@ -10,6 +10,8 @@
 #include "KAVIBase.h"
 #include "PlannerSuggestion.h"
 #include "ExecPlanner.h"
+#include "PlanAnalyzer.h"
+#include "SolutionSettingsDialog.h"
 
 namespace Ui {
 class PlanningDialog;
@@ -24,6 +26,10 @@ public:
     ~PlanningDialog();
 
     void solveProblemWithSinglePlanner(QString domain, QString problem, QDomElement chosenPlanner);
+
+    static QDomElement getKAVIPlanners();
+
+    void loadKAVIPlanners();
 
 private slots:
     void on_customProblem_clicked(bool checked);
@@ -54,6 +60,10 @@ private:
 
     bool forceFinish = false;
     bool stopRunningPlanners = false;
+
+    static QDomElement KAVIPlanners;
+
+    SolutionSettingsDialog* solutionSettingsDialog;
 };
 
 #endif // PLANNINGDIALOG_H

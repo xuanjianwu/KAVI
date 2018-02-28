@@ -21,6 +21,11 @@ SolutionSettingsDialog::~SolutionSettingsDialog()
     delete ui;
 }
 
+QDomElement SolutionSettingsDialog::getRootElement()
+{
+    return rootElement;
+}
+
 bool SolutionSettingsDialog::getXMLDocument()
 {
     QString filePath = getXMLFilePath();

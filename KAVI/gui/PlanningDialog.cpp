@@ -6,6 +6,7 @@ PlanningDialog::PlanningDialog(QWidget *parent) :
     ui(new Ui::PlanningDialog)
 {
     ui->setupUi(this);
+    solutionSettingsDialog = new SolutionSettingsDialog(this);
 }
 
 PlanningDialog::~PlanningDialog()
@@ -18,6 +19,16 @@ void PlanningDialog::solveProblemWithSinglePlanner(QString domain, QString probl
     exe = new ExecPlanner(chosenPlanner, domain, problem, false, this);
     connect(exe, SIGNAL(finished()), this, SLOT(showPlannerOutput()));
     exe->start();
+}
+
+QDomElement PlanningDialog::getKAVIPlanners()
+{
+    return KAVIPlanners;
+}
+
+void PlanningDialog::loadKAVIPlanners()
+{
+    KAVIPlanners = solutionSettingsDialog->getRootElement();
 }
 
 void PlanningDialog::on_customProblem_clicked(bool checked)
