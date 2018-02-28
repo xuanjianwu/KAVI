@@ -25,7 +25,7 @@
      <height>281</height>
     </rect>
    </property>
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="problemSelection">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -43,7 +43,7 @@
     <property name="checkable">
      <bool>false</bool>
     </property>
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="customProblem">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -62,7 +62,7 @@
       <string>Custom problem</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="labelPDDLDomainFile">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -75,7 +75,7 @@
       <string>PDDL Domain File:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="labelPDDLProblemFile">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -88,7 +88,7 @@
       <string>PDDL Problem File:</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="pddlDomainFile">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -101,7 +101,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="pddlProblemFile">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -114,7 +114,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="domainBrowse">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -130,7 +130,7 @@
       <string>Browse</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="problemBrowse">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -147,7 +147,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="plannerSelection">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -163,7 +163,7 @@
      <string>Select one planner</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="plannersSettings">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -189,7 +189,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="execPlanner">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -218,6 +218,29 @@
      <bool>false</bool>
     </property>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="clearOutput">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>550</y>
+     <width>75</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="plannerOutput">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>331</width>
+     <height>271</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <resources>

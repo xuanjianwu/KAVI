@@ -14,8 +14,8 @@ class ExecPlanner: public QThread {
     Q_OBJECT
 
 public:
-    ExecPlanner();
-    ExecPlanner(QDomElement chosenPlanner, QString domainFile, QString problemFile, bool replaning);
+    ExecPlanner(QObject *parent = 0);
+    ExecPlanner(QDomElement chosenPlanner, QString domainFile, QString problemFile, bool replaning, QObject *parent = 0);
 
     QString getContentsAsString(QFile& file);
     QStringList getContentsAsStringList(QFile& file);
@@ -25,12 +25,6 @@ public:
     void getPlanAndStatistics(QStringList output, QStringList plan, QStringList statistics);
 
     QStringList getPlan(QStringList output);
-
-    void processError(QProcess::ProcessError error);
-    void startProcess();
-    void finishProcess(int exitCode, QProcess::ExitStatus exitStatus);
-    void startReadOutput();
-    void startReadError();
 
     QStringList getPlannerOutput(QDomElement chosenPlanner, QString domain, QString problem, QStringList consoleOutput);
 
@@ -64,8 +58,6 @@ public:
 
     void setPlan(QDomElement thePlan);
 
-    void run();
-
     void destroyProcess();
 
     QString getOperatingSystem();
@@ -79,6 +71,18 @@ public:
     QString getPlannersPath();
 
     QString removeTroublesomeCharacters(QString inString);
+
+    QStringList getTestConsoleOutput();
+
+public slots:
+    void processError(QProcess::ProcessError error);
+    void startProcess();
+    void finishProcess(int exitCode, QProcess::ExitStatus exitStatus);
+    void startReadOutput();
+    void startReadError();
+
+protected:
+    void run();
 private:
     // planner execution time in milliseconds. Time used to solve the problem or give an answer.
     double time = 0;
@@ -97,6 +101,7 @@ private:
     QDomElement xmlDomain;
     QDomElement xmlProblem;
 
+    QStringList testConsoleOutput;
 
     bool rePlaning;
     bool showReport;

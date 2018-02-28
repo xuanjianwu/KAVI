@@ -7,7 +7,9 @@
 #ifndef PLANNINGDIALOG_H
 #define PLANNINGDIALOG_H
 
-#include <QDialog>
+#include "KAVIBase.h"
+#include "PlannerSuggestion.h"
+#include "ExecPlanner.h"
 
 namespace Ui {
 class PlanningDialog;
@@ -21,8 +23,37 @@ public:
     explicit PlanningDialog(QWidget *parent = 0);
     ~PlanningDialog();
 
+    void solveProblemWithSinglePlanner(QString domain, QString problem, QDomElement chosenPlanner);
+
+private slots:
+    void on_customProblem_clicked(bool checked);
+
+    void on_clearOutput_clicked();
+
+    void on_domainBrowse_clicked();
+
+    void on_problemBrowse_clicked();
+
+    void showPlannerOutput();
+
 private:
     Ui::PlanningDialog *ui;
+
+    ExecPlanner* exe;
+    QThread* plannerThread;
+
+    QString domainFile;
+    QString problemFile;
+
+    QDomElement plans;
+    QDomElement solveResult;
+    QDomElement theSingleChosenPlanner;
+
+    QList<QDomElement> plannersList;
+    PlannerSuggestion* plannerSuggestion;
+
+    bool forceFinish = false;
+    bool stopRunningPlanners = false;
 };
 
 #endif // PLANNINGDIALOG_H

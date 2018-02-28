@@ -2,13 +2,15 @@
 
 using namespace XMLUtils;
 
-ExecPlanner::ExecPlanner()
+ExecPlanner::ExecPlanner(QObject *parent)
+    : QThread(parent)
 {
     KAVIRunMode = Debug;
     getXMLDocument();
 }
 
-ExecPlanner::ExecPlanner(QDomElement chosenPlanner, QString domainFile, QString problemFile, bool replaning)
+ExecPlanner::ExecPlanner(QDomElement chosenPlanner, QString domainFile, QString problemFile, bool replaning, QObject *parent)
+    :QThread(parent)
 {
     this->chosenPlanner = chosenPlanner;
     this->domainFile = domainFile;
@@ -186,6 +188,11 @@ void ExecPlanner::processError(QProcess::ProcessError error)
     }
 }
 
+void ExecPlanner::startProcess()
+{
+
+}
+
 void ExecPlanner::finishProcess(int exitCode, QProcess::ExitStatus exitStatus)
 {
     if (exitStatus == QProcess::NormalExit)
@@ -201,6 +208,11 @@ void ExecPlanner::finishProcess(int exitCode, QProcess::ExitStatus exitStatus)
 void ExecPlanner::startReadOutput()
 {
     readyReadOutput = true;
+}
+
+void ExecPlanner::startReadError()
+{
+
 }
 
 QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString domain, QString problem, QStringList consoleOutput)
@@ -318,6 +330,8 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
         if (!gotError && normalExit && readyReadOutput)
         {
             consoleOutput = QString::fromLocal8Bit(process->readAllStandardOutput()).split("\n");
+
+            testConsoleOutput = consoleOutput;
 
             // ItSIMPLE.getInstance().appendOutputPanelText("\n>> Planner's output read. \n");
 
@@ -492,7 +506,7 @@ void ExecPlanner::parsePlanToXML(QDomElement planNode, QStringList plan)
 
             // the other items are the parameters
             QDomElement parameters = thePlan.ownerDocument().createElement("parameters");
-            for (int i = 1; i < actionItems; i++)
+            for (int i = 1; i < actionItems.size(); i++)
             {
                 QDomElement parameter = thePlan.ownerDocument().createElement("parameter");
                 setStrAttribute(parameter, "id", QString(actionItems[i]).toUpper());
@@ -544,7 +558,8 @@ void ExecPlanner::parseStatisticsToXML(QDomElement statisticNode, QStringList st
     </statistics>*/
 
     //1. set the tool time, i. e., the total time seen by KAVI
-    setStrValue(statisticNode.firstChildElement("toolTime"), QString::number(this->time/1000));
+    QDomElement toolTime = statisticNode.firstChildElement("toolTime");
+    setStrValue(toolTime, QString::number(this->time/1000));
 
     foreach (QString line, statistic) {
         QString keyword;
@@ -566,32 +581,39 @@ void ExecPlanner::parseStatisticsToXML(QDomElement statisticNode, QStringList st
 
         if (keyword.contains("Time"))
         {
-            setStrValue(statisticNode.firstChildElement("time"), value);
+            QDomElement time = statisticNode.firstChildElement("time");
+            setStrValue(time, value);
         }
         else if (keyword.contains("ParsingTime"))
         {
-            setStrValue(statisticNode.firstChildElement("parsingTime"), value);
+            QDomElement parsingTime = statisticNode.firstChildElement("parsingTime");
+            setStrValue(parsingTime, value);
         }
         else if (keyword.contains("NrActions"))
         {
-            setStrValue(statisticNode.firstChildElement("nrActions"), value);
+            QDomElement nrActions = statisticNode.firstChildElement("nrActions");
+            setStrValue(nrActions, value);
         }
         else if (keyword.contains("MakeSpan"))
         {
-            setStrValue(statisticNode.firstChildElement("makeSpan"), value);
+            QDomElement makeSpan = statisticNode.firstChildElement("makeSpan");
+            setStrValue(makeSpan, value);
         }
         else if (keyword.contains("MetricValue"))
         {
-            setStrValue(statisticNode.firstChildElement("metricValue"), value);
+            QDomElement metricValue = statisticNode.firstChildElement("metricValue");
+            setStrValue(metricValue, value);
         }
         else if (keyword.contains("PlanningTechnique"))
         {
-            setStrValue(statisticNode.firstChildElement("planningTechnique"), value);
+            QDomElement planningTechnique = statisticNode.firstChildElement("planningTechnique");
+            setStrValue(planningTechnique, value);
         }
         else
         {
-            QString text = getStrValue(statisticNode.firstChildElement("additional"));
-            setStrValue(statisticNode.firstChildElement("additional"), text.append(keyword).append(" ").append(value).append("\n"));
+            QDomElement additional = statisticNode.firstChildElement("additional");
+            QString text = getStrValue(additional);
+            setStrValue(additional, text.append(keyword).append(" ").append(value).append("\n"));
         }
 
     }
@@ -641,7 +663,8 @@ QDomElement ExecPlanner::solvePlanningProblem(QDomElement chosenPlanner, QString
             //3. set datetime
             QDateTime current_date_time =QDateTime::currentDateTime();
             QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
-            setStrValue(thePlan.firstChildElement("datetime"), current_date);
+            QDomElement datetime = thePlan.firstChildElement("datetime");
+            setStrValue(datetime, current_date);
 
             //4. set the planner results
             QDomElement planner = thePlan.firstChildElement("planner");
@@ -656,7 +679,8 @@ QDomElement ExecPlanner::solvePlanningProblem(QDomElement chosenPlanner, QString
 
             //4.3.2 set the value/output
             planner.appendChild(planner.ownerDocument().createElement("consoleOutput"));
-            setStrValue(planner.firstChildElement("consoleOutput"), consoleOutputStr);
+            QDomElement consoleOutputElement = planner.firstChildElement("consoleOutput");
+            setStrValue(consoleOutputElement, consoleOutputStr);
 
             //5. set statistics
             QDomElement statisticNode = thePlan.firstChildElement("statistics");
@@ -676,7 +700,9 @@ QDomElement ExecPlanner::solvePlanningProblem(QDomElement chosenPlanner, QString
             }
 
             //7. set tool information message
-            setStrValue(thePlan.firstChildElement("toolInformation").firstChildElement("message"), toolMessage);
+            QDomElement toolInformation = thePlan.firstChildElement("toolInformation");
+            QDomElement message = toolInformation.firstChildElement("message");
+            setStrValue(message, toolMessage);
 
             //Plan Validation
             //check if automatic plan validation is enabled (if so call validation with VAL
@@ -874,4 +900,9 @@ QString ExecPlanner::removeTroublesomeCharacters(QString inString)
         }
     }
     return newString;
+}
+
+QStringList ExecPlanner::getTestConsoleOutput()
+{
+    return testConsoleOutput;
 }
