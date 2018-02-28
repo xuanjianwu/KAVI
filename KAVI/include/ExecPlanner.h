@@ -77,6 +77,8 @@ public:
     bool writeToXMLFile();
 
     QString getPlannersPath();
+
+    QString removeTroublesomeCharacters(QString inString);
 private:
     // planner execution time in milliseconds. Time used to solve the problem or give an answer.
     double time = 0;

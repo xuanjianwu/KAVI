@@ -67,6 +67,7 @@
 #include <QThread>
 #include <QProcess>
 #include <QTime>
+#include <QDateTime>
 
 
 #endif // KAVIBASE_H

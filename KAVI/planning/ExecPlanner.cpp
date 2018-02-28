@@ -460,22 +460,236 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
 
 void ExecPlanner::parsePlanToXML(QDomElement planNode, QStringList plan)
 {
+    /*<action id="UNSTACK">
+        <parameters>
+            <parameter id="H1"/>
+            <parameter id="A"/>
+            <parameter id="B"/>
+            <parameter id="TABLE1"/>
+        </parameters>
+        <startTime/>
+        <duration/>
+        <notes/>
+    </action>*/
 
+    if (thePlan.isNull())
+    {
+        setEmptyPlan();
+    }
+    if (!thePlan.isNull())
+    {
+        foreach (QString line, plan) {
+            QDomElement action = thePlan.ownerDocument().createElement("action");
+
+            QString actionInstance = line;
+            actionInstance.remove(0, actionInstance.indexOf("(")+1);
+            actionInstance.remove(actionInstance.indexOf(")"), actionInstance.size()-actionInstance.indexOf(")"));
+            QStringList actionItems = actionInstance.split(" ");
+
+            // the first item is the action name
+            QString actionName = QString(actionItems[0]);
+            setStrAttribute(action, "id", actionName.toUpper());
+
+            // the other items are the parameters
+            QDomElement parameters = thePlan.ownerDocument().createElement("parameters");
+            for (int i = 1; i < actionItems; i++)
+            {
+                QDomElement parameter = thePlan.ownerDocument().createElement("parameter");
+                setStrAttribute(parameter, "id", QString(actionItems[i]).toUpper());
+                parameters.appendChild(parameter);
+                parameter.clear();
+            }
+            action.appendChild(parameters);
+
+            // set the startTime name
+            QString startTimeStr = line;
+            startTimeStr.remove(startTimeStr.indexOf(":"), startTimeStr.size()-startTimeStr.indexOf(":"));
+            QDomElement startTime = thePlan.ownerDocument().createElement("startTime");
+            setStrValue(startTime, startTimeStr);
+            action.appendChild(startTime);
+
+            // set the action duration
+            QString durationStr = "1";
+            if (line.indexOf("[") > -1)
+            {
+                durationStr = line;
+                durationStr.remove(0, durationStr.indexOf("[")+1);
+                durationStr.remove(durationStr.indexOf("]"), durationStr.size()-durationStr.indexOf("]"));
+            }
+            QDomElement duration = thePlan.ownerDocument().createElement("duration");
+            setStrValue(duration, durationStr);
+            action.appendChild(duration);
+
+            // add the notes node
+            QDomElement notes = thePlan.ownerDocument().createElement("notes");
+            action.appendChild(notes);
+
+            // add the action to the plan node
+            planNode.appendChild(action);
+        }
+    }
 }
 
 void ExecPlanner::parseStatisticsToXML(QDomElement statisticNode, QStringList statistic)
 {
+    /*	<statistics>
+    <toolTime/>
+    <time/>
+    <parsingTime/>
+    <nrActions/>
+    <makeSpan/>
+    <metricValue/>
+    <planningTechnique/>
+    <additional/>
+    </statistics>*/
 
+    //1. set the tool time, i. e., the total time seen by KAVI
+    setStrValue(statisticNode.firstChildElement("toolTime"), QString::number(this->time/1000));
+
+    foreach (QString line, statistic) {
+        QString keyword;
+        QString value;
+
+        if (line.indexOf(" ") > -1)
+        {
+            // there is a value
+            keyword = line;
+            value = line;
+            keyword = keyword.remove(keyword.indexOf(" "), keyword.size()-keyword.indexOf(" ")).trimmed();
+            value = value.remove(0, value.indexOf(" ")+1).trimmed();
+        }
+        else
+        {
+            keyword = line;
+            value = "";
+        }
+
+        if (keyword.contains("Time"))
+        {
+            setStrValue(statisticNode.firstChildElement("time"), value);
+        }
+        else if (keyword.contains("ParsingTime"))
+        {
+            setStrValue(statisticNode.firstChildElement("parsingTime"), value);
+        }
+        else if (keyword.contains("NrActions"))
+        {
+            setStrValue(statisticNode.firstChildElement("nrActions"), value);
+        }
+        else if (keyword.contains("MakeSpan"))
+        {
+            setStrValue(statisticNode.firstChildElement("makeSpan"), value);
+        }
+        else if (keyword.contains("MetricValue"))
+        {
+            setStrValue(statisticNode.firstChildElement("metricValue"), value);
+        }
+        else if (keyword.contains("PlanningTechnique"))
+        {
+            setStrValue(statisticNode.firstChildElement("planningTechnique"), value);
+        }
+        else
+        {
+            QString text = getStrValue(statisticNode.firstChildElement("additional"));
+            setStrValue(statisticNode.firstChildElement("additional"), text.append(keyword).append(" ").append(value).append("\n"));
+        }
+
+    }
 }
 
 QDomElement ExecPlanner::solvePlanningProblem(QDomElement chosenPlanner, QString domainFile, QString problemFile)
 {
+    toolMessage = "";
 
+    //check if the planner file exists
+    QDomElement settings = chosenPlanner.firstChildElement("settings");
+
+    QString plannerFilePath;
+    plannerFilePath.append(getPlannersPath()).append(getStrValue(settings.firstChildElement("filePath")));
+
+    QFile plannerFile(plannerFilePath);
+    //plannerRunFile = plannerFile;
+    bool plannerFileExists = true;
+    if (!plannerFile.exists())
+    {
+        plannerFileExists = false;
+        toolMessage += ">> Could not find selected planner '"+ getStrValue(settings.firstChildElement("filePath")) +"'. \n" +
+                ">> Please download and copy it in the folder /KAVIPlanners \n";
+        // should append toolMessage to planning dialog
+    }
+
+    if (plannerFileExists)
+    {
+        if (thePlan.isNull())
+        {
+            setEmptyPlan();
+        }
+
+        if (!thePlan.isNull())
+        {
+            //1. get chosen planner output
+            QStringList output;
+            QStringList consoleOutput;
+
+            output = getPlannerOutput(chosenPlanner, domainFile, problemFile, consoleOutput);
+
+            //2. separates the plan and the statistics
+            QStringList plan;
+            QStringList statistic;
+            getPlanAndStatistics(output, plan, statistic);
+
+            //3. set datetime
+            QDateTime current_date_time =QDateTime::currentDateTime();
+            QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz ddd");
+            setStrValue(thePlan.firstChildElement("datetime"), current_date);
+
+            //4. set the planner results
+            QDomElement planner = thePlan.firstChildElement("planner");
+
+            //4.3 set the planner console output
+            //4.3.1 build up the text from the string list
+            QString consoleOutputStr;
+            foreach (QString line, consoleOutput) {
+                line = removeTroublesomeCharacters(line);
+                consoleOutputStr.append(line).append("\n");
+            }
+
+            //4.3.2 set the value/output
+            planner.appendChild(planner.ownerDocument().createElement("consoleOutput"));
+            setStrValue(planner.firstChildElement("consoleOutput"), consoleOutputStr);
+
+            //5. set statistics
+            QDomElement statisticNode = thePlan.firstChildElement("statistics");
+            parseStatisticsToXML(statisticNode, statistic);
+
+            //6. set the plan
+            QDomElement planNode = thePlan.firstChildElement("plan");
+            parsePlanToXML(planNode, plan);
+
+            if (!planNode.firstChildElement("action").isNull())
+            {
+                toolMessage.append("Planner generated a solution.");
+            }
+            else
+            {
+                toolMessage.append("Planner did not generate any solution!");
+            }
+
+            //7. set tool information message
+            setStrValue(thePlan.firstChildElement("toolInformation").firstChildElement("message"), toolMessage);
+
+            //Plan Validation
+            //check if automatic plan validation is enabled (if so call validation with VAL
+
+
+        }
+    }
+    return thePlan;
 }
 
 QDomElement ExecPlanner::solveProblem()
 {
-    solvePlanningProblem(chosenPlanner, domainFile, problemFile);
+    thePlan = solvePlanningProblem(chosenPlanner, domainFile, problemFile);
     return thePlan;
 }
 
@@ -496,52 +710,58 @@ void ExecPlanner::setXMLProblem(QDomElement problem)
 
 void ExecPlanner::setDomainName(QString name)
 {
-
+    domainName = name;
 }
 
 void ExecPlanner::setProblemName(QString name)
 {
-
+    problemName = name;
 }
 
 QString ExecPlanner::getProblemName()
 {
-
+    return problemName;
 }
 
 void ExecPlanner::setChosenPlanner(QDomElement chosenPlanner)
 {
-
+    this->chosenPlanner = chosenPlanner;
 }
 
 QDomElement ExecPlanner::getChosenPlanner()
 {
-
+    return chosenPlanner;
 }
 
 void ExecPlanner::setShowReport(bool showReport)
 {
-
+    this->showReport = showReport;
 }
 
 QDomElement ExecPlanner::getPlan()
 {
-
+    return thePlan;
 }
 
 void ExecPlanner::setPlan(QDomElement thePlan)
 {
-
+    this->thePlan = thePlan;
 }
 
 void ExecPlanner::run()
 {
-
+    if (!chosenPlanner.isNull() && !domainFile.isNull() && !problemFile.isNull())
+    {
+        QDomElement xmlPlan= solvePlanningProblem(chosenPlanner, domainFile, problemFile);
+    }
 }
 
 void ExecPlanner::destroyProcess()
 {
-
+    if (process != NULL)
+    {
+        process->destroyed();
+    }
 }
 
 QString ExecPlanner::getOperatingSystem()
@@ -636,4 +856,22 @@ QString ExecPlanner::getPlannersPath()
     }
 
     return filePath;
+}
+
+QString ExecPlanner::removeTroublesomeCharacters(QString inString)
+{
+    if (inString.isNull())
+        return QString();
+
+    QString newString;
+
+    for (int i = 0; i < inString.size(); i++)
+    {
+        QChar ch = inString.at(i);
+        if ((ch < 0x00FD && ch > 0x001F) || ch == '\t' || ch == '\n' || ch == '\r')
+        {
+            newString.append(ch);
+        }
+    }
+    return newString;
 }
