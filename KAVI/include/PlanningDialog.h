@@ -12,6 +12,7 @@
 #include "ExecPlanner.h"
 #include "PlanAnalyzer.h"
 #include "SolutionSettingsDialog.h"
+#include "XMLUtils.h"
 
 namespace Ui {
 class PlanningDialog;
@@ -27,9 +28,18 @@ public:
 
     void solveProblemWithSinglePlanner(QString domain, QString problem, QDomElement chosenPlanner);
 
-    static QDomElement getKAVIPlanners();
+    QDomElement getKAVIPlanners();
 
     void loadKAVIPlanners();
+
+    void initEnvironment();
+
+    void initProblemSelection();
+
+    void initPlannerSelection(QList<QDomElement> plannersList);
+
+signals:
+    void exportDefaultPDDL();
 
 private slots:
     void on_customProblem_clicked(bool checked);
@@ -42,7 +52,28 @@ private slots:
 
     void showPlannerOutput();
 
+    void on_plannersSettings_clicked();
+
+    void on_plannerSelection_currentIndexChanged(int index);
+
+    void on_execPlanner_clicked();
+
 private:
+    void setDefaultDomainFile();
+    void setDefaultProblemFile();
+
+    void setDomainFile(QString domainFile);
+    void setProblemFile(QString problemFile);
+
+    void resetDomainFile();
+    void resetProblemFile();
+    void resetPlannerSelection();
+
+    bool getXMLDocument();
+
+    QString getPDDLFilePath();
+    QString getXMLFilePath();
+
     Ui::PlanningDialog *ui;
 
     ExecPlanner* exe;
@@ -53,17 +84,21 @@ private:
 
     QDomElement plans;
     QDomElement solveResult;
-    QDomElement theSingleChosenPlanner;
 
+    QDomElement theSingleChosenPlanner;
     QList<QDomElement> plannersList;
+
     PlannerSuggestion* plannerSuggestion;
 
     bool forceFinish = false;
     bool stopRunningPlanners = false;
 
-    static QDomElement KAVIPlanners;
 
-    SolutionSettingsDialog* solutionSettingsDialog;
+    QDomDocument KAVIPlannersDocument;
+    QDomElement KAVIPlanners;
+
+    // the running mode of KAVI: Debug or Release
+    RunMode KAVIRunMode;
 };
 
 #endif // PLANNINGDIALOG_H

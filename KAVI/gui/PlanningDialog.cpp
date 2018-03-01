@@ -1,12 +1,16 @@
 #include "PlanningDialog.h"
 #include "ui_PlanningDialog.h"
 
+using namespace XMLUtils;
+
 PlanningDialog::PlanningDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PlanningDialog)
 {
     ui->setupUi(this);
-    solutionSettingsDialog = new SolutionSettingsDialog(this);
+    KAVIRunMode = Debug;
+
+    initEnvironment();
 }
 
 PlanningDialog::~PlanningDialog()
@@ -28,7 +32,52 @@ QDomElement PlanningDialog::getKAVIPlanners()
 
 void PlanningDialog::loadKAVIPlanners()
 {
-    KAVIPlanners = solutionSettingsDialog->getRootElement();
+    KAVIPlanners = KAVIPlannersDocument.firstChildElement("KAVIPlanners");
+}
+
+void PlanningDialog::initEnvironment()
+{
+    getXMLDocument();
+    loadKAVIPlanners();
+    // init plannerSuggestion
+    plannerSuggestion = new PlannerSuggestion();
+
+    setDefaultDomainFile();
+    setDefaultProblemFile();
+
+    // init solutionSettingsDialog
+    //solutionSettingsDialog = new SolutionSettingsDialog(getKAVIPlanners(), this);
+}
+
+void PlanningDialog::initProblemSelection()
+{
+    QFile pddlDomainFile(domainFile);
+    if ( !pddlDomainFile.open(QFile::ReadOnly | QFile::Text ))
+    {
+        qDebug()<< "@Error: cannot open file: " << pddlDomainFile.fileName();
+        return;
+    }
+    plannerSuggestion->initialPlannerSelection(pddlDomainFile, getKAVIPlanners());
+    initPlannerSelection(plannerSuggestion->getSuggestedPlanners());
+}
+
+void PlanningDialog::initPlannerSelection(QList<QDomElement> plannersList)
+{
+    ui->plannerSelection->clear();
+    this->plannersList = plannersList;
+    ui->plannerSelection->addItem("Select one planner");
+    ui->plannerSelection->setCurrentIndex(0);
+    for (int i = 0; i < this->plannersList.size(); i++)
+    {
+        QDomElement planner = this->plannersList.at(i).toElement();
+        QDomElement plannerName = planner.firstChildElement("name");
+        QDomElement plannerVersion = planner.firstChildElement("version");
+
+        QString name = getStrValue(plannerName);
+        QString version = getStrValue(plannerVersion);
+
+        ui->plannerSelection->addItem(name.append(" - ").append(version));
+    }
 }
 
 void PlanningDialog::on_customProblem_clicked(bool checked)
@@ -39,6 +88,8 @@ void PlanningDialog::on_customProblem_clicked(bool checked)
         ui->pddlProblemFile->setEnabled(true);
         ui->domainBrowse->setEnabled(true);
         ui->problemBrowse->setEnabled(true);
+        resetDomainFile();
+        resetProblemFile();
     }
     else
     {
@@ -48,6 +99,8 @@ void PlanningDialog::on_customProblem_clicked(bool checked)
         ui->pddlProblemFile->clear();
         ui->domainBrowse->setEnabled(false);
         ui->problemBrowse->setEnabled(false);
+        setDefaultDomainFile();
+        setDefaultProblemFile();
     }
 }
 
@@ -65,7 +118,7 @@ void PlanningDialog::on_domainBrowse_clicked()
 
     ui->pddlDomainFile->setText(fileName);
 
-    domainFile = fileName;
+    setDomainFile(fileName);
 }
 
 void PlanningDialog::on_problemBrowse_clicked()
@@ -77,14 +130,166 @@ void PlanningDialog::on_problemBrowse_clicked()
 
     ui->pddlProblemFile->setText(fileName);
 
-    problemFile = fileName;
+    setProblemFile(fileName);
 }
 
 void PlanningDialog::showPlannerOutput()
 {
     ui->plannerOutput->clear();
-    QStringList textList = exe->getTestConsoleOutput();
-    foreach (QString line, textList) {
-        ui->plannerOutput->append(line);
+    //ui->plannerOutput->setText();
+}
+
+bool PlanningDialog::getXMLDocument()
+{
+    QString filePath = getXMLFilePath();
+    QFile xmlFile(filePath.append(KAVIPLANNERS_FILE));
+
+    if ( !xmlFile.open(QFile::ReadOnly | QFile::Text ))
+    {
+        qDebug()<< "@Error: cannot open file: " << xmlFile.fileName();
+        return false;
     }
+
+    QString error;
+    int row = 0, column = 0;
+    if (!KAVIPlannersDocument.setContent(&xmlFile, false, &error, &row, &column))
+    {
+        QMessageBox::information(NULL, QString("Error"), QString("Parsing xml file failed at line row and column ") + QString::number(row, 10) + QString(",") + QString::number(column, 10));
+        return false;
+    }
+    xmlFile.close();
+
+    return true;
+}
+
+QString PlanningDialog::getPDDLFilePath()
+{
+    QString filePath;
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:
+        filePath.append(upPath).append(KAVI_PDDL_DIR_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(KAVI_PDDL_DIR_RELEASE);
+        break;
+    default:
+        break;
+    }
+
+    return filePath;
+}
+
+QString PlanningDialog::getXMLFilePath()
+{
+    QString filePath;
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:
+        filePath.append(upPath).append(PLANNERS_CONFIGS_DIR_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(PLANNERS_CONFIGS_DIR_RELEASE);
+        break;
+    default:
+        break;
+    }
+
+    return filePath;
+}
+
+void PlanningDialog::on_plannersSettings_clicked()
+{
+    SolutionSettingsDialog* solutionSettingsDialog = new SolutionSettingsDialog(getKAVIPlanners(), this);
+    solutionSettingsDialog->exec();
+}
+
+void PlanningDialog::setDefaultDomainFile()
+{
+    QString fileName = getPDDLFilePath();
+
+    fileName.append(DEFAULT_DOMAIN_PDDL_FILE);
+
+    setDomainFile(fileName);
+}
+
+void PlanningDialog::setDefaultProblemFile()
+{
+    QString fileName = getPDDLFilePath();
+
+    fileName.append(DEFAULT_PROBLEM_PDDL_FILE);
+
+    setProblemFile(fileName);
+}
+
+void PlanningDialog::setDomainFile(QString domainFile)
+{
+    this->domainFile = domainFile;
+    initProblemSelection();
+}
+
+void PlanningDialog::setProblemFile(QString problemFile)
+{
+    this->problemFile = problemFile;
+}
+
+void PlanningDialog::resetDomainFile()
+{
+    this->domainFile.clear();
+    resetPlannerSelection();
+}
+
+void PlanningDialog::resetProblemFile()
+{
+    this->problemFile.clear();
+}
+
+void PlanningDialog::resetPlannerSelection()
+{
+    ui->plannerSelection->clear();
+    ui->plannerSelection->addItem("Select one planner");
+    ui->plannerSelection->setCurrentIndex(0);
+}
+
+void PlanningDialog::on_plannerSelection_currentIndexChanged(int index)
+{
+
+    if (index < 1)
+    {
+        ui->execPlanner->setEnabled(false);
+        theSingleChosenPlanner.clear();
+        return;
+    }
+    ui->execPlanner->setEnabled(true);
+    theSingleChosenPlanner = this->plannersList.at(index-1).toElement();
+}
+
+void PlanningDialog::on_execPlanner_clicked()
+{
+    if (domainFile.simplified().isNull())
+    {
+        qDebug() << "@Warning: The domain PDDL file can not be empty";
+        return;
+    }
+    if (problemFile.simplified().isNull())
+    {
+        qDebug() << "@Warning: The problem PDDL file can not be empty";
+        return;
+    }
+    if (theSingleChosenPlanner.isNull())
+    {
+        qDebug() << "@Warning: Please select one planner to execute planning";
+        return;
+    }
+    solveProblemWithSinglePlanner(domainFile, problemFile, theSingleChosenPlanner);
 }

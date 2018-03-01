@@ -17,8 +17,8 @@ ExecPlanner::ExecPlanner(QDomElement chosenPlanner, QString domainFile, QString 
     this->problemFile = problemFile;
     this->rePlaning = replaning;
 
-    getXMLDocument();
     KAVIRunMode = Debug;
+    getXMLDocument();
 }
 
 QString ExecPlanner::getContentsAsString(QFile &file)
@@ -161,6 +161,7 @@ QStringList ExecPlanner::getPlan(QStringList output)
 
 void ExecPlanner::processError(QProcess::ProcessError error)
 {
+    qDebug() << "@Something wrong while running planner";
     gotError = true;
     switch(error)
     {

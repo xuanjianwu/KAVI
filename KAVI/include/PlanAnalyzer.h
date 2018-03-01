@@ -13,7 +13,7 @@
 
 class PlanAnalyzer {
 public:
-    static QString generateHTMLSinglePlanReport(QDomElement xmlPlan);
-}
+    static QString generateHTMLSinglePlanReport(QDomElement planners, QDomElement xmlPlan);
+};
 
 #endif // PLANANALYZER_H

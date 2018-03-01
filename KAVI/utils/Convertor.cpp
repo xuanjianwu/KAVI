@@ -126,6 +126,33 @@ void Convertor::writeProblemsToPDDL(const QDomDocument &doc, QString &targetDir)
     }
 }
 
+void Convertor::writeSingleProblemToPDDL(const QDomDocument &doc, QString problemName, QFile &output)
+{
+    if (!basicStructureCheck(doc))
+    {
+        qCritical() << "@Error while exporting document.";
+        return;
+    }
+
+    QDomElement task = problemsElement.firstChildElement("task");
+
+    while (!task.isNull())
+    {
+        QString taskName = task.attribute("name");
+
+        if (taskName.isEmpty())
+            qWarning() << "$Convertor::writeDomainToPDDL : missing task name";
+
+        if (taskName.trimmed().contains(problemName.trimmed()))
+        {
+            QDomElement taskDiagram = task.firstChildElement("diagram");
+            writeSingleTask(taskDiagram, taskName, output);
+            break;
+        }
+        task = task.nextSiblingElement("task");
+    }
+}
+
 bool Convertor::basicStructureCheck(const QDomDocument &domainDocument)
 {
     Q_ASSERT(!domainDocument.isNull());
@@ -345,10 +372,82 @@ void Convertor::writeTask(QDomElement &diagram, const QString &name, const QStri
     outfile.close();
 }
 
+void Convertor::writeSingleTask(QDomElement &diagram, const QString &name, QFile &outfile)
+{
+    //Q_ASSERT(!diagram.isNull());
+    if (diagram.isNull())
+    {
+        //return;
+    }
+
+    qDebug() << "$Convertor::writeProblem : writing to file: " << outfile.fileName();
+
+    outStream.setDevice(&outfile);
+
+    outStream << "(define (problem " << name << ")" << endl;
+
+    if (!domainName.isEmpty())
+    {
+        QStringList toWrite;
+        toWrite << "(:domain" << domainName << ")";
+        writeLine(1, toWrite.join(" "));
+    }
+    else
+        writeLine(1, "(domain UNNAMED)");
+
+    writeItem(1, getObjectList(diagram), "(:objects",")");
+
+    QStringList initLiterals;
+    QStringList goalLiterals;
+
+    QDomElement actNode = diagram.firstChildElement("node");
+
+    while ( !actNode.isNull() )
+    {
+        if ( !verifyNodeType(actNode, NST_PREDICATE) )
+        {
+            actNode = actNode.nextSiblingElement("node");
+            continue;
+        }
+
+        QString predicateState = subelementTagValue(actNode, "state");
+
+        if ( predicateState == NSTS_INIT )
+        {
+            initLiterals.append(getPredicateInstance(actNode, diagram, false));
+            actNode = actNode.nextSiblingElement("node");
+            continue;
+        }
+
+        if ( predicateState == NSTS_GOAL )
+        {
+            goalLiterals.append(getPredicateInstance(actNode, diagram, false));
+            actNode = actNode.nextSiblingElement("node");
+            continue;
+        }
+
+        qWarning() << "$Convertor::writeProblem : predicate state is not defined";
+    }
+
+    writeItem(1, initLiterals.join("\n"), "(:init", ")");
+
+    writeLine(1, "(:goal");
+    writeItem(2, goalLiterals.join("\n"), "(and ", ")");
+    writeLine(1, ")");
+
+    outStream << ")";
+
+    outfile.close();
+}
+
 QString Convertor::getDefinedTypes()
 {
     QDomElement diagramElement = definitionElement.firstChildElement("diagram");
-    Q_ASSERT(!diagramElement.isNull());
+    //Q_ASSERT(!diagramElement.isNull());
+    if (diagramElement.isNull())
+    {
+        return QString();
+    }
 
     GraphClass * graph = new GraphClass(diagramElement);
 
@@ -406,7 +505,11 @@ QString Convertor::getDefinedTypes()
 QString Convertor::getDefinedPredicates()
 {
     QDomElement diagramElement = definitionElement.firstChildElement("diagram");
-    Q_ASSERT(!diagramElement.isNull());
+    //Q_ASSERT(!diagramElement.isNull());
+    if (diagramElement.isNull())
+    {
+        return QString();
+    }
 
     QString result;
 
@@ -504,7 +607,11 @@ QString Convertor::getPredicateInstance(QDomElement predicate, QDomElement diagr
 
 QString Convertor::getObjectList(QDomElement diagram)
 {
-    Q_ASSERT(!diagram.isNull());
+    //Q_ASSERT(!diagram.isNull());
+    if (diagram.isNull())
+    {
+        return QString();
+    }
 
     QDomElement actNode = diagram.firstChildElement("node");
 
@@ -612,7 +719,11 @@ QStringList Convertor::generateArgumentNames(int size, char startingChar)
 
 QString Convertor::getActionParameters(QDomElement diagram)
 {
-    Q_ASSERT(!diagram.isNull());
+    //Q_ASSERT(!diagram.isNull());
+    if (diagram.isNull())
+    {
+        return QString();
+    }
 
     QString result = ":parameters (";
     QDomElement actNode = diagram.firstChildElement("node");

@@ -101,6 +101,7 @@ QList<QString> PlannerSuggestion::getPDDLRequirements(QFile &PDDL)
             break;
         }
     }
+    requirementsLine.remove(requirementsLine.size()-1, 1);
     QStringList itemsList = requirementsLine.split(" ");
     for (int i = 1; i < itemsList.size(); i++)
     {

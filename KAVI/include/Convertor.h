@@ -56,11 +56,20 @@ public:
     /*
     * run basicStructureCheck and write problems in domain document to PDDL file
     * @params:
-    *       doc    - the specified QDomDocument
+    *       doc       - the specified QDomDocument
     *       targetDir - expected PDDL file directory
     * @return: void
     */
     void writeProblemsToPDDL(const QDomDocument& doc, QString& targetDir);
+
+    /*
+    * run basicStructureCheck and write single problem in domain document to PDDL file
+    * @params:
+    *       doc    - the specified QDomDocument
+    *       output - expected PDDL file
+    * @return: void
+    */
+    void writeSingleProblemToPDDL(const QDomDocument& doc, QString problemName, QFile& output);
 
 private:
     // convertor's owner widget
@@ -138,6 +147,16 @@ private:
     * @return: void
     */
     void writeTask(QDomElement& diagram, const QString& name, const QString& targetDir);
+
+    /*
+    * write single task to PDDL file
+    * @params:
+    *       diagram    - task's diagram
+    *       name       - task's name
+    *       outfile    - PDDL file
+    * @return: void
+    */
+    void writeSingleTask(QDomElement& diagram, const QString& name, QFile &outfile);
 
     /*
     * get the defined class types in definition

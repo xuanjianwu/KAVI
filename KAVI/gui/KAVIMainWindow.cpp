@@ -28,6 +28,8 @@ KAVIMainWindow::KAVIMainWindow(QWidget *parent)
 {
     ui.setupUi(this);
 
+    KAVIRunMode = Debug;
+
     domainChanged = false;
 
     nameChecker.setPattern(QString("^([a-z]|[A-Z])([a-z]|[A-Z]|[0-9]|[-_]){,%1}$").arg(MAX_NAME_LENGTH));
@@ -92,6 +94,60 @@ void KAVIMainWindow::crash()
     dump << ui.logTextEdit->toPlainText();
     file.close();
     this->close();
+}
+
+void KAVIMainWindow::exportDomainPDDL()
+{
+    // save to domainData
+    globalSave();
+
+    QString fileName = getPDDLFilePath();
+
+    fileName.append(DEFAULT_DOMAIN_PDDL_FILE);
+
+    if (QFile::exists(fileName))
+    {
+        QFile::remove(fileName);
+
+    }
+    QFile file(fileName);
+
+    if ( !file.open(QIODevice::Truncate | QIODevice::WriteOnly | QIODevice::Text) )
+    {
+        QMessageBox::critical(this, tr("Error"), tr("Can't open file %1").arg(fileName));
+        return;
+    }
+
+    dataConvertor->writeDomainToPDDL(domainData, file);
+
+    file.close();
+}
+
+void KAVIMainWindow::exportProblemPDDL()
+{
+    // save to domainData
+    globalSave();
+
+    QString fileName = getPDDLFilePath();
+
+    fileName.append(DEFAULT_PROBLEM_PDDL_FILE);
+
+    if (QFile::exists(fileName))
+    {
+        QFile::remove(fileName);
+
+    }
+    QFile file(fileName);
+
+    if ( !file.open(QIODevice::Truncate | QIODevice::WriteOnly | QIODevice::Text) )
+    {
+        QMessageBox::critical(this, tr("Error"), tr("Can't open file %1").arg(fileName));
+        return;
+    }
+
+    dataConvertor->writeSingleProblemToPDDL(domainData, ui.taskSelector->currentText(), file);
+
+    file.close();
 }
 
 void KAVIMainWindow::on_actionNew_N_triggered()
@@ -1432,6 +1488,29 @@ void KAVIMainWindow::centerContents(QGraphicsView *view)
     view->centerOn(boundingRect.center());
 }
 
+QString KAVIMainWindow::getPDDLFilePath()
+{
+    QString filePath;
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:
+        filePath.append(upPath).append(KAVI_PDDL_DIR_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(KAVI_PDDL_DIR_RELEASE);
+        break;
+    default:
+        break;
+    }
+
+    return filePath;
+}
+
 void KAVIMainWindow::on_actionSolution_Settings_triggered()
 {
     SolutionSettingsDialog* dialog = new SolutionSettingsDialog(this);
@@ -1440,6 +1519,11 @@ void KAVIMainWindow::on_actionSolution_Settings_triggered()
 
 void KAVIMainWindow::on_actionPlanning_triggered()
 {
+    exportDomainPDDL();
+    exportProblemPDDL();
+
     PlanningDialog* dialog = new PlanningDialog(this);
+    //connect(dialog, SIGNAL(exportDefaultPDDL), this, SLOT(exportDomainPDDL()));
+    //connect(dialog, SIGNAL(exportDefaultPDDL), this, SLOT(exportProblemPDDL()));
     dialog->exec();
 }

@@ -29,6 +29,15 @@ public:
     explicit SolutionSettingsDialog(QWidget *parent = 0);
 
     /*
+    * construct function, init the settings from the QDomElement
+    * @params:
+    *       rootElement - the specified QDomelement
+    *       parent - parent object
+    * @return: N/A
+    */
+    explicit SolutionSettingsDialog(QDomElement rootElement, QWidget *parent = 0);
+
+    /*
     * deconstruct function
     * @params: N/A
     * @return: N/A
@@ -36,6 +45,27 @@ public:
     ~SolutionSettingsDialog();
 
     QDomElement getRootElement();
+
+    /*
+    * read xml file to xmlData
+    * @params: N/A
+    * @return: bool
+    */
+    bool getXMLDocument();
+
+    /*
+    * get the xml file's path
+    * @params: N/A
+    * @return: the specified file path
+    */
+    QString getXMLFilePath();
+
+    /*
+    * write xmlData to xml file
+    * @params: N/A
+    * @return: bool
+    */
+    bool writeToXMLFile();
 
 private slots:
     /*
@@ -61,27 +91,6 @@ private slots:
     void on_buttonBox_accepted();
 
 private:
-    /*
-    * read xml file to xmlData
-    * @params: N/A
-    * @return: bool
-    */
-    bool getXMLDocument();
-
-    /*
-    * get the xml file's path
-    * @params: N/A
-    * @return: the specified file path
-    */
-    QString getXMLFilePath();
-
-    /*
-    * write xmlData to xml file
-    * @params: N/A
-    * @return: bool
-    */
-    bool writeToXMLFile();
-
     /*
     * set all the settings in solution settings dialog
     * @params: N/A
@@ -155,6 +164,8 @@ private:
     QDomElement rootElement;
     // the current selected planner element
     QDomElement selectdPlanner;
+
+    //bool customRootElement;
 };
 
 #endif // SOLUTIONSETTINGSDIALOG_H

@@ -248,4 +248,11 @@
 #define PLANNERS_DIR_DEBUG "/KAVI/"
 #define DEFAULTPLAN_FILE "DefaultPlan.xml"
 
+// PlanningDialog ------------------------
+
+#define KAVI_PDDL_DIR_RELEASE "/KAVIPDDL/"
+#define KAVI_PDDL_DIR_DEBUG "/KAVI/KAVIPDDL/"
+#define DEFAULT_DOMAIN_PDDL_FILE "DefaultDomain.pddl"
+#define DEFAULT_PROBLEM_PDDL_FILE "DefaultProblem.pddl"
+
 #endif // KAVIMACROS_H

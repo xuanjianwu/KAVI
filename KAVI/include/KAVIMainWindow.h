@@ -49,7 +49,15 @@ public:
     */
     void crash();
 
+signals:
+    void loadDefaultDomainPDDL(QString domainPDDL);
+    void loadDefaultProblemPDDL(QString problemPDDL);
+
 public slots:
+    // slots for the planning dialog
+    void exportDomainPDDL();
+    void exportProblemPDDL();
+
     // menubar: File
 
     void on_actionNew_N_triggered();
@@ -358,6 +366,11 @@ private:
     * @return: void
     */
     void centerContents(QGraphicsView* view);
+
+    // the running mode of KAVI: Debug or Release
+    RunMode KAVIRunMode;
+
+    QString getPDDLFilePath();
 
     Ui::MainWindow ui;
 };

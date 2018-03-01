@@ -10,9 +10,23 @@ SolutionSettingsDialog::SolutionSettingsDialog(QWidget *parent) :
     ui->setupUi(this);
     KAVIRunMode = Debug;
     selectdPlanner = QDomElement();
+    //customRootElement = false;
 
     getXMLDocument();
     rootElement = xmlData.firstChildElement("KAVIPlanners");
+    setAllSettings();
+}
+
+SolutionSettingsDialog::SolutionSettingsDialog(QDomElement rootElement, QWidget *parent)
+    :QDialog(parent)
+{
+    ui->setupUi(this);
+    KAVIRunMode = Debug;
+    selectdPlanner = QDomElement();
+    //customRootElement = true;
+
+    this->xmlData = rootElement.ownerDocument();
+    this->rootElement = xmlData.firstChildElement("KAVIPlanners");
     setAllSettings();
 }
 
