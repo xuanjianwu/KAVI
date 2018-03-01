@@ -55,20 +55,35 @@ void ExecPlanner::setEmptyPlan()
     setStrValue(problemElement, problemName);
 
     //3. set the planner info
-    if (!chosenPlanner.isNull())
+    if (!this->chosenPlanner.isNull())
     {
         QDomElement plannerElement = thePlan.firstChildElement("planner");
         //3.1 set the planner id
-        setIntAttribute(plannerElement, "id", getIntAttribute(chosenPlanner, "id"));
+        //setIntAttribute(plannerElement, "id", getIntAttribute(this->chosenPlanner, "id"));
 
         //3.2 add planner's characteristics
-        plannerElement.appendChild(chosenPlanner.cloneNode(true));
+        //plannerElement.appendChild(chosenPlanner.cloneNode(true));
+        /*
+        QDomNodeList plannerFeatures = this->chosenPlanner.childNodes();
+        for (int i = 0; i < plannerFeatures.size(); i++)
+        {
+            QDomElement plannerFeatureElement = plannerFeatures.at(i).toElement();
+            plannerElement.ownerDocument().importNode(plannerFeatureElement, true);
+            plannerElement.appendChild(plannerFeatureElement);
+        }
+        */
+        QDomNode previousNode = plannerElement.previousSibling();
+        thePlan.removeChild(plannerElement);
+        thePlan.insertAfter(this->chosenPlanner.cloneNode(true), previousNode);
+
+        QDomElement newPlannerElement = thePlan.firstChildElement("planner");
         //except for setting
-        plannerElement.removeChild(plannerElement.firstChildElement("settings"));
+        QDomElement settingsElement = newPlannerElement.firstChildElement("settings");
+        newPlannerElement.removeChild(settingsElement);
     }
 }
 
-void ExecPlanner::getPlanAndStatistics(QStringList output, QStringList plan, QStringList statistics)
+void ExecPlanner::getPlanAndStatistics(QStringList output, QStringList &plan, QStringList &statistics)
 {
     //Separate statistics and plan (get plan)
     if (!output.isEmpty())
@@ -161,7 +176,7 @@ QStringList ExecPlanner::getPlan(QStringList output)
 
 void ExecPlanner::processError(QProcess::ProcessError error)
 {
-    qDebug() << "@Something wrong while running planner";
+    //qDebug() << "@Something wrong while running planner";
     gotError = true;
     switch(error)
     {
@@ -196,6 +211,7 @@ void ExecPlanner::startProcess()
 
 void ExecPlanner::finishProcess(int exitCode, QProcess::ExitStatus exitStatus)
 {
+    //normalExit = true;
     if (exitStatus == QProcess::NormalExit)
     {
         normalExit = true;
@@ -216,7 +232,7 @@ void ExecPlanner::startReadError()
 
 }
 
-QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString domain, QString problem, QStringList consoleOutput)
+QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString domain, QString problem, QStringList &consoleOutput)
 {
     QStringList output;
     QString solutionFile =  "solution.soln";
@@ -317,18 +333,21 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
         bool gotError = false;
 
         process = new QProcess(this);
-        process->setProcessChannelMode(QProcess::SeparateChannels);
-        process->setReadChannel(QProcess::StandardOutput);
+        //process->setProcessChannelMode(QProcess::SeparateChannels);
+        //process->setReadChannel(QProcess::StandardOutput);
 
         connect(process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(processError(QProcess::ProcessError)));
         connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(startReadOutput()));
-        connect(process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(finishProcess(int, QProcess::ExitStatus)));
+        connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(finishProcess(int, QProcess::ExitStatus)));
 
         //Call the planner
         process->start(program, arguments);
+        //process->execute(program, arguments);
+        //process->startDetached(program, arguments);
         process->waitForFinished();
 
-        if (!gotError && normalExit && readyReadOutput)
+        //if (!gotError && normalExit && readyReadOutput)
+        if (!gotError)
         {
             consoleOutput = QString::fromLocal8Bit(process->readAllStandardOutput()).split("\n");
 
@@ -358,7 +377,7 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
                 }
 
                 // get output
-                getContentsAsStringList(theOutputFile);
+                output = getContentsAsStringList(theOutputFile);
                 theOutputFile.remove();
 
                 // delete additional generated files
@@ -452,6 +471,10 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
                     else if (line.trimmed().startsWith(";"))
                     {
                         statisticsList.append(line.trimmed());
+                    }
+                    else
+                    {
+                        //statisticsList.append(line.trimmed());
                     }
                 }
 
@@ -780,6 +803,7 @@ void ExecPlanner::run()
     if (!chosenPlanner.isNull() && !domainFile.isNull() && !problemFile.isNull())
     {
         QDomElement xmlPlan= solvePlanningProblem(chosenPlanner, domainFile, problemFile);
+        writeToXMLFile();
     }
 }
 
@@ -859,7 +883,24 @@ QString ExecPlanner::getXMLFilePath()
 
 bool ExecPlanner::writeToXMLFile()
 {
+    QString filePath = getXMLFilePath();
+    QFile xmlFile(filePath.append(TEMPPLAN_FILE));
 
+    QString fileName = xmlFile.fileName();
+    if (QFile::exists(fileName))
+    {
+        QFile::remove(fileName);
+    }
+    QFile newXmlFile(fileName);
+
+    if ( !newXmlFile.open(QFile::WriteOnly | QFile::Text ))
+    {
+        qDebug()<< "@Error: cannot open file: " << newXmlFile.fileName();
+        return false;
+    }
+    QTextStream saveStream(&newXmlFile);
+    planDocument.save(saveStream, OUTPUT_INDENT);
+    newXmlFile.close();
 }
 
 QString ExecPlanner::getPlannersPath()

@@ -77,7 +77,11 @@ float getFloatValue(const QDomElement &elem)
 
 QString getStrValue(const QDomElement &elem)
 {
-    Q_ASSERT(!elem.isNull());
+    //Q_ASSERT(!elem.isNull());
+    if (elem.isNull())
+    {
+        return QString();
+    }
     return elem.text().trimmed();
 }
 

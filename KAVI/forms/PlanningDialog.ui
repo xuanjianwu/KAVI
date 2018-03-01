@@ -225,8 +225,8 @@
   <widget class="QPushButton" name="clearOutput">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>550</y>
+     <x>260</x>
+     <y>300</y>
      <width>75</width>
      <height>25</height>
     </rect>
@@ -238,10 +238,10 @@
   <widget class="QTextEdit" name="plannerOutput">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>300</y>
-     <width>331</width>
-     <height>271</height>
+     <x>350</x>
+     <y>10</y>
+     <width>541</width>
+     <height>581</height>
     </rect>
    </property>
   </widget>

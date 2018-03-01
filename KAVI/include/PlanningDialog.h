@@ -59,6 +59,9 @@ private slots:
     void on_execPlanner_clicked();
 
 private:
+    QString getDomainName();
+    QString getProblemName();
+
     void setDefaultDomainFile();
     void setDefaultProblemFile();
 

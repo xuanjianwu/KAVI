@@ -21,6 +21,10 @@ PlanningDialog::~PlanningDialog()
 void PlanningDialog::solveProblemWithSinglePlanner(QString domain, QString problem, QDomElement chosenPlanner)
 {
     exe = new ExecPlanner(chosenPlanner, domain, problem, false, this);
+    exe->setDomainName(getDomainName());
+    exe->setProblemName(getProblemName());
+
+    //connect(exe, SIGNAL(finished()), this, SLOT(deleteLater()));
     connect(exe, SIGNAL(finished()), this, SLOT(showPlannerOutput()));
     exe->start();
 }
@@ -136,7 +140,13 @@ void PlanningDialog::on_problemBrowse_clicked()
 void PlanningDialog::showPlannerOutput()
 {
     ui->plannerOutput->clear();
-    //ui->plannerOutput->setText();
+    QString text = PlanAnalyzer::generateHTMLSinglePlanReport(getKAVIPlanners(), exe->getPlan());
+    QStringList strList = exe->getTestConsoleOutput();
+    QString str;
+    foreach (QString line, strList) {
+        str.append(line);
+    }
+    ui->plannerOutput->setText(text);
 }
 
 bool PlanningDialog::getXMLDocument()
@@ -292,4 +302,66 @@ void PlanningDialog::on_execPlanner_clicked()
         return;
     }
     solveProblemWithSinglePlanner(domainFile, problemFile, theSingleChosenPlanner);
+}
+
+QString PlanningDialog::getDomainName()
+{
+    QFile pddlDomainFile(domainFile);
+    if ( !pddlDomainFile.open(QFile::ReadOnly | QFile::Text ))
+    {
+        qDebug()<< "@Error: cannot open file: " << pddlDomainFile.fileName();
+        return QString();
+    }
+
+    QString domainNameLine;
+    while (!pddlDomainFile.atEnd())
+    {
+        QByteArray line = pddlDomainFile.readLine();
+        QString str(line);
+        if (str.contains("define") && str.contains("domain"))
+        {
+            domainNameLine = str.simplified();
+            break;
+        }
+    }
+    if (domainNameLine.indexOf("(") > -1 && domainNameLine.indexOf(")") > -1)
+    {
+        domainNameLine.remove(0, domainNameLine.lastIndexOf("(")+1);
+        domainNameLine.remove(domainNameLine.indexOf(")"), 1);
+        domainNameLine = domainNameLine.simplified();
+        QStringList domainItems = domainNameLine.split(" ");
+        return domainItems.at(1);
+    }
+    return QString();
+}
+
+QString PlanningDialog::getProblemName()
+{
+    QFile pddlProblemFile(problemFile);
+    if ( !pddlProblemFile.open(QFile::ReadOnly | QFile::Text ))
+    {
+        qDebug()<< "@Error: cannot open file: " << pddlProblemFile.fileName();
+        return QString();
+    }
+
+    QString problemNameLine;
+    while (!pddlProblemFile.atEnd())
+    {
+        QByteArray line = pddlProblemFile.readLine();
+        QString str(line);
+        if (str.contains("define") && str.contains("problem"))
+        {
+            problemNameLine = str.simplified();
+            break;
+        }
+    }
+    if (problemNameLine.indexOf("(") > -1 && problemNameLine.indexOf(")") > -1)
+    {
+        problemNameLine.remove(0, problemNameLine.lastIndexOf("(")+1);
+        problemNameLine.remove(problemNameLine.indexOf(")"), 1);
+        problemNameLine = problemNameLine.simplified();
+        QStringList problemItems = problemNameLine.split(" ");
+        return problemItems.at(1);
+    }
+    return QString();
 }

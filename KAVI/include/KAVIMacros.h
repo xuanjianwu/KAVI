@@ -247,6 +247,7 @@
 #define PLANNERS_DIR_RELEASE "/"
 #define PLANNERS_DIR_DEBUG "/KAVI/"
 #define DEFAULTPLAN_FILE "DefaultPlan.xml"
+#define TEMPPLAN_FILE "TempPlan.xml"
 
 // PlanningDialog ------------------------
 

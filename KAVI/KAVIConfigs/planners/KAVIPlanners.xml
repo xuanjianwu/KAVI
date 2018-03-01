@@ -268,14 +268,14 @@
                         <name>solver</name>
                         <value/>
                         <enable>false</enable>
-                        <description>-solver SPEC { -then SPEC }*   sequence of solver specifications, must be the last argument. &#xd;&#xd;&#xd;
-						Format of SPEC: &#xd;&#xd;&#xd;
-						SPEC == { -maxit N } { -maxsec F } COMMAND {solver specific options}. &#xd;&#xd;&#xd;
-						COMMAND == graphplan || satz || walksat || relsat || compact. &#xd;&#xd;&#xd;
-						-maxsec F == only run solver for F seconds. &#xd;&#xd;&#xd;
-						-maxit N == only run solver for N iterations (flips/backtracks/recursions). &#xd;&#xd;&#xd;
-						If maxsec or maxit are not specified, then use the most recently set value. Default values are 0 (meaning no limit). &#xd;&#xd;&#xd;
-						To get options for particular solvers (e.g. walksat) try blackbox -help -solver walksat&#xd;&#xd;&#xd;&#xd;
+                        <description>-solver SPEC { -then SPEC }*   sequence of solver specifications, must be the last argument. &#xd;&#xd;&#xd;&#xd;
+						Format of SPEC: &#xd;&#xd;&#xd;&#xd;
+						SPEC == { -maxit N } { -maxsec F } COMMAND {solver specific options}. &#xd;&#xd;&#xd;&#xd;
+						COMMAND == graphplan || satz || walksat || relsat || compact. &#xd;&#xd;&#xd;&#xd;
+						-maxsec F == only run solver for F seconds. &#xd;&#xd;&#xd;&#xd;
+						-maxit N == only run solver for N iterations (flips/backtracks/recursions). &#xd;&#xd;&#xd;&#xd;
+						If maxsec or maxit are not specified, then use the most recently set value. Default values are 0 (meaning no limit). &#xd;&#xd;&#xd;&#xd;
+						To get options for particular solvers (e.g. walksat) try blackbox -help -solver walksat&#xd;&#xd;&#xd;&#xd;&#xd;
 						</description>
                     </argument>
                 </arguments>

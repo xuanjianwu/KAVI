@@ -22,11 +22,11 @@ public:
 
     void setEmptyPlan();
 
-    void getPlanAndStatistics(QStringList output, QStringList plan, QStringList statistics);
+    void getPlanAndStatistics(QStringList output, QStringList& plan, QStringList& statistics);
 
     QStringList getPlan(QStringList output);
 
-    QStringList getPlannerOutput(QDomElement chosenPlanner, QString domain, QString problem, QStringList consoleOutput);
+    QStringList getPlannerOutput(QDomElement chosenPlanner, QString domain, QString problem, QStringList& consoleOutput);
 
     void parsePlanToXML(QDomElement planNode, QStringList plan);
 
