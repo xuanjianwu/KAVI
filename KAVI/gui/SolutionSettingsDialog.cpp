@@ -18,7 +18,8 @@ SolutionSettingsDialog::SolutionSettingsDialog(QWidget *parent) :
 }
 
 SolutionSettingsDialog::SolutionSettingsDialog(QDomElement rootElement, QWidget *parent)
-    :QDialog(parent)
+    :QDialog(parent),
+    ui(new Ui::SolutionSettingsDialog)
 {
     ui->setupUi(this);
     KAVIRunMode = Debug;

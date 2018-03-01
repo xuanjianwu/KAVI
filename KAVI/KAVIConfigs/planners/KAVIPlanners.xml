@@ -58,39 +58,39 @@
                     </consoleOutput>
                 </output>
                 <arguments>
-                    <domain id="1" parameter="-o">
+                    <domain parameter="-o" id="1">
                         <name>domain</name>
-                        <value/>
+                        <value></value>
                         <enable>true</enable>
                         <description>specifies the file of the operators</description>
                     </domain>
-                    <problem id="2" parameter="-f">
+                    <problem parameter="-f" id="2">
                         <name>problem</name>
-                        <value/>
+                        <value></value>
                         <enable>true</enable>
                         <description>specifies the file of (init/goal) facts</description>
                     </problem>
-                    <argument id="3" parameter="-E">
+                    <argument parameter="-E" id="3">
                         <name>enforced hill-climbing</name>
-                        <value/>
+                        <value></value>
                         <enable>false</enable>
                         <description>don't do enforced hill-climbing try before bestfirst</description>
                     </argument>
-                    <argument id="4" parameter="-g">
+                    <argument parameter="-g" id="4">
                         <name>weight</name>
                         <value>10</value>
                         <enable>false</enable>
                         <description>set weight w_g in w_g*g(s) + w_h*h(s) [preset: 0]</description>
                     </argument>
-                    <argument id="5" parameter="-h">
+                    <argument parameter="-h" id="5">
                         <name>weight</name>
                         <value>10</value>
                         <enable>false</enable>
                         <description>set weight w_h in w_g*g(s) + w_h*h(s) [preset: 0]</description>
                     </argument>
-                    <argument id="6" parameter="-O">
+                    <argument parameter="-O" id="6">
                         <name>optimization</name>
-                        <value/>
+                        <value></value>
                         <enable>true</enable>
                         <description>switch on optimization expression (default is plan length)</description>
                     </argument>
@@ -138,144 +138,144 @@
                     </consoleOutput>
                 </output>
                 <arguments>
-                    <domain id="1" parameter="-o">
+                    <domain parameter="-o" id="1">
                         <name>domain</name>
                         <value/>
                         <enable>true</enable>
                         <description>to specify operator file</description>
                     </domain>
-                    <problem id="2" parameter="-f">
+                    <problem parameter="-f" id="2">
                         <name>problem</name>
                         <value/>
                         <enable>true</enable>
                         <description>to specify fact file</description>
                     </problem>
-                    <argument id="3" parameter="-g">
+                    <argument parameter="-g" id="3">
                         <name>output file</name>
                         <value>solution.sol</value>
                         <enable>false</enable>
                         <description>to specify output file</description>
                     </argument>
-                    <argument id="4" parameter="-t">
+                    <argument parameter="-t" id="4">
                         <name>fixed number of time steps</name>
                         <value>10</value>
                         <enable>false</enable>
                         <description>to specify a fixed number of time steps</description>
                     </argument>
-                    <argument id="5" parameter="-i">
+                    <argument parameter="-i" id="5">
                         <name>info level</name>
                         <value>0</value>
                         <enable>false</enable>
                         <description>to specify tracing info level 1 or 2 (default is 0)</description>
                     </argument>
-                    <argument id="6" parameter="-step">
+                    <argument parameter="-step" id="6">
                         <name>plan graph length</name>
                         <value>10</value>
                         <enable>false</enable>
                         <description>increment plan graph by length n</description>
                     </argument>
-                    <argument id="7" parameter="-noskip">
+                    <argument parameter="-noskip" id="7">
                         <name>don't graphplan solver</name>
                         <value/>
                         <enable>false</enable>
                         <description>don't skip graphplan solver</description>
                     </argument>
-                    <argument id="8" parameter="-noopt">
+                    <argument parameter="-noopt" id="8">
                         <name>stop first solution</name>
                         <value/>
                         <enable>false</enable>
                         <description>stop as soon as a solution found</description>
                     </argument>
-                    <argument id="9" parameter="-printlit">
+                    <argument parameter="-printlit" id="9">
                         <name>print literal form</name>
                         <value/>
                         <enable>false</enable>
                         <description>print wff in literal form</description>
                     </argument>
-                    <argument id="10" parameter="-printcnf">
+                    <argument parameter="-printcnf" id="10">
                         <name>print propositional form</name>
                         <value/>
                         <enable>false</enable>
                         <description>print wff in propositional (.cnf) form</description>
                     </argument>
-                    <argument id="11" parameter="-printmap">
+                    <argument parameter="-printmap" id="11">
                         <name>literals to propositions</name>
                         <value/>
                         <enable>false</enable>
                         <description>map mapping from literals to propositions</description>
                     </argument>
-                    <argument id="12" parameter="-printmodel">
+                    <argument parameter="-printmodel" id="12">
                         <name>print model</name>
                         <value/>
                         <enable>false</enable>
                         <description>print model returned by solver</description>
                     </argument>
-                    <argument id="13" parameter="-printexit">
+                    <argument parameter="-printexit" id="13">
                         <name>exit after printing wff</name>
                         <value/>
                         <enable>false</enable>
                         <description>exit after printing wff</description>
                     </argument>
-                    <argument id="14" parameter="-nopretty">
+                    <argument parameter="-nopretty" id="14">
                         <name>print solution in literal form</name>
                         <value/>
                         <enable>false</enable>
                         <description>print the solution plan in literal form, rather than lisp notation</description>
                     </argument>
-                    <argument id="15" parameter="-M">
+                    <argument parameter="-M" id="15">
                         <name>alternative max nodes</name>
                         <value>2048</value>
                         <enable>false</enable>
                         <description>to specify alternative max nodes in a time step (default is 2048)</description>
                     </argument>
-                    <argument id="16" parameter="-maxfail">
+                    <argument parameter="-maxfail" id="16">
                         <name>failure mode</name>
                         <value>4</value>
                         <enable>false</enable>
                         <description>halt if solvers go into failure mode N times in a row (default 4)</description>
                     </argument>
-                    <argument id="17" parameter="-maxtimeout">
+                    <argument parameter="-maxtimeout" id="17">
                         <name>timeout N times</name>
                         <value>8</value>
                         <enable>false</enable>
                         <description>halt if solvers timeout N times in a row (default 8)</description>
                     </argument>
-                    <argument id="18" parameter="-maxauto">
+                    <argument parameter="-maxauto" id="18">
                         <name>halt after plans of length N are reached</name>
                         <value>50</value>
                         <enable>false</enable>
                         <description>halt after plans of length N are reached (default 50)</description>
                     </argument>
-                    <argument id="19" parameter="-noexcl">
+                    <argument parameter="-noexcl" id="19">
                         <name>minimal set of exclusiveness</name>
                         <value/>
                         <enable>false</enable>
                         <description>only generate minimal set of exclusiveness relationships</description>
                     </argument>
-                    <argument id="20" parameter="-axioms">
+                    <argument parameter="-axioms" id="20">
                         <name>aximos</name>
                         <value>7</value>
                         <enable>false</enable>
                         <description>or default (7), mutex (15), compressed (31), expanded (63), action (129), dagsat (319)</description>
                     </argument>
-                    <argument id="21" parameter="-maxglobalsec">
+                    <argument parameter="-maxglobalsec" id="21">
                         <name>maximum global time limit</name>
                         <value>1800</value>
                         <enable>false</enable>
                         <description>maximum global time limit N seconds (default 1800)</description>
                     </argument>
-                    <argument id="22" parameter="-solver">
+                    <argument parameter="-solver" id="22">
                         <name>solver</name>
                         <value/>
                         <enable>false</enable>
-                        <description>-solver SPEC { -then SPEC }*   sequence of solver specifications, must be the last argument. &#xd;&#xd;&#xd;&#xd;
-						Format of SPEC: &#xd;&#xd;&#xd;&#xd;
-						SPEC == { -maxit N } { -maxsec F } COMMAND {solver specific options}. &#xd;&#xd;&#xd;&#xd;
-						COMMAND == graphplan || satz || walksat || relsat || compact. &#xd;&#xd;&#xd;&#xd;
-						-maxsec F == only run solver for F seconds. &#xd;&#xd;&#xd;&#xd;
-						-maxit N == only run solver for N iterations (flips/backtracks/recursions). &#xd;&#xd;&#xd;&#xd;
-						If maxsec or maxit are not specified, then use the most recently set value. Default values are 0 (meaning no limit). &#xd;&#xd;&#xd;&#xd;
-						To get options for particular solvers (e.g. walksat) try blackbox -help -solver walksat&#xd;&#xd;&#xd;&#xd;&#xd;
+                        <description>-solver SPEC { -then SPEC }*   sequence of solver specifications, must be the last argument. &#xd;&#xd;&#xd;&#xd;&#xd;
+						Format of SPEC: &#xd;&#xd;&#xd;&#xd;&#xd;
+						SPEC == { -maxit N } { -maxsec F } COMMAND {solver specific options}. &#xd;&#xd;&#xd;&#xd;&#xd;
+						COMMAND == graphplan || satz || walksat || relsat || compact. &#xd;&#xd;&#xd;&#xd;&#xd;
+						-maxsec F == only run solver for F seconds. &#xd;&#xd;&#xd;&#xd;&#xd;
+						-maxit N == only run solver for N iterations (flips/backtracks/recursions). &#xd;&#xd;&#xd;&#xd;&#xd;
+						If maxsec or maxit are not specified, then use the most recently set value. Default values are 0 (meaning no limit). &#xd;&#xd;&#xd;&#xd;&#xd;
+						To get options for particular solvers (e.g. walksat) try blackbox -help -solver walksat&#xd;&#xd;&#xd;&#xd;&#xd;&#xd;
 						</description>
                     </argument>
                 </arguments>
@@ -335,37 +335,37 @@
                     </consoleOutput>
                 </output>
                 <arguments>
-                    <domain id="1" parameter="-o">
+                    <domain parameter="-o" id="1">
                         <name>domain</name>
                         <value/>
                         <enable>true</enable>
                         <description>specifies the file of the operators</description>
                     </domain>
-                    <problem id="2" parameter="-f">
+                    <problem parameter="-f" id="2">
                         <name>problem</name>
                         <value/>
                         <enable>true</enable>
                         <description>specifies the file of (init/goal) facts</description>
                     </problem>
-                    <argument id="3" parameter="-quality">
+                    <argument parameter="-quality" id="3">
                         <name>running mode</name>
                         <value/>
                         <enable>true</enable>
                         <description>specifies a running mode, which is either "speed" (-speed), "quality"(-quality) or "incremental quality" (-n #solutions) (also called "bestquality")</description>
                     </argument>
-                    <argument id="4" parameter="-speed">
+                    <argument parameter="-speed" id="4">
                         <name>running mode</name>
                         <value/>
                         <enable>false</enable>
                         <description>specifies a running mode, which is either "speed" (-speed), "quality"(-quality) or "incremental quality" (-n #solutions) (also called "bestquality")</description>
                     </argument>
-                    <argument id="5" parameter="-n">
+                    <argument parameter="-n" id="5">
                         <name>running mode</name>
                         <value>2</value>
                         <enable>false</enable>
                         <description>specifies a running mode, which is either "speed" (-speed), "quality"(-quality) or "incremental quality" (-n #solutions) (also called "bestquality")</description>
                     </argument>
-                    <argument id="6" parameter="-cputime">
+                    <argument parameter="-cputime" id="6">
                         <name>cputime</name>
                         <value>1800</value>
                         <enable>false</enable>

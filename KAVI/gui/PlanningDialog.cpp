@@ -146,6 +146,14 @@ void PlanningDialog::showPlannerOutput()
     foreach (QString line, strList) {
         str.append(line);
     }
+    QFile htmlFile("test.html");
+
+    if (!htmlFile.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    QTextStream out(&htmlFile);
+    out << text;
+
     ui->plannerOutput->setText(text);
 }
 
@@ -332,6 +340,7 @@ QString PlanningDialog::getDomainName()
         QStringList domainItems = domainNameLine.split(" ");
         return domainItems.at(1);
     }
+    pddlDomainFile.seek(0);
     return QString();
 }
 
@@ -363,5 +372,6 @@ QString PlanningDialog::getProblemName()
         QStringList problemItems = problemNameLine.split(" ");
         return problemItems.at(1);
     }
+    pddlProblemFile.seek(0);
     return QString();
 }

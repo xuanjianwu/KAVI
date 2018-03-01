@@ -8,8 +8,8 @@ QString PlanAnalyzer::generateHTMLSinglePlanReport(QDomElement planners, QDomEle
     QString dateTime = getStrValue(dateElement);
 
     // head
-    QString info = "<html> \n";
-    info += "<html>\n";
+    QString info = "<html>\n";
+    //info += "<html>\n";
     info += "<head>\n";
     info += "<title>Plan Report</title>\n";
     info +="<style type=\"text/css\">\n";
@@ -25,7 +25,7 @@ QString PlanAnalyzer::generateHTMLSinglePlanReport(QDomElement planners, QDomEle
                             "<b>Introduction</b></font></TD></TR>";
                             */
 
-    info.append("<TABLE width='100%' BORDER='0' align='center'>").append("<TR><TD bgcolor='333399'><font size=4 face=arial color='FFFFFF'>").append("<b>Introduction</b></font></TD></TR>");
+    info.append("<TABLE width='100%' BORDER='0' align='center'>").append("<TR><TD><font size=4 face=arial color='FFFFFF'>").append("<b>Introduction</b></font></TD></TR>\n");
 
     QDomElement domainNameElement = xmlPlan.firstChildElement("domain");
     QDomElement problemNameElement = xmlPlan.firstChildElement("problem");
@@ -42,11 +42,11 @@ QString PlanAnalyzer::generateHTMLSinglePlanReport(QDomElement planners, QDomEle
         QString problemName = getStrValue(problemNameElement);
 
         info += "<TR><TD><font size=3 face=arial><b>Domain: </b>"+ domainName +
-                        "</font></TD></TR>" +
+                        "</font></TD></TR>\n" +
                         "<TR><TD><font size=3 face=arial><b>Problem: </b>"+ problemName +
-                        "</font></TD></TR>" +
+                        "</font></TD></TR>\n" +
                         "<TR><TD><font size=3 face=arial><b>Date/Time: </b>"+ dateTime +
-                        "</font></TD></TR>";
+                        "</font></TD></TR>\n";
         if ( !planvalidityElement.isNull() && !validatorElement.isNull())
         {
             QString validityString;
@@ -85,12 +85,12 @@ QString PlanAnalyzer::generateHTMLSinglePlanReport(QDomElement planners, QDomEle
                 validityString = "<font color='red'><strong>Empty plan. Goal not satisfied.</strong>";
             }
             info += "<TR><TD><font size=3 face=arial><b>Plan validity: </b>"+ validityString+
-                       "</font></TD></TR>";
+                       "</font></TD></TR>\n";
         }
     }
 
-    info += "<TR><TD bgcolor='FFFFFF'><font size=3 face=arial><b>KAVI message:<br></b>"+
-                    toolMessage.replace("\n", "<br>") +"<p></TD></TR>";
+    info += "<TR><TD><font size=3 face=arial><b>KAVI message:<br></b>"+
+                    toolMessage.replace("\n", "<br>") +"<p></TD></TR>\n";
 
     // planner
     QDomElement plannerElement = xmlPlan.firstChildElement("planner");
@@ -121,7 +121,7 @@ QString PlanAnalyzer::generateHTMLSinglePlanReport(QDomElement planners, QDomEle
         QDomElement descriptionElement = settingsPlanner.firstChildElement("description");
 
         /*
-        info += "<TR><TD bgcolor='gray'><font size=4 face=arial color='FFFFFF'><b>Planner</b></TD></TR>" +
+        info += "<TR><TD bgcolor='66CDAA'><font size=4 face=arial color='FFFFFF'><b>Planner</b></TD></TR>" +
                         "<TR><TD><font size=3 face=arial><b>Name: </b>"+ getStrValue(nameElement)+
                         "</font></TD></TR>"+
                         "<TR><TD><font size=3 face=arial><b>Version: </b>"+ getStrValue(versionElement)+
@@ -137,20 +137,20 @@ QString PlanAnalyzer::generateHTMLSinglePlanReport(QDomElement planners, QDomEle
                         */
 
 
-        info.append("<TR><TD bgcolor='gray'><font size=4 face=arial color='FFFFFF'><b>Planner</b></TD></TR>");
-        info.append("<TR><TD><font size=3 face=arial><b>Name: </b>").append(getStrValue(nameElement)).append("</font></TD></TR>");
-        info.append("<TR><TD><font size=3 face=arial><b>Version: </b>").append(getStrValue(versionElement)).append("</font></TD></TR>");
-        info.append("<TR><TD><font size=3 face=arial><b>Author(s): </b>").append(getStrValue(authorElement)).append("</font></TD></TR>");
-        info.append("<TR><TD><font size=3 face=arial><b>Institution(s): </b>").append(getStrValue(institutionElement)).append("</font></TD></TR>");
-        info.append("<TR><TD><font size=3 face=arial><b>Link: </b>").append(getStrValue(linkELement)).append("</font></TD></TR>");
-        info.append("<TR><TD><font size=3 face=arial><b>Description: </b>").append(getStrValue(descriptionElement)).append("</font><p></TD></TR>");
+        info.append("<TR><TD><font size=4 face=arial color='FFFFFF'><b>Planner</b></TD></TR>\n");
+        info.append("<TR><TD><font size=3 face=arial><b>Name: </b>").append(getStrValue(nameElement)).append("</font></TD></TR>\n");
+        info.append("<TR><TD><font size=3 face=arial><b>Version: </b>").append(getStrValue(versionElement)).append("</font></TD></TR>\n");
+        info.append("<TR><TD><font size=3 face=arial><b>Author(s): </b>").append(getStrValue(authorElement)).append("</font></TD></TR>\n");
+        info.append("<TR><TD><font size=3 face=arial><b>Institution(s): </b>").append(getStrValue(institutionElement)).append("</font></TD></TR>\n");
+        info.append("<TR><TD><font size=3 face=arial><b>Link: </b>").append(getStrValue(linkELement)).append("</font></TD></TR>\n");
+        info.append("<TR><TD><font size=3 face=arial><b>Description: </b>").append(getStrValue(descriptionElement)).append("</font><p></TD></TR>\n");
     }
 
     // statistics
     QDomElement statisticsElement = xmlPlan.firstChildElement("statistics");
 
     /*
-    info += "<TR><TD bgcolor='gray'><font size=4 face=arial color='FFFFFF'><b>Statistics</b>" +
+    info += "<TR><TD bgcolor='66CDAA'><font size=4 face=arial color='FFFFFF'><b>Statistics</b>" +
                     "</TD></TR>"+
                     "<TR><TD><font size=3 face=arial><b>Tool total time: </b>"+ statisticsElement.firstChildElement("toolTime").text().trimmed()+
                     "</font></TD></TR>" +
@@ -170,19 +170,19 @@ QString PlanAnalyzer::generateHTMLSinglePlanReport(QDomElement planners, QDomEle
                     "</font><p></TD></TR>";
                     */
 
-    info.append("<TR><TD bgcolor='gray'><font size=4 face=arial color='FFFFFF'><b>Statistics</b>").append("</TD></TR>");
-    info.append("<TR><TD><font size=3 face=arial><b>Tool total time: </b>").append(statisticsElement.firstChildElement("toolTime").text().trimmed()).append("</font></TD></TR>");
-    info.append("<TR><TD><font size=3 face=arial><b>Planner time: </b>").append(statisticsElement.firstChildElement("time").text().trimmed()).append("</font></TD></TR>");
-    info.append("<TR><TD><font size=3 face=arial><b>Parsing time: </b>").append(statisticsElement.firstChildElement("parsingTime").text().trimmed()).append("</font></TD></TR>");
-    info.append("<TR><TD><font size=3 face=arial><b>Number of actions: </b>").append(xmlPlan.firstChildElement("plan").childNodes().size()).append("</font></TD></TR>");
+    info.append("<TR><TD><font size=4 face=arial color='FFFFFF'><b>Statistics</b>").append("</TD></TR>\n");
+    info.append("<TR><TD><font size=3 face=arial><b>Tool total time: </b>").append(statisticsElement.firstChildElement("toolTime").text().trimmed()).append("</font></TD></TR>\n");
+    info.append("<TR><TD><font size=3 face=arial><b>Planner time: </b>").append(statisticsElement.firstChildElement("time").text().trimmed()).append("</font></TD></TR>\n");
+    info.append("<TR><TD><font size=3 face=arial><b>Parsing time: </b>").append(statisticsElement.firstChildElement("parsingTime").text().trimmed()).append("</font></TD></TR>\n");
+    info.append("<TR><TD><font size=3 face=arial><b>Number of actions: </b>").append(xmlPlan.firstChildElement("plan").childNodes().size()).append("</font></TD></TR>\n");
     info.append("<TR><TD><font size=3 face=arial><b>Makespan: </b>").append(statisticsElement.firstChildElement("makeSpan").text().trimmed()).append("</font></TD></TR>");
-    info.append("<TR><TD><font size=3 face=arial><b>Metric value: </b>").append(statisticsElement.firstChildElement("metricValue").text().trimmed()).append("</font></TD></TR>");
-    info.append("<TR><TD><font size=3 face=arial><b>Planning technique: </b>").append(statisticsElement.firstChildElement("planningTechnique").text().trimmed()).append("</font></TD></TR>");
-    info.append("<TR><TD><font size=3 face=arial><b>Additional: </b>").append(statisticsElement.firstChildElement("additional").text().trimmed().replace("\n", "<br>")).append("</font><p></TD></TR>");
+    info.append("<TR><TD><font size=3 face=arial><b>Metric value: </b>").append(statisticsElement.firstChildElement("metricValue").text().trimmed()).append("</font></TD></TR>\n");
+    info.append("<TR><TD><font size=3 face=arial><b>Planning technique: </b>").append(statisticsElement.firstChildElement("planningTechnique").text().trimmed()).append("</font></TD></TR>\n");
+    info.append("<TR><TD><font size=3 face=arial><b>Additional: </b>").append(statisticsElement.firstChildElement("additional").text().trimmed().replace("\n", "<br>")).append("</font><p></TD></TR>\n");
 
 
     // plan
-    info += "<TR><TD bgcolor='gray'><font size=4 face=arial color='FFFFFF'><b>Plan</b></TD></TR>";
+    info += "<TR><TD><font size=4 face=arial color='FFFFFF'><b>Plan</b></TD></TR>\n";
 
     QDomNodeList actions = xmlPlan.firstChildElement("plan").childNodes();
 
@@ -222,33 +222,33 @@ QString PlanAnalyzer::generateHTMLSinglePlanReport(QDomElement planners, QDomEle
 
             if (i < actions.size() - 1)
             {
-                info += "<TR><TD><font size=3 face=arial>"+ actionStr +"</font></TD></TR>";
+                info += "<TR><TD><font size=3 face=arial>"+ actionStr +"</font></TD></TR>\n";
             }
             else
             {
-                info += "<TR><TD><font size=3 face=arial>"+ actionStr +"</font><p></TD></TR>";
+                info += "<TR><TD><font size=3 face=arial>"+ actionStr +"</font><p></TD></TR>\n";
             }
         }
     }
     else
     {
-        info += "<TR><TD><font size=3 face=arial>No plan found.</font><p></TD></TR>";
+        info += "<TR><TD><font size=3 face=arial>No plan found.</font><p></TD></TR>\n";
     }
 
     // planner console output
     if ( !plannerElement.isNull() && !plannerElement.firstChildElement("consoleOutput").isNull())
     {
         /*
-        info += "<TR><TD bgcolor='gray'><font size=3 face=arial color='FFFFFF'>" +
+        info += "<TR><TD bgcolor='66CDAA'><font size=3 face=arial color='FFFFFF'>" +
                         "<b>Planner Console Output</b></TD></TR>"+
                         "<TR><TD><font size=4 face=courier>" +
                         plannerElement.firstChildElement("consoleOutput").text().trimmed().replace("\n", "<br>") +"</font><p></TD></TR>";
                         */
 
-        info.append("<TR><TD bgcolor='gray'><font size=3 face=arial color='FFFFFF'>").append("<b>Planner Console Output</b></TD></TR>").append("<TR><TD><font size=4 face=courier>");
-        info.append(plannerElement.firstChildElement("consoleOutput").text().trimmed().replace("\n", "<br>")).append("</font><p></TD></TR>");
+        info.append("<TR><TD><font size=3 face=arial color='FFFFFF'>").append("<b>Planner Console Output</b></TD></TR>\n").append("<TR><TD><font size=4 face=courier>");
+        info.append(plannerElement.firstChildElement("consoleOutput").text().trimmed().replace("\n", "<br>")).append("</font><p></TD></TR>\n");
     }
-    info += "</TABLE>";
+    info += "</TABLE>\n";
 
     info += "</body>\n";
     info += "</html>\n";

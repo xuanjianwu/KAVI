@@ -238,10 +238,10 @@
   <widget class="QTextEdit" name="plannerOutput">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>360</x>
      <y>10</y>
-     <width>541</width>
-     <height>581</height>
+     <width>521</width>
+     <height>571</height>
     </rect>
    </property>
   </widget>

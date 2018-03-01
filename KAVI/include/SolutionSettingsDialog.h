@@ -35,7 +35,7 @@ public:
     *       parent - parent object
     * @return: N/A
     */
-    explicit SolutionSettingsDialog(QDomElement rootElement, QWidget *parent = 0);
+    SolutionSettingsDialog(QDomElement rootElement, QWidget *parent = 0);
 
     /*
     * deconstruct function

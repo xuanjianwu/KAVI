@@ -68,6 +68,7 @@
 #include <QProcess>
 #include <QTime>
 #include <QDateTime>
+#include <QMetaType>
 
 
 #endif // KAVIBASE_H

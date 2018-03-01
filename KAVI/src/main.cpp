@@ -56,6 +56,7 @@ int main(int argc, char ** argv)
 
     //qInstallMsgHandler(msgHandler);
     qInstallMessageHandler(msgHandler);
+    qRegisterMetaType<QTextCharFormat>("QTextCharFormat");
 
     mainWindow.show();
     return app.exec();

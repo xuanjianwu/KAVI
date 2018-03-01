@@ -38,6 +38,8 @@ void PlannerSuggestion::initialPlannerSelection(QFile &domainPDDL, QDomElement p
     suggestedPlanners.clear();
     discardedPlanners.clear();
 
+    QList<QString> pddlRequirements = getPDDLRequirements(domainPDDL);
+
     QDomNodeList planners = plannersElement.firstChildElement("planners").childNodes();
     for (int i = 0; i < planners.size(); i++) {
         QDomElement plannerElement = planners.at(i).toElement();
@@ -47,7 +49,7 @@ void PlannerSuggestion::initialPlannerSelection(QFile &domainPDDL, QDomElement p
         for (int j = 0; j < plannerRequirements.size(); j++) {
             plannerRequirementsElements.append(plannerRequirements.at(j).toElement());
         }
-        if (containsRequirements(plannerRequirementsElements, domainPDDL) && checkOperatingSystemCompatibility(plannerElement))
+        if (containsRequirements(plannerRequirementsElements, pddlRequirements) && checkOperatingSystemCompatibility(plannerElement))
         {
             suggestedPlanners.append(plannerElement);
         }
@@ -58,11 +60,10 @@ void PlannerSuggestion::initialPlannerSelection(QFile &domainPDDL, QDomElement p
     }
 }
 
-bool PlannerSuggestion::containsRequirements(QList<QDomElement> plannerRequirementsElements, QFile &PDDL)
+bool PlannerSuggestion::containsRequirements(QList<QDomElement> plannerRequirementsElements, QList<QString> pddlRequirements)
 {
     bool containsRequirements = true;
 
-    QList<QString> pddlRequirements = getPDDLRequirements(PDDL);
     QList<QString> plannerRequirements = getPlannerRequirements(plannerRequirementsElements);
 
     foreach (QString pddlRequirement, pddlRequirements) {
@@ -91,6 +92,7 @@ QList<QString> PlannerSuggestion::getPDDLRequirements(QFile &PDDL)
 {
     QString requirementsLine;
     QList<QString> res;
+
     while (!PDDL.atEnd())
     {
         QByteArray line = PDDL.readLine();
@@ -100,7 +102,8 @@ QList<QString> PlannerSuggestion::getPDDLRequirements(QFile &PDDL)
             requirementsLine = str.toLower().simplified();
             break;
         }
-    }
+    }    
+
     requirementsLine.remove(requirementsLine.size()-1, 1);
     QStringList itemsList = requirementsLine.split(" ");
     for (int i = 1; i < itemsList.size(); i++)
@@ -108,6 +111,7 @@ QList<QString> PlannerSuggestion::getPDDLRequirements(QFile &PDDL)
         QString item = itemsList.at(i);
         res.append(item.remove(0, 1));
     }
+    PDDL.seek(0);
     return res;
 }
 

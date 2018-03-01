@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xmlPlan>
+    <toolInformation>
+        <name>KAVI</name>
+        <version>1.0</version>
+        <message>Planner generated a solution.</message>
+    </toolInformation>
+    <name/>
+    <description/>
+    <project/>
+    <domain>Blockworld</domain>
+    <problem>fourBoxes</problem>
+    <datetime>2018.03.02 03:36:47.042 周五</datetime>
+    <planner id="1">
+        <name>Metric-FF</name>
+        <version>Windows</version>
+        <date>2002</date>
+        <institution/>
+        <author>J. Hoffmann</author>
+        <link>http://fai.cs.uni-saarland.de/hoffmann/metric-ff.html</link>
+        <description/>
+        <platform>
+            <windows/>
+        </platform>
+        <requirements>
+            <adl/>
+            <mdp/>
+            <typing/>
+            <rewards/>
+            <strips/>
+            <fluents/>
+            <equality/>
+            <conditional-effects/>
+            <disjunctive-preconditions/>
+            <duration-inequalities/>
+            <durative-actions/>
+            <existential-preconditions/>
+            <negative-preconditions/>
+            <numeric-fluents/>
+            <quantified-preconditions/>
+            <universal-preconditions/>
+        </requirements>
+        <consoleOutput>
+ff: parsing domain file
+domain 'BLOCKWORLD' defined
+ ... done.
+ff: parsing problem file
+problem 'FOURBOXES' defined
+ ... done.
+
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is  best-first on 1*g(s) + 5*h(s) where
+    metric is  plan length
+
+advancing to distance:    1
+                          0
+
+ff: found legal plan
+The pert-value:  1
+
+time spent:    0.00 seconds instantiating 2 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 5 facts and 2 actions
+               0.00 seconds creating final representation with 4 relevant facts, 0 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.00 seconds searching, evaluating 2 states, to a max depth of 0
+               0.00 seconds total time
+
+
+</consoleOutput>
+    </planner>
+    <statistics>
+        <toolTime>0.105</toolTime>
+        <time>0.00</time>
+        <parsingTime/>
+        <nrActions>1</nrActions>
+        <makeSpan></makeSpan>
+        <metricValue></metricValue>
+        <planningTechnique/>
+        <additional>ParsingTime 
+</additional>
+        <forcedQuit/>
+    </statistics>
+    <validity isValid=""/>
+    <validator id=""/>
+    <evaluation value="">
+        <rationales/>
+    </evaluation>
+    <plan>
+        <action id="STACK">
+            <parameters>
+                <parameter id="R1"/>
+                <parameter id="B1"/>
+                <parameter id="B2"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>0</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+    </plan>
+    <comments/>
+</xmlPlan>

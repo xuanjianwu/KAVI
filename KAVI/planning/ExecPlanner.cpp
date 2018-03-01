@@ -29,6 +29,7 @@ QString ExecPlanner::getContentsAsString(QFile &file)
         QString str(line);
         res.append(str).append("\n");
     }
+    file.seek(0);
     return res;
 }
 
@@ -40,6 +41,7 @@ QStringList ExecPlanner::getContentsAsStringList(QFile &file)
         QString str(line);
         res.append(str);
     }
+    file.seek(0);
     return res;
 }
 
@@ -365,14 +367,20 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
                 {
                     solutionFile.append(getStrValue(outputElement.firstChildElement("outputFile").firstChildElement("fileNameAutomaticIncrement")).trimmed());
                 }
+
                 //Get the planner answer exposed in the solution Output File
+
+                //QString outputFilePath;
+                //outputFilePath.append(getPlannersPath()).append(KAVIPLANNERS_FOLDER).append(solutionFile);
+                //QFile theOutputFile(outputFilePath);
+
                 QString outputFilePath;
-                outputFilePath.append(getPlannersPath()).append(KAVIPLANNERS_FOLDER).append(solutionFile);
+                outputFilePath.append(getPlannerGeneratedFilesPath()).append(solutionFile);
                 QFile theOutputFile(outputFilePath);
 
                 if ( !theOutputFile.open(QFile::ReadOnly | QFile::Text ))
                 {
-                    qDebug()<< "@Error: cannot open file: " << theOutputFile.fileName();
+                    //qDebug()<< "@Error: cannot open file: " << theOutputFile.fileName();
                     return QStringList();
                 }
 
@@ -385,7 +393,7 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
                 for (int i = 0; i < generatedFiles.size(); i++) {
                     QDomElement generatedFile = generatedFiles.at(i).toElement();
                     QString generatedFilePath;
-                    generatedFilePath.append(getPlannersPath()).append(KAVIPLANNERS_FOLDER).append(getStrValue(generatedFile));
+                    generatedFilePath.append(getPlannerGeneratedFilesPath()).append(getStrValue(generatedFile));
                     QFile theGeneratedFile(generatedFilePath);
 
                     if (theGeneratedFile.exists())
@@ -603,32 +611,32 @@ void ExecPlanner::parseStatisticsToXML(QDomElement statisticNode, QStringList st
             value = "";
         }
 
-        if (keyword.contains("Time"))
+        if (keyword == "Time")
         {
             QDomElement time = statisticNode.firstChildElement("time");
             setStrValue(time, value);
         }
-        else if (keyword.contains("ParsingTime"))
+        else if (keyword == "Parsing")
         {
             QDomElement parsingTime = statisticNode.firstChildElement("parsingTime");
             setStrValue(parsingTime, value);
         }
-        else if (keyword.contains("NrActions"))
+        else if (keyword == "NrActions")
         {
             QDomElement nrActions = statisticNode.firstChildElement("nrActions");
             setStrValue(nrActions, value);
         }
-        else if (keyword.contains("MakeSpan"))
+        else if (keyword == "MakeSpan")
         {
             QDomElement makeSpan = statisticNode.firstChildElement("makeSpan");
             setStrValue(makeSpan, value);
         }
-        else if (keyword.contains("MetricValue"))
+        else if (keyword == "MetricValue")
         {
             QDomElement metricValue = statisticNode.firstChildElement("metricValue");
             setStrValue(metricValue, value);
         }
-        else if (keyword.contains("PlanningTechnique"))
+        else if (keyword == "PlanningTechnique")
         {
             QDomElement planningTechnique = statisticNode.firstChildElement("planningTechnique");
             setStrValue(planningTechnique, value);
@@ -636,7 +644,8 @@ void ExecPlanner::parseStatisticsToXML(QDomElement statisticNode, QStringList st
         else
         {
             QDomElement additional = statisticNode.firstChildElement("additional");
-            QString text = getStrValue(additional);
+            //QString text = getStrValue(additional);
+            QString text = additional.text();
             setStrValue(additional, text.append(keyword).append(" ").append(value).append("\n"));
         }
 
@@ -947,4 +956,16 @@ QString ExecPlanner::removeTroublesomeCharacters(QString inString)
 QStringList ExecPlanner::getTestConsoleOutput()
 {
     return testConsoleOutput;
+}
+
+QString ExecPlanner::getPlannerGeneratedFilesPath()
+{
+    QString filePath;
+
+    QDir tmpDir;
+    filePath = tmpDir.currentPath();
+
+    filePath.append(PLANNER_GENERATED_FILE_DIR);
+
+    return filePath;
 }

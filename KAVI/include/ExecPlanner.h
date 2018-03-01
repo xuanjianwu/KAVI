@@ -74,6 +74,8 @@ public:
 
     QStringList getTestConsoleOutput();
 
+    QString getPlannerGeneratedFilesPath();
+
 public slots:
     void processError(QProcess::ProcessError error);
     void startProcess();

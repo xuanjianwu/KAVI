@@ -70,10 +70,10 @@ public:
     * check that if the planner's requirements contains the pddl's requirements or not
     * @params:
     *       plannerRequirementsElements - the planner's requirements
-    *       PDDL                        - the specified pddl file
+    *       pddlRequirements            - the specified pddl file's requirements
     * @return: contains or not
     */
-    bool containsRequirements(QList<QDomElement> plannerRequirementsElements, QFile &PDDL);
+    bool containsRequirements(QList<QDomElement> plannerRequirementsElements, QList<QString> pddlRequirements);
 
     /*
     * get the requirements of the planner Requirements Elements
