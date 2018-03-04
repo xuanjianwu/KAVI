@@ -21,7 +21,11 @@ public:
     void initEnvironment();
     void initPlan();
 
+    void appendPreconditionsToPlanAction(PlanAction& planAction, QString domainAction);
+
     void matchPlanActionWithDomain(PlanAction& action, QString domainFile);
+
+    void selectMatchedActionFromDomainActions(QString actionName, QStringList& domainActions, QString &targetDomainAction);
 
     void splitDomainActionsToString(QString domainFile, QStringList& actions);
 

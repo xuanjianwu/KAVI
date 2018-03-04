@@ -32,6 +32,114 @@ void PlanValidator::initPlan()
     plan = new Plan();
 }
 
+void PlanValidator::appendPreconditionsToPlanAction(PlanAction &planAction, QString domainAction)
+{
+    QString actionName;
+    QStringList actionParameters;
+
+    QString actionFormula = planAction.getFormula();
+    actionFormula.remove(actionFormula.indexOf("("), 1);
+    actionFormula.remove(actionFormula.indexOf(")"), 1);
+    actionFormula = actionFormula.simplified();
+    QStringList actionItems = actionFormula.split(" ");
+    for (int i = 0; i < actionItems.size(); i++)
+    {
+        if (i == 0)
+        {
+            actionName = actionItems.at(i);
+        }
+        else
+        {
+            actionParameters.append(actionItems.at(i));
+        }
+    }
+
+    int pos = 0;
+    // replace the arguments of domain action with the parameters of plan action
+    QRegExp parametersChecker;
+    parametersChecker.setPattern(QString("\\:parameters[\\s]*\\([^()]*\\)"));
+    parametersChecker.indexIn(domainAction);
+    QString parameters = parametersChecker.cap(0);
+    parameters = parameters.simplified();
+
+    parametersChecker.setPattern("\\([^()]*\\)");
+    parametersChecker.indexIn(parameters);
+    parameters = parametersChecker.cap(0);
+    parameters = parameters.simplified();
+
+    QStringList argumentsList;
+    QStringList argumentNameList;
+    parameters.remove(parameters.indexOf("("), 1);
+    parameters.remove(parameters.indexOf(")"), 1);
+    argumentsList = parameters.split("?");
+    foreach (QString argument, argumentsList) {
+        if (!argument.isEmpty())
+        {
+            QStringList argumentPair = argument.split("-");
+            QString argumentName = argumentPair.at(0);
+            argumentNameList.append(argumentName.simplified());
+        }
+    }
+    for (int i = 0; i < argumentNameList.size(); i++)
+    {
+        domainAction.replace(argumentNameList.at(i), actionParameters.at(i));
+    }
+
+    // split the positive predicates and negative predicates
+    QRegExp preconditionChecker;
+    preconditionChecker.setPattern(QString("[\\s]*\\:precondition[\\s\\S]*[\\s]*\\:"));
+    preconditionChecker.indexIn(domainAction);
+    QString precondition = preconditionChecker.cap(0);
+    precondition.remove(precondition.lastIndexOf(":"), 1);
+    precondition = precondition.simplified();
+
+    QRegExp predicateChecker;
+    predicateChecker.setPattern(QString("\\([^()]*\\)"));
+    pos = 0;
+    QStringList predicateList;
+    while ((pos = predicateChecker.indexIn(precondition, pos)) != -1)
+    {
+        predicateList.append(predicateChecker.capturedTexts());
+        pos += predicateChecker.matchedLength();
+    }
+
+    QRegExp negativePredicateChecker;
+    negativePredicateChecker.setPattern(QString("not[\\s]*\\([^()]*\\)"));
+    pos = 0;
+    QStringList negativePredicateList;
+    while ((pos = negativePredicateChecker.indexIn(precondition, pos)) != -1)
+    {
+        negativePredicateList.append(negativePredicateChecker.capturedTexts());
+        pos += negativePredicateChecker.matchedLength();
+    }
+    pos = 0;
+    QStringList negativePurePredicateList;
+    for (int i = 0; i < negativePredicateList.size(); i++)
+    {
+        QString tmpStr = negativePredicateList.at(i);
+        predicateChecker.indexIn(tmpStr, pos);
+        negativePurePredicateList.append(predicateChecker.cap(0).simplified());
+    }
+
+    QStringList positivePurePredicateList;
+    foreach (QString predicate, predicateList) {
+        if (!negativePurePredicateList.contains(predicate))
+        {
+            predicate = predicate.replace("?", "");
+            positivePurePredicateList.append(predicate);
+        }
+    }
+    QStringList negativePurePredicateList2;
+    for (int i = 0; i < negativePurePredicateList.size(); i++)
+    {
+        QString tmpStr = negativePurePredicateList.at(i);
+        tmpStr.replace("?", "");
+        negativePurePredicateList2.append(tmpStr);
+    }
+    planAction.setPositivePreconditions(positivePurePredicateList.toSet());
+    planAction.setNegativePreconditions(negativePurePredicateList2.toSet());
+}
+
 void PlanValidator::matchPlanActionWithDomain(PlanAction &action, QString domainFile)
 {
     QString actionName;
@@ -64,8 +172,29 @@ void PlanValidator::matchPlanActionWithDomain(PlanAction &action, QString domain
     QStringList domainActions;
     //content.replace("\n", " ");
     splitDomainActionsToString(content, domainActions);
+    QString matchedDomainAction;
+    selectMatchedActionFromDomainActions(actionName, domainActions, matchedDomainAction);
 
+    appendPreconditionsToPlanAction(action, matchedDomainAction);
+}
 
+void PlanValidator::selectMatchedActionFromDomainActions(QString actionName, QStringList& domainActions, QString& targetDomainAction)
+{
+    foreach (QString action, domainActions) {
+        if (action.contains(actionName))
+        {
+            QRegExp tmpChecker;
+            tmpChecker.setPattern(QString("\\([\\s]*\\:action"));
+            if ((action.indexOf(actionName) > action.indexOf(tmpChecker)))
+            {
+                tmpChecker.setPattern(QString("[\\s]*\\:parameters"));
+                if (action.indexOf(actionName) < action.indexOf(tmpChecker))
+                {
+                    targetDomainAction = action;
+                }
+            }
+        }
+    }
 }
 
 void PlanValidator::splitDomainActionsToString(QString domainFile, QStringList &actions)
@@ -417,8 +546,8 @@ void PlanValidator::run()
     if (!chosenValidator.isNull() && !domainFile.isNull() && !problemFile.isNull() && !planFile.isNull())
     {
         QStringList consoleOutput;
-        //getValidatorOutput(chosenValidator, domainFile, problemFile, planFile, consoleOutput);
+        getValidatorOutput(chosenValidator, domainFile, problemFile, planFile, consoleOutput);
         PlanAction action;
-        matchPlanActionWithDomain(action, domainFile);
+        //matchPlanActionWithDomain(action, domainFile);
     }
 }
