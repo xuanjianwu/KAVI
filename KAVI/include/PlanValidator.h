@@ -20,6 +20,8 @@ public:
 
     QStringList getValidatorOutput(QDomElement chosenValidator, QString domain, QString problem, QString plan, QStringList& consoleOutput);
 
+    void parseValidatorOutput(QStringList& consoleOutput);
+
     QString getValidatorsPath();
 
 

@@ -146,7 +146,7 @@ QStringList PlanValidator::getValidatorOutput(QDomElement chosenValidator, QStri
         readyReadOutput = false;
         normalExit = false;
 
-        process = new QProcess(this);
+        process = new QProcess();
         //process->setProcessChannelMode(QProcess::SeparateChannels);
         //process->setReadChannel(QProcess::StandardOutput);
 
@@ -174,10 +174,15 @@ QStringList PlanValidator::getValidatorOutput(QDomElement chosenValidator, QStri
             //The validator does not provide a output file, just the console message
             else
             {
-
+                parseValidatorOutput(consoleOutput);
             }
         }
     }
+}
+
+void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
+{
+
 }
 
 QString PlanValidator::getValidatorsPath()
