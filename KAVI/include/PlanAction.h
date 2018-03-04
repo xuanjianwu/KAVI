@@ -29,11 +29,19 @@ public:
     QSet<QString> getNegativeEffects() const;
     void setNegativeEffects(const QSet<QString> &value);
 
+    QSet<QString> getPositivePreconditions() const;
+    void setPositivePreconditions(const QSet<QString> &value);
+
+    QSet<QString> getNegativePreconditions() const;
+    void setNegativePreconditions(const QSet<QString> &value);
+
 private:
     QString formula;
     double time;
     int id;
 
+    QSet<QString> positivePreconditions;
+    QSet<QString> negativePreconditions;
     QSet<QString> positiveEffects;
     QSet<QString> negativeEffects;
 };

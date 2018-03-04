@@ -259,8 +259,8 @@
 
 #define KAVI_PARSERS_FOLDER "KAVIParsers/"
 #define KAVI_VALIDATORS_FOLDER "KAVIValidators/"
-#define VALIDATORS_CONFIGS_DIR_RELEASE "/KAVIConfigs/validators"
-#define VALIDATORS_CONFIGS_DIR_DEBUG "/KAVI/KAVIConfigs/validators"
+#define VALIDATORS_CONFIGS_DIR_RELEASE "/KAVIConfigs/validators/"
+#define VALIDATORS_CONFIGS_DIR_DEBUG "/KAVI/KAVIConfigs/validators/"
 #define KAVIVALIDATORS_FILE "KAVIValidators.xml"
 
 #endif // KAVIMACROS_H

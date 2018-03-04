@@ -5,6 +5,8 @@ using namespace XMLUtils;
 PlanValidator::PlanValidator()
 {
     KAVIRunMode = Debug;
+
+    initEnvironment();
 }
 
 PlanValidator::PlanValidator(QDomElement chosenValidator, QString domainFile, QString problemFile, QString planFile)
@@ -15,6 +17,94 @@ PlanValidator::PlanValidator(QDomElement chosenValidator, QString domainFile, QS
     this->domainFile = domainFile;
     this->problemFile = problemFile;
     this->planFile = planFile;
+
+    initEnvironment();
+}
+
+void PlanValidator::initEnvironment()
+{
+    initPlan();
+    stateHistory = new StateHistory();
+}
+
+void PlanValidator::initPlan()
+{
+    plan = new Plan();
+}
+
+void PlanValidator::matchPlanActionWithDomain(PlanAction &action, QString domainFile)
+{
+    QString actionName;
+    QStringList actionParameters;
+
+    QString actionFormula = action.getFormula();
+    actionFormula.remove(actionFormula.indexOf("("), 1);
+    actionFormula.remove(actionFormula.indexOf(")"), 1);
+    actionFormula = actionFormula.simplified();
+    QStringList actionItems = actionFormula.split(" ");
+    for (int i = 0; i < actionItems.size(); i++)
+    {
+        if (i == 0)
+        {
+            actionName = actionItems.at(i);
+        }
+        else
+        {
+            actionParameters.append(actionItems.at(i));
+        }
+    }
+
+
+    QFile file(domainFile);
+    if ( !file.open(QFile::ReadOnly | QFile::Text ))
+    {
+        return;
+    }
+    QString content(file.readAll());
+    QStringList domainActions;
+    //content.replace("\n", " ");
+    splitDomainActionsToString(content, domainActions);
+
+
+}
+
+void PlanValidator::splitDomainActionsToString(QString domainFile, QStringList &actions)
+{
+    // this function split the plain text of domain file for all the actions as string, such as
+    /*
+  ( :action load-truck
+    :parameters
+         (?obj - package
+          ?truck - truck
+          ?loc - location)
+    :precondition
+        (and 	(at ?truck ?loc)
+            (at ?obj ?loc))
+    :effect
+        (and 	(not (at ?obj ?loc))
+            (in ?obj ?truck)))
+     */
+
+    QRegExp actionChecker;
+    //actionChecker.setPattern(QString("\\([\\s]*\\:action[\\s\\S]*?[\\s]*\\:parameters[\\s\\S]*?[\\s]*\\:precondition[\\s\\S]*?[\\s]*\\:effect[\\s\\S]*?"));
+    actionChecker.setPattern(QString("\\([\\s]*\\:action[\\s\\S]*[\\s]*\\:parameters[\\s\\S]*[\\s]*\\:precondition[\\s\\S]*[\\s]*\\:effect[\\s\\S]*"));
+    int pos = actionChecker.indexIn(domainFile);
+    QString actionsString = actionChecker.cap(0);
+    //QString str2 = actionChecker.cap(1);
+    //QString str3 = actionChecker.cap(3);
+    //actions = actionChecker.capturedTexts();
+    actionsString.remove(actionsString.lastIndexOf(")"), actionsString.size()-actionsString.lastIndexOf(")"));
+    QRegExp tmpChecker;
+    tmpChecker.setPattern(QString("\\([\\s]*\\:action"));
+    QStringList tmpList = actionsString.split(tmpChecker);
+
+    foreach (QString action, tmpList) {
+        if (!action.isEmpty())
+        {
+            action.prepend("(:action ");
+            actions.append(action.simplified());
+        }
+    }
 }
 
 QString PlanValidator::getContentsAsString(QFile &file)
@@ -182,7 +272,51 @@ QStringList PlanValidator::getValidatorOutput(QDomElement chosenValidator, QStri
 
 void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
 {
+    bool planActioning = false;
+    bool planValidationDetails = false;
 
+    for (int i = 0; i < consoleOutput.size(); i++)
+    {
+        QString line = consoleOutput.at(i);
+
+        if (line.isEmpty())
+        {
+            continue;
+        }
+
+        if (line.contains("Plan size"))
+        {
+            line = line.remove(0, line.indexOf(":")+1).simplified();
+            setPlanSize(line.toInt());
+            planActioning = true;
+            continue;
+        }
+        if (line.contains("Plan Validation details"))
+        {
+            planActioning = false;
+            planValidationDetails = true;
+        }
+        else if (planActioning)
+        {
+            double actionTime;
+            QString actionFormula;
+
+            line = line.remove(line.indexOf(":"), 1).simplified();
+            actionTime = line.toDouble();
+
+            i++;
+
+            line = consoleOutput.at(i);
+            actionFormula = line.simplified();
+
+            PlanAction addAction;
+            addAction.setTime(actionTime);
+            addAction.setFormula(actionFormula);
+
+            matchPlanActionWithDomain(addAction, domainFile);
+            plan->addAction(addAction);
+        }
+    }
 }
 
 QString PlanValidator::getValidatorsPath()
@@ -256,4 +390,35 @@ QString PlanValidator::getProblemName() const
 void PlanValidator::setProblemName(const QString &value)
 {
     problemName = value;
+}
+
+QDomElement PlanValidator::getChosenValidator() const
+{
+    return chosenValidator;
+}
+
+void PlanValidator::setChosenValidator(const QDomElement &value)
+{
+    chosenValidator = value;
+}
+
+void PlanValidator::setPlanSize(int value)
+{
+    planSize = value;
+}
+
+int PlanValidator::getPlanSize() const
+{
+    return planSize;
+}
+
+void PlanValidator::run()
+{
+    if (!chosenValidator.isNull() && !domainFile.isNull() && !problemFile.isNull() && !planFile.isNull())
+    {
+        QStringList consoleOutput;
+        //getValidatorOutput(chosenValidator, domainFile, problemFile, planFile, consoleOutput);
+        PlanAction action;
+        matchPlanActionWithDomain(action, domainFile);
+    }
 }

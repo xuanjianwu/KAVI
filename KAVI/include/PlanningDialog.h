@@ -12,6 +12,7 @@
 #include "ExecPlanner.h"
 #include "PlanAnalyzer.h"
 #include "SolutionSettingsDialog.h"
+#include "PlanValidator.h"
 #include "XMLUtils.h"
 
 namespace Ui {
@@ -32,11 +33,20 @@ public:
 
     void loadKAVIPlanners();
 
+    QDomElement getKAVIValidators();
+
+    void loadKAVIValidators();
+
+    void initChosenValidator();
+
     void initEnvironment();
 
     void initProblemSelection();
 
     void initPlannerSelection(QList<QDomElement> plannersList);
+
+    QString getPlanFile() const;
+    void setPlanFile(const QString &value);
 
 signals:
     void exportDefaultPDDL();
@@ -58,6 +68,10 @@ private slots:
 
     void on_execPlanner_clicked();
 
+    void on_planBrowse_clicked();
+
+    void on_runValidator_clicked();
+
 private:
     QString getDomainName();
     QString getProblemName();
@@ -73,9 +87,11 @@ private:
     void resetPlannerSelection();
 
     bool getXMLDocument();
+    bool getValidatorsXMLDocument();
 
     QString getPDDLFilePath();
     QString getXMLFilePath();
+    QString getValidatorsXMLFilePath();
 
     Ui::PlanningDialog *ui;
 
@@ -84,12 +100,15 @@ private:
 
     QString domainFile;
     QString problemFile;
+    QString planFile;
 
     QDomElement plans;
     QDomElement solveResult;
 
     QDomElement theSingleChosenPlanner;
     QList<QDomElement> plannersList;
+
+    QDomElement theSingleChosenValidator;
 
     PlannerSuggestion* plannerSuggestion;
 
@@ -99,6 +118,9 @@ private:
 
     QDomDocument KAVIPlannersDocument;
     QDomElement KAVIPlanners;
+
+    QDomDocument KAVIValidatorsDocument;
+    QDomElement KAVIValidators;
 
     // the running mode of KAVI: Debug or Release
     RunMode KAVIRunMode;

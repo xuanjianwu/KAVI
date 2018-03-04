@@ -55,3 +55,23 @@ void PlanAction::setNegativeEffects(const QSet<QString> &value)
 {
     negativeEffects = value;
 }
+
+QSet<QString> PlanAction::getPositivePreconditions() const
+{
+    return positivePreconditions;
+}
+
+void PlanAction::setPositivePreconditions(const QSet<QString> &value)
+{
+    positivePreconditions = value;
+}
+
+QSet<QString> PlanAction::getNegativePreconditions() const
+{
+    return negativePreconditions;
+}
+
+void PlanAction::setNegativePreconditions(const QSet<QString> &value)
+{
+    negativePreconditions = value;
+}

@@ -10,10 +10,20 @@
 #include "KAVIBase.h"
 #include "XMLUtils.h"
 
+#include "StateHistory.h"
+#include "Plan.h"
+
 class PlanValidator {
 public:
     PlanValidator();
     PlanValidator(QDomElement chosenValidator, QString domainFile, QString problemFile, QString planFile);
+
+    void initEnvironment();
+    void initPlan();
+
+    void matchPlanActionWithDomain(PlanAction& action, QString domainFile);
+
+    void splitDomainActionsToString(QString domainFile, QStringList& actions);
 
     QString getContentsAsString(QFile& file);
     QStringList getContentsAsStringList(QFile& file);
@@ -23,7 +33,6 @@ public:
     void parseValidatorOutput(QStringList& consoleOutput);
 
     QString getValidatorsPath();
-
 
     QString getDomainFile() const;
     void setDomainFile(const QString &value);
@@ -40,6 +49,14 @@ public:
     QString getProblemName() const;
     void setProblemName(const QString &value);
 
+    QDomElement getChosenValidator() const;
+    void setChosenValidator(const QDomElement &value);
+
+    void setPlanSize(int value);
+    int getPlanSize() const;
+
+    void run();
+
 private:
     double time = 0;
     QString toolMessage;
@@ -47,6 +64,8 @@ private:
     bool gotError;
     bool readyReadOutput;
     bool normalExit;
+
+    int planSize;
 
     QDomElement chosenValidator;
     QString domainFile;
@@ -58,6 +77,9 @@ private:
 
     // the running mode of KAVI: Debug or Release
     RunMode KAVIRunMode;
+
+    Plan *plan;
+    StateHistory *stateHistory;
 };
 
 #endif // PLANVALIDATOR_H

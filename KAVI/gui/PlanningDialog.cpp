@@ -39,10 +39,30 @@ void PlanningDialog::loadKAVIPlanners()
     KAVIPlanners = KAVIPlannersDocument.firstChildElement("KAVIPlanners");
 }
 
+QDomElement PlanningDialog::getKAVIValidators()
+{
+    return KAVIValidators;
+}
+
+void PlanningDialog::loadKAVIValidators()
+{
+    KAVIValidators = KAVIValidatorsDocument.firstChildElement("KAVIValidators");
+}
+
+void PlanningDialog::initChosenValidator()
+{
+    QDomElement validators = KAVIValidators.firstChildElement("validators");
+    theSingleChosenValidator = validators.firstChildElement("validator");
+}
+
 void PlanningDialog::initEnvironment()
 {
     getXMLDocument();
     loadKAVIPlanners();
+    getValidatorsXMLDocument();
+    loadKAVIValidators();
+    initChosenValidator();
+
     // init plannerSuggestion
     plannerSuggestion = new PlannerSuggestion();
 
@@ -180,6 +200,29 @@ bool PlanningDialog::getXMLDocument()
     return true;
 }
 
+bool PlanningDialog::getValidatorsXMLDocument()
+{
+    QString filePath = getValidatorsXMLFilePath();
+    QFile xmlFile(filePath.append(KAVIVALIDATORS_FILE));
+
+    if ( !xmlFile.open(QFile::ReadOnly | QFile::Text ))
+    {
+        qDebug()<< "@Error: cannot open file: " << xmlFile.fileName();
+        return false;
+    }
+
+    QString error;
+    int row = 0, column = 0;
+    if (!KAVIValidatorsDocument.setContent(&xmlFile, false, &error, &row, &column))
+    {
+        QMessageBox::information(NULL, QString("Error"), QString("Parsing xml file failed at line row and column ") + QString::number(row, 10) + QString(",") + QString::number(column, 10));
+        return false;
+    }
+    xmlFile.close();
+
+    return true;
+}
+
 QString PlanningDialog::getPDDLFilePath()
 {
     QString filePath;
@@ -224,6 +267,39 @@ QString PlanningDialog::getXMLFilePath()
     }
 
     return filePath;
+}
+
+QString PlanningDialog::getValidatorsXMLFilePath()
+{
+    QString filePath;
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:
+        filePath.append(upPath).append(VALIDATORS_CONFIGS_DIR_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(VALIDATORS_CONFIGS_DIR_RELEASE);
+        break;
+    default:
+        break;
+    }
+
+    return filePath;
+}
+
+QString PlanningDialog::getPlanFile() const
+{
+    return planFile;
+}
+
+void PlanningDialog::setPlanFile(const QString &value)
+{
+    planFile = value;
 }
 
 void PlanningDialog::on_plannersSettings_clicked()
@@ -374,4 +450,42 @@ QString PlanningDialog::getProblemName()
     }
     pddlProblemFile.seek(0);
     return QString();
+}
+
+void PlanningDialog::on_planBrowse_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Plan File"), ".", tr("Planning plan"));
+
+    if ( fileName.isEmpty() )
+        return;
+
+    ui->planFile->setText(fileName);
+
+    setPlanFile(fileName);
+}
+
+void PlanningDialog::on_runValidator_clicked()
+{
+    if (domainFile.simplified().isNull())
+    {
+        qDebug() << "@Warning: The domain PDDL file can not be empty";
+        return;
+    }
+    if (problemFile.simplified().isNull())
+    {
+        qDebug() << "@Warning: The problem PDDL file can not be empty";
+        return;
+    }
+    if (planFile.simplified().isNull())
+    {
+        qDebug() << "@Warning: The plan file can not be empty";
+        return;
+    }
+    if (theSingleChosenValidator.isNull())
+    {
+        qDebug() << "@Warning: Please select one validator to execute validation";
+        return;
+    }
+    PlanValidator* exePlanValidator = new PlanValidator(theSingleChosenValidator, domainFile, problemFile, planFile);
+    exePlanValidator->run();
 }
