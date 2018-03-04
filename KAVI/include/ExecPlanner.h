@@ -90,9 +90,9 @@ private:
     double time = 0;
     QString toolMessage = "";
     QProcess* process;
-    bool gotError = false;
-    bool readyReadOutput = false;
-    bool normalExit = false;
+    bool gotError;
+    bool readyReadOutput;
+    bool normalExit;
 
     QDomElement chosenPlanner;
     QString domainFile;

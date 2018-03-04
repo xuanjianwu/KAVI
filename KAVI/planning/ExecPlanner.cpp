@@ -332,7 +332,9 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
         start_time.start();
 
         // ItSIMPLE.getInstance().appendOutputPanelText("\n>> Calling planner "+ chosenPlanner.getChildText("name")+ "\n ");
-        bool gotError = false;
+        gotError = false;
+        readyReadOutput = false;
+        normalExit = false;
 
         process = new QProcess(this);
         //process->setProcessChannelMode(QProcess::SeparateChannels);
@@ -371,7 +373,7 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
                 //Get the planner answer exposed in the solution Output File
 
                 //QString outputFilePath;
-                //outputFilePath.append(getPlannersPath()).append(KAVIPLANNERS_FOLDER).append(solutionFile);
+                //outputFilePath.append(getPlannersPath()).append(KAVI_PLANNERS_FOLDER).append(solutionFile);
                 //QFile theOutputFile(outputFilePath);
 
                 QString outputFilePath;

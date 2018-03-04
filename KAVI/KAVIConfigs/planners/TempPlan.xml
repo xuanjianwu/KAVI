@@ -10,7 +10,7 @@
     <project/>
     <domain>Blockworld</domain>
     <problem>fourBoxes</problem>
-    <datetime>2018.03.02 03:36:47.042 周五</datetime>
+    <datetime>2018.03.04 01:49:00.808 周日</datetime>
     <planner id="1">
         <name>Metric-FF</name>
         <version>Windows</version>
@@ -74,7 +74,7 @@ time spent:    0.00 seconds instantiating 2 easy, 0 hard action templates
 </consoleOutput>
     </planner>
     <statistics>
-        <toolTime>0.105</toolTime>
+        <toolTime>0.188</toolTime>
         <time>0.00</time>
         <parsingTime/>
         <nrActions>1</nrActions>

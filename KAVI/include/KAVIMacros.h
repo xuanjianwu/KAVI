@@ -243,7 +243,7 @@
 
 // ExecPlanner ---------------------------
 
-#define KAVIPLANNERS_FOLDER "KAVIPlanners/"
+#define KAVI_PLANNERS_FOLDER "KAVIPlanners/"
 #define PLANNERS_DIR_RELEASE "/"
 #define PLANNERS_DIR_DEBUG "/KAVI/"
 #define DEFAULTPLAN_FILE "DefaultPlan.xml"
@@ -256,5 +256,11 @@
 #define KAVI_PDDL_DIR_DEBUG "/KAVI/KAVIPDDL/"
 #define DEFAULT_DOMAIN_PDDL_FILE "DefaultDomain.pddl"
 #define DEFAULT_PROBLEM_PDDL_FILE "DefaultProblem.pddl"
+
+#define KAVI_PARSERS_FOLDER "KAVIParsers/"
+#define KAVI_VALIDATORS_FOLDER "KAVIValidators/"
+#define VALIDATORS_CONFIGS_DIR_RELEASE "/KAVIConfigs/validators"
+#define VALIDATORS_CONFIGS_DIR_DEBUG "/KAVI/KAVIConfigs/validators"
+#define KAVIVALIDATORS_FILE "KAVIValidators.xml"
 
 #endif // KAVIMACROS_H
