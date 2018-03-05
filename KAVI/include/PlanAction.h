@@ -40,6 +40,18 @@ public:
     void addRepairAdvice(const QString precondition, const bool advice);
     int getRepairAdviceSize() const;
 
+    QMap<int, QSet<QString> > getPositivePreconditionsDependers() const;
+    void setPositivePreconditionsDependers(const QMap<int, QSet<QString> > &value);
+
+    QMap<int, QSet<QString> > getNegativePreconditionsDependers() const;
+    void setNegativePreconditionsDependers(const QMap<int, QSet<QString> > &value);
+
+    QMap<int, QSet<QString> > getPositiveEffectsDependers() const;
+    void setPositiveEffectsDependers(const QMap<int, QSet<QString> > &value);
+
+    QMap<int, QSet<QString> > getNegativeEffectsDependers() const;
+    void setNegativeEffectsDependers(const QMap<int, QSet<QString> > &value);
+
 private:
     QString formula;
     double time;
@@ -51,6 +63,12 @@ private:
     QSet<QString> negativeEffects;
 
     QMap<QString, bool> repairAdvice;
+
+    QMap<int, QSet<QString> > positivePreconditionsDependers;
+    QMap<int, QSet<QString> > negativePreconditionsDependers;
+
+    QMap<int, QSet<QString> > positiveEffectsDependers;
+    QMap<int, QSet<QString> > negativeEffectsDependers;
 };
 
 #endif // PLANACTION_H

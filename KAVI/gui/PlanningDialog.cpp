@@ -135,7 +135,7 @@ void PlanningDialog::on_clearOutput_clicked()
 
 void PlanningDialog::on_domainBrowse_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open PDDL Domain File"), ".", tr("Planning domains (*.pddl)"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open PDDL Domain File"), ".", tr("Planning domain (*.pddl)"));
 
     if ( fileName.isEmpty() )
         return;
@@ -147,7 +147,7 @@ void PlanningDialog::on_domainBrowse_clicked()
 
 void PlanningDialog::on_problemBrowse_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open PDDL Problem File"), ".", tr("Planning domains (*.pddl)"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open PDDL Problem File"), ".", tr("Planning problem (*.pddl)"));
 
     if ( fileName.isEmpty() )
         return;
@@ -454,7 +454,7 @@ QString PlanningDialog::getProblemName()
 
 void PlanningDialog::on_planBrowse_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Plan File"), ".", tr("Planning plan"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Plan File in txt format"), ".", tr("Plan txt (*.txt)"));
 
     if ( fileName.isEmpty() )
         return;

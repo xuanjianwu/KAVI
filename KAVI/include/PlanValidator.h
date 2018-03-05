@@ -18,6 +18,8 @@ public:
     PlanValidator();
     PlanValidator(QDomElement chosenValidator, QString domainFile, QString problemFile, QString planFile);
 
+    void buildDependenceBetweenPlanAction();
+
     void initEnvironment();
     void initPlan();
 
@@ -48,7 +50,7 @@ public:
 
     QStringList getValidatorOutput(QDomElement chosenValidator, QString domain, QString problem, QString plan, QStringList& consoleOutput);
 
-    void parseValidatorOutput(QStringList& consoleOutput);
+    void parseValidatorOutputToPlan(QStringList& consoleOutput);
 
     QString getValidatorsPath();
 

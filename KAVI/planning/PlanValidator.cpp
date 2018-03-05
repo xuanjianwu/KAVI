@@ -21,6 +21,138 @@ PlanValidator::PlanValidator(QDomElement chosenValidator, QString domainFile, QS
     initEnvironment();
 }
 
+void PlanValidator::buildDependenceBetweenPlanAction()
+{
+    if (this->plan->getPlanSize() > 0)
+    {
+        for (int i = 0; i < this->plan->getPlanSize(); i++)
+        {
+            PlanAction currentAction = this->plan->getAction(i);
+
+            QMap<int, QSet<QString> > positivePreconditionsDependers;
+            QMap<int, QSet<QString> > negativePreconditionsDependers;
+
+            QMap<int, QSet<QString> > positiveEffectsDependers;
+            QMap<int, QSet<QString> > negativeEffectsDependers;
+
+            // build the positive preconditions dependers
+
+            for (int j = i-1; j >= 0; j--)
+            {
+                PlanAction previousAction = this->plan->getAction(j);
+
+                foreach (QString positivePrecondition, currentAction.getPositivePreconditions()) {
+                    if (previousAction.getPositiveEffects().contains(positivePrecondition))
+                    {
+                        if (!positivePreconditionsDependers.contains(j))
+                        {
+                            QSet<QString> tmpSet;
+                            tmpSet.insert(positivePrecondition);
+                            positivePreconditionsDependers.insert(j, tmpSet);
+                        }
+                        else
+                        {
+                            QSet<QString> tmpSet = positivePreconditionsDependers.value(j);
+                            tmpSet.insert(positivePrecondition);
+                            positivePreconditionsDependers.insert(j, tmpSet);
+                        }
+                        break;
+                    }
+                }
+            }
+
+
+            // build the negative preconditions dependers
+
+            for (int j = i-1; j >= 0; j--)
+            {
+                PlanAction previousAction = this->plan->getAction(j);
+
+                foreach (QString negativePrecondition, currentAction.getNegativePreconditions()) {
+                    if (previousAction.getNegativeEffects().contains(negativePrecondition))
+                    {
+                        if (!negativePreconditionsDependers.contains(j))
+                        {
+                            QSet<QString> tmpSet;
+                            tmpSet.insert(negativePrecondition);
+                            negativePreconditionsDependers.insert(j, tmpSet);
+                        }
+                        else
+                        {
+                            QSet<QString> tmpSet = negativePreconditionsDependers.value(j);
+                            tmpSet.insert(negativePrecondition);
+                            negativePreconditionsDependers.insert(j, tmpSet);
+                        }
+                        break;
+                    }
+                }
+            }
+
+
+            // build the positive effects dependers
+
+            for (int j = i+1; j < this->plan->getPlanSize(); j++)
+            {
+                PlanAction nextAction = this->plan->getAction(j);
+
+                foreach (QString positiveEffect, currentAction.getPositiveEffects()) {
+                    if (nextAction.getPositivePreconditions().contains(positiveEffect))
+                    {
+                        if (!positiveEffectsDependers.contains(j))
+                        {
+                            QSet<QString> tmpSet;
+                            tmpSet.insert(positiveEffect);
+                            positiveEffectsDependers.insert(j, tmpSet);
+                        }
+                        else
+                        {
+                            QSet<QString> tmpSet = positiveEffectsDependers.value(j);
+                            tmpSet.insert(positiveEffect);
+                            positiveEffectsDependers.insert(j, tmpSet);
+                        }
+                        break;
+                    }
+                }
+            }
+
+
+            // build the negative effects dependers
+
+            for (int j = i+1; j < this->plan->getPlanSize(); j++)
+            {
+                PlanAction nextAction = this->plan->getAction(j);
+
+                foreach (QString negativeEffect, currentAction.getNegativeEffects()) {
+                    if (nextAction.getNegativePreconditions().contains(negativeEffect))
+                    {
+                        if (!negativeEffectsDependers.contains(j))
+                        {
+                            QSet<QString> tmpSet;
+                            tmpSet.insert(negativeEffect);
+                            negativeEffectsDependers.insert(j, tmpSet);
+                        }
+                        else
+                        {
+                            QSet<QString> tmpSet = negativeEffectsDependers.value(j);
+                            tmpSet.insert(negativeEffect);
+                            negativeEffectsDependers.insert(j, tmpSet);
+                        }
+                        break;
+                    }
+                }
+            }
+
+
+            currentAction.setPositivePreconditionsDependers(positivePreconditionsDependers);
+            currentAction.setNegativePreconditionsDependers(negativePreconditionsDependers);
+            currentAction.setPositiveEffectsDependers(positiveEffectsDependers);
+            currentAction.setNegativeEffectsDependers(negativeEffectsDependers);
+
+            this->plan->insertAction(currentAction.getId(), currentAction);
+        }
+    }
+}
+
 void PlanValidator::initEnvironment()
 {
     initPlan();
@@ -79,7 +211,7 @@ void PlanValidator::appendEffectsToInitPlanAction(PlanAction &action, QString in
     {
         QString tmpStr = negativePredicateList.at(i);
         predicateChecker.indexIn(tmpStr, pos);
-        negativePurePredicateList.append(predicateChecker.cap(0).simplified());
+        negativePurePredicateList.append(predicateChecker.cap(0).simplified().toLower());
     }
     // select positive predicates
     QStringList positivePurePredicateList;
@@ -88,7 +220,7 @@ void PlanValidator::appendEffectsToInitPlanAction(PlanAction &action, QString in
         {
             // remove the "?" before parameters
             //predicate = predicate.replace("?", "");
-            positivePurePredicateList.append(predicate);
+            positivePurePredicateList.append(predicate.toLower());
         }
     }
     action.setPositiveEffects(positivePurePredicateList.toSet());
@@ -140,7 +272,7 @@ void PlanValidator::appendPreconditionsToGoalPlanAction(PlanAction &action, QStr
     {
         QString tmpStr = negativePredicateList.at(i);
         predicateChecker.indexIn(tmpStr, pos);
-        negativePurePredicateList.append(predicateChecker.cap(0).simplified());
+        negativePurePredicateList.append(predicateChecker.cap(0).simplified().toLower());
     }
     // select positive predicates
     QStringList positivePurePredicateList;
@@ -149,7 +281,7 @@ void PlanValidator::appendPreconditionsToGoalPlanAction(PlanAction &action, QStr
         {
             // remove the "?" before parameters
             //predicate = predicate.replace("?", "");
-            positivePurePredicateList.append(predicate);
+            positivePurePredicateList.append(predicate.toLower());
         }
     }
     action.setPositivePreconditions(positivePurePredicateList.toSet());
@@ -220,8 +352,8 @@ void PlanValidator::appendPreconditionsToPlanAction(PlanAction &planAction, QStr
         argument = argument.simplified();
         if (!argument.isEmpty())
         {
-            QStringList argumentPair = argument.split("-");
-            QString argumentName = argumentPair.at(0);
+            QStringList argumentItems = argument.split(" ", QString::SkipEmptyParts);
+            QString argumentName = argumentItems.at(0);
             argumentNameList.append(argumentName.simplified());
         }
     }
@@ -275,7 +407,7 @@ void PlanValidator::appendPreconditionsToPlanAction(PlanAction &planAction, QStr
         {
             // remove the "?" before parameters
             predicate = predicate.replace("?", "");
-            positivePurePredicateList.append(predicate);
+            positivePurePredicateList.append(predicate.toLower());
         }
     }
     QStringList negativePurePredicateList2;
@@ -284,7 +416,7 @@ void PlanValidator::appendPreconditionsToPlanAction(PlanAction &planAction, QStr
         QString tmpStr = negativePurePredicateList.at(i);
         // remove the "?" before parameters
         tmpStr.replace("?", "");
-        negativePurePredicateList2.append(tmpStr);
+        negativePurePredicateList2.append(tmpStr.toLower());
     }
 
     // append the positive predicates and negative predicates to plan action preconditions
@@ -341,8 +473,8 @@ void PlanValidator::appendEffectsToPlanAction(PlanAction &planAction, QString do
         argument = argument.simplified();
         if (!argument.isEmpty())
         {
-            QStringList argumentPair = argument.split("-");
-            QString argumentName = argumentPair.at(0);
+            QStringList argumentItems = argument.split(" ", QString::SkipEmptyParts);
+            QString argumentName = argumentItems.at(0);
             argumentNameList.append(argumentName.simplified());
         }
     }
@@ -396,7 +528,7 @@ void PlanValidator::appendEffectsToPlanAction(PlanAction &planAction, QString do
         {
             // remove the "?" before parameters
             predicate = predicate.replace("?", "");
-            positivePurePredicateList.append(predicate);
+            positivePurePredicateList.append(predicate.toLower());
         }
     }
     QStringList negativePurePredicateList2;
@@ -405,7 +537,7 @@ void PlanValidator::appendEffectsToPlanAction(PlanAction &planAction, QString do
         QString tmpStr = negativePurePredicateList.at(i);
         // remove the "?" before parameters
         tmpStr.replace("?", "");
-        negativePurePredicateList2.append(tmpStr);
+        negativePurePredicateList2.append(tmpStr.toLower());
     }
 
     // append the positive predicates and negative predicates to plan action effects
@@ -698,13 +830,14 @@ QStringList PlanValidator::getValidatorOutput(QDomElement chosenValidator, QStri
             //The validator does not provide a output file, just the console message
             else
             {
-                parseValidatorOutput(consoleOutput);
+                parseValidatorOutputToPlan(consoleOutput);
+                buildDependenceBetweenPlanAction();
             }
         }
     }
 }
 
-void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
+void PlanValidator::parseValidatorOutputToPlan(QStringList &consoleOutput)
 {
     bool planActioning = false;
     bool planValidationDetails = false;
@@ -834,6 +967,7 @@ void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
         }
     }
 
+    // add all plan action to the plan, additionly construct the init action and goal action
     PlanAction initPlanAction;
     PlanAction goalPlanAction;
 

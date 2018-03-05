@@ -13,6 +13,11 @@ void Plan::addAction(PlanAction action)
     this->actions.insert(newId, action);
 }
 
+void Plan::insertAction(int actionId, PlanAction action)
+{
+    this->actions.insert(actionId, action);
+}
+
 bool Plan::removeAction(int actionId)
 {
     if (this->actions.remove(actionId) == 1) {
@@ -33,10 +38,6 @@ int Plan::getActionId(PlanAction action) const
 PlanAction Plan::getAction(int actionId) const
 {
     return this->actions.value(actionId);
-}
-
-PlanAction &Plan::getActionByTime(double) const
-{
 }
 
 int Plan::getActionId() const

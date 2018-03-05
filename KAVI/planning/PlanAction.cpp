@@ -95,3 +95,43 @@ int PlanAction::getRepairAdviceSize() const
 {
     return repairAdvice.size();
 }
+
+QMap<int, QSet<QString> > PlanAction::getPositivePreconditionsDependers() const
+{
+    return positivePreconditionsDependers;
+}
+
+void PlanAction::setPositivePreconditionsDependers(const QMap<int, QSet<QString> > &value)
+{
+    positivePreconditionsDependers = value;
+}
+
+QMap<int, QSet<QString> > PlanAction::getNegativePreconditionsDependers() const
+{
+    return negativePreconditionsDependers;
+}
+
+void PlanAction::setNegativePreconditionsDependers(const QMap<int, QSet<QString> > &value)
+{
+    negativePreconditionsDependers = value;
+}
+
+QMap<int, QSet<QString> > PlanAction::getPositiveEffectsDependers() const
+{
+    return positiveEffectsDependers;
+}
+
+void PlanAction::setPositiveEffectsDependers(const QMap<int, QSet<QString> > &value)
+{
+    positiveEffectsDependers = value;
+}
+
+QMap<int, QSet<QString> > PlanAction::getNegativeEffectsDependers() const
+{
+    return negativeEffectsDependers;
+}
+
+void PlanAction::setNegativeEffectsDependers(const QMap<int, QSet<QString> > &value)
+{
+    negativeEffectsDependers = value;
+}

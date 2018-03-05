@@ -16,11 +16,11 @@ public:
     Plan();
 
     void addAction(PlanAction action);
+    void insertAction(int actionId, PlanAction action);
     bool removeAction(int actionId);
 
     int getActionId(PlanAction action) const;
     PlanAction getAction(int actionId) const;
-    PlanAction &getActionByTime(double) const;
 
     int getActionId() const;
     void setActionId(int value);
