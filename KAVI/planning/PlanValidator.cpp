@@ -37,12 +37,19 @@ void PlanValidator::buildDependenceBetweenPlanAction()
 
             // build the positive preconditions dependers
 
+            QSet<QString> discardedPreconditions;
             for (int j = i-1; j >= 0; j--)
             {
                 PlanAction previousAction = this->plan->getAction(j);
 
                 foreach (QString positivePrecondition, currentAction.getPositivePreconditions()) {
-                    if (previousAction.getPositiveEffects().contains(positivePrecondition))
+                    if (previousAction.getNegativeEffects().contains(positivePrecondition))
+                    {
+                        discardedPreconditions.insert(positivePrecondition);
+                        continue;
+                    }
+
+                    if (!discardedPreconditions.contains(positivePrecondition) && previousAction.getPositiveEffects().contains(positivePrecondition))
                     {
                         if (!positivePreconditionsDependers.contains(j))
                         {
@@ -56,7 +63,7 @@ void PlanValidator::buildDependenceBetweenPlanAction()
                             tmpSet.insert(positivePrecondition);
                             positivePreconditionsDependers.insert(j, tmpSet);
                         }
-                        break;
+                        //break;
                     }
                 }
             }
@@ -64,12 +71,19 @@ void PlanValidator::buildDependenceBetweenPlanAction()
 
             // build the negative preconditions dependers
 
+            discardedPreconditions.clear();
             for (int j = i-1; j >= 0; j--)
             {
                 PlanAction previousAction = this->plan->getAction(j);
 
                 foreach (QString negativePrecondition, currentAction.getNegativePreconditions()) {
-                    if (previousAction.getNegativeEffects().contains(negativePrecondition))
+                    if (previousAction.getPositiveEffects().contains(negativePrecondition))
+                    {
+                        discardedPreconditions.insert(negativePrecondition);
+                        continue;
+                    }
+
+                    if (!discardedPreconditions.contains(negativePrecondition) && previousAction.getNegativeEffects().contains(negativePrecondition))
                     {
                         if (!negativePreconditionsDependers.contains(j))
                         {
@@ -83,7 +97,7 @@ void PlanValidator::buildDependenceBetweenPlanAction()
                             tmpSet.insert(negativePrecondition);
                             negativePreconditionsDependers.insert(j, tmpSet);
                         }
-                        break;
+                        //break;
                     }
                 }
             }
@@ -91,12 +105,13 @@ void PlanValidator::buildDependenceBetweenPlanAction()
 
             // build the positive effects dependers
 
+            QSet<QString> discardedEffects;
             for (int j = i+1; j < this->plan->getPlanSize(); j++)
             {
                 PlanAction nextAction = this->plan->getAction(j);
 
                 foreach (QString positiveEffect, currentAction.getPositiveEffects()) {
-                    if (nextAction.getPositivePreconditions().contains(positiveEffect))
+                    if (!discardedEffects.contains(positiveEffect) && nextAction.getPositivePreconditions().contains(positiveEffect))
                     {
                         if (!positiveEffectsDependers.contains(j))
                         {
@@ -110,7 +125,12 @@ void PlanValidator::buildDependenceBetweenPlanAction()
                             tmpSet.insert(positiveEffect);
                             positiveEffectsDependers.insert(j, tmpSet);
                         }
-                        break;
+                        //break;
+                    }
+
+                    if (nextAction.getNegativeEffects().contains(positiveEffect))
+                    {
+                        discardedEffects.insert(positiveEffect);
                     }
                 }
             }
@@ -118,12 +138,13 @@ void PlanValidator::buildDependenceBetweenPlanAction()
 
             // build the negative effects dependers
 
+            discardedEffects.clear();
             for (int j = i+1; j < this->plan->getPlanSize(); j++)
             {
                 PlanAction nextAction = this->plan->getAction(j);
 
                 foreach (QString negativeEffect, currentAction.getNegativeEffects()) {
-                    if (nextAction.getNegativePreconditions().contains(negativeEffect))
+                    if (!discardedEffects.contains(negativeEffect) && nextAction.getNegativePreconditions().contains(negativeEffect))
                     {
                         if (!negativeEffectsDependers.contains(j))
                         {
@@ -137,7 +158,12 @@ void PlanValidator::buildDependenceBetweenPlanAction()
                             tmpSet.insert(negativeEffect);
                             negativeEffectsDependers.insert(j, tmpSet);
                         }
-                        break;
+                        //break;
+                    }
+
+                    if (nextAction.getPositiveEffects().contains(negativeEffect))
+                    {
+                        discardedEffects.insert(negativeEffect);
                     }
                 }
             }
@@ -347,7 +373,7 @@ void PlanValidator::appendPreconditionsToPlanAction(PlanAction &planAction, QStr
     QStringList argumentNameList;
     parameters.remove(parameters.indexOf("("), 1);
     parameters.remove(parameters.indexOf(")"), 1);
-    argumentsList = parameters.split("?");
+    argumentsList = parameters.split("?", QString::SkipEmptyParts);
     foreach (QString argument, argumentsList) {
         argument = argument.simplified();
         if (!argument.isEmpty())
@@ -359,6 +385,12 @@ void PlanValidator::appendPreconditionsToPlanAction(PlanAction &planAction, QStr
     }
     for (int i = 0; i < argumentNameList.size(); i++)
     {
+        QRegExp argumentNameChecker;
+        QString pattern("[\\s]+");
+        pattern.append(argumentNameList.at(i));
+        pattern.append("[\\s]+");
+        argumentNameChecker.setPattern(pattern);
+
         domainAction.replace(argumentNameList.at(i), actionParameters.at(i));
     }
 
@@ -468,7 +500,7 @@ void PlanValidator::appendEffectsToPlanAction(PlanAction &planAction, QString do
     QStringList argumentNameList;
     parameters.remove(parameters.indexOf("("), 1);
     parameters.remove(parameters.indexOf(")"), 1);
-    argumentsList = parameters.split("?");
+    argumentsList = parameters.split("?", QString::SkipEmptyParts);
     foreach (QString argument, argumentsList) {
         argument = argument.simplified();
         if (!argument.isEmpty())
