@@ -256,6 +256,7 @@
 #define KAVI_PDDL_DIR_DEBUG "/KAVI/KAVIPDDL/"
 #define DEFAULT_DOMAIN_PDDL_FILE "DefaultDomain.pddl"
 #define DEFAULT_PROBLEM_PDDL_FILE "DefaultProblem.pddl"
+#define DEFAULT_PLAN_FILE "DefaultPlan"
 
 #define KAVI_PARSERS_FOLDER "KAVIParsers/"
 #define KAVI_VALIDATORS_FOLDER "KAVIValidators/"

@@ -68,6 +68,10 @@ public:
 
     bool writeToXMLFile();
 
+    void writePlanToDefaultPath(QStringList& plan);
+
+    QString getPDDLFilePath();
+
     QString getPlannersPath();
 
     QString removeTroublesomeCharacters(QString inString);

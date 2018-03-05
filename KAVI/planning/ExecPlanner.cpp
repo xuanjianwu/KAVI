@@ -694,6 +694,7 @@ QDomElement ExecPlanner::solvePlanningProblem(QDomElement chosenPlanner, QString
             QStringList plan;
             QStringList statistic;
             getPlanAndStatistics(output, plan, statistic);
+            writePlanToDefaultPath(plan);
 
             //3. set datetime
             QDateTime current_date_time =QDateTime::currentDateTime();
@@ -912,6 +913,55 @@ bool ExecPlanner::writeToXMLFile()
     QTextStream saveStream(&newXmlFile);
     planDocument.save(saveStream, OUTPUT_INDENT);
     newXmlFile.close();
+}
+
+void ExecPlanner::writePlanToDefaultPath(QStringList &plan)
+{
+    QString fileName = getPDDLFilePath();
+
+    fileName.append(DEFAULT_PLAN_FILE);
+
+    if (QFile::exists(fileName))
+    {
+        QFile::remove(fileName);
+
+    }
+    QFile file(fileName);
+
+    if ( !file.open(QIODevice::Truncate | QIODevice::WriteOnly | QIODevice::Text) )
+    {
+        //QMessageBox::critical(this, tr("Error"), tr("Can't open file %1").arg(fileName));
+        return;
+    }
+
+    QTextStream outStream(&file);
+    foreach (QString line, plan) {
+        outStream << line << "\n";
+    }
+    file.close();
+}
+
+QString ExecPlanner::getPDDLFilePath()
+{
+    QString filePath;
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:
+        filePath.append(upPath).append(KAVI_PDDL_DIR_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(KAVI_PDDL_DIR_RELEASE);
+        break;
+    default:
+        break;
+    }
+
+    return filePath;
 }
 
 QString ExecPlanner::getPlannersPath()

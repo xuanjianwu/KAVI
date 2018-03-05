@@ -21,9 +21,13 @@ public:
     void initEnvironment();
     void initPlan();
 
+    void initDomainActions();
+
     void appendPreconditionsToPlanAction(PlanAction& planAction, QString domainAction);
 
-    void matchPlanActionWithDomain(PlanAction& action, QString domainFile);
+    void appendEffectsToPlanAction(PlanAction& planAction, QString domainAction);
+
+    void matchPlanActionWithDomain(PlanAction& action);
 
     void selectMatchedActionFromDomainActions(QString actionName, QStringList& domainActions, QString &targetDomainAction);
 
@@ -78,6 +82,8 @@ private:
 
     QString domainName;
     QString problemName;
+
+    QStringList domainActions;
 
     // the running mode of KAVI: Debug or Release
     RunMode KAVIRunMode;

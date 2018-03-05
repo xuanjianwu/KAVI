@@ -10,14 +10,14 @@
     <project/>
     <domain>Blockworld</domain>
     <problem>fourBoxes</problem>
-    <datetime>2018.03.04 01:49:00.808 周日</datetime>
-    <planner id="1">
-        <name>Metric-FF</name>
-        <version>Windows</version>
-        <date>2002</date>
-        <institution/>
-        <author>J. Hoffmann</author>
-        <link>http://fai.cs.uni-saarland.de/hoffmann/metric-ff.html</link>
+    <datetime>2018.03.05 12:41:16.456 周一</datetime>
+    <planner id="3">
+        <name>LPG-td</name>
+        <version>1.0 Windows</version>
+        <date>August 2004</date>
+        <institution>Dipartimento di Elettronica per l'Automazione Universita' di Brescia Via Branze 38, I-25123, Brescia, Italy</institution>
+        <author>Alfonso Gerevini, Alessandro Saetti and Ivan Serina</author>
+        <link>http://eracle.ing.unibs.it/lpg/index.html</link>
         <description/>
         <platform>
             <windows/>
@@ -31,57 +31,89 @@
             <fluents/>
             <equality/>
             <conditional-effects/>
+            <constraints/>
+            <continuous-effects/>
+            <derived-predicates/>
             <disjunctive-preconditions/>
             <duration-inequalities/>
             <durative-actions/>
             <existential-preconditions/>
             <negative-preconditions/>
             <numeric-fluents/>
+            <preferences/>
+            <probabilistic-effects/>
             <quantified-preconditions/>
+            <timed-initial-literals/>
             <universal-preconditions/>
         </requirements>
         <consoleOutput>
-ff: parsing domain file
-domain 'BLOCKWORLD' defined
- ... done.
-ff: parsing problem file
-problem 'FOURBOXES' defined
- ... done.
+Parsing domain file:  domain 'BLOCKWORLD' defined ... done.
+Parsing problem file:  problem 'FOURBOXES' defined ... done.
 
 
-no metric specified. plan length assumed.
 
-checking for cyclic := effects --- OK.
+Modality: Quality Planner
 
-ff: search configuration is  best-first on 1*g(s) + 5*h(s) where
-    metric is  plan length
+Number of actions             :       2
+Number of conditional actions :       0
+Number of facts               :       4
 
-advancing to distance:    1
-                          0
 
-ff: found legal plan
-The pert-value:  1
+Analyzing Planning Problem:
+	Temporal Planning Problem: NO
+	Numeric Planning Problem: NO
+	Problem with Timed Initial Litearals: NO
+	Problem with Derived Predicates: NO
 
-time spent:    0.00 seconds instantiating 2 easy, 0 hard action templates
-               0.00 seconds reachability analysis, yielding 5 facts and 2 actions
-               0.00 seconds creating final representation with 4 relevant facts, 0 relevant fluents
-               0.00 seconds computing LNF
-               0.00 seconds building connectivity graph
-               0.00 seconds searching, evaluating 2 states, to a max depth of 0
-               0.00 seconds total time
+Evaluation function weights:
+     Action duration 0.00; Action cost 1.00
+
+
+Computing mutex... done
+
+Preprocessing total time: 0.00 seconds
+
+Searching ('.' = every 50 search steps):
+ Restart.
+.
+
+Plan computed:
+   Time: (ACTION) [action Duration; action Cost]
+
+
+Solution found:
+Total time:      0.01
+Search time:     0.00
+Actions:         1
+Execution cost:  1.00
+Duration:        1.000
+Plan quality:    1.000
+     Plan file:       C:/Users/liYc/Desktop/Blockworld_fourBoxes.pddl.SOL
+
+
+
+Do not use option -quality for better solutions.
 
 
 </consoleOutput>
     </planner>
     <statistics>
-        <toolTime>0.188</toolTime>
-        <time>0.00</time>
-        <parsingTime/>
-        <nrActions>1</nrActions>
-        <makeSpan></makeSpan>
-        <metricValue></metricValue>
+        <toolTime>0.158</toolTime>
+        <time>0.01</time>
+        <parsingTime>time 0.00</parsingTime>
+        <nrActions/>
+        <makeSpan/>
+        <metricValue/>
         <planningTechnique/>
-        <additional>ParsingTime 
+        <additional>Version LPG-td-1.0
+Seed 108427894
+Command line: /cygdrive/e/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPlanners/lpg-td-1.0 -o C:/Users/liYc/Desktop/1.pddl -f C:/Users/liYc/Desktop/Blockworld_fourBoxes.pddl -quality -out solution
+Problem C:/Users/liYc/Desktop/Blockworld_fourBoxes.pddl
+Actions having STRIPS duration
+Plan generation time 0.00
+Search time 0.00
+Mutex time 0.00
+Quality 1
 </additional>
         <forcedQuit/>
     </statistics>
@@ -96,7 +128,6 @@ time spent:    0.00 seconds instantiating 2 easy, 0 hard action templates
                 <parameter id="R1"/>
                 <parameter id="B1"/>
                 <parameter id="B2"/>
-                <parameter id=""/>
             </parameters>
             <startTime>0</startTime>
             <duration>1</duration>
