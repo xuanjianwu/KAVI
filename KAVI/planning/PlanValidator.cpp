@@ -217,6 +217,7 @@ void PlanValidator::appendPreconditionsToPlanAction(PlanAction &planAction, QStr
     parameters.remove(parameters.indexOf(")"), 1);
     argumentsList = parameters.split("?");
     foreach (QString argument, argumentsList) {
+        argument = argument.simplified();
         if (!argument.isEmpty())
         {
             QStringList argumentPair = argument.split("-");
@@ -337,6 +338,7 @@ void PlanValidator::appendEffectsToPlanAction(PlanAction &planAction, QString do
     parameters.remove(parameters.indexOf(")"), 1);
     argumentsList = parameters.split("?");
     foreach (QString argument, argumentsList) {
+        argument = argument.simplified();
         if (!argument.isEmpty())
         {
             QStringList argumentPair = argument.split("-");
@@ -444,8 +446,13 @@ void PlanValidator::matchPlanActionWithDomain(PlanAction &action)
 
 void PlanValidator::selectMatchedActionFromDomainActions(QString actionName, QStringList& domainActions, QString& targetDomainAction)
 {
+    QRegExp actionNameChecker;
+    QString pattern("[\\s]+");
+    pattern.append(actionName);
+    pattern.append("[\\s]+");
+    actionNameChecker.setPattern(pattern);
     foreach (QString action, domainActions) {
-        if (action.contains(actionName))
+        if (action.contains(actionNameChecker))
         {
             QRegExp tmpChecker;
             tmpChecker.setPattern(QString("\\([\\s]*\\:action"));
@@ -707,7 +714,7 @@ void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
 
     int repairedPlanActionIndex = -1;
 
-    QList<PlanAction> tmpPlanActions;
+    QVector<PlanAction> tmpPlanActions;
 
     planSuccess = true;
     int lastCheckedPlanActionIndex = -1;
@@ -717,6 +724,7 @@ void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
     {
         QString line = consoleOutput.at(i);
 
+        line = line.simplified();
         if (line.isEmpty())
         {
             continue;
@@ -792,15 +800,15 @@ void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
             {
                 repairAdvising = true;
                 double repairedPlanActionTime = QString(line.split(" ").last()).toDouble();
-                for (int i = 0; i < tmpPlanActions.size(); i++)
+                for (int j = 0; j < tmpPlanActions.size(); j++)
                 {
-                    if (tmpPlanActions.at(i).getTime() == repairedPlanActionTime)
+                    if (tmpPlanActions[j].getTime() == repairedPlanActionTime)
                     {
-                        repairedPlanActionIndex = i;
+                        repairedPlanActionIndex = j;
                     }
                 }
             }
-            else if (repairAdvising && line.contains("set"))
+            else if (repairAdvising && line.contains("Set"))
             {
                 QRegExp repairedPreconditionChecker;
                 repairedPreconditionChecker.setPattern(QString("\\([^()]*\\)"));
@@ -815,7 +823,8 @@ void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
                 {
                     advice = false;
                 }
-                tmpPlanActions.at(i).addRepairAdvice(repairedPrecondition, advice);
+                //PlanAction(tmpPlanActions.at(repairedPlanActionIndex)).addRepairAdvice(repairedPrecondition, advice);
+                tmpPlanActions[repairedPlanActionIndex].addRepairAdvice(repairedPrecondition, advice);
             }
             else if (line.contains("Failed plans:"))
             {
