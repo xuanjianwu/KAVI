@@ -34,6 +34,128 @@ void PlanValidator::initPlan()
     plan = new Plan();
 }
 
+void PlanValidator::setInitPlanAction(PlanAction &action)
+{
+    QFile file(problemFile);
+    if ( !file.open(QFile::ReadOnly | QFile::Text ))
+    {
+        return;
+    }
+    QString content(file.readAll());
+    file.seek(0);
+    file.close();
+    action.setFormula("(init)");
+
+    splitProblemInitToString(content, problemInit);
+    appendEffectsToInitPlanAction(action, problemInit);
+}
+
+void PlanValidator::appendEffectsToInitPlanAction(PlanAction &action, QString initString)
+{
+    // select all predicates including positive and negative
+    QRegExp predicateChecker;
+    predicateChecker.setPattern(QString("\\([^()]*\\)"));
+    int pos = 0;
+    QStringList predicateList;
+    while ((pos = predicateChecker.indexIn(initString, pos)) != -1)
+    {
+        predicateList.append(predicateChecker.capturedTexts());
+        pos += predicateChecker.matchedLength();
+    }
+
+    // select negative predicates
+    QRegExp negativePredicateChecker;
+    negativePredicateChecker.setPattern(QString("not[\\s]*\\([^()]*\\)"));
+    pos = 0;
+    QStringList negativePredicateList;
+    while ((pos = negativePredicateChecker.indexIn(initString, pos)) != -1)
+    {
+        negativePredicateList.append(negativePredicateChecker.capturedTexts());
+        pos += negativePredicateChecker.matchedLength();
+    }
+    pos = 0;
+    QStringList negativePurePredicateList;
+    for (int i = 0; i < negativePredicateList.size(); i++)
+    {
+        QString tmpStr = negativePredicateList.at(i);
+        predicateChecker.indexIn(tmpStr, pos);
+        negativePurePredicateList.append(predicateChecker.cap(0).simplified());
+    }
+    // select positive predicates
+    QStringList positivePurePredicateList;
+    foreach (QString predicate, predicateList) {
+        if (!negativePurePredicateList.contains(predicate))
+        {
+            // remove the "?" before parameters
+            //predicate = predicate.replace("?", "");
+            positivePurePredicateList.append(predicate);
+        }
+    }
+    action.setPositiveEffects(positivePurePredicateList.toSet());
+    action.setNegativeEffects(negativePurePredicateList.toSet());
+}
+
+void PlanValidator::setGoalPlanAction(PlanAction &action)
+{
+    QFile file(problemFile);
+    if ( !file.open(QFile::ReadOnly | QFile::Text ))
+    {
+        return;
+    }
+    QString content(file.readAll());
+    file.seek(0);
+    file.close();
+    action.setFormula("(goal)");
+
+    splitProblemGoalToString(content, problemGoal);
+    appendPreconditionsToGoalPlanAction(action, problemGoal);
+}
+
+void PlanValidator::appendPreconditionsToGoalPlanAction(PlanAction &action, QString goalString)
+{
+    // select all predicates including positive and negative
+    QRegExp predicateChecker;
+    predicateChecker.setPattern(QString("\\([^()]*\\)"));
+    int pos = 0;
+    QStringList predicateList;
+    while ((pos = predicateChecker.indexIn(goalString, pos)) != -1)
+    {
+        predicateList.append(predicateChecker.capturedTexts());
+        pos += predicateChecker.matchedLength();
+    }
+
+    // select negative predicates
+    QRegExp negativePredicateChecker;
+    negativePredicateChecker.setPattern(QString("not[\\s]*\\([^()]*\\)"));
+    pos = 0;
+    QStringList negativePredicateList;
+    while ((pos = negativePredicateChecker.indexIn(goalString, pos)) != -1)
+    {
+        negativePredicateList.append(negativePredicateChecker.capturedTexts());
+        pos += negativePredicateChecker.matchedLength();
+    }
+    pos = 0;
+    QStringList negativePurePredicateList;
+    for (int i = 0; i < negativePredicateList.size(); i++)
+    {
+        QString tmpStr = negativePredicateList.at(i);
+        predicateChecker.indexIn(tmpStr, pos);
+        negativePurePredicateList.append(predicateChecker.cap(0).simplified());
+    }
+    // select positive predicates
+    QStringList positivePurePredicateList;
+    foreach (QString predicate, predicateList) {
+        if (!negativePurePredicateList.contains(predicate))
+        {
+            // remove the "?" before parameters
+            //predicate = predicate.replace("?", "");
+            positivePurePredicateList.append(predicate);
+        }
+    }
+    action.setPositivePreconditions(positivePurePredicateList.toSet());
+    action.setNegativePreconditions(negativePurePredicateList.toSet());
+}
+
 void PlanValidator::initDomainActions()
 {
     QFile file(domainFile);
@@ -43,6 +165,7 @@ void PlanValidator::initDomainActions()
     }
     QString content(file.readAll());
     file.seek(0);
+    file.close();
 
     //content.replace("\n", " ");
     splitDomainActionsToString(content, domainActions);
@@ -377,6 +500,40 @@ void PlanValidator::splitDomainActionsToString(QString domainFile, QStringList &
     }
 }
 
+void PlanValidator::splitProblemInitToString(QString problemFile, QString &initString)
+{
+    // this function split the plain text of problem file for the init as string, such as
+    /*
+    (:init
+        (holding R1 B2)
+        (clear B1)
+    )
+     */
+
+    QString tmpString = QString(problemFile.split("(:init").at(1));
+    tmpString = QString(tmpString.split("(:goal").at(0));
+    tmpString.prepend("(:init ");
+    initString = tmpString.simplified();
+}
+
+void PlanValidator::splitProblemGoalToString(QString problemFile, QString &goalString)
+{
+    // this function split the plain text of problem file for the goal as string, such as
+    /*
+    (:goal
+        (and
+            (empty R1)
+            (clear B2)
+            (on B2 B1)
+        )
+    )
+     */
+
+    QString tmpString = QString(problemFile.split("(:goal").at(1));
+    tmpString.prepend("(:goal ");
+    goalString = tmpString.simplified();
+}
+
 QString PlanValidator::getContentsAsString(QFile &file)
 {
     QString res;
@@ -544,6 +701,17 @@ void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
 {
     bool planActioning = false;
     bool planValidationDetails = false;
+    bool checkingNextHappening = false;
+    bool planRepairAdvice = false;
+    bool repairAdvising = false;
+
+    int repairedPlanActionIndex = -1;
+
+    QList<PlanAction> tmpPlanActions;
+
+    planSuccess = true;
+    int lastCheckedPlanActionIndex = -1;
+    double lastCheckedPlanActionTime;
 
     for (int i = 0; i < consoleOutput.size(); i++)
     {
@@ -554,7 +722,7 @@ void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
             continue;
         }
 
-        if (line.contains("Plan size"))
+        if (line.contains("Plan size:"))
         {
             line = line.remove(0, line.indexOf(":")+1).simplified();
             setPlanSize(line.toInt());
@@ -584,9 +752,100 @@ void PlanValidator::parseValidatorOutput(QStringList &consoleOutput)
             addAction.setFormula(actionFormula);
 
             matchPlanActionWithDomain(addAction);
-            plan->addAction(addAction);
+            tmpPlanActions.append(addAction);
+
+            //plan->addAction(addAction);
+        }
+        else if (planValidationDetails)
+        {
+            if (line.contains("Checking next happening"))
+            {
+                checkingNextHappening = true;
+
+                lastCheckedPlanActionIndex++;
+
+                QString timeStr = line;
+                timeStr.remove(0, timeStr.indexOf("(")+1);
+                timeStr.remove(timeStr.indexOf(")"), 1);
+                timeStr = timeStr.simplified();
+                lastCheckedPlanActionTime = QString(timeStr.split(" ").at(1)).toDouble();
+            }
+            else if (line.contains("Plan failed to execute"))
+            {
+                planSuccess = false;
+                planValidationDetails = false;
+            }
+            else if (line.contains("Plan executed successfully - checking goal"))
+            {
+                planSuccess = true;
+                planValidationDetails = false;
+                break;
+            }
+        }
+        else if (line.contains("Plan Repair Advice:"))
+        {
+            planRepairAdvice = true;
+        }
+        else if (planRepairAdvice)
+        {
+            if (line.contains("at time"))
+            {
+                repairAdvising = true;
+                double repairedPlanActionTime = QString(line.split(" ").last()).toDouble();
+                for (int i = 0; i < tmpPlanActions.size(); i++)
+                {
+                    if (tmpPlanActions.at(i).getTime() == repairedPlanActionTime)
+                    {
+                        repairedPlanActionIndex = i;
+                    }
+                }
+            }
+            else if (repairAdvising && line.contains("set"))
+            {
+                QRegExp repairedPreconditionChecker;
+                repairedPreconditionChecker.setPattern(QString("\\([^()]*\\)"));
+                repairedPreconditionChecker.indexIn(line);
+                QString repairedPrecondition = repairedPreconditionChecker.cap(0);
+                bool advice;
+                if (line.contains("true"))
+                {
+                    advice = true;
+                }
+                else if (line.contains("false"))
+                {
+                    advice = false;
+                }
+                tmpPlanActions.at(i).addRepairAdvice(repairedPrecondition, advice);
+            }
+            else if (line.contains("Failed plans:"))
+            {
+                planRepairAdvice = false;
+                break;
+            }
         }
     }
+
+    PlanAction initPlanAction;
+    PlanAction goalPlanAction;
+
+    setInitPlanAction(initPlanAction);
+    setGoalPlanAction(goalPlanAction);
+
+    this->plan->addAction(initPlanAction);
+
+    if (planSuccess)
+    {
+        foreach (PlanAction tmpPlanAction, tmpPlanActions) {
+            this->plan->addAction(tmpPlanAction);
+        }
+    }
+    else {
+        foreach (PlanAction tmpPlanAction, tmpPlanActions) {
+            this->plan->addAction(tmpPlanAction);
+        }
+    }
+
+    this->plan->addAction(goalPlanAction);
 }
 
 QString PlanValidator::getValidatorsPath()

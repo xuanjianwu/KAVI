@@ -75,3 +75,23 @@ void PlanAction::setNegativePreconditions(const QSet<QString> &value)
 {
     negativePreconditions = value;
 }
+
+QMap<QString, bool> PlanAction::getRepairAdvice() const
+{
+    return repairAdvice;
+}
+
+void PlanAction::setRepairAdvice(const QMap<QString, bool> &value)
+{
+    repairAdvice = value;
+}
+
+void PlanAction::addRepairAdvice(const QString precondition, const bool advice)
+{
+    repairAdvice.insert(precondition, advice);
+}
+
+int PlanAction::getRepairAdviceSize() const
+{
+    return repairAdvice.size();
+}

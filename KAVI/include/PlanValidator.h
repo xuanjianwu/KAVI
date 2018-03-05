@@ -21,6 +21,12 @@ public:
     void initEnvironment();
     void initPlan();
 
+    void setInitPlanAction(PlanAction &action);
+    void appendEffectsToInitPlanAction(PlanAction &action, QString initString);
+
+    void setGoalPlanAction(PlanAction &action);
+    void appendPreconditionsToGoalPlanAction(PlanAction &action, QString goalString);
+
     void initDomainActions();
 
     void appendPreconditionsToPlanAction(PlanAction& planAction, QString domainAction);
@@ -32,6 +38,10 @@ public:
     void selectMatchedActionFromDomainActions(QString actionName, QStringList& domainActions, QString &targetDomainAction);
 
     void splitDomainActionsToString(QString domainFile, QStringList& actions);
+
+    void splitProblemInitToString(QString problemFile, QString &initString);
+
+    void splitProblemGoalToString(QString problemFile, QString &goalString);
 
     QString getContentsAsString(QFile& file);
     QStringList getContentsAsStringList(QFile& file);
@@ -83,6 +93,8 @@ private:
     QString domainName;
     QString problemName;
 
+    QString problemInit;
+    QString problemGoal;
     QStringList domainActions;
 
     // the running mode of KAVI: Debug or Release
@@ -90,6 +102,7 @@ private:
 
     Plan *plan;
     StateHistory *stateHistory;
+    bool planSuccess;
 };
 
 #endif // PLANVALIDATOR_H

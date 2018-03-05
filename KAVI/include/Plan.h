@@ -20,6 +20,7 @@ public:
 
     int getActionId(PlanAction action) const;
     PlanAction getAction(int actionId) const;
+    PlanAction &getActionByTime(double) const;
 
     int getActionId() const;
     void setActionId(int value);

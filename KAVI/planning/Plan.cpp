@@ -35,6 +35,10 @@ PlanAction Plan::getAction(int actionId) const
     return this->actions.value(actionId);
 }
 
+PlanAction &Plan::getActionByTime(double) const
+{
+}
+
 int Plan::getActionId() const
 {
     return actionId;

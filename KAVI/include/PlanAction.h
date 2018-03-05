@@ -35,6 +35,11 @@ public:
     QSet<QString> getNegativePreconditions() const;
     void setNegativePreconditions(const QSet<QString> &value);
 
+    QMap<QString, bool> getRepairAdvice() const;
+    void setRepairAdvice(const QMap<QString, bool> &value);
+    void addRepairAdvice(const QString precondition, const bool advice);
+    int getRepairAdviceSize() const;
+
 private:
     QString formula;
     double time;
@@ -44,6 +49,8 @@ private:
     QSet<QString> negativePreconditions;
     QSet<QString> positiveEffects;
     QSet<QString> negativeEffects;
+
+    QMap<QString, bool> repairAdvice;
 };
 
 #endif // PLANACTION_H
