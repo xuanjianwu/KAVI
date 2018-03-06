@@ -745,7 +745,7 @@ QStringList PlanValidator::getContentsAsStringList(QFile &file)
     return res;
 }
 
-QStringList PlanValidator::getValidatorOutput(QDomElement chosenValidator, QString domain, QString problem, QString plan, QStringList &consoleOutput)
+void PlanValidator::getValidatorOutput(QDomElement chosenValidator, QString domain, QString problem, QString plan, QStringList &consoleOutput)
 {
     QStringList output;
     QString solutionFile =  "solution.soln";

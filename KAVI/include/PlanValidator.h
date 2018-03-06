@@ -50,7 +50,7 @@ public:
     QString getContentsAsString(QFile& file);
     QStringList getContentsAsStringList(QFile& file);
 
-    QStringList getValidatorOutput(QDomElement chosenValidator, QString domain, QString problem, QString plan, QStringList& consoleOutput);
+    void getValidatorOutput(QDomElement chosenValidator, QString domain, QString problem, QString plan, QStringList& consoleOutput);
 
     void parseValidatorOutputToPlan(QStringList& consoleOutput);
 
