@@ -8,9 +8,9 @@
     <name/>
     <description/>
     <project/>
-    <domain>UNNAMED</domain>
-    <problem></problem>
-    <datetime>2018.03.06 20:52:56.621 周二</datetime>
+    <domain>Blockworld</domain>
+    <problem>fourBoxes</problem>
+    <datetime>2018.03.06 21:17:05.185 周二</datetime>
     <planner id="2">
         <name>Blackbox</name>
         <version>42 Windows</version>
@@ -34,18 +34,18 @@
             <negative-preconditions/>
         </requirements>
         <consoleOutput>blackbox version 42
-command line:  /cygdrive/e/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPlanners/blackbox -o E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPDDL/DefaultDomain.pddl -f E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPDDL/DefaultProblem.pddl
+command line:  /cygdrive/e/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPlanners/blackbox -o C:/Users/liYc/Desktop/1.pddl -f C:/Users/liYc/Desktop/Blockworld_fourBoxes.pddl
 
 Begin solver specification
     -maxint        0   -maxsec 10.000000  graphplan
     -maxint        0   -maxsec 0.000000  chaff
 End solver specification
-Loading domain file: E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPDDL/DefaultDomain.pddl
+Loading domain file: C:/Users/liYc/Desktop/1.pddl
 
 </consoleOutput>
     </planner>
     <statistics>
-        <toolTime>0.074</toolTime>
+        <toolTime>0.067</toolTime>
         <time/>
         <parsingTime/>
         <nrActions/>

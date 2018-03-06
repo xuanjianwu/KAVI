@@ -78,7 +78,8 @@ SOURCES += \
     planning/State.cpp \
     planning/PlanAction.cpp \
     planning/Plan.cpp \
-    planning/StateHistory.cpp
+    planning/StateHistory.cpp \
+    gui/PlanValidationDialog.cpp
 
 HEADERS += \
     include/KAVIBase.h \
@@ -136,7 +137,8 @@ HEADERS += \
     include/State.h \
     include/PlanAction.h \
     include/Plan.h \
-    include/StateHistory.h
+    include/StateHistory.h \
+    include/PlanValidationDialog.h
 
 FORMS += \
     forms/KAVIMainWindow.ui \
@@ -157,7 +159,8 @@ FORMS += \
     forms/KnowledgeBaseClassEditDialog.ui \
     forms/KnowledgeBasePredicateEditDialog.ui \
     forms/SolutionSettingsDialog.ui \
-    forms/PlanningDialog.ui
+    forms/PlanningDialog.ui \
+    forms/PlanValidationDialog.ui
 
 RESOURCES += \
     res/KAVIIcons.qrc \

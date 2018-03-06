@@ -156,18 +156,18 @@ void PlanningDialog::showPlannerOutput()
 {
     ui->plannerOutput->clear();
     QString text = PlanAnalyzer::generateHTMLSinglePlanReport(getKAVIPlanners(), exe->getPlan());
-    QStringList strList = exe->getTestConsoleOutput();
-    QString str;
-    foreach (QString line, strList) {
-        str.append(line);
-    }
-    QFile htmlFile("test.html");
+//    QStringList strList = exe->getTestConsoleOutput();
+//    QString str;
+//    foreach (QString line, strList) {
+//        str.append(line);
+//    }
+//    QFile htmlFile("test.html");
 
-    if (!htmlFile.open(QIODevice::WriteOnly | QIODevice::Text))
-        return;
+//    if (!htmlFile.open(QIODevice::WriteOnly | QIODevice::Text))
+//        return;
 
-    QTextStream out(&htmlFile);
-    out << text;
+//    QTextStream out(&htmlFile);
+//    out << text;
 
     ui->plannerOutput->setText(text);
 }
