@@ -6,19 +6,21 @@ PlanValidator::PlanValidator()
 {
     KAVIRunMode = Debug;
 
-    initEnvironment();
+    //initEnvironment();
 }
 
 PlanValidator::PlanValidator(QDomElement chosenValidator, QString domainFile, QString problemFile, QString planFile)
 {
     KAVIRunMode = Debug;
 
-    this->chosenValidator = chosenValidator;
-    this->domainFile = domainFile;
-    this->problemFile = problemFile;
-    this->planFile = planFile;
+//    this->chosenValidator = chosenValidator;
+//    this->domainFile = domainFile;
+//    this->problemFile = problemFile;
+//    this->planFile = planFile;
 
-    initEnvironment();
+//    initEnvironment();
+
+    initPlanValidator(chosenValidator, domainFile, problemFile, planFile);
 }
 
 void PlanValidator::buildDependenceBetweenPlanAction()
@@ -1047,6 +1049,8 @@ void PlanValidator::parseValidatorOutputToPlan(QStringList &consoleOutput)
     {
         this->plan->setInterruptActionId(lastCheckedPlanActionIndex+1);
     }
+
+    setPlanSize(this->plan->getPlanSize());
 }
 
 QString PlanValidator::getValidatorsPath()
@@ -1148,7 +1152,73 @@ void PlanValidator::run()
     {
         QStringList consoleOutput;
         getValidatorOutput(chosenValidator, domainFile, problemFile, planFile, consoleOutput);
-        PlanAction action;
-        //matchPlanActionWithDomain(action);
     }
+}
+
+Plan *PlanValidator::getPlan() const
+{
+    return plan;
+}
+
+StateHistory *PlanValidator::getStateHistory()
+{
+    return stateHistory;
+}
+
+void PlanValidator::solveProblem(QDomElement chosenValidator, QString domain, QString problem, QString plan)
+{
+    resetPlanValidator();
+    initPlanValidator(chosenValidator, domain, problem, plan);
+
+    if (!this->chosenValidator.isNull() && !this->domainFile.isNull() && !this->problemFile.isNull() && !this->planFile.isNull())
+    {
+        QStringList consoleOutput;
+        getValidatorOutput(this->chosenValidator, this->domainFile, this->problemFile, this->planFile, consoleOutput);
+    }
+}
+
+void PlanValidator::resetPlanValidator()
+{
+    toolMessage.clear();
+    time = 0;
+    gotError = false;
+    readyReadOutput = false;
+    normalExit  = false;
+    planSize = 0;
+    chosenValidator.clear();
+    domainFile.clear();
+    problemFile.clear();
+    planFile.clear();
+    domainName.clear();
+    problemName.clear();
+    problemInit.clear();
+    problemGoal.clear();
+    domainActions.clear();
+    planSuccess = true;
+
+    if (process != NULL)
+    {
+        delete process;
+        process = NULL;
+    }
+    if (plan != NULL)
+    {
+        delete plan;
+        plan = NULL;
+    }
+    if (stateHistory != NULL)
+    {
+        delete stateHistory;
+        stateHistory = NULL;
+    }
+}
+
+void PlanValidator::initPlanValidator(QDomElement chosenValidator, QString domain, QString problem, QString plan)
+{
+    this->chosenValidator = chosenValidator;
+    this->domainFile = domain;
+    this->problemFile = problem;
+    this->planFile = plan;
+
+    initEnvironment();
 }

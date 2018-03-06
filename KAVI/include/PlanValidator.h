@@ -79,6 +79,15 @@ public:
 
     void run();
 
+    Plan *getPlan() const;
+
+    StateHistory *getStateHistory();
+
+    void solveProblem(QDomElement chosenValidator, QString domain, QString problem, QString plan);
+
+    void resetPlanValidator();
+
+    void initPlanValidator(QDomElement chosenValidator, QString domain, QString problem, QString plan);
 private:
     double time = 0;
     QString toolMessage;

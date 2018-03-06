@@ -21,7 +21,11 @@
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
-       <widget class="QTextEdit" name="actionInfomation"/>
+       <widget class="QTextEdit" name="actionInfomation">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -33,7 +37,11 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
-       <widget class="QTextEdit" name="worldStateChange"/>
+       <widget class="QTextEdit" name="worldStateChange">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -45,7 +53,11 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
-       <widget class="QTableWidget" name="actionsTable"/>
+       <widget class="QTableWidget" name="actionsTable">
+        <property name="dragEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

@@ -68,6 +68,7 @@ void PlanningDialog::initEnvironment()
 
     setDefaultDomainFile();
     setDefaultProblemFile();
+    setDefaultPlanFile();
 
     // init solutionSettingsDialog
     //solutionSettingsDialog = new SolutionSettingsDialog(getKAVIPlanners(), this);
@@ -114,6 +115,13 @@ void PlanningDialog::on_customProblem_clicked(bool checked)
         ui->problemBrowse->setEnabled(true);
         resetDomainFile();
         resetProblemFile();
+
+        if (ui->planValidation->checkState() == Qt::Checked)
+        {
+            ui->planBrowse->setEnabled(true);
+            ui->planFile->setEnabled(true);
+            resetPlanFile();
+        }
     }
     else
     {
@@ -287,16 +295,6 @@ QString PlanningDialog::getValidatorsXMLFilePath()
     return filePath;
 }
 
-QString PlanningDialog::getPlanFile() const
-{
-    return planFile;
-}
-
-void PlanningDialog::setPlanFile(const QString &value)
-{
-    planFile = value;
-}
-
 void PlanningDialog::on_plannersSettings_clicked()
 {
     SolutionSettingsDialog* solutionSettingsDialog = new SolutionSettingsDialog(getKAVIPlanners(), this);
@@ -321,6 +319,15 @@ void PlanningDialog::setDefaultProblemFile()
     setProblemFile(fileName);
 }
 
+void PlanningDialog::setDefaultPlanFile()
+{
+    QString fileName = getPDDLFilePath();
+
+    fileName.append(DEFAULT_PLAN_FILE);
+
+    setPlanFile(fileName);
+}
+
 void PlanningDialog::setDomainFile(QString domainFile)
 {
     this->domainFile = domainFile;
@@ -332,6 +339,11 @@ void PlanningDialog::setProblemFile(QString problemFile)
     this->problemFile = problemFile;
 }
 
+void PlanningDialog::setPlanFile(QString planFile)
+{
+    this->planFile = planFile;
+}
+
 void PlanningDialog::resetDomainFile()
 {
     this->domainFile.clear();
@@ -341,6 +353,11 @@ void PlanningDialog::resetDomainFile()
 void PlanningDialog::resetProblemFile()
 {
     this->problemFile.clear();
+}
+
+void PlanningDialog::resetPlanFile()
+{
+    this->planFile.clear();
 }
 
 void PlanningDialog::resetPlannerSelection()
@@ -459,8 +476,29 @@ void PlanningDialog::on_planBrowse_clicked()
     setPlanFile(fileName);
 }
 
+void PlanningDialog::on_planValidation_clicked(bool checked)
+{
+    if (checked)
+    {
+        ui->execValidator->setEnabled(true);
+        if (ui->customProblem->checkState() == Qt::Checked)
+        {
+            ui->planBrowse->setEnabled(true);
+            ui->planFile->setEnabled(true);
+            resetPlanFile();
+        }
+        setDefaultPlanFile();
+    }
+    else {
+        ui->execValidator->setEnabled(false);
+        ui->planBrowse->setEnabled(false);
+        ui->planFile->setEnabled(false);
+        resetPlanFile();
+    }
+}
 
-/*
+void PlanningDialog::on_execValidator_clicked()
+{
     if (domainFile.simplified().isNull())
     {
         qDebug() << "@Warning: The domain PDDL file can not be empty";
@@ -481,6 +519,8 @@ void PlanningDialog::on_planBrowse_clicked()
         qDebug() << "@Warning: Please select one validator to execute validation";
         return;
     }
-    PlanValidator* exePlanValidator = new PlanValidator(theSingleChosenValidator, domainFile, problemFile, planFile);
-    exePlanValidator->run();
-*/
+    planValidator = new PlanValidator(theSingleChosenPlanner, domainFile, problemFile, planFile);
+    planValidator->run();
+    PlanValidationDialog* dialog = new PlanValidationDialog(planValidator, this);
+    dialog->exec();
+}

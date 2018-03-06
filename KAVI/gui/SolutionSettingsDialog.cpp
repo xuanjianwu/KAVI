@@ -280,6 +280,10 @@ void SolutionSettingsDialog::fillPlannerParametersTable()
         ui->ParameterTable->item(argumentRowIndex, 1)->setFlags((Qt::ItemFlags) 0);
         ui->ParameterTable->item(argumentRowIndex, 4)->setFlags((Qt::ItemFlags) 0);
 
+        //ui->ParameterTable->item(argumentRowIndex, 0)->setFlags((Qt::ItemFlags) 0);
+        //ui->ParameterTable->item(argumentRowIndex, 1)->setFlags((Qt::ItemFlags) 0);
+        //ui->ParameterTable->item(argumentRowIndex, 4)->setFlags((Qt::ItemFlags) 0);
+
         argumentRowIndex++;
 
         argument = argument.nextSibling().toElement();
