@@ -182,14 +182,24 @@ void PlanValidator::buildDependenceBetweenPlanAction()
 void PlanValidator::initEnvironment()
 {
     initPlan();
-    stateHistory = new StateHistory();
+    initStateHistory();
 
     initDomainActions();
 }
 
 void PlanValidator::initPlan()
 {
-    plan = new Plan();
+    this->plan = new Plan();
+}
+
+void PlanValidator::initStateHistory()
+{
+    this->stateHistory = new StateHistory();
+}
+
+void PlanValidator::buildStateHistoryFromPlan()
+{
+    this->stateHistory->initStateHistoryFromPlan(this->plan);
 }
 
 void PlanValidator::setInitPlanAction(PlanAction &action)
@@ -870,6 +880,7 @@ QStringList PlanValidator::getValidatorOutput(QDomElement chosenValidator, QStri
             {
                 parseValidatorOutputToPlan(consoleOutput);
                 buildDependenceBetweenPlanAction();
+                buildStateHistoryFromPlan();
             }
         }
     }
@@ -1027,6 +1038,15 @@ void PlanValidator::parseValidatorOutputToPlan(QStringList &consoleOutput)
     }
 
     this->plan->addAction(goalPlanAction);
+
+    if (planSuccess)
+    {
+        this->plan->setInterruptActionId(-1);
+    }
+    else
+    {
+        this->plan->setInterruptActionId(lastCheckedPlanActionIndex+1);
+    }
 }
 
 QString PlanValidator::getValidatorsPath()

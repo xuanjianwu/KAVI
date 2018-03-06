@@ -9,18 +9,30 @@
 
 #include "KAVIBase.h"
 #include "State.h"
+#include "Plan.h"
+#include "PlanAction.h"
 
 class StateHistory {
 public:
     StateHistory();
 
-    void addState(State state);
+    ~StateHistory();
+
+    void initStateHistoryFromPlan(Plan* plan);
+
+    void clearStateHistory();
+
+    void setPlan(Plan* plan);
+
+    void buildStateHistoryFromPlan();
 
     QList<State> getStatesList() const;
     void setStatesList(const QList<State> &value);
 
 private:
     QList<State> statesList;
+
+    Plan* plan;
 };
 
 #endif // STATEHISTORY_H

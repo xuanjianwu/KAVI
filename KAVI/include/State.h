@@ -12,12 +12,7 @@
 
 class State{
 public:
-    State(QSet<QString> facts);
-
-    void changeState();
-
-    QSet<QString> getFacts() const;
-    void setFacts(const QSet<QString> &value);
+    State();
 
     QSet<QString> getIncludeFacts() const;
     void setIncludeFacts(const QSet<QString> &value);
@@ -25,8 +20,15 @@ public:
     QSet<QString> getExcludeFacts() const;
     void setExcludeFacts(const QSet<QString> &value);
 
+    QSet<QString> getBeforeActionFacts() const;
+    void setBeforeActionFacts(const QSet<QString> &value);
+
+    QSet<QString> getAfterActionFacts() const;
+    void setAfterActionFacts(const QSet<QString> &value);
+
 private:
-    QSet<QString> facts;
+    QSet<QString> beforeActionFacts;
+    QSet<QString> afterActionFacts;
     QSet<QString> includeFacts;
     QSet<QString> excludeFacts;
 };

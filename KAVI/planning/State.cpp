@@ -1,32 +1,7 @@
 #include "State.h"
 
-State::State(QSet<QString> facts)
+State::State()
 {
-    setFacts(facts);
-}
-
-void State::changeState()
-{
-    foreach (QString fact, excludeFacts) {
-        if (facts.contains(fact))
-        {
-            facts.remove(fact);
-        }
-    }
-
-    foreach (QString fact, includeFacts) {
-        facts.insert(fact);
-    }
-}
-
-QSet<QString> State::getFacts() const
-{
-    return facts;
-}
-
-void State::setFacts(const QSet<QString> &value)
-{
-    facts = value;
 }
 
 QSet<QString> State::getIncludeFacts() const
@@ -47,4 +22,24 @@ QSet<QString> State::getExcludeFacts() const
 void State::setExcludeFacts(const QSet<QString> &value)
 {
     excludeFacts = value;
+}
+
+QSet<QString> State::getBeforeActionFacts() const
+{
+    return beforeActionFacts;
+}
+
+void State::setBeforeActionFacts(const QSet<QString> &value)
+{
+    beforeActionFacts = value;
+}
+
+QSet<QString> State::getAfterActionFacts() const
+{
+    return afterActionFacts;
+}
+
+void State::setAfterActionFacts(const QSet<QString> &value)
+{
+    afterActionFacts = value;
 }

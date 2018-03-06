@@ -30,11 +30,13 @@ public:
     QMap<int, PlanAction> getActions() const;
     void setActions(const QMap<int, PlanAction> &value);
 
+    int getInterruptActionId() const;
+    void setInterruptActionId(int value);
+
 private:
     int actionId;
     QMap<int, PlanAction> actions;
-
-
+    int interruptActionId;
 };
 
 #endif // PLAN_H

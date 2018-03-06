@@ -64,3 +64,13 @@ void Plan::setActions(const QMap<int, PlanAction> &value)
 {
     actions = value;
 }
+
+int Plan::getInterruptActionId() const
+{
+    return interruptActionId;
+}
+
+void Plan::setInterruptActionId(int value)
+{
+    interruptActionId = value;
+}

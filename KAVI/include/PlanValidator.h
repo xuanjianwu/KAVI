@@ -22,6 +22,8 @@ public:
 
     void initEnvironment();
     void initPlan();
+    void initStateHistory();
+    void buildStateHistoryFromPlan();
 
     void setInitPlanAction(PlanAction &action);
     void appendEffectsToInitPlanAction(PlanAction &action, QString initString);
