@@ -28,5 +28,6 @@
         <file>images2/Trash Empty.png</file>
         <file>images2/ucpos.png</file>
         <file>images2/validate.png</file>
+        <file>images2/refresh.png</file>
     </qresource>
 </RCC>

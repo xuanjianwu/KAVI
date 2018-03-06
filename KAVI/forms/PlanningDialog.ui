@@ -16,26 +16,26 @@
   <property name="modal">
    <bool>false</bool>
   </property>
-  <widget class="QWidget" name="widget" native="true">
+  <widget class="QWidget" name="planningConsole" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
      <width>331</width>
-     <height>391</height>
+     <height>581</height>
     </rect>
    </property>
-   <widget class="QGroupBox" name="problemSelection">
+   <widget class="QGroupBox" name="configures">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
       <width>331</width>
-      <height>261</height>
+      <height>251</height>
      </rect>
     </property>
     <property name="title">
-     <string>Problem selection</string>
+     <string>Configures</string>
     </property>
     <property name="flat">
      <bool>false</bool>
@@ -62,33 +62,33 @@
       <string>Custom problem</string>
      </property>
     </widget>
-    <widget class="QLabel" name="labelPDDLDomainFile">
+    <widget class="QLabel" name="labelDomainPDDLFile">
      <property name="geometry">
       <rect>
        <x>20</x>
        <y>70</y>
-       <width>121</width>
+       <width>120</width>
        <height>17</height>
       </rect>
      </property>
      <property name="text">
-      <string>PDDL Domain File:</string>
+      <string>Domain PDDL file:</string>
      </property>
     </widget>
-    <widget class="QLabel" name="labelPDDLProblemFile">
+    <widget class="QLabel" name="labelProblemPDDLFile">
      <property name="geometry">
       <rect>
        <x>20</x>
        <y>130</y>
-       <width>121</width>
+       <width>120</width>
        <height>17</height>
       </rect>
      </property>
      <property name="text">
-      <string>PDDL Problem File:</string>
+      <string>Problem PDDL file:</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="pddlDomainFile">
+    <widget class="QLineEdit" name="domainPDDLFile">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -100,8 +100,11 @@
        <height>23</height>
       </rect>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
     </widget>
-    <widget class="QLineEdit" name="pddlProblemFile">
+    <widget class="QLineEdit" name="problemPDDLFile">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -112,6 +115,9 @@
        <width>201</width>
        <height>23</height>
       </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="domainBrowse">
@@ -147,6 +153,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="planFile">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -155,131 +164,291 @@
        <height>23</height>
       </rect>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QPushButton" name="planBrowse">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>240</x>
        <y>210</y>
        <width>75</width>
-       <height>25</height>
+       <height>23</height>
       </rect>
      </property>
      <property name="text">
       <string>Browse</string>
      </property>
     </widget>
+    <widget class="QLabel" name="labelPlanFile">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>190</y>
+       <width>120</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Plan file:</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QComboBox" name="plannerSelection">
+   <widget class="QGroupBox" name="solve">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>320</y>
-      <width>201</width>
-      <height>23</height>
+      <x>0</x>
+      <y>260</y>
+      <width>331</width>
+      <height>141</height>
      </rect>
     </property>
-    <property name="toolTip">
-     <string>Select one planner</string>
+    <property name="title">
+     <string>Solve</string>
     </property>
-    <property name="statusTip">
-     <string>Select one planner</string>
-    </property>
+    <widget class="QComboBox" name="plannerSelection">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>201</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Select one planner</string>
+     </property>
+     <property name="statusTip">
+      <string>Select one planner</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="execPlanner">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>90</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>Execute the planner</string>
+     </property>
+     <property name="statusTip">
+      <string>Execute the planner</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../res/KAVIImages.qrc">
+       <normaloff>:/images2/images2/play.png</normaloff>:/images2/images2/play.png</iconset>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="plannersSettings">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>40</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>View and edit planners settings</string>
+     </property>
+     <property name="statusTip">
+      <string>View and edit planners settings</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../res/KAVIImages.qrc">
+       <normaloff>:/images2/images2/engine.png</normaloff>:/images2/images2/engine.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="execValidator">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>90</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../res/KAVIImages.qrc">
+       <normaloff>:/images2/images2/validate.png</normaloff>:/images2/images2/validate.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clearConsoleLog">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>90</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="../res/KAVIImages.qrc">
+       <normaloff>:/images2/images2/refresh.png</normaloff>:/images2/images2/refresh.png</iconset>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
    </widget>
-   <widget class="QPushButton" name="plannersSettings">
+   <widget class="QGroupBox" name="compileOutput">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>320</y>
-      <width>51</width>
-      <height>23</height>
+      <x>0</x>
+      <y>410</y>
+      <width>331</width>
+      <height>171</height>
      </rect>
     </property>
-    <property name="toolTip">
-     <string>View and edit planners settings</string>
+    <property name="title">
+     <string>Compile output</string>
     </property>
-    <property name="statusTip">
-     <string>View and edit planners settings</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="../res/KAVIImages.qrc">
-      <normaloff>:/images2/images2/engine.png</normaloff>:/images2/images2/engine.png</iconset>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="execPlanner">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>350</y>
-      <width>51</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>Execute the planner</string>
-    </property>
-    <property name="statusTip">
-     <string>Execute the planner</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="../res/KAVIImages.qrc">
-      <normaloff>:/images2/images2/play.png</normaloff>:/images2/images2/play.png</iconset>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
+    <widget class="QTextEdit" name="consoleLog">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>331</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="clearOutput">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>420</y>
-     <width>75</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Clear</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="plannerOutput">
+  <widget class="QTabWidget" name="planningResult">
    <property name="geometry">
     <rect>
      <x>360</x>
      <y>10</y>
-     <width>521</width>
-     <height>571</height>
+     <width>531</width>
+     <height>581</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QPushButton" name="runValidator">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>420</y>
-     <width>75</width>
-     <height>25</height>
-    </rect>
+   <property name="currentIndex">
+    <number>1</number>
    </property>
-   <property name="text">
-    <string>Validate</string>
-   </property>
+   <widget class="QWidget" name="planReport">
+    <attribute name="title">
+     <string>Plan Report</string>
+    </attribute>
+    <widget class="QTextEdit" name="plannerOutput">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>521</width>
+       <height>541</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="planValidation">
+    <attribute name="title">
+     <string>Plan Validation</string>
+    </attribute>
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>521</width>
+       <height>291</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTabWidget" name="validationInfomation">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>300</y>
+       <width>521</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="actionInfomation">
+      <attribute name="title">
+       <string>Action Infomation</string>
+      </attribute>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>511</width>
+         <height>221</height>
+        </rect>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="worldStateChange">
+      <attribute name="title">
+       <string>World State Change</string>
+      </attribute>
+      <widget class="QTextEdit" name="textEdit_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>511</width>
+         <height>221</height>
+        </rect>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources>

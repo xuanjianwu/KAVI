@@ -108,8 +108,8 @@ void PlanningDialog::on_customProblem_clicked(bool checked)
 {
     if (checked)
     {
-        ui->pddlDomainFile->setEnabled(true);
-        ui->pddlProblemFile->setEnabled(true);
+        ui->domainPDDLFile->setEnabled(true);
+        ui->problemPDDLFile->setEnabled(true);
         ui->domainBrowse->setEnabled(true);
         ui->problemBrowse->setEnabled(true);
         resetDomainFile();
@@ -117,20 +117,15 @@ void PlanningDialog::on_customProblem_clicked(bool checked)
     }
     else
     {
-        ui->pddlDomainFile->setEnabled(false);
-        ui->pddlDomainFile->clear();
-        ui->pddlProblemFile->setEnabled(false);
-        ui->pddlProblemFile->clear();
+        ui->domainPDDLFile->setEnabled(false);
+        ui->domainPDDLFile->clear();
+        ui->problemPDDLFile->setEnabled(false);
+        ui->problemPDDLFile->clear();
         ui->domainBrowse->setEnabled(false);
         ui->problemBrowse->setEnabled(false);
         setDefaultDomainFile();
         setDefaultProblemFile();
     }
-}
-
-void PlanningDialog::on_clearOutput_clicked()
-{
-    ui->plannerOutput->clear();
 }
 
 void PlanningDialog::on_domainBrowse_clicked()
@@ -140,7 +135,7 @@ void PlanningDialog::on_domainBrowse_clicked()
     if ( fileName.isEmpty() )
         return;
 
-    ui->pddlDomainFile->setText(fileName);
+    ui->domainPDDLFile->setText(fileName);
 
     setDomainFile(fileName);
 }
@@ -152,7 +147,7 @@ void PlanningDialog::on_problemBrowse_clicked()
     if ( fileName.isEmpty() )
         return;
 
-    ui->pddlProblemFile->setText(fileName);
+    ui->problemPDDLFile->setText(fileName);
 
     setProblemFile(fileName);
 }
@@ -464,8 +459,8 @@ void PlanningDialog::on_planBrowse_clicked()
     setPlanFile(fileName);
 }
 
-void PlanningDialog::on_runValidator_clicked()
-{
+
+/*
     if (domainFile.simplified().isNull())
     {
         qDebug() << "@Warning: The domain PDDL file can not be empty";
@@ -488,4 +483,4 @@ void PlanningDialog::on_runValidator_clicked()
     }
     PlanValidator* exePlanValidator = new PlanValidator(theSingleChosenValidator, domainFile, problemFile, planFile);
     exePlanValidator->run();
-}
+*/

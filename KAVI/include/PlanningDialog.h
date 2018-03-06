@@ -54,8 +54,6 @@ signals:
 private slots:
     void on_customProblem_clicked(bool checked);
 
-    void on_clearOutput_clicked();
-
     void on_domainBrowse_clicked();
 
     void on_problemBrowse_clicked();
@@ -69,8 +67,6 @@ private slots:
     void on_execPlanner_clicked();
 
     void on_planBrowse_clicked();
-
-    void on_runValidator_clicked();
 
 private:
     QString getDomainName();
