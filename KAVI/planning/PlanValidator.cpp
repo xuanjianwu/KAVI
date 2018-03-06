@@ -386,12 +386,12 @@ void PlanValidator::appendPreconditionsToPlanAction(PlanAction &planAction, QStr
     for (int i = 0; i < argumentNameList.size(); i++)
     {
         QRegExp argumentNameChecker;
-        QString pattern("[\\s]+");
+        QString pattern("\\b");
         pattern.append(argumentNameList.at(i));
-        pattern.append("[\\s]+");
+        pattern.append("\\b");
         argumentNameChecker.setPattern(pattern);
 
-        domainAction.replace(argumentNameList.at(i), actionParameters.at(i));
+        domainAction.replace(argumentNameChecker, actionParameters.at(i));
     }
 
     // split the positive predicates and negative predicates from preconditions
@@ -512,7 +512,13 @@ void PlanValidator::appendEffectsToPlanAction(PlanAction &planAction, QString do
     }
     for (int i = 0; i < argumentNameList.size(); i++)
     {
-        domainAction.replace(argumentNameList.at(i), actionParameters.at(i));
+        QRegExp argumentNameChecker;
+        QString pattern("\\b");
+        pattern.append(argumentNameList.at(i));
+        pattern.append("\\b");
+        argumentNameChecker.setPattern(pattern);
+
+        domainAction.replace(argumentNameChecker, actionParameters.at(i));
     }
 
     // split the positive effects and negative effects from effect
