@@ -870,6 +870,11 @@ void PlanValidator::getValidatorOutput(QDomElement chosenValidator, QString doma
         {
             consoleOutput = QString::fromLocal8Bit(process->readAllStandardOutput()).split("\n");
 
+            if (QString(consoleOutput.at(0)).isEmpty())
+            {
+                return;
+            }
+
             this->time = start_time.elapsed();
 
             //The validator does provide a output file

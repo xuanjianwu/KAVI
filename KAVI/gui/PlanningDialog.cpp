@@ -519,7 +519,7 @@ void PlanningDialog::on_execValidator_clicked()
         qDebug() << "@Warning: Please select one validator to execute validation";
         return;
     }
-    planValidator = new PlanValidator(theSingleChosenPlanner, domainFile, problemFile, planFile);
+    planValidator = new PlanValidator(theSingleChosenValidator, domainFile, problemFile, planFile);
     planValidator->run();
     PlanValidationDialog* dialog = new PlanValidationDialog(planValidator, this);
     dialog->exec();

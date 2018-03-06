@@ -26,6 +26,13 @@ public:
     void fillActionsTable();
 
 
+private slots:
+    void on_actionsTable_cellClicked(int row, int column);
+
+    void on_okButton_clicked();
+
+    void on_cancelButton_clicked();
+
 private:
     Ui::PlanValidationDialog *ui;
 
