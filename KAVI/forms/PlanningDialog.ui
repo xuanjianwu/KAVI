@@ -222,7 +222,7 @@
            </property>
            <property name="icon">
             <iconset resource="../res/KAVIImages.qrc">
-             <normaloff>:/images2/images2/refresh.png</normaloff>:/images2/images2/refresh.png</iconset>
+             <normaloff>:/images2/images2/refresh2.png</normaloff>:/images2/images2/refresh2.png</iconset>
            </property>
            <property name="flat">
             <bool>false</bool>

@@ -70,6 +70,7 @@ public:
     void setZoomDelta(qreal delta);
     qreal zoomDelta() const;
 
+
 signals:
     /*
     * this signal is occur by EditWidget and its inheritor,
@@ -92,6 +93,11 @@ signals:
     void updateInfoPanel(QWidget* infoWidget);
 
 public slots:
+
+    void handleZoomIn();
+
+    void handleZoomOut();
+
     void zoomIn();  // 放大
     void zoomOut();  // 缩小
     void zoom(float scaleFactor); // 缩放 - scaleFactor：缩放的比例因子

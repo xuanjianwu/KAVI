@@ -1527,3 +1527,17 @@ void KAVIMainWindow::on_actionPlanning_triggered()
     //connect(dialog, SIGNAL(exportDefaultPDDL), this, SLOT(exportProblemPDDL()));
     dialog->exec();
 }
+
+void KAVIMainWindow::on_actionZoom_In_I_triggered()
+{
+    ui.definitionEdit->handleZoomIn();
+    ui.actionEdit->handleZoomIn();
+    ui.taskEdit->handleZoomIn();
+}
+
+void KAVIMainWindow::on_actionZoom_Out_O_triggered()
+{
+    ui.definitionEdit->handleZoomOut();
+    ui.actionEdit->handleZoomOut();
+    ui.taskEdit->handleZoomOut();
+}

@@ -190,6 +190,10 @@ private slots:
 
     void on_actionPlanning_triggered();
 
+    void on_actionZoom_In_I_triggered();
+
+    void on_actionZoom_Out_O_triggered();
+
 private:
     // specified the domain changed or not
     bool domainChanged;

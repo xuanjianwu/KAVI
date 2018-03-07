@@ -197,6 +197,14 @@
     <property name="title">
      <string>View(&amp;V)</string>
     </property>
+    <widget class="QMenu" name="menuZoom">
+     <property name="title">
+      <string>Zoom</string>
+     </property>
+     <addaction name="actionZoom_In_I"/>
+     <addaction name="actionZoom_Out_O"/>
+    </widget>
+    <addaction name="menuZoom"/>
    </widget>
    <widget class="QMenu" name="menuDeveloper_D">
     <property name="title">
@@ -379,6 +387,9 @@
    <addaction name="separator"/>
    <addaction name="actionCheckDiagram"/>
    <addaction name="actionSavePNG"/>
+   <addaction name="separator"/>
+   <addaction name="actionZoom_In_I"/>
+   <addaction name="actionZoom_Out_O"/>
   </widget>
   <action name="actionNew_N">
    <property name="icon">
@@ -729,6 +740,30 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+F5</string>
+   </property>
+  </action>
+  <action name="actionZoom_In_I">
+   <property name="icon">
+    <iconset resource="../res/KAVIImages.qrc">
+     <normaloff>:/images2/images2/zoomIN.png</normaloff>:/images2/images2/zoomIN.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom In(&amp;I)</string>
+   </property>
+   <property name="shortcut">
+    <string>+</string>
+   </property>
+  </action>
+  <action name="actionZoom_Out_O">
+   <property name="icon">
+    <iconset resource="../res/KAVIImages.qrc">
+     <normaloff>:/images2/images2/zoomOUT.png</normaloff>:/images2/images2/zoomOUT.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom Out(&amp;O)</string>
+   </property>
+   <property name="shortcut">
+    <string>-</string>
    </property>
   </action>
  </widget>

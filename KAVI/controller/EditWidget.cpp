@@ -66,7 +66,7 @@ void EditWidget::initInteractiveView()
     m_translateButton = Qt::RightButton;
     m_scale = 1.0;
     m_zoomDelta = 0.1;
-    m_translateSpeed = 1.0;
+    m_translateSpeed = 2.0;
     m_bMouseTranslate = false;
 
     // 去掉滚动条
@@ -103,6 +103,16 @@ void EditWidget::setZoomDelta(qreal delta)
 qreal EditWidget::zoomDelta() const
 {
     return m_zoomDelta;
+}
+
+void EditWidget::handleZoomIn()
+{
+    zoomIn();
+}
+
+void EditWidget::handleZoomOut()
+{
+    zoomOut();
 }
 
 void EditWidget::zoomIn()
@@ -162,16 +172,16 @@ void EditWidget::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
     case Qt::Key_Up:
-        translate(QPointF(0, -2));  // 上移
+        translate(QPointF(0, -4));  // 上移
         break;
     case Qt::Key_Down:
-        translate(QPointF(0, 2));  // 下移
+        translate(QPointF(0, 4));  // 下移
         break;
     case Qt::Key_Left:
-        translate(QPointF(-2, 0));  // 左移
+        translate(QPointF(-4, 0));  // 左移
         break;
     case Qt::Key_Right:
-        translate(QPointF(2, 0));  // 右移
+        translate(QPointF(4, 0));  // 右移
         break;
     case Qt::Key_Plus:  // 放大
         zoomIn();
