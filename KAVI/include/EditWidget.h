@@ -59,6 +59,17 @@ public:
     */
     const DataWidget* xmlDataPointer();
 
+
+    void initInteractiveView();
+
+    // 平移速度
+    void setTranslateSpeed(qreal speed);
+    qreal translateSpeed() const;
+
+    // 缩放的增量
+    void setZoomDelta(qreal delta);
+    qreal zoomDelta() const;
+
 signals:
     /*
     * this signal is occur by EditWidget and its inheritor,
@@ -81,6 +92,11 @@ signals:
     void updateInfoPanel(QWidget* infoWidget);
 
 public slots:
+    void zoomIn();  // 放大
+    void zoomOut();  // 缩小
+    void zoom(float scaleFactor); // 缩放 - scaleFactor：缩放的比例因子
+    void translate(QPointF delta);  // 平移
+
 
     /*
     * set the changed value
@@ -110,6 +126,16 @@ public slots:
     void loadXMLdata(QDomDocument diagramDocument);
 
 protected:
+    // 上/下/左/右键向各个方向移动、加/减键进行缩放、空格/回车键旋转
+    void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
+    // 平移
+    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+    // 放大/缩小
+    void wheelEvent(QWheelEvent *event) Q_DECL_OVERRIDE;
+
+
 
     enum ReconnectionValue {
         NoChange,
@@ -266,6 +292,14 @@ protected:
     virtual void makeConnection(EdgeStructure& edge, int& argNum) = 0;
     virtual void changeConnection(EdgeStructure& edge, bool isStart, int toNode, int& argNum) = 0;
     virtual void deleteConnection(int edgeID) = 0;
+
+private:
+    Qt::MouseButton m_translateButton;  // 平移按钮
+    qreal m_translateSpeed;  // 平移速度
+    qreal m_zoomDelta;  // 缩放的增量
+    bool m_bMouseTranslate;  // 平移标识
+    QPoint m_lastMousePos;  // 鼠标最后按下的位置
+    qreal m_scale;  // 缩放值
 };
 
 

@@ -3,21 +3,21 @@
     <toolInformation>
         <name>KAVI</name>
         <version>1.0</version>
-        <message>Planner generated a solution.</message>
+        <message>Planner did not generate any solution!</message>
     </toolInformation>
     <name/>
     <description/>
     <project/>
-    <domain>logistics</domain>
-    <problem>pb1</problem>
-    <datetime>2018.03.07 18:23:20.777 周三</datetime>
-    <planner id="2">
-        <name>Blackbox</name>
-        <version>42 Windows</version>
-        <date>11 Jan 2006</date>
+    <domain>UNNAMED</domain>
+    <problem></problem>
+    <datetime>2018.03.07 18:29:19.589 周三</datetime>
+    <planner id="1">
+        <name>Metric-FF</name>
+        <version>Windows</version>
+        <date>2002</date>
         <institution/>
-        <author>Henry Kautz</author>
-        <link>https://www.cs.rochester.edu/u/kautz/satplan/blackbox/</link>
+        <author>J. Hoffmann</author>
+        <link>http://fai.cs.uni-saarland.de/hoffmann/metric-ff.html</link>
         <description/>
         <platform>
             <windows/>
@@ -28,147 +28,35 @@
             <typing/>
             <rewards/>
             <strips/>
+            <fluents/>
             <equality/>
             <conditional-effects/>
             <disjunctive-preconditions/>
+            <duration-inequalities/>
+            <durative-actions/>
+            <existential-preconditions/>
             <negative-preconditions/>
+            <numeric-fluents/>
+            <quantified-preconditions/>
+            <universal-preconditions/>
         </requirements>
-        <consoleOutput>blackbox version 42
-command line:  /cygdrive/e/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPlanners/blackbox -o E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIValidators/3.pddl -f E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIValidators/3p.pddl
-
-Begin solver specification
-    -maxint        0   -maxsec 10.000000  graphplan
-    -maxint        0   -maxsec 0.000000  chaff
-End solver specification
-Loading domain file: E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIValidators/3.pddl
-Loading fact file: E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIValidators/3p.pddl
-Problem name: pb1
-Facts loaded.
-time: 1, 19 facts and 16 exclusive pairs.
-time: 2, 38 facts and 153 exclusive pairs.
-time: 3, 41 facts and 126 exclusive pairs.
-time: 4, 68 facts and 162 exclusive pairs.
-Goals first reachable in 4 steps.
-597 nodes created.
-
-####################################################
-goals at time 5:
-  at_mxf_bos-airport at_avrim_jfk-airport at_pencil_bos-airport at_alex_jfk-airport at_april_bos-airport 
-at_lisa_par-airport at_michelle_jfk-airport at_jason_bos-airport at_paper_par-airport at_betty_jfk-airport 
+        <consoleOutput>
+ff: parsing domain file
+domain 'UNNAMED' defined
+ ... done.
+ff: parsing problem file ... done.
 
 
+ff: goal can be simplified to TRUE. The empty plan solves it
 
-----------------------------------------------------
-Invoking solver graphplan
-Result is Unsat
-Iteration was 3
-
-----------------------------------------------------
-Can't solve in 4 steps
-time: 5, 68 facts and 162 exclusive pairs.
-320 new nodes added.
-
-####################################################
-goals at time 6:
-  at_mxf_bos-airport at_avrim_jfk-airport at_pencil_bos-airport at_alex_jfk-airport at_april_bos-airport 
-at_lisa_par-airport at_michelle_jfk-airport at_jason_bos-airport at_paper_par-airport at_betty_jfk-airport 
-
-
-
-----------------------------------------------------
-Invoking solver graphplan
-Result is Unsat
-Iteration was 3265
-
-----------------------------------------------------
-Can't solve in 5 steps
-time: 6, 68 facts and 162 exclusive pairs.
-320 new nodes added.
-
-####################################################
-goals at time 7:
-  at_mxf_bos-airport at_avrim_jfk-airport at_pencil_bos-airport at_alex_jfk-airport at_april_bos-airport 
-at_lisa_par-airport at_michelle_jfk-airport at_jason_bos-airport at_paper_par-airport at_betty_jfk-airport 
-
-
-
-----------------------------------------------------
-Invoking solver graphplan
-Result is Unsat
-Iteration was 767835
-
-----------------------------------------------------
-Can't solve in 6 steps
-time: 7, 68 facts and 162 exclusive pairs.
-320 new nodes added.
-
-####################################################
-goals at time 8:
-  at_mxf_bos-airport at_avrim_jfk-airport at_pencil_bos-airport at_alex_jfk-airport at_april_bos-airport 
-at_lisa_par-airport at_michelle_jfk-airport at_jason_bos-airport at_paper_par-airport at_betty_jfk-airport 
-
-
-
-----------------------------------------------------
-Invoking solver graphplan
-Result is Sat
-Iteration was 1564376
-Performing plan justification:
-   0 actions were pruned in 0.00 seconds
-
-----------------------------------------------------
-Begin plan
-1 (fly-airplane airplane2 bos-airport lon-airport)
-1 (load-airplane jason airplane1 jfk-airport)
-2 (fly-airplane airplane1 jfk-airport bos-airport)
-2 (load-airplane pencil airplane2 lon-airport)
-2 (load-airplane paper airplane2 lon-airport)
-2 (load-airplane michelle airplane2 lon-airport)
-2 (load-airplane betty airplane2 lon-airport)
-2 (load-airplane april airplane2 lon-airport)
-2 (load-airplane lisa airplane2 lon-airport)
-3 (fly-airplane airplane2 lon-airport par-airport)
-3 (unload-airplane jason airplane1 bos-airport)
-4 (load-airplane alex airplane2 par-airport)
-4 (fly-airplane airplane1 bos-airport par-airport)
-4 (unload-airplane lisa airplane2 par-airport)
-4 (unload-airplane april airplane2 par-airport)
-4 (unload-airplane paper airplane2 par-airport)
-4 (load-airplane avrim airplane2 par-airport)
-4 (unload-airplane pencil airplane2 par-airport)
-5 (load-airplane april airplane1 par-airport)
-5 (fly-airplane airplane2 par-airport jfk-airport)
-5 (load-airplane pencil airplane1 par-airport)
-5 (load-airplane mxf airplane1 par-airport)
-6 (unload-airplane michelle airplane2 jfk-airport)
-6 (unload-airplane alex airplane2 jfk-airport)
-6 (unload-airplane avrim airplane2 jfk-airport)
-6 (fly-airplane airplane1 par-airport bos-airport)
-6 (unload-airplane betty airplane2 jfk-airport)
-7 (unload-airplane april airplane1 bos-airport)
-7 (unload-airplane mxf airplane1 bos-airport)
-7 (unload-airplane pencil airplane1 bos-airport)
-End plan
-----------------------------------------------------
-
-30 total actions in plan
-119567 entries in hash table, 556100 hash hits, avg set size 11
-675673 total set-creation steps (entries + hits + plan length - 1)
-753509 actions tried
-
-####################################################
-Total elapsed time:   1.54 seconds
-Time in milliseconds: 1541
-
-####################################################
 
 </consoleOutput>
     </planner>
     <statistics>
-        <toolTime>1.606</toolTime>
+        <toolTime>0.059</toolTime>
         <time/>
         <parsingTime/>
-        <nrActions>30</nrActions>
+        <nrActions>0</nrActions>
         <makeSpan/>
         <metricValue/>
         <planningTechnique/>
@@ -180,307 +68,6 @@ Time in milliseconds: 1541
     <evaluation value="">
         <rationales/>
     </evaluation>
-    <plan>
-        <action id="FLY-AIRPLANE">
-            <parameters>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="BOS-AIRPORT"/>
-                <parameter id="LON-AIRPORT"/>
-            </parameters>
-            <startTime>1</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="JASON"/>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="JFK-AIRPORT"/>
-            </parameters>
-            <startTime>1</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="FLY-AIRPLANE">
-            <parameters>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="JFK-AIRPORT"/>
-                <parameter id="BOS-AIRPORT"/>
-            </parameters>
-            <startTime>2</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="PENCIL"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="LON-AIRPORT"/>
-            </parameters>
-            <startTime>2</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="PAPER"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="LON-AIRPORT"/>
-            </parameters>
-            <startTime>2</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="MICHELLE"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="LON-AIRPORT"/>
-            </parameters>
-            <startTime>2</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="BETTY"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="LON-AIRPORT"/>
-            </parameters>
-            <startTime>2</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="APRIL"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="LON-AIRPORT"/>
-            </parameters>
-            <startTime>2</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="LISA"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="LON-AIRPORT"/>
-            </parameters>
-            <startTime>2</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="FLY-AIRPLANE">
-            <parameters>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="LON-AIRPORT"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>3</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="JASON"/>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="BOS-AIRPORT"/>
-            </parameters>
-            <startTime>3</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="ALEX"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>4</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="FLY-AIRPLANE">
-            <parameters>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="BOS-AIRPORT"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>4</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="LISA"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>4</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="APRIL"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>4</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="PAPER"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>4</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="AVRIM"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>4</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="PENCIL"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>4</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="APRIL"/>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>5</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="FLY-AIRPLANE">
-            <parameters>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="PAR-AIRPORT"/>
-                <parameter id="JFK-AIRPORT"/>
-            </parameters>
-            <startTime>5</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="PENCIL"/>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>5</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="LOAD-AIRPLANE">
-            <parameters>
-                <parameter id="MXF"/>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="PAR-AIRPORT"/>
-            </parameters>
-            <startTime>5</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="MICHELLE"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="JFK-AIRPORT"/>
-            </parameters>
-            <startTime>6</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="ALEX"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="JFK-AIRPORT"/>
-            </parameters>
-            <startTime>6</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="AVRIM"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="JFK-AIRPORT"/>
-            </parameters>
-            <startTime>6</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="FLY-AIRPLANE">
-            <parameters>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="PAR-AIRPORT"/>
-                <parameter id="BOS-AIRPORT"/>
-            </parameters>
-            <startTime>6</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="BETTY"/>
-                <parameter id="AIRPLANE2"/>
-                <parameter id="JFK-AIRPORT"/>
-            </parameters>
-            <startTime>6</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="APRIL"/>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="BOS-AIRPORT"/>
-            </parameters>
-            <startTime>7</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="MXF"/>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="BOS-AIRPORT"/>
-            </parameters>
-            <startTime>7</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="UNLOAD-AIRPLANE">
-            <parameters>
-                <parameter id="PENCIL"/>
-                <parameter id="AIRPLANE1"/>
-                <parameter id="BOS-AIRPORT"/>
-            </parameters>
-            <startTime>7</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-    </plan>
+    <plan/>
     <comments/>
 </xmlPlan>

@@ -69,6 +69,8 @@
 #include <QTime>
 #include <QDateTime>
 #include <QMetaType>
+#include <QWheelEvent>
+#include <QKeyEvent>
 
 
 #endif // KAVIBASE_H
