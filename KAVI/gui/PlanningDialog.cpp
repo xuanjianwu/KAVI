@@ -110,7 +110,9 @@ void PlanningDialog::on_customProblem_clicked(bool checked)
     if (checked)
     {
         ui->domainPDDLFile->setEnabled(true);
+        ui->domainPDDLFile->clear();
         ui->problemPDDLFile->setEnabled(true);
+        ui->problemPDDLFile->clear();
         ui->domainBrowse->setEnabled(true);
         ui->problemBrowse->setEnabled(true);
         resetDomainFile();
@@ -118,8 +120,18 @@ void PlanningDialog::on_customProblem_clicked(bool checked)
 
         if (ui->planValidation->checkState() == Qt::Checked)
         {
+            ui->execValidator->setEnabled(true);
             ui->planBrowse->setEnabled(true);
             ui->planFile->setEnabled(true);
+            ui->planFile->clear();
+            resetPlanFile();
+        }
+        else
+        {
+            ui->execValidator->setEnabled(false);
+            ui->planBrowse->setEnabled(false);
+            ui->planFile->setEnabled(false);
+            ui->planFile->clear();
             resetPlanFile();
         }
     }
@@ -133,6 +145,24 @@ void PlanningDialog::on_customProblem_clicked(bool checked)
         ui->problemBrowse->setEnabled(false);
         setDefaultDomainFile();
         setDefaultProblemFile();
+
+        if (ui->planValidation->checkState() == Qt::Checked)
+        {
+            ui->execValidator->setEnabled(true);
+            ui->planBrowse->setEnabled(false);
+            ui->planFile->setEnabled(false);
+            ui->planFile->clear();
+            //resetPlanFile();
+            setDefaultPlanFile();
+        }
+        else
+        {
+            ui->execValidator->setEnabled(false);
+            ui->planBrowse->setEnabled(false);
+            ui->planFile->setEnabled(false);
+            ui->planFile->clear();
+            resetPlanFile();
+        }
     }
 }
 
@@ -485,14 +515,22 @@ void PlanningDialog::on_planValidation_clicked(bool checked)
         {
             ui->planBrowse->setEnabled(true);
             ui->planFile->setEnabled(true);
+            ui->planFile->clear();
             resetPlanFile();
         }
-        setDefaultPlanFile();
+        else
+        {
+            ui->planBrowse->setEnabled(false);
+            ui->planFile->setEnabled(false);
+            ui->planFile->clear();
+            setDefaultPlanFile();
+        }
     }
     else {
         ui->execValidator->setEnabled(false);
         ui->planBrowse->setEnabled(false);
         ui->planFile->setEnabled(false);
+        ui->planFile->clear();
         resetPlanFile();
     }
 }

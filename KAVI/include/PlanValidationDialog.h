@@ -25,6 +25,9 @@ public:
 
     void fillActionsTable();
 
+    void fillActionAdvice(int actionId);
+
+    void fillActionInfomation(int actionId);
 
 private slots:
     void on_actionsTable_cellClicked(int row, int column);
