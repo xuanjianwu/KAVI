@@ -246,7 +246,7 @@ void PlanValidationDialog::fillActionInfomation(int actionId)
     htmlStr += "<ul>\n";
     // show positive effects
     foreach (QString str, action.getPositiveEffects()) {
-        if ( actionId < plan->getInterruptActionId())
+        if ( actionId < plan->getInterruptActionId() || this->planValidator->getPlan()->getInterruptActionId() < 0)
         {
             htmlStr += "<li>";
             htmlStr += str;
@@ -258,7 +258,7 @@ void PlanValidationDialog::fillActionInfomation(int actionId)
             htmlStr += "<ul type=\"circle\">\n";
             for (iter = dependers.begin(); iter != dependers.end(); iter++)
             {
-                if (iter.key() > plan->getInterruptActionId())
+                if (plan->getInterruptActionId() > 0 && iter.key() > plan->getInterruptActionId())
                 {
                     continue;
                 }
@@ -294,7 +294,7 @@ void PlanValidationDialog::fillActionInfomation(int actionId)
 
     // show negative effects
     foreach (QString str, action.getNegativeEffects()) {
-        if ( actionId < plan->getInterruptActionId())
+        if ( actionId < plan->getInterruptActionId() || this->planValidator->getPlan()->getInterruptActionId() < 0)
         {
             htmlStr += "<li>";
             htmlStr += "(not ";
@@ -308,7 +308,7 @@ void PlanValidationDialog::fillActionInfomation(int actionId)
             htmlStr += "<ul type=\"circle\">\n";
             for (iter = dependers.begin(); iter != dependers.end(); iter++)
             {
-                if (iter.key() > plan->getInterruptActionId())
+                if (plan->getInterruptActionId() > 0 && iter.key() > plan->getInterruptActionId())
                 {
                     continue;
                 }
@@ -411,6 +411,13 @@ void PlanValidationDialog::fillWorldStateChange(int actionId)
             htmlStr += "</li>\n";
         }
     }
+    if (actionId == plan->getInterruptActionId())
+    {
+        htmlStr += "<li>";
+        htmlStr += "N/A";
+        htmlStr += "</li>\n";
+    }
+
     htmlStr += "</ul>\n";
 
     htmlStr += "</body>\n";
@@ -425,7 +432,7 @@ void PlanValidationDialog::on_actionsTable_cellClicked(int row, int column)
     ui->worldStateChange->clear();
     ui->advice->clear();
 
-    if (row <= this->planValidator->getPlan()->getInterruptActionId())
+    if (row <= this->planValidator->getPlan()->getInterruptActionId() || this->planValidator->getPlan()->getInterruptActionId() < 0)
     {
         ui->actionInfomation->setEnabled(true);
         ui->worldStateChange->setEnabled(true);
