@@ -28,9 +28,9 @@
     <widget class="QComboBox" name="predComboBox"/>
    </item>
    <item row="2" column="0">
-    <widget class="QCheckBox" name="precondCheck">
+    <widget class="QCheckBox" name="precondPosCheck">
      <property name="text">
-      <string>precondition</string>
+      <string>precondition+</string>
      </property>
     </widget>
    </item>
@@ -55,6 +55,13 @@
      </property>
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="precondNegCheck">
+     <property name="text">
+      <string>precondition-</string>
      </property>
     </widget>
    </item>

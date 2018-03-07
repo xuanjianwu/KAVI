@@ -22,8 +22,11 @@ QStringList OperatorsPredicateDialog::predicateSet()
 {
     QStringList result;
 
-    if ( ui.precondCheck->isChecked() )
-        result << NSPS_PRECOND;
+    if ( ui.precondPosCheck->isChecked() )
+        result << NSPS_PRECOND_POS;
+
+    if ( ui.precondNegCheck->isChecked() )
+        result << NSPS_PRECOND_NEG;
 
     if ( ui.effectPosCheck->isChecked() )
         result << NSPS_EFFECT_POS;
@@ -34,21 +37,29 @@ QStringList OperatorsPredicateDialog::predicateSet()
     return result;
 }
 
-void OperatorsPredicateDialog::on_precondCheck_toggled(bool checked)
-{
-    ui.effectPosCheck->setEnabled( !checked && !ui.effectNegCheck->isChecked() );
-}
 
 void OperatorsPredicateDialog::on_effectPosCheck_toggled(bool checked)
 {
     ui.effectNegCheck->setEnabled(!checked);
-    ui.precondCheck->setEnabled(!checked);
+    ui.precondPosCheck->setEnabled(!checked);
+    //ui.precondNegCheck->setEnabled(checked);
 }
 
 void OperatorsPredicateDialog::on_effectNegCheck_toggled(bool checked)
 {
-    ui.effectPosCheck->setEnabled( !checked && !ui.precondCheck->isChecked() );
+    ui.effectPosCheck->setEnabled( !checked && !ui.precondPosCheck->isChecked() );
+    ui.precondNegCheck->setEnabled( !checked && !ui.precondPosCheck->isChecked() );
 }
 
 
+void OperatorsPredicateDialog::on_precondPosCheck_toggled(bool checked)
+{
+    ui.effectPosCheck->setEnabled( !checked && !ui.effectNegCheck->isChecked() );
+    ui.precondNegCheck->setEnabled( !checked && !ui.effectNegCheck->isChecked() );
+}
 
+void OperatorsPredicateDialog::on_precondNegCheck_toggled(bool checked)
+{
+    ui.precondPosCheck->setEnabled(!checked);
+    ui.effectNegCheck->setEnabled(!checked);
+}

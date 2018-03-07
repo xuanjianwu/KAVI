@@ -42,14 +42,6 @@ public:
 private slots:
 
     /*
-    * handle the precondition set check for the new add predicate
-    * @params:
-    *       checked - check flag
-    * @return: void
-    */
-    void on_precondCheck_toggled(bool checked);
-
-    /*
     * handle the positive effect set check for the new add predicate
     * @params:
     *       checked - check flag
@@ -64,6 +56,16 @@ private slots:
     * @return: void
     */
     void on_effectNegCheck_toggled(bool checked);
+
+    /*
+    * handle the positive precondition set check for the new add predicate
+    * @params:
+    *       checked - check flag
+    * @return: void
+    */
+    void on_precondPosCheck_toggled(bool checked);
+
+    void on_precondNegCheck_toggled(bool checked);
 
 private:
     Ui::OperatorsPredicateDialog ui;

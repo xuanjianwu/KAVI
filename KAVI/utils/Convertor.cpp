@@ -237,7 +237,7 @@ void Convertor::writeAction(int indent, QDomElement diagram, QString name)
 
             setEl = setEl.nextSiblingElement("set");
 
-            if ( setStr == NSPS_PRECOND )
+            if ( setStr == NSPS_PRECOND_POS )
             {
                 actPrecond.insert(predID);
                 continue;

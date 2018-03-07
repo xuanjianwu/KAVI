@@ -64,7 +64,8 @@
 #define NC_DEFAULT "#FFFFFF"
 
 // predicate layer colors
-#define LC_PRECOND "#3CDC84"
+#define LC_PRECOND_POS "#3CDC84"
+#define LC_PRECOND_NEG "#6CA6CD"
 #define LC_EFFECT_POS "#0F74DC"
 #define LC_EFFECT_NEG "#FF5753"
 #define LC_DEFAULT "#FFFFFF"
@@ -84,7 +85,8 @@
 #define NST_UNKNOWN		(char)240	/*1111 0000*/
 
 // node structure predicate set
-#define NSPS_PRECOND		"precond"
+#define NSPS_PRECOND_POS	"precond+"
+#define NSPS_PRECOND_NEG	"precond-"
 #define NSPS_EFFECT_POS		"effect+"
 #define NSPS_EFFECT_NEG		"effect-"
 
@@ -140,7 +142,8 @@
 #define EP_INHERITANCE "inheritance"
 
 // predicate set names
-#define PS_PRECOND "precondition"
+#define PS_PRECOND_POS "precondition+"
+#define PS_PRECOND_NEG "precondition-"
 #define PS_EFFECT_POS "effect+"
 #define PS_EFFECT_NEG "effect-"
 

@@ -68,9 +68,9 @@ void OperatorsPredicateInfo::on_precondCheck_toggled(bool checked)
     ui.effectPosCheck->setEnabled( !checked && !ui.effectNegCheck->isChecked() );
 
     if (checked)
-        includeInSet(NSPS_PRECOND);
+        includeInSet(NSPS_PRECOND_POS);
     else
-        excludeFromSet(NSPS_PRECOND);
+        excludeFromSet(NSPS_PRECOND_POS);
 
     xmlData->refreshNode(getIntAttribute(selectedNode, "id"));
 
@@ -183,7 +183,7 @@ void OperatorsPredicateInfo::setCheckBoxes()
             ui.effectNegCheck->setChecked(true);
         }
 
-        if ( getStrValue(setElem) == NSPS_PRECOND )
+        if ( getStrValue(setElem) == NSPS_PRECOND_POS )
         {
             ui.precondCheck->setChecked(true);
         }

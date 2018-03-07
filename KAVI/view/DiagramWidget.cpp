@@ -224,8 +224,8 @@ Edge *DiagramWidget::edgeAt(const QPointF &pos)
 
 QString DiagramWidget::layerColor(QString predicateSet)
 {
-    if (predicateSet == NSPS_PRECOND)
-        return LC_PRECOND;
+    if (predicateSet == NSPS_PRECOND_POS)
+        return LC_PRECOND_POS;
 
     if (predicateSet == NSPS_EFFECT_POS)
         return LC_EFFECT_POS;
