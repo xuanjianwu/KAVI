@@ -207,7 +207,8 @@ void PlanningDialog::showPlannerOutput()
 //    QTextStream out(&htmlFile);
 //    out << text;
 
-    ui->plannerOutput->setText(text);
+    //ui->plannerOutput->setText(text);
+    ui->plannerOutput->setHtml(text);
 }
 
 bool PlanningDialog::getXMLDocument()
@@ -560,5 +561,59 @@ void PlanningDialog::on_execValidator_clicked()
     planValidator = new PlanValidator(theSingleChosenValidator, domainFile, problemFile, planFile);
     planValidator->run();
     PlanValidationDialog* dialog = new PlanValidationDialog(planValidator, this);
+    dialog->exec();
+}
+
+void PlanningDialog::on_domainPDDLFile_textChanged(const QString &arg1)
+{
+    if (arg1.isEmpty())
+    {
+        ui->editDomainPDDL->setEnabled(false);
+    }
+    else
+    {
+        ui->editDomainPDDL->setEnabled(true);
+    }
+}
+
+void PlanningDialog::on_problemPDDLFile_textChanged(const QString &arg1)
+{
+    if (arg1.isEmpty())
+    {
+        ui->editProblemPDDL->setEnabled(false);
+    }
+    else
+    {
+        ui->editProblemPDDL->setEnabled(true);
+    }
+}
+
+void PlanningDialog::on_planFile_textChanged(const QString &arg1)
+{
+    if (arg1.isEmpty())
+    {
+        ui->editPlanFile->setEnabled(false);
+    }
+    else
+    {
+        ui->editPlanFile->setEnabled(true);
+    }
+}
+
+void PlanningDialog::on_editDomainPDDL_clicked()
+{
+    EditFileDialog* dialog = new EditFileDialog(domainFile, this);
+    dialog->exec();
+}
+
+void PlanningDialog::on_editProblemPDDL_clicked()
+{
+    EditFileDialog* dialog = new EditFileDialog(problemFile, this);
+    dialog->exec();
+}
+
+void PlanningDialog::on_editPlanFile_clicked()
+{
+    EditFileDialog* dialog = new EditFileDialog(planFile, this);
     dialog->exec();
 }

@@ -15,6 +15,7 @@
 #include "PlanValidator.h"
 #include "XMLUtils.h"
 #include "PlanValidationDialog.h"
+#include "EditFileDialog.h"
 
 namespace Ui {
 class PlanningDialog;
@@ -69,6 +70,18 @@ private slots:
     void on_planValidation_clicked(bool checked);
 
     void on_execValidator_clicked();
+
+    void on_domainPDDLFile_textChanged(const QString &arg1);
+
+    void on_problemPDDLFile_textChanged(const QString &arg1);
+
+    void on_planFile_textChanged(const QString &arg1);
+
+    void on_editDomainPDDL_clicked();
+
+    void on_editProblemPDDL_clicked();
+
+    void on_editPlanFile_clicked();
 
 private:
     QString getDomainName();

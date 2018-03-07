@@ -3,21 +3,21 @@
     <toolInformation>
         <name>KAVI</name>
         <version>1.0</version>
-        <message>Planner did not generate any solution!</message>
+        <message>Planner generated a solution.</message>
     </toolInformation>
     <name/>
     <description/>
     <project/>
-    <domain>UNNAMED</domain>
-    <problem></problem>
-    <datetime>2018.03.07 18:29:19.589 周三</datetime>
-    <planner id="1">
-        <name>Metric-FF</name>
-        <version>Windows</version>
-        <date>2002</date>
+    <domain>Blockworld</domain>
+    <problem>fourBoxes</problem>
+    <datetime>2018.03.07 22:21:55.357 周三</datetime>
+    <planner id="2">
+        <name>Blackbox</name>
+        <version>42 Windows</version>
+        <date>11 Jan 2006</date>
         <institution/>
-        <author>J. Hoffmann</author>
-        <link>http://fai.cs.uni-saarland.de/hoffmann/metric-ff.html</link>
+        <author>Henry Kautz</author>
+        <link>https://www.cs.rochester.edu/u/kautz/satplan/blackbox/</link>
         <description/>
         <platform>
             <windows/>
@@ -28,35 +28,62 @@
             <typing/>
             <rewards/>
             <strips/>
-            <fluents/>
             <equality/>
             <conditional-effects/>
             <disjunctive-preconditions/>
-            <duration-inequalities/>
-            <durative-actions/>
-            <existential-preconditions/>
             <negative-preconditions/>
-            <numeric-fluents/>
-            <quantified-preconditions/>
-            <universal-preconditions/>
         </requirements>
-        <consoleOutput>
-ff: parsing domain file
-domain 'UNNAMED' defined
- ... done.
-ff: parsing problem file ... done.
+        <consoleOutput>blackbox version 42
+command line:  /cygdrive/e/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPlanners/blackbox -o C:/Users/liYc/Desktop/1.pddl -f C:/Users/liYc/Desktop/Blockworld_fourBoxes.pddl
+
+Begin solver specification
+    -maxint        0   -maxsec 10.000000  graphplan
+    -maxint        0   -maxsec 0.000000  chaff
+End solver specification
+Loading domain file: C:/Users/liYc/Desktop/1.pddl
+Loading fact file: C:/Users/liYc/Desktop/Blockworld_fourBoxes.pddl
+Problem name: fourboxes
+Facts loaded.
+time: 1, 5 facts and 0 exclusive pairs.
+Goals first reachable in 1 steps.
+10 nodes created.
+
+####################################################
+goals at time 2:
+  empty_r1 clear_b2 on_b2_b1 
 
 
-ff: goal can be simplified to TRUE. The empty plan solves it
+----------------------------------------------------
+Invoking solver graphplan
+Result is Sat
+Iteration was 3
+Performing plan justification:
+   0 actions were pruned in 0.00 seconds
 
+----------------------------------------------------
+Begin plan
+1 (stack r1 b1 b2)
+End plan
+----------------------------------------------------
+
+1 total actions in plan
+0 entries in hash table, 
+0 total set-creation steps (entries + hits + plan length - 1)
+1 actions tried
+
+####################################################
+Total elapsed time:   0.00 seconds
+Time in milliseconds: 1
+
+####################################################
 
 </consoleOutput>
     </planner>
     <statistics>
-        <toolTime>0.059</toolTime>
+        <toolTime>0.062</toolTime>
         <time/>
         <parsingTime/>
-        <nrActions>0</nrActions>
+        <nrActions>1</nrActions>
         <makeSpan/>
         <metricValue/>
         <planningTechnique/>
@@ -68,6 +95,17 @@ ff: goal can be simplified to TRUE. The empty plan solves it
     <evaluation value="">
         <rationales/>
     </evaluation>
-    <plan/>
+    <plan>
+        <action id="STACK">
+            <parameters>
+                <parameter id="R1"/>
+                <parameter id="B1"/>
+                <parameter id="B2"/>
+            </parameters>
+            <startTime>1</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+    </plan>
     <comments/>
 </xmlPlan>

@@ -110,7 +110,7 @@ void PlanValidationDialog::fillActionAdvice(int actionId)
         adviceStr.append(iter.key());
         adviceStr.append(" to ");
         adviceStr.append(iter.value() == true ? "true" : "false");
-        ui->advice->append(adviceStr);
+        ui->advice->addItem(adviceStr);
     }
 }
 

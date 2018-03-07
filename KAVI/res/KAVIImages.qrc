@@ -32,5 +32,9 @@
         <file>images2/zoomIN.png</file>
         <file>images2/zoomOUT.png</file>
         <file>images2/refresh2.png</file>
+        <file>images2/exit.png</file>
+        <file>images2/redo.png</file>
+        <file>images2/save.png</file>
+        <file>images2/undo.png</file>
     </qresource>
 </RCC>
