@@ -39,6 +39,24 @@ void StateHistory::buildStateHistoryFromPlan()
         if (action.getId() == this->plan->getInterruptActionId())
         {
             // when meeting the wrong action, stop build the state history
+            QSet<QString> beforeActionFacts;
+
+            if (statesList.size() ==0 )
+            {
+                beforeActionFacts.clear();
+            }
+            else
+            {
+                State previousState = statesList.last();
+
+                beforeActionFacts = previousState.getAfterActionFacts();
+
+            }
+            State newState;
+            newState.setBeforeActionFacts(beforeActionFacts);
+
+            statesList.append(newState);
+
             break;
         }
 

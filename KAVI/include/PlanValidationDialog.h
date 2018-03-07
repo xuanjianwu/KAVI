@@ -29,6 +29,8 @@ public:
 
     void fillActionInfomation(int actionId);
 
+    void fillWorldStateChange(int actionId);
+
 private slots:
     void on_actionsTable_cellClicked(int row, int column);
 

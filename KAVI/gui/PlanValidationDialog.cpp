@@ -352,6 +352,73 @@ void PlanValidationDialog::fillActionInfomation(int actionId)
     ui->actionInfomation->setHtml(htmlStr);
 }
 
+void PlanValidationDialog::fillWorldStateChange(int actionId)
+{
+    Plan* plan = this->planValidator->getPlan();
+    QMap<int, PlanAction> actions = plan->getActions();
+    PlanAction action = actions.value(actionId);
+
+    StateHistory* stateHistory = this->planValidator->getStateHistory();
+    QList<State> statesList = stateHistory->getStatesList();
+    State state = statesList.at(actionId);
+
+    QString htmlStr;
+    htmlStr += "<html>\n";
+    htmlStr += "<body>\n";
+    htmlStr += "<h2><b>";
+    htmlStr += action.getFormula();
+    htmlStr += "</b></h2>\n";
+
+    // show facts before action
+    htmlStr += "<h3><u>State before action: </u></h3>\n";
+
+    htmlStr += "<ul>\n";
+    foreach (QString fact, state.getBeforeActionFacts()) {
+        if (!state.getExcludeFacts().contains(fact))
+        {
+            htmlStr += "<li>";
+            htmlStr += fact;
+            htmlStr += "</li>\n";
+        }
+        else
+        {
+            htmlStr += "<li style=\"color:#FF4500;\">";
+            htmlStr += "<s>";
+            htmlStr += fact;
+            htmlStr += "</s>";
+            htmlStr += "</li>\n";
+        }
+    }
+    htmlStr += "</ul>\n";
+
+    // show facts after action
+    htmlStr += "<h3><u>State after action: </u></h3>\n";
+
+    htmlStr += "<ul>\n";
+    foreach (QString fact, state.getAfterActionFacts()) {
+        if (!state.getIncludeFacts().contains(fact))
+        {
+            htmlStr += "<li>";
+            htmlStr += fact;
+            htmlStr += "</li>\n";
+        }
+        else
+        {
+            htmlStr += "<li style=\"color:#4169E1;\">";
+            //htmlStr += "<del>";
+            htmlStr += fact;
+            //htmlStr += "</del>";
+            htmlStr += "</li>\n";
+        }
+    }
+    htmlStr += "</ul>\n";
+
+    htmlStr += "</body>\n";
+    htmlStr += "</html>";
+
+    ui->worldStateChange->setHtml(htmlStr);
+}
+
 void PlanValidationDialog::on_actionsTable_cellClicked(int row, int column)
 {
     ui->actionInfomation->clear();
@@ -363,6 +430,7 @@ void PlanValidationDialog::on_actionsTable_cellClicked(int row, int column)
         ui->actionInfomation->setEnabled(true);
         ui->worldStateChange->setEnabled(true);
         fillActionInfomation(row);
+        fillWorldStateChange(row);
     }
     else
     {
