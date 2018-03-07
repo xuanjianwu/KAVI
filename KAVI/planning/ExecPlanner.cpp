@@ -729,11 +729,18 @@ QDomElement ExecPlanner::solvePlanningProblem(QDomElement chosenPlanner, QString
             if (!planNode.firstChildElement("action").isNull())
             {
                 toolMessage.append("Planner generated a solution.");
+                int numOfActions = planNode.childNodes().size();
+
+                QDomElement nrActions = statisticNode.firstChildElement("nrActions");
+                setStrValue(nrActions, QString::number(numOfActions));
             }
             else
             {
                 toolMessage.append("Planner did not generate any solution!");
+                QDomElement nrActions = statisticNode.firstChildElement("nrActions");
+                setStrValue(nrActions, QString::number(0));
             }
+
 
             //7. set tool information message
             QDomElement toolInformation = thePlan.firstChildElement("toolInformation");

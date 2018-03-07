@@ -141,7 +141,12 @@ QString PlanAnalyzer::generateHTMLSinglePlanReport(QDomElement planners, QDomEle
         info.append("<TR><TD><font size=4 face=arial><b>Parsing time: </b>").append(statisticsElement.firstChildElement("parsingTime").text().trimmed()).append("</font></TD></TR>\n");
     }
 
-    info.append("<TR><TD><font size=4 face=arial><b>Number of actions: </b>").append(xmlPlan.firstChildElement("plan").childNodes().size()).append("</font></TD></TR>\n");
+    if (! statisticsElement.firstChildElement("nrActions").text().trimmed().isEmpty())
+    {
+        info.append("<TR><TD><font size=4 face=arial><b>Number of actions: </b>").append(statisticsElement.firstChildElement("nrActions").text().trimmed()).append("</font></TD></TR>\n");
+    }
+
+    //info.append("<TR><TD><font size=4 face=arial><b>Number of actions: </b>").append(xmlPlan.firstChildElement("plan").childNodes().size()).append("</font></TD></TR>\n");
 
     if (! statisticsElement.firstChildElement("makeSpan").text().trimmed().isEmpty())
     {
