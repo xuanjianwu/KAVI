@@ -9,6 +9,10 @@ PlanValidationDialog::PlanValidationDialog(PlanValidator* planValidator, QWidget
 
     this->planValidator = planValidator;
     fillActionsTable();
+
+    optionsText.append("Directly create a new action");
+
+    connect(ui->advice, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(on_repair_clicked()));
 }
 
 PlanValidationDialog::~PlanValidationDialog()
@@ -105,11 +109,17 @@ void PlanValidationDialog::fillActionAdvice(int actionId)
     QMap<QString, bool> repairAdvice = interruptedAction.getRepairAdvice();
     QMap<QString, bool>::iterator iter;
     for (iter = repairAdvice.begin(); iter != repairAdvice.end(); iter++) {
+        flawStates.append(iter.key());
+        flawAdvice.append(iter.value());
+    }
+
+    for (int i = 0; i < flawStates.size(); i++)
+    {
         QString adviceStr;
         adviceStr.append("Set ");
-        adviceStr.append(iter.key());
+        adviceStr.append(flawStates.at(i));
         adviceStr.append(" to ");
-        adviceStr.append(iter.value() == true ? "true" : "false");
+        adviceStr.append(flawAdvice.at(i) == true ? "true" : "false");
         ui->advice->addItem(adviceStr);
     }
 }
@@ -426,11 +436,18 @@ void PlanValidationDialog::fillWorldStateChange(int actionId)
     ui->worldStateChange->setHtml(htmlStr);
 }
 
+void PlanValidationDialog::runRepair(int selectedOption)
+{
+
+}
+
 void PlanValidationDialog::on_actionsTable_cellClicked(int row, int column)
 {
     ui->actionInfomation->clear();
     ui->worldStateChange->clear();
     ui->advice->clear();
+    flawAdvice.clear();
+    flawStates.clear();
 
     if (row <= this->planValidator->getPlan()->getInterruptActionId() || this->planValidator->getPlan()->getInterruptActionId() < 0)
     {
@@ -447,13 +464,13 @@ void PlanValidationDialog::on_actionsTable_cellClicked(int row, int column)
 
     if (row == this->planValidator->getPlan()->getInterruptActionId())
     {
-        ui->repair->setEnabled(true);
+        //ui->repair->setEnabled(true);
         ui->advice->setEnabled(true);
         fillActionAdvice(row);
     }
     else
     {
-        ui->repair->setEnabled(false);
+        //ui->repair->setEnabled(false);
         ui->advice->setEnabled(false);
     }
 }
@@ -466,4 +483,38 @@ void PlanValidationDialog::on_okButton_clicked()
 void PlanValidationDialog::on_cancelButton_clicked()
 {
     this->reject();
+}
+
+
+void PlanValidationDialog::on_repair_clicked()
+{
+    if (ui->advice->currentRow() >= 0)
+    {
+        RepairDialog* dialog = new RepairDialog(optionsText, this);
+        if (dialog->exec() == QDialog::Accepted)
+        {
+            int selectedOption = dialog->getOption();
+
+            Plan* plan = this->planValidator->getPlan();
+            QMap<int, PlanAction> actions = plan->getActions();
+            PlanAction interruptedAction = actions.value(plan->getInterruptActionId());
+
+            QString flawFact = flawStates.at(ui->advice->currentRow());
+
+            emit createNewAction(interruptedAction, flawFact);
+            this->accept();
+        }
+    }
+}
+
+void PlanValidationDialog::on_advice_currentRowChanged(int currentRow)
+{
+    if (currentRow < 0)
+    {
+        ui->repair->setEnabled(false);
+    }
+    else
+    {
+        ui->repair->setEnabled(true);
+    }
 }

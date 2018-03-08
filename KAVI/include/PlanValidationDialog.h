@@ -10,6 +10,7 @@
 #include "KAVIBase.h"
 #include "PlanningDialog.h"
 #include "PlanValidator.h"
+#include "RepairDialog.h"
 
 namespace Ui {
 class PlanValidationDialog;
@@ -31,6 +32,11 @@ public:
 
     void fillWorldStateChange(int actionId);
 
+    void runRepair(int selectedOption);
+
+signals:
+    void createNewAction(PlanAction flawAction, QString flawFact);
+
 private slots:
     void on_actionsTable_cellClicked(int row, int column);
 
@@ -38,8 +44,17 @@ private slots:
 
     void on_cancelButton_clicked();
 
+    void on_repair_clicked();
+
+    void on_advice_currentRowChanged(int currentRow);
+
 private:
     Ui::PlanValidationDialog *ui;
+
+    QList<QString> flawStates;
+    QList<bool> flawAdvice;
+
+    QStringList optionsText;
 
     PlanValidator* planValidator;
 };

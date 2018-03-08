@@ -80,7 +80,8 @@ SOURCES += \
     planning/Plan.cpp \
     planning/StateHistory.cpp \
     gui/PlanValidationDialog.cpp \
-    gui/EditFileDialog.cpp
+    gui/EditFileDialog.cpp \
+    gui/RepairDialog.cpp
 
 HEADERS += \
     include/KAVIBase.h \
@@ -140,7 +141,8 @@ HEADERS += \
     include/Plan.h \
     include/StateHistory.h \
     include/PlanValidationDialog.h \
-    include/EditFileDialog.h
+    include/EditFileDialog.h \
+    include/RepairDialog.h
 
 FORMS += \
     forms/KAVIMainWindow.ui \
@@ -163,7 +165,8 @@ FORMS += \
     forms/SolutionSettingsDialog.ui \
     forms/PlanningDialog.ui \
     forms/PlanValidationDialog.ui \
-    forms/EditFileDialog.ui
+    forms/EditFileDialog.ui \
+    forms/RepairDialog.ui
 
 RESOURCES += \
     res/KAVIIcons.qrc \

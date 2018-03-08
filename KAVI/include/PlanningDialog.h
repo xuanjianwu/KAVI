@@ -50,6 +50,10 @@ public:
 signals:
     void exportDefaultPDDL();
 
+public slots:
+
+    void execRepair(PlanAction flawAction, QString index);
+
 private slots:
     void on_customProblem_clicked(bool checked);
 

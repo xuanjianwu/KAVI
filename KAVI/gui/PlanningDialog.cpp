@@ -105,6 +105,11 @@ void PlanningDialog::initPlannerSelection(QList<QDomElement> plannersList)
     }
 }
 
+void PlanningDialog::execRepair(PlanAction flawAction, QString index)
+{
+
+}
+
 void PlanningDialog::on_customProblem_clicked(bool checked)
 {
     if (checked)
@@ -561,6 +566,9 @@ void PlanningDialog::on_execValidator_clicked()
     planValidator = new PlanValidator(theSingleChosenValidator, domainFile, problemFile, planFile);
     planValidator->run();
     PlanValidationDialog* dialog = new PlanValidationDialog(planValidator, this);
+
+    connect(dialog, SIGNAL(createNewAction(PlanAction, QString)), this, SLOT(execRepair(PlanAction, QString)));
+
     dialog->exec();
 }
 
