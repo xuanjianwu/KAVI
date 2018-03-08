@@ -172,12 +172,16 @@ bool checkPredicateInstance(const QDomElement &predicate, const QDomElement &def
         /*if (verbose && setDefinition.isNull())
             qWarning() << predLabel << "has no state defined.";
          */
-        if (verbose && stateDefinition.isNull())
-            qWarning() << "@" << predLabel << "has no state defined.";
+//        if (verbose && stateDefinition.isNull())
+//        {
+//            qWarning() << "@" << predLabel << "has no state defined.";
+//            return false;
+//        }
         if (verbose && setDefinition.isNull())
+        {
             qWarning() << "@" << predLabel << "has no set defined.";
-
-        return false;
+            return false;
+        }
     }
 
     if (verbose)
@@ -335,7 +339,7 @@ bool checkDependentDiagram(const QDomElement &diagramRoot, const QDomElement &de
 
     foreach(QDomElement actPred, predicateList)
     {
-        if ( checkPredicateInstance(actPred,definitionRoot,verbose) )
+        if ( checkPredicateInstance(actPred, definitionRoot, verbose) )
             predOK++;
         else
             predKO++;

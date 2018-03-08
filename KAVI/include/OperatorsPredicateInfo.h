@@ -64,7 +64,7 @@ private slots:
     *       checked - check flag
     * @return: void
     */
-    void on_precondCheck_toggled(bool checked);
+    void on_precondPosCheck_toggled(bool checked);
 
     /*
     * handle effect positive check toggle, update predicate's set in DataWidget
@@ -85,6 +85,8 @@ private slots:
     * @return: void
     */
     void on_effectNegCheck_toggled(bool checked);
+
+    void on_precondNegCheck_toggled(bool checked);
 
 private:
     // the dependent definition DataWidget

@@ -65,7 +65,7 @@
 
 // predicate layer colors
 #define LC_PRECOND_POS "#3CDC84"
-#define LC_PRECOND_NEG "#6CA6CD"
+#define LC_PRECOND_NEG "#808080"
 #define LC_EFFECT_POS "#0F74DC"
 #define LC_EFFECT_NEG "#FF5753"
 #define LC_DEFAULT "#FFFFFF"

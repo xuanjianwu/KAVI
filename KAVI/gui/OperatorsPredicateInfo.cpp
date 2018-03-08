@@ -63,24 +63,13 @@ void OperatorsPredicateInfo::on_moveUp_pressed()
     //emit madeChange(ArgumentOrderChanged);
 }
 
-void OperatorsPredicateInfo::on_precondCheck_toggled(bool checked)
-{
-    ui.effectPosCheck->setEnabled( !checked && !ui.effectNegCheck->isChecked() );
-
-    if (checked)
-        includeInSet(NSPS_PRECOND_POS);
-    else
-        excludeFromSet(NSPS_PRECOND_POS);
-
-    xmlData->refreshNode(getIntAttribute(selectedNode, "id"));
-
-    emit madeChange(PredicateSetChanged);
-}
-
 void OperatorsPredicateInfo::on_effectPosCheck_toggled(bool checked)
 {
-    ui.precondCheck->setEnabled(!checked);
-    ui.effectNegCheck->setEnabled(!checked);
+    ui.precondPosCheck->setEnabled(!checked && !ui.precondNegCheck->isChecked() );
+    //ui.precondPosCheck->setChecked(!checked);
+
+    ui.effectNegCheck->setEnabled(!checked && !ui.precondNegCheck->isChecked() );
+    //ui.effectNegCheck->setChecked(!checked);
 
     if (checked)
         includeInSet(NSPS_EFFECT_POS);
@@ -94,7 +83,11 @@ void OperatorsPredicateInfo::on_effectPosCheck_toggled(bool checked)
 
 void OperatorsPredicateInfo::on_effectNegCheck_toggled(bool checked)
 {
-    ui.effectPosCheck->setEnabled( !checked && !ui.precondCheck->isChecked() );
+    ui.effectPosCheck->setEnabled( !checked && !ui.precondPosCheck->isChecked() );
+    //ui.effectPosCheck->setChecked( !checked && !ui.precondPosCheck->isChecked() );
+
+    ui.precondNegCheck->setEnabled( !checked && !ui.precondPosCheck->isChecked() );
+    //ui.precondNegCheck->setChecked( !checked && !ui.precondPosCheck->isChecked() );
 
     if (checked)
         includeInSet(NSPS_EFFECT_NEG);
@@ -102,6 +95,42 @@ void OperatorsPredicateInfo::on_effectNegCheck_toggled(bool checked)
         excludeFromSet(NSPS_EFFECT_NEG);
 
     xmlData->refreshNode(getIntAttribute(selectedNode,"id"));
+
+    emit madeChange(PredicateSetChanged);
+}
+
+void OperatorsPredicateInfo::on_precondPosCheck_toggled(bool checked)
+{
+    ui.effectPosCheck->setEnabled( !checked && !ui.effectNegCheck->isChecked() );
+    //ui.effectPosCheck->setChecked( !checked && !ui.effectNegCheck->isChecked() );
+
+    ui.precondNegCheck->setEnabled( !checked && !ui.effectNegCheck->isChecked() );
+    //ui.precondNegCheck->setChecked( !checked && !ui.effectNegCheck->isChecked() );
+
+    if (checked)
+        includeInSet(NSPS_PRECOND_POS);
+    else
+        excludeFromSet(NSPS_PRECOND_POS);
+
+    xmlData->refreshNode(getIntAttribute(selectedNode, "id"));
+
+    emit madeChange(PredicateSetChanged);
+}
+
+void OperatorsPredicateInfo::on_precondNegCheck_toggled(bool checked)
+{
+    ui.precondPosCheck->setEnabled(!checked && !ui.effectPosCheck->isChecked() );
+    //ui.precondPosCheck->setChecked(!checked);
+
+    ui.effectNegCheck->setEnabled(!checked && !ui.effectPosCheck->isChecked() );
+    //ui.effectNegCheck->setChecked(!checked);
+
+    if (checked)
+        includeInSet(NSPS_PRECOND_NEG);
+    else
+        excludeFromSet(NSPS_PRECOND_NEG);
+
+    xmlData->refreshNode(getIntAttribute(selectedNode, "id"));
 
     emit madeChange(PredicateSetChanged);
 }
@@ -185,7 +214,12 @@ void OperatorsPredicateInfo::setCheckBoxes()
 
         if ( getStrValue(setElem) == NSPS_PRECOND_POS )
         {
-            ui.precondCheck->setChecked(true);
+            ui.precondPosCheck->setChecked(true);
+        }
+
+        if ( getStrValue(setElem) == NSPS_PRECOND_NEG )
+        {
+            ui.precondNegCheck->setChecked(true);
         }
 
         setElem = setElem.nextSiblingElement("set");
@@ -281,7 +315,5 @@ void OperatorsPredicateInfo::excludeFromSet(QString set)
 
     selectedNode.removeChild(removed);
 }
-
-
 
 

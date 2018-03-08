@@ -40,8 +40,8 @@ QStringList OperatorsPredicateDialog::predicateSet()
 
 void OperatorsPredicateDialog::on_effectPosCheck_toggled(bool checked)
 {
-    ui.effectNegCheck->setEnabled(!checked);
-    ui.precondPosCheck->setEnabled(!checked);
+    ui.effectNegCheck->setEnabled(!checked && !ui.precondNegCheck->isChecked() );
+    ui.precondPosCheck->setEnabled(!checked && !ui.precondNegCheck->isChecked() );
     //ui.precondNegCheck->setEnabled(checked);
 }
 
@@ -60,6 +60,6 @@ void OperatorsPredicateDialog::on_precondPosCheck_toggled(bool checked)
 
 void OperatorsPredicateDialog::on_precondNegCheck_toggled(bool checked)
 {
-    ui.precondPosCheck->setEnabled(!checked);
-    ui.effectNegCheck->setEnabled(!checked);
+    ui.precondPosCheck->setEnabled(!checked && !ui.effectPosCheck->isChecked() );
+    ui.effectNegCheck->setEnabled(!checked && !ui.effectPosCheck->isChecked() );
 }
