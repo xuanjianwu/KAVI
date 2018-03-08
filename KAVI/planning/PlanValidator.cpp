@@ -339,7 +339,7 @@ void PlanValidator::initDomainActions()
 
     //content.replace("\n", " ");
     splitDomainActionsToString(content, domainActions);
-    buildDomainPlanActionsFromDomainActions(domainPlanActions, domainActions);
+    //buildDomainPlanActionsFromDomainActions(domainPlanActions, domainActions);
 }
 
 void PlanValidator::buildDomainPlanActionsFromDomainActions(QList<PlanAction> &domainPlanActions, QStringList &domainActions)
@@ -895,6 +895,7 @@ void PlanValidator::selectMatchedActionFromDomainActions(QString actionName, QSt
     pattern.append(actionName);
     pattern.append("[\\s]+");
     actionNameChecker.setPattern(pattern);
+    actionNameChecker.setCaseSensitivity(Qt::CaseInsensitive);
     foreach (QString action, domainActions) {
         if (action.contains(actionNameChecker))
         {
