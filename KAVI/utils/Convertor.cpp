@@ -708,7 +708,7 @@ QString Convertor::buildSetString(QStringList &positive, QStringList &negative)
 //        result.append(pred);
 //        result.append(")");
 //    }
-
+    result.append("\n");
     for (int i = 0; i < negative.size(); i++)
     {
         QString pred = negative.at(i);

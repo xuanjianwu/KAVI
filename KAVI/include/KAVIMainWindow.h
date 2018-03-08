@@ -9,6 +9,7 @@
 
 #include "KAVIBase.h"
 #include "ui_KAVIMainWindow.h"
+#include "PlanAction.h"
 
 
 
@@ -49,11 +50,15 @@ public:
     */
     void crash();
 
+    void createActionTriggeredByPlanningDialog(QString &newOperatorName);
+
 signals:
     void loadDefaultDomainPDDL(QString domainPDDL);
     void loadDefaultProblemPDDL(QString problemPDDL);
 
 public slots:
+    void createActionFromPlanningDialog(PlanAction action, QString index);
+
     // slots for the planning dialog
     void exportDomainPDDL();
     void exportProblemPDDL();

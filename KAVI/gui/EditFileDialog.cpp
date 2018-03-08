@@ -148,6 +148,8 @@ void EditFileDialog::createNewActionToFile(QString actionText)
 //        return;
 //    }
 
+    setWindowTitle(this->filePath.append(" - Please modify the new added action's name"));
+
     QString newOperatorName = "NewActionName";
 
     actionText.prepend("\n").prepend(newOperatorName).prepend("    (:action ");

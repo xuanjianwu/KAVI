@@ -49,6 +49,7 @@ public:
 
 signals:
     void exportDefaultPDDL();
+    void createNewAction(PlanAction action, QString index);
 
 public slots:
 

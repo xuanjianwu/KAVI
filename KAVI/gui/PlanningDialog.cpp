@@ -184,6 +184,8 @@ void PlanningDialog::execRepair(PlanAction flawAction, QString index)
     else
     {
 
+        this->accept();
+        emit createNewAction(flawAction, index);
     }
 }
 

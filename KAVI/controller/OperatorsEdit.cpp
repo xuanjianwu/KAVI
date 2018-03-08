@@ -21,6 +21,76 @@ OperatorsEdit::OperatorsEdit(QWidget *parent)
     xmlDefinition = (DataWidget*)NULL;
 }
 
+void OperatorsEdit::defineOperatorFromPlanningDialog(QString newPredicateName, QList<QString> variableName, QList<QString> variableClass, bool predicateSet)
+{
+    // add the specified predicate node
+    NodeStructure newNode;
+
+    QPointF pos = diagram->newNodePos(pos);
+    int newID = diagram->newNodeID();
+
+    newNode.setData(nodePosition, pos);
+    newNode.setData(nodeID, newID);
+    newNode.setData(nodeLabel, newPredicateName);
+    newNode.setData(nodeType, NST_PREDICATE);
+
+    if (predicateSet == true)
+    {
+        newNode.setData(nodePredicateSet, QStringList(NSPS_EFFECT_POS));
+    }
+    else
+    {
+        newNode.setData(nodePredicateSet, QStringList(NSPS_EFFECT_NEG));
+    }
+
+
+    xmlData->addDataNode(newNode);
+    emit sceneChanged(EllipseNodeAdded);
+
+    // add the associated argument variable
+    for (int i = 0; i < variableName.size(); i++)
+    {
+        NodeStructure newNode;
+
+        QPointF newNodePos = diagram->newNodePos(pos);
+        int newNodeID = diagram->newNodeID();
+
+        newNode.setData(nodePosition, newNodePos);
+        newNode.setData(nodeID, newNodeID);
+        newNode.setData(nodeLabel, variableName.at(i));
+        newNode.setData(nodeType, NST_VARIABLE);
+        newNode.setData(nodeClass, variableClass.at(i));
+
+        xmlData->addDataNode(newNode);
+
+        emit sceneChanged(RectNodeAdded);
+
+        // add assocaition edges
+        int sX = newNodePos.x() > pos.x()? (pos.x() + diagram->getNode(newID)->getSize().width()/2) :
+                                          (pos.x() - diagram->getNode(newID)->getSize().width()/2);
+        int sY = newNodePos.y() > pos.y()? (pos.y() + diagram->getNode(newID)->getSize().height()/2) :
+                                          (pos.y() - diagram->getNode(newID)->getSize().height()/2);
+        QPointF sPoint(sX, sY);
+
+        int eX = pos.x() > newNodePos.x()? (newNodePos.x() + diagram->getNode(newNodeID)->getSize().width()/2) :
+                                      (newNodePos.x() - diagram->getNode(newNodeID)->getSize().width()/2);
+        int eY = pos.y() > newNodePos.y()? (newNodePos.y() + diagram->getNode(newNodeID)->getSize().height()/2) :
+                                      (newNodePos.y() - diagram->getNode(newNodeID)->getSize().height()/2);
+        QPointF ePoint(eX, eY);
+
+        EdgeStructure newEdge;
+        newEdge.id = diagram->newEdgeID();
+        newEdge.startPos = sPoint;
+        newEdge.endPos = ePoint;
+        newEdge.startNodeID = newID;
+        newEdge.endNodeID = newNodeID;
+        newEdge.purpose = DEP_ASSOCIATION;
+
+        int arg = i+1;
+        makeConnection(newEdge, arg);
+    }
+}
+
 void OperatorsEdit::defineRectangleNode(QPointF pos, int newID)
 {
     Q_ASSERT(xmlDefinition);

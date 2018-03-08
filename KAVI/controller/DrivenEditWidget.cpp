@@ -23,7 +23,7 @@ void DrivenEditWidget::makeConnection(EdgeStructure &edge, int &argNum)
 
     QDomElement connEl = xmlData->connectEdgeToNode(edge.id, EDGE_START, edge.startNodeID);
 
-    Q_ASSERT(argNum != INVALID_ARGN);
+    //Q_ASSERT(argNum != INVALID_ARGN);
     setIntAttribute(connEl, "argn", argNum);
 
     xmlData->connectEdgeToNode(edge.id, EDGE_END, edge.endNodeID);

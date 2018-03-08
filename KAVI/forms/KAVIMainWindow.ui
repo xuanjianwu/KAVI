@@ -785,8 +785,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../res/KAVIIcons.qrc"/>
   <include location="../res/KAVIImages.qrc"/>
+  <include location="../res/KAVIIcons.qrc"/>
  </resources>
  <connections/>
 </ui>

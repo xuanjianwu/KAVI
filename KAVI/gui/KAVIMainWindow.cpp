@@ -96,6 +96,90 @@ void KAVIMainWindow::crash()
     this->close();
 }
 
+void KAVIMainWindow::createActionTriggeredByPlanningDialog(QString &newOperatorName)
+{
+    bool ok;
+    newOperatorName = QInputDialog::getText(this, tr("Create new operator"),
+            tr("Name:"), QLineEdit::Normal, QString("operator"), &ok);
+
+    if (!ok)
+        return;
+
+    if (newOperatorName.isEmpty())
+    {
+        QMessageBox::information(this, tr("KAVI"), tr("Operator name can't be empty."));
+        return;
+    }
+
+    if ( !nameChecker.exactMatch(newOperatorName) )
+    {
+        QMessageBox::warning(this, tr("KAVI"),
+        tr("Name has wrong format.\n - only letters, digits, \"-\" and \"_\" are allowed\n- max lenght is limited\n - must start with letter"));
+        return;
+    }
+
+    if ( ui.actionSelector->findText(newOperatorName) >= 0)
+    {
+        QMessageBox::warning(this, tr("KAVI"), tr("Operator name must be unique."));
+        return;
+    }
+
+    // get the operators element from domain
+    QDomElement operatorsElement = findDomainSubelement("operators");
+    Q_ASSERT(!operatorsElement.isNull());
+
+    // create the action element for the new action in domain withour diagram element
+    QDomElement newActionElement = domainData.createElement("action");
+    newActionElement.setAttribute("name", newOperatorName);
+
+    operatorsElement.appendChild(newActionElement);
+
+    registerSubelement(newActionElement, ui.actionSelector);
+
+    int index = ui.actionSelector->findText(newOperatorName);
+
+    ui.actionSelector->setCurrentIndex(index);
+
+    ui.actionTab->setEnabled(true);
+    ui.actionDeleteAction->setEnabled(true);
+    ui.actionCheckDiagram->setEnabled(true);
+
+    domainChanged = true;
+}
+
+void KAVIMainWindow::createActionFromPlanningDialog(PlanAction action, QString index)
+{
+    ui.tabWidget->setCurrentIndex(TAB_INDEX_OPERATORS);
+
+
+    QString actionName;
+    createActionTriggeredByPlanningDialog(actionName);
+
+    QString targetEffect = index;
+    bool targetEffectAdvice = action.getRepairAdvice().value(index);
+
+    QString effectStr = targetEffect;
+
+    effectStr.remove(effectStr.indexOf("("), 1);
+    effectStr.remove(effectStr.indexOf(")"), 1);
+
+    QStringList effectItems = effectStr.split(" ");
+    QString predicateName = effectItems.at(0);
+    QStringList argumentsList = effectItems;
+    argumentsList.removeFirst();
+
+    QList<QString> variableName;
+    QList<QString> variableClass;
+
+    for (int i = 0; i < argumentsList.size(); i++)
+    {
+        variableName.append(argumentsList.at(i));
+        variableClass.append(action.getArgumentTypePair().value(argumentsList.at(i)));
+    }
+
+    ui.actionEdit->defineOperatorFromPlanningDialog(predicateName, variableName, variableClass, targetEffectAdvice);
+}
+
 void KAVIMainWindow::exportDomainPDDL()
 {
     // save to domainData
@@ -1525,6 +1609,9 @@ void KAVIMainWindow::on_actionPlanning_triggered()
     PlanningDialog* dialog = new PlanningDialog(this);
     //connect(dialog, SIGNAL(exportDefaultPDDL), this, SLOT(exportDomainPDDL()));
     //connect(dialog, SIGNAL(exportDefaultPDDL), this, SLOT(exportProblemPDDL()));
+
+    connect(dialog, SIGNAL(createNewAction(PlanAction, QString)), this, SLOT(createActionFromPlanningDialog(PlanAction, QString)));
+
     dialog->exec();
 }
 

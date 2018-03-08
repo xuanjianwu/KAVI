@@ -3,14 +3,14 @@
     <toolInformation>
         <name>KAVI</name>
         <version>1.0</version>
-        <message>Planner generated a solution.</message>
+        <message>Planner did not generate any solution!</message>
     </toolInformation>
     <name/>
     <description/>
     <project/>
     <domain>Blockworld</domain>
     <problem>fourBoxes</problem>
-    <datetime>2018.03.08 23:53:22.506 周四</datetime>
+    <datetime>2018.03.09 01:50:40.113 周五</datetime>
     <planner id="2">
         <name>Blackbox</name>
         <version>42 Windows</version>
@@ -34,58 +34,23 @@
             <negative-preconditions/>
         </requirements>
         <consoleOutput>blackbox version 42
-command line:  /cygdrive/e/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPlanners/blackbox -o E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIValidators/1.pddl -f E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIValidators/1p.pddl
+command line:  /cygdrive/e/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPlanners/blackbox -o E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPDDL/DefaultDomain.pddl -f E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPDDL/DefaultProblem.pddl
 
 Begin solver specification
     -maxint        0   -maxsec 10.000000  graphplan
     -maxint        0   -maxsec 0.000000  chaff
 End solver specification
-Loading domain file: E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIValidators/1.pddl
-Loading fact file: E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIValidators/1p.pddl
-Problem name: fourboxes
-Facts loaded.
-time: 1, 4 facts and 1 exclusive pairs.
-time: 2, 7 facts and 4 exclusive pairs.
-Goals first reachable in 2 steps.
-24 nodes created.
+Loading domain file: E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPDDL/DefaultDomain.pddl
+requirement: negative-preconditions is not supported
 
-####################################################
-goals at time 3:
-  empty_r1 on_b2_b1 
-
-
-----------------------------------------------------
-Invoking solver graphplan
-Result is Sat
-Iteration was 6
-Performing plan justification:
-   0 actions were pruned in 0.00 seconds
-
-----------------------------------------------------
-Begin plan
-1 (newactionname r1 b2)
-2 (stack r1 b1 b2)
-End plan
-----------------------------------------------------
-
-2 total actions in plan
-0 entries in hash table, 
-1 total set-creation steps (entries + hits + plan length - 1)
-2 actions tried
-
-####################################################
-Total elapsed time:   0.00 seconds
-Time in milliseconds: 1
-
-####################################################
 
 </consoleOutput>
     </planner>
     <statistics>
-        <toolTime>0.063</toolTime>
+        <toolTime>0.061</toolTime>
         <time/>
         <parsingTime/>
-        <nrActions>2</nrActions>
+        <nrActions>0</nrActions>
         <makeSpan/>
         <metricValue/>
         <planningTechnique/>
@@ -97,26 +62,6 @@ Time in milliseconds: 1
     <evaluation value="">
         <rationales/>
     </evaluation>
-    <plan>
-        <action id="NEWACTIONNAME">
-            <parameters>
-                <parameter id="R1"/>
-                <parameter id="B2"/>
-            </parameters>
-            <startTime>1</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-        <action id="STACK">
-            <parameters>
-                <parameter id="R1"/>
-                <parameter id="B1"/>
-                <parameter id="B2"/>
-            </parameters>
-            <startTime>2</startTime>
-            <duration>1</duration>
-            <notes/>
-        </action>
-    </plan>
+    <plan/>
     <comments/>
 </xmlPlan>

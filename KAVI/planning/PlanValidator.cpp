@@ -616,11 +616,27 @@ void PlanValidator::appendPreconditionsToPlanAction(PlanAction &planAction, QStr
     predicateChecker.setPattern(QString("\\([^()]*\\)"));
     pos = 0;
     QStringList predicateList;
-    while ((pos = predicateChecker.indexIn(precondition, pos)) != -1)
+
+    QString tmpPrecondition = precondition;
+    tmpPrecondition.remove(tmpPrecondition.indexOf("("), 1);
+    tmpPrecondition.remove(tmpPrecondition.indexOf(")"), 1);
+
+    if (tmpPrecondition.indexOf("(") == -1 &&
+            tmpPrecondition.indexOf(")") == -1 &&
+            tmpPrecondition.indexOf("?") == -1)
     {
-        predicateList.append(predicateChecker.capturedTexts());
-        pos += predicateChecker.matchedLength();
+
     }
+    else
+    {
+        while ((pos = predicateChecker.indexIn(precondition, pos)) != -1)
+        {
+            predicateList.append(predicateChecker.capturedTexts());
+            pos += predicateChecker.matchedLength();
+        }
+    }
+
+
 
     // select negative predicates
     QRegExp negativePredicateChecker;

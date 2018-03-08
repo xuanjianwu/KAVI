@@ -25,6 +25,8 @@ public:
     */
     OperatorsEdit(QWidget* parent = 0);
 
+    void defineOperatorFromPlanningDialog(QString newPredicateName, QList<QString> variableName, QList<QString> variableClass, bool predicateSet);
+
 private:
     /*
     * define a new variable node base on the class type in Definition, add new
