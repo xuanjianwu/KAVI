@@ -19,6 +19,9 @@ class EditFileDialog : public QDialog
 
 public:
     explicit EditFileDialog(QString filePath, QWidget *parent = 0);
+
+    EditFileDialog(QString filePath, QString addText, QWidget *parent);
+
     ~EditFileDialog();
 
     void initFileEditFromFilePath();
@@ -28,6 +31,8 @@ public:
 
     bool getTextChanged() const;
     void setTextChanged(bool value);
+
+    void createNewActionToFile(QString actionText);
 
 private slots:
     void on_save_clicked();
@@ -45,6 +50,8 @@ private slots:
 private:
     Ui::EditFileDialog *ui;
     QString filePath;
+
+    QRegExp nameChecker;
 
     bool textChanged;
 };

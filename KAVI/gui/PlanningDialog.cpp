@@ -107,7 +107,84 @@ void PlanningDialog::initPlannerSelection(QList<QDomElement> plannersList)
 
 void PlanningDialog::execRepair(PlanAction flawAction, QString index)
 {
+    if (ui->customProblem->checkState() == Qt::Checked)
+    {
+        QString actionStr;
 
+        actionStr.append("        :parameters ( ");
+
+
+        QString targetEffect = index;
+        bool targetEffectAdvice = flawAction.getRepairAdvice().value(index);
+
+        QString effectStr = targetEffect;
+
+        effectStr.remove(effectStr.indexOf("("), 1);
+        effectStr.remove(effectStr.indexOf(")"), 1);
+
+        QStringList effectItems = effectStr.split(" ");
+        QString predicateName = effectItems.at(0);
+        QStringList argumentsList = effectItems;
+        argumentsList.removeFirst();
+
+        foreach (QString argument, argumentsList) {
+            actionStr.append("?").append(argument);
+
+            if (flawAction.getArgumentTypePair().value(argument) == "-1")
+            {
+
+            }
+            else
+            {
+                actionStr.append(" - ").append(flawAction.getArgumentTypePair().value(argument));
+            }
+
+            actionStr.append(" ");
+        }
+
+        actionStr.append(")\n");
+
+        actionStr.append("        :precondition (and )\n");
+
+        actionStr.append("        :effect (and\n");
+
+        if (targetEffectAdvice)
+        {
+            actionStr.append("            ( ");
+        }
+        else
+        {
+            actionStr.append("            (not (");
+        }
+
+        actionStr.append(predicateName);
+
+        foreach (QString argument, argumentsList) {
+            actionStr.append(" ?");
+            actionStr.append(argument);
+        }
+
+        if (targetEffectAdvice)
+        {
+            actionStr.append(" )\n");
+        }
+        else
+        {
+            actionStr.append(" ))\n");
+        }
+
+
+        actionStr.append("        )\n");
+
+        actionStr.append("    )\n");
+
+        EditFileDialog* dialog = new EditFileDialog(domainFile, actionStr, this);
+        dialog->exec();
+    }
+    else
+    {
+
+    }
 }
 
 void PlanningDialog::on_customProblem_clicked(bool checked)

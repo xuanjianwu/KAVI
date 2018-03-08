@@ -566,7 +566,8 @@ void PlanValidator::appendPreconditionsToPlanAction(PlanAction &planAction, QStr
             if (argumentItems.size() == 1)
             {
                 QString typeName = argumentItems.at(0);
-                typeNameList.append(typeName.simplified());
+                //typeNameList.append(typeName.simplified());
+                typeNameList.append(QString::number(-1));
             }
             else if (argumentItems.size() == 2)
             {

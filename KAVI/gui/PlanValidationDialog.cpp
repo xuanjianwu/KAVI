@@ -501,8 +501,9 @@ void PlanValidationDialog::on_repair_clicked()
 
             QString flawFact = flawStates.at(ui->advice->currentRow());
 
-            emit createNewAction(interruptedAction, flawFact);
             this->accept();
+            emit createNewAction(interruptedAction, flawFact);
+
         }
     }
 }
