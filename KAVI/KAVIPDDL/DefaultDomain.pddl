@@ -1,5 +1,5 @@
 (define (domain UNNAMED )
-    (:requirements :strips :typing)
+    (:requirements :strips :typing :negative-preconditions)
     (:types
         
     )

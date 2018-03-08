@@ -135,3 +135,23 @@ void PlanAction::setNegativeEffectsDependers(const QMap<int, QSet<QString> > &va
 {
     negativeEffectsDependers = value;
 }
+
+QString PlanAction::getActioName() const
+{
+    return actioName;
+}
+
+void PlanAction::setActioName(const QString &value)
+{
+    actioName = value;
+}
+
+QMap<QString, QString> PlanAction::getArgumentTypePair() const
+{
+    return argumentTypePair;
+}
+
+void PlanAction::setArgumentTypePair(const QMap<QString, QString> &value)
+{
+    argumentTypePair = value;
+}

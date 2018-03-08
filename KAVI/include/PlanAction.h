@@ -52,10 +52,18 @@ public:
     QMap<int, QSet<QString> > getNegativeEffectsDependers() const;
     void setNegativeEffectsDependers(const QMap<int, QSet<QString> > &value);
 
+    QString getActioName() const;
+    void setActioName(const QString &value);
+
+    QMap<QString, QString> getArgumentTypePair() const;
+    void setArgumentTypePair(const QMap<QString, QString> &value);
+
 private:
     QString formula;
     double time;
     int id;
+    QString actioName;
+    QMap<QString, QString> argumentTypePair;
 
     QSet<QString> positivePreconditions;
     QSet<QString> negativePreconditions;

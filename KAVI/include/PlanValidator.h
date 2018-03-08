@@ -32,8 +32,11 @@ public:
     void appendPreconditionsToGoalPlanAction(PlanAction &action, QString goalString);
 
     void initDomainActions();
+    void buildDomainPlanActionsFromDomainActions(QList<PlanAction> &domainPlanActions, QStringList &domainActions);
 
     void appendPreconditionsToPlanAction(PlanAction& planAction, QString domainAction);
+
+    void appendEffectsToDomainPlanAction(PlanAction& planAction, QString& domainAction);
 
     void appendEffectsToPlanAction(PlanAction& planAction, QString domainAction);
 
@@ -109,6 +112,7 @@ private:
     QString problemInit;
     QString problemGoal;
     QStringList domainActions;
+    QList<PlanAction> domainPlanActions;
 
     // the running mode of KAVI: Debug or Release
     RunMode KAVIRunMode;
