@@ -257,6 +257,7 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
         toolMessage += ">> Could not find selected planner '"+ getStrValue(settings.firstChildElement("filePath")) +"'. \n" +
                 ">> Please download and copy it in the folder /KAVIPlanners \n";
         // should append toolMessage to planning dialog
+        emit appendToLog(toolMessage);
     }
 
     //proceed only if planner file exists
@@ -344,6 +345,11 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
         connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(startReadOutput()));
         connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(finishProcess(int, QProcess::ExitStatus)));
 
+        QDomElement nameElement =  chosenPlanner.firstChildElement("name");
+        QString plannerName = getStrValue(nameElement);
+
+        emit appendToLog("\n>> Calling planner "+ plannerName + "\n ");
+
         //Call the planner
         process->start(program, arguments);
         //process->execute(program, arguments);
@@ -358,6 +364,8 @@ QStringList ExecPlanner::getPlannerOutput(QDomElement chosenPlanner, QString dom
             testConsoleOutput = consoleOutput;
 
             // ItSIMPLE.getInstance().appendOutputPanelText("\n>> Planner's output read. \n");
+
+            emit appendToLog("\n>> Planner's output read. \n");
 
             this->time = start_time.elapsed();
 
@@ -673,6 +681,7 @@ QDomElement ExecPlanner::solvePlanningProblem(QDomElement chosenPlanner, QString
         toolMessage += ">> Could not find selected planner '"+ getStrValue(settings.firstChildElement("filePath")) +"'. \n" +
                 ">> Please download and copy it in the folder /KAVIPlanners \n";
         // should append toolMessage to planning dialog
+        emit appendToLog(toolMessage);
     }
 
     if (plannerFileExists)

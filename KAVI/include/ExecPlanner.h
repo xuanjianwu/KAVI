@@ -80,6 +80,9 @@ public:
 
     QString getPlannerGeneratedFilesPath();
 
+signals:
+    void appendToLog(QString text);
+
 public slots:
     void processError(QProcess::ProcessError error);
     void startProcess();

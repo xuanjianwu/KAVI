@@ -52,6 +52,7 @@ signals:
     void createNewAction(PlanAction action, QString index);
 
 public slots:
+    void appendToConsoleLog(QString text);
 
     void execRepair(PlanAction flawAction, QString index);
 
@@ -87,6 +88,8 @@ private slots:
     void on_editProblemPDDL_clicked();
 
     void on_editPlanFile_clicked();
+
+    void on_clearConsoleLog_clicked();
 
 private:
     QString getDomainName();

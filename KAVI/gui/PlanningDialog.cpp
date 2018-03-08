@@ -26,6 +26,8 @@ void PlanningDialog::solveProblemWithSinglePlanner(QString domain, QString probl
 
     //connect(exe, SIGNAL(finished()), this, SLOT(deleteLater()));
     connect(exe, SIGNAL(finished()), this, SLOT(showPlannerOutput()));
+    connect(exe, SIGNAL(appendToLog(QString)), this, SLOT(appendToConsoleLog(QString)));
+
     exe->start();
 }
 
@@ -79,7 +81,8 @@ void PlanningDialog::initProblemSelection()
     QFile pddlDomainFile(domainFile);
     if ( !pddlDomainFile.open(QFile::ReadOnly | QFile::Text ))
     {
-        qDebug()<< "@Error: cannot open file: " << pddlDomainFile.fileName();
+        //qDebug()<< "@Error: cannot open file: " << pddlDomainFile.fileName();
+        appendToConsoleLog(QString("Error: cannot open file: ").append(pddlDomainFile.fileName()));
         return;
     }
     plannerSuggestion->initialPlannerSelection(pddlDomainFile, getKAVIPlanners());
@@ -103,6 +106,11 @@ void PlanningDialog::initPlannerSelection(QList<QDomElement> plannersList)
 
         ui->plannerSelection->addItem(name.append(" - ").append(version));
     }
+}
+
+void PlanningDialog::appendToConsoleLog(QString text)
+{
+    ui->consoleLog->append(text);
 }
 
 void PlanningDialog::execRepair(PlanAction flawAction, QString index)
@@ -302,7 +310,8 @@ bool PlanningDialog::getXMLDocument()
 
     if ( !xmlFile.open(QFile::ReadOnly | QFile::Text ))
     {
-        qDebug()<< "@Error: cannot open file: " << xmlFile.fileName();
+        //qDebug()<< "@Error: cannot open file: " << xmlFile.fileName();
+        appendToConsoleLog(QString("Error: cannot open file: ").append(xmlFile.fileName()));
         return false;
     }
 
@@ -325,7 +334,8 @@ bool PlanningDialog::getValidatorsXMLDocument()
 
     if ( !xmlFile.open(QFile::ReadOnly | QFile::Text ))
     {
-        qDebug()<< "@Error: cannot open file: " << xmlFile.fileName();
+        //qDebug()<< "@Error: cannot open file: " << xmlFile.fileName();
+        appendToConsoleLog(QString("Error: cannot open file: ").append(xmlFile.fileName()));
         return false;
     }
 
@@ -499,17 +509,20 @@ void PlanningDialog::on_execPlanner_clicked()
 {
     if (domainFile.simplified().isNull())
     {
-        qDebug() << "@Warning: The domain PDDL file can not be empty";
+        //qDebug() << "@Warning: The domain PDDL file can not be empty";
+        appendToConsoleLog(QString("Warning: The domain PDDL file can not be empty"));
         return;
     }
     if (problemFile.simplified().isNull())
     {
-        qDebug() << "@Warning: The problem PDDL file can not be empty";
+        //qDebug() << "@Warning: The problem PDDL file can not be empty";
+        appendToConsoleLog(QString("Warning: The problem PDDL file can not be empty"));
         return;
     }
     if (theSingleChosenPlanner.isNull())
     {
-        qDebug() << "@Warning: Please select one planner to execute planning";
+        //qDebug() << "@Warning: Please select one planner to execute planning";
+        appendToConsoleLog(QString("Warning: Please select one planner to execute planning"));
         return;
     }
     solveProblemWithSinglePlanner(domainFile, problemFile, theSingleChosenPlanner);
@@ -520,7 +533,8 @@ QString PlanningDialog::getDomainName()
     QFile pddlDomainFile(domainFile);
     if ( !pddlDomainFile.open(QFile::ReadOnly | QFile::Text ))
     {
-        qDebug()<< "@Error: cannot open file: " << pddlDomainFile.fileName();
+        //qDebug()<< "@Error: cannot open file: " << pddlDomainFile.fileName();
+        appendToConsoleLog(QString("Error: cannot open file: ").append(pddlDomainFile.fileName()));
         return QString();
     }
 
@@ -552,7 +566,8 @@ QString PlanningDialog::getProblemName()
     QFile pddlProblemFile(problemFile);
     if ( !pddlProblemFile.open(QFile::ReadOnly | QFile::Text ))
     {
-        qDebug()<< "@Error: cannot open file: " << pddlProblemFile.fileName();
+        //qDebug()<< "@Error: cannot open file: " << pddlProblemFile.fileName();
+        appendToConsoleLog(QString("Error: cannot open file: ").append(pddlProblemFile.fileName()));
         return QString();
     }
 
@@ -624,22 +639,26 @@ void PlanningDialog::on_execValidator_clicked()
 {
     if (domainFile.simplified().isNull())
     {
-        qDebug() << "@Warning: The domain PDDL file can not be empty";
+        //qDebug() << "@Warning: The domain PDDL file can not be empty";
+        appendToConsoleLog(QString("Warning: The domain PDDL file can not be empty"));
         return;
     }
     if (problemFile.simplified().isNull())
     {
-        qDebug() << "@Warning: The problem PDDL file can not be empty";
+        //qDebug() << "@Warning: The problem PDDL file can not be empty";
+        appendToConsoleLog(QString("Warning: The problem PDDL file can not be empty"));
         return;
     }
     if (planFile.simplified().isNull())
     {
-        qDebug() << "@Warning: The plan file can not be empty";
+        //qDebug() << "@Warning: The plan file can not be empty";
+        appendToConsoleLog(QString("Warning: The plan file can not be empty"));
         return;
     }
     if (theSingleChosenValidator.isNull())
     {
-        qDebug() << "@Warning: Please select one validator to execute validation";
+        //qDebug() << "@Warning: Please select one validator to execute validation";
+        appendToConsoleLog(QString("Warning: Please select one validator to execute validation"));
         return;
     }
     planValidator = new PlanValidator(theSingleChosenValidator, domainFile, problemFile, planFile);
@@ -703,4 +722,9 @@ void PlanningDialog::on_editPlanFile_clicked()
 {
     EditFileDialog* dialog = new EditFileDialog(planFile, this);
     dialog->exec();
+}
+
+void PlanningDialog::on_clearConsoleLog_clicked()
+{
+    ui->consoleLog->clear();
 }
