@@ -80,7 +80,7 @@ void Convertor::writeDomainToPDDL(const QDomDocument &doc, QFile &output)
 
     outStream << "(define (domain " << domainName << " )"<< endl;
 
-    writeLine(1, "(:requirements :strips :typing)");
+    writeLine(1, "(:requirements :strips :typing :negative-preconditions)");
 
     writeItem(1, getDefinedTypes(), "(:types", ")");
     writeItem(1, getDefinedPredicates(), "(:predicates", ")");
@@ -213,7 +213,8 @@ void Convertor::writeAction(int indent, QDomElement diagram, QString name)
 
     writeLine(indent + 1, getActionParameters(diagram));
 
-    QSet<int> actPrecond;
+    QSet<int> actPrecondPos;
+    QSet<int> actPrecondNeg;
     QSet<int> actEffectPos;
     QSet<int> actEffectNeg;
 
@@ -239,7 +240,13 @@ void Convertor::writeAction(int indent, QDomElement diagram, QString name)
 
             if ( setStr == NSPS_PRECOND_POS )
             {
-                actPrecond.insert(predID);
+                actPrecondPos.insert(predID);
+                continue;
+            }
+
+            if ( setStr == NSPS_PRECOND_NEG )
+            {
+                actPrecondNeg.insert(predID);
                 continue;
             }
 
@@ -269,15 +276,21 @@ void Convertor::writeAction(int indent, QDomElement diagram, QString name)
     // the negative list to build string
     QStringList negativeList;
 
-    // for the precondition string, the positive list equals the actPrecond
-    foreach (int id, actPrecond)
+    // for the precondition string, the positive list equals the actPrecondPos
+    foreach (int id, actPrecondPos)
     {
         positiveList << allPredicates.value(id);
+    }
+    // for the precondition string, the negative list equals the actPrecondNeg
+    foreach (int id, actPrecondNeg)
+    {
+        negativeList << allPredicates.value(id);
     }
 
     // build the precondition string
     QString precondString = buildSetString(positiveList, negativeList);
     positiveList.clear();
+    negativeList.clear();
 
     // for the effect string, the positive list equals the actEffectPos,
     // the negative list equals the actEffectNeg
@@ -689,9 +702,21 @@ QString Convertor::buildSetString(QStringList &positive, QStringList &negative)
 {
     QString result = positive.join("\n");
 
-    foreach(QString pred, negative)
+//    foreach(QString pred, negative)
+//    {
+//        result.append("\n(not ");
+//        result.append(pred);
+//        result.append(")");
+//    }
+
+    for (int i = 0; i < negative.size(); i++)
     {
-        result.append("\n(not ");
+        QString pred = negative.at(i);
+        if (i > 0)
+        {
+            result.append("\n");
+        }
+        result.append("(not ");
         result.append(pred);
         result.append(")");
     }
