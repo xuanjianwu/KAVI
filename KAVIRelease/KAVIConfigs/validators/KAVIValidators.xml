@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<KAVIValidators>
+	<toolInformation>
+		<name>KAVI</name>
+		<version>1.0</version>
+	</toolInformation>
+	<settings>
+		<timeout enabled="false">1200</timeout>
+		<planValidation enabled="true" />
+	</settings>
+	<validators>
+		<validator id="1">
+			<name>VAL</name>
+			<version>Version 4</version>
+			<date>Feb 2015</date>
+			<institution>planning research group in the Department of Informatics at King's College London (https://nms.kcl.ac.uk/planning/index.html)</institution>
+			<author>Derek Long, Richard Howey, Stephen Cresswell and Maria Fox</author>
+			<link>https://github.com/KCL-Planning/VAL</link>
+			<description />
+			<platform>
+				<windows />
+			</platform>
+			<requirements>
+				<pddl21 />
+				<pddl22 />
+				<pddl30 />
+			</requirements>
+			<settings>
+				<filePath>KAVIValidators/validate.exe</filePath>
+				<output hasOutputFile="false">
+					<outputFile>
+						<fileName></fileName>
+						<fileNameAutomaticIncrement />
+						<argument needArgument="false" parameter="">
+							<description />
+						</argument>
+						<additionalGeneratedFiles>
+							<fileName></fileName>
+						</additionalGeneratedFiles>
+					</outputFile>
+					<consoleOutput>
+						<planStartIdentifier startsAfterNlines="" />
+						<planEndIdentifier />
+					</consoleOutput>
+				</output>
+				<arguments>
+					<argument parameter="-f" id="1">
+						<name>laTeX report file</name>
+						<value>report</value>
+						<enable>false</enable>
+						<description>-f file -- LaTeX report will be stored in file 'file.tex'</description>
+					</argument>
+					<argument parameter="-v" id="2">
+						<name>verbose</name>
+						<value />
+						<enable>true</enable>
+						<description>verbose reporting of plan check progress</description>
+					</argument>					
+					<domain parameter="" id="3">
+						<name>domain</name>
+						<value />
+						<enable>true</enable>
+						<description>specifies the file of the operators</description>
+					</domain>
+					<problem parameter="" id="4">
+						<name>problem</name>
+						<value />
+						<enable>true</enable>
+						<description>specifies the file of (init/goal) facts</description>
+					</problem>
+					<plan parameter="" id="5">
+						<name>plan</name>
+						<value />
+						<enable>true</enable>
+						<description>specifies the file of the plan</description>
+					</plan>
+				</arguments>
+				<timeout enabled="false">36000</timeout>
+			</settings>
+		</validator>
+	</validators>
+</KAVIValidators>
+

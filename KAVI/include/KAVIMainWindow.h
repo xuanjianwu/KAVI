@@ -381,6 +381,10 @@ private:
 
     QString getPDDLFilePath();
 
+    QString getExamplesPath();
+
+    QString getPNGPath();
+
     Ui::MainWindow ui;
 };
 

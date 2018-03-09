@@ -207,6 +207,12 @@
 
 #define MAX_NAME_LENGTH 30
 
+#define KAVI_EXAMPLES_FOLDER_RELEASE "/KAVIExamples/"
+#define KAVI_EXAMPLES_FOLDER_DEBUG "/KAVI/KAVIExamples/"
+
+#define KAVI_PNG_FOLDER_RELEASE "/KAVIPNG/"
+#define KAVI_PNG_FOLDER_DEBUG "/KAVI/KAVIPNG/"
+
 // the margin for saving PNG
 #define IMAGE_MARGIN 20
 

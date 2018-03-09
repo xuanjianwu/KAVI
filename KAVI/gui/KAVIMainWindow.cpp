@@ -252,7 +252,9 @@ void KAVIMainWindow::on_actionOpen_O_triggered()
     if ( !askForSave("Open domain") )
         return;
 
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), ".", tr("Planning domains (*.xml)"));
+    QString defaultOpenFilePath = getExamplesPath();
+
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), defaultOpenFilePath, tr("Planning domains (*.xml)"));
 
     if ( fileName.isEmpty() )
         return;
@@ -280,7 +282,9 @@ void KAVIMainWindow::on_actionSave_As_A_triggered()
     // save to domainData
     globalSave();
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), ".", tr("Planning domains (*.xml)"));
+    QString defaultOpenFilePath = getExamplesPath();
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), defaultOpenFilePath, tr("Planning domains (*.xml)"));
 
     if ( fileName.isEmpty() )
         return;
@@ -313,7 +317,9 @@ void KAVIMainWindow::on_actionDomain_PDDL_triggered()
     // save to domainData
     globalSave();
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Export domain"), ".", tr("Planning domains (*.pddl)"));
+    QString defaultOpenFilePath = getPDDLFilePath();
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export domain"), defaultOpenFilePath, tr("Planning domains (*.pddl)"));
 
     if ( fileName.isEmpty() )
         return;
@@ -335,7 +341,10 @@ void KAVIMainWindow::on_actionProblem_PDDL_triggered()
 {
     // save to domainData
     globalSave();
-    QString dirName = QFileDialog::getExistingDirectory(this, tr("Export problems"), ".",
+
+    QString defaultOpenFilePath = getPDDLFilePath();
+
+    QString dirName = QFileDialog::getExistingDirectory(this, tr("Export problems"), defaultOpenFilePath,
                     QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
     if ( dirName.isEmpty() )
@@ -756,7 +765,9 @@ void KAVIMainWindow::on_actionSavePNG_triggered()
 {
     qDebug() << "@Saving Image";
 
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save Image"), ".", tr("Images (*.png)"));
+    QString defaultOpenFilePath = getPNGPath();
+
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save Image"), defaultOpenFilePath, tr("Images (*.png)"));
 
     if ( fileName.isEmpty() )
         return;
@@ -1587,6 +1598,52 @@ QString KAVIMainWindow::getPDDLFilePath()
         break;
     case Release:
         filePath.append(currentPath).append(KAVI_PDDL_DIR_RELEASE);
+        break;
+    default:
+        break;
+    }
+
+    return filePath;
+}
+
+QString KAVIMainWindow::getExamplesPath()
+{
+    QString filePath;
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:
+        filePath.append(upPath).append(KAVI_EXAMPLES_FOLDER_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(KAVI_EXAMPLES_FOLDER_RELEASE);
+        break;
+    default:
+        break;
+    }
+
+    return filePath;
+}
+
+QString KAVIMainWindow::getPNGPath()
+{
+    QString filePath;
+
+    QDir tmpDir;
+    QString currentPath = tmpDir.currentPath();
+    tmpDir.cdUp();
+    QString upPath = tmpDir.path();
+    tmpDir.setCurrent(currentPath);
+    switch (KAVIRunMode) {
+    case Debug:
+        filePath.append(upPath).append(KAVI_PNG_FOLDER_DEBUG);
+        break;
+    case Release:
+        filePath.append(currentPath).append(KAVI_PNG_FOLDER_RELEASE);
         break;
     default:
         break;

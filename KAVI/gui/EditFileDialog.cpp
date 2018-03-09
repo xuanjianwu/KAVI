@@ -148,7 +148,11 @@ void EditFileDialog::createNewActionToFile(QString actionText)
 //        return;
 //    }
 
-    setWindowTitle(this->filePath.append(" - Please modify the new added action's name"));
+    QString newWindowTitle = this->filePath;
+
+    newWindowTitle.append(" - Please modify the new added action's name");
+
+    setWindowTitle(newWindowTitle);
 
     QString newOperatorName = "NewActionName";
 
