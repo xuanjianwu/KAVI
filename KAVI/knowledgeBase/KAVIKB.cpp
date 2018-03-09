@@ -3,7 +3,7 @@
 
 KAVIKB::KAVIKB()
 {
-    KAVIRunMode = Debug;
+    KAVIRunMode = Release;
 }
 
 KAVIKB::~KAVIKB()

@@ -8,7 +8,7 @@ PlanningDialog::PlanningDialog(QWidget *parent) :
     ui(new Ui::PlanningDialog)
 {
     ui->setupUi(this);
-    KAVIRunMode = Debug;
+    KAVIRunMode = Release;
 
     initEnvironment();
 }
