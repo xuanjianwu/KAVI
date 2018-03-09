@@ -1204,6 +1204,13 @@ void PlanValidator::parseValidatorOutputToPlan(QStringList &consoleOutput)
             line = line.remove(0, line.indexOf(":")+1).simplified();
             setPlanSize(line.toInt());
             planActioning = true;
+
+            if (getPlanSize() == 0)
+            {
+                planSuccess = false;
+                break;
+            }
+
             continue;
         }
         if (line.contains("Plan Validation details"))
