@@ -2,6 +2,7 @@
 
 using namespace XMLUtils;
 
+
 ExecPlanner::ExecPlanner(QObject *parent)
     : QThread(parent)
 {
