@@ -4,14 +4,14 @@ using namespace XMLUtils;
 
 PlanValidator::PlanValidator()
 {
-    KAVIRunMode = Release;
+    KAVIRunMode = Debug;
 
     //initEnvironment();
 }
 
 PlanValidator::PlanValidator(QDomElement chosenValidator, QString domainFile, QString problemFile, QString planFile)
 {
-    KAVIRunMode = Release;
+    KAVIRunMode = Debug;
 
 //    this->chosenValidator = chosenValidator;
 //    this->domainFile = domainFile;

@@ -6,7 +6,7 @@ using namespace XMLUtils;
 ExecPlanner::ExecPlanner(QObject *parent)
     : QThread(parent)
 {
-    KAVIRunMode = Release;
+    KAVIRunMode = Debug;
     getXMLDocument();
 }
 
@@ -18,7 +18,7 @@ ExecPlanner::ExecPlanner(QDomElement chosenPlanner, QString domainFile, QString 
     this->problemFile = problemFile;
     this->rePlaning = replaning;
 
-    KAVIRunMode = Release;
+    KAVIRunMode = Debug;
     getXMLDocument();
 }
 

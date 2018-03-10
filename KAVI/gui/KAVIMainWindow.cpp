@@ -28,7 +28,7 @@ KAVIMainWindow::KAVIMainWindow(QWidget *parent)
 {
     ui.setupUi(this);
 
-    KAVIRunMode = Release;
+    KAVIRunMode = Debug;
 
     domainChanged = false;
 
