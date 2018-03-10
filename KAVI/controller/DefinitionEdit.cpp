@@ -14,6 +14,7 @@
 using namespace XMLUtils;
 using namespace CheckUtils;
 
+
 DefinitionEdit::DefinitionEdit(QWidget *parent)
     :EditWidget(parent)
 {
