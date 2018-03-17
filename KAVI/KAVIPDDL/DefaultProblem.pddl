@@ -1,18 +1,22 @@
 (define (problem fourBoxes)
     (:domain Blockworld )
     (:objects
-         B2 B1 - Box
-         R1 - Robot
+         D C B A - Box
+         Rob - Robot
     )
     (:init
-        (holding R1 B2)
-        (clear B1)
+        (clear A)
+        (on B A)
+        (on C B)
+        (onground C)
+        (empty Rob)
+        (clear D)
+        (onground D)
     )
     (:goal
         (and 
-            (empty R1)
-            (clear B2)
-            (on B2 B1)
+            (on C B)
+            (on D C)
         )
     )
 )

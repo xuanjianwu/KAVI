@@ -14,6 +14,7 @@ class GraphClass;
 
 struct NodeStructure;
 
+
 CU_NS_BEGIN
    /*
     * get the arguments of predicate

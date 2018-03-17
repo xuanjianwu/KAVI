@@ -11,6 +11,7 @@ PlanValidationDialog::PlanValidationDialog(PlanValidator* planValidator, QWidget
     fillActionsTable();
 
     optionsText.append("Directly create a new action");
+    optionsText.append("Modify current actions");
 
     connect(ui->advice, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(on_repair_clicked()));
 }
