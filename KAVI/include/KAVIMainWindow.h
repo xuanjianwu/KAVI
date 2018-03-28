@@ -58,6 +58,7 @@ signals:
 
 public slots:
     void createActionFromPlanningDialog(PlanAction action, QString index);
+    void modifyActionsFromPlanningDialog();
 
     // slots for the planning dialog
     void exportDomainPDDL();

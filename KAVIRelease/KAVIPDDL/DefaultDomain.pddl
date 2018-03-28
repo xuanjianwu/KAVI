@@ -6,25 +6,25 @@
         Robot Box - object
     )
     (:predicates
-        (holding ?a - Robot ?b - Box)
-        (onground ?a - Box)
-        (on ?a - Box ?b - Box)
-        (clear ?a - Box)
         (empty ?a - Robot)
+        (clear ?a - Box)
+        (on ?a - Box ?b - Box)
+        (onground ?a - Box)
+        (holding ?a - Robot ?b - Box)
     )
     (:action stack
         :parameters (?R1 - Robot ?B1 - Box ?B2 - Box )
         :precondition (and 
-            (holding ?R1 ?B2)
             (clear ?B1)
+            (holding ?R1 ?B2)
             
         )
         :effect (and 
-            (on ?B2 ?B1)
-            (empty ?R1)
             (clear ?B2)
-            (not (holding ?R1 ?B2))
+            (empty ?R1)
+            (on ?B2 ?B1)
             (not (clear ?B1))
+            (not (holding ?R1 ?B2))
         )
     )
 )

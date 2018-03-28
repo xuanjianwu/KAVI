@@ -5,7 +5,6 @@
          Rob - Robot
     )
     (:init
-        (clear A)
         (on B A)
         (on C B)
         (onground C)

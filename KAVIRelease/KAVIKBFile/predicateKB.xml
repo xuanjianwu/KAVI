@@ -5,4 +5,6 @@
     <predicate>clear Box</predicate>
     <predicate>onground Box</predicate>
     <predicate>on Box Box</predicate>
+    <predicate>empty</predicate>
+    <predicate>empty c</predicate>
 </predicates>

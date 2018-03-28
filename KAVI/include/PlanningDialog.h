@@ -49,12 +49,16 @@ public:
 
 signals:
     void exportDefaultPDDL();
+
     void createNewAction(PlanAction action, QString index);
+
+    void modifyOldActions();
 
 public slots:
     void appendToConsoleLog(QString text);
 
-    void execRepair(PlanAction flawAction, QString index);
+    void execRepairByCreateAction(PlanAction flawAction, QString index);
+    void execRepairByModifyActions();
 
 private slots:
     void on_customProblem_clicked(bool checked);

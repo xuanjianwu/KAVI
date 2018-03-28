@@ -113,7 +113,7 @@ void PlanningDialog::appendToConsoleLog(QString text)
     ui->consoleLog->append(text);
 }
 
-void PlanningDialog::execRepair(PlanAction flawAction, QString index)
+void PlanningDialog::execRepairByCreateAction(PlanAction flawAction, QString index)
 {
     if (ui->customProblem->checkState() == Qt::Checked)
     {
@@ -194,6 +194,21 @@ void PlanningDialog::execRepair(PlanAction flawAction, QString index)
 
         this->accept();
         emit createNewAction(flawAction, index);
+    }
+}
+
+void PlanningDialog::execRepairByModifyActions()
+{
+
+    if (ui->customProblem->checkState() == Qt::Checked)
+    {
+        EditFileDialog* dialog = new EditFileDialog(domainFile, this);
+        dialog->exec();
+    }
+    else
+    {
+        this->accept();
+        emit modifyOldActions();
     }
 }
 
@@ -671,7 +686,8 @@ void PlanningDialog::on_execValidator_clicked()
     planValidator->run();
     PlanValidationDialog* dialog = new PlanValidationDialog(planValidator, this);
 
-    connect(dialog, SIGNAL(createNewAction(PlanAction, QString)), this, SLOT(execRepair(PlanAction, QString)));
+    connect(dialog, SIGNAL(createNewAction(PlanAction, QString)), this, SLOT(execRepairByCreateAction(PlanAction, QString)));
+    connect(dialog, SIGNAL(modifyOldActions()), this, SLOT(execRepairByModifyActions()));
 
     dialog->exec();
 }

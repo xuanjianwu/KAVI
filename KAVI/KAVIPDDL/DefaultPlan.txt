@@ -1,1 +1,3 @@
-0: (stack Rob A B)
+0: (caonima A) [1]
+1: (stack Rob A B) [1]
+

@@ -36,6 +36,7 @@ public:
 
 signals:
     void createNewAction(PlanAction flawAction, QString flawFact);
+    void modifyOldActions();
 
 private slots:
     void on_actionsTable_cellClicked(int row, int column);
@@ -54,7 +55,7 @@ private:
     QList<QString> flawStates;
     QList<bool> flawAdvice;
 
-    QStringList optionsText;
+    QMap<int, QString> options;
 
     PlanValidator* planValidator;
 };

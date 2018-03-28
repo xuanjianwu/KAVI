@@ -10,8 +10,8 @@ PlanValidationDialog::PlanValidationDialog(PlanValidator* planValidator, QWidget
     this->planValidator = planValidator;
     fillActionsTable();
 
-    optionsText.append("Directly create a new action");
-    optionsText.append("Modify current actions");
+    options.insert(0, "Directly create a new action");
+    options.insert(1, "Modify current actions");
 
     connect(ui->advice, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(on_repair_clicked()));
 }
@@ -491,20 +491,27 @@ void PlanValidationDialog::on_repair_clicked()
 {
     if (ui->advice->currentRow() >= 0)
     {
-        RepairDialog* dialog = new RepairDialog(optionsText, this);
+        RepairDialog* dialog = new RepairDialog(QStringList(options.values()), this);
         if (dialog->exec() == QDialog::Accepted)
         {
             int selectedOption = dialog->getOption();
 
-            Plan* plan = this->planValidator->getPlan();
-            QMap<int, PlanAction> actions = plan->getActions();
-            PlanAction interruptedAction = actions.value(plan->getInterruptActionId());
-
-            QString flawFact = flawStates.at(ui->advice->currentRow());
-
-            this->accept();
-            emit createNewAction(interruptedAction, flawFact);
-
+            // Directly create a new action
+            if (selectedOption == options.keys().at(0))
+            {
+                Plan* plan = this->planValidator->getPlan();
+                QMap<int, PlanAction> actions = plan->getActions();
+                PlanAction interruptedAction = actions.value(plan->getInterruptActionId());
+                QString flawFact = flawStates.at(ui->advice->currentRow());
+                this->accept();
+                emit createNewAction(interruptedAction, flawFact);
+            }
+            // Modify current actions
+            else if (selectedOption = options.keys().at(1))
+            {
+                this->accept();
+                emit modifyOldActions();
+            }
         }
     }
 }

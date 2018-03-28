@@ -8,9 +8,9 @@
     <name/>
     <description/>
     <project/>
-    <domain>UNNAMED</domain>
-    <problem></problem>
-    <datetime>2018.03.09 12:11:01.418 周五</datetime>
+    <domain>Blockworld</domain>
+    <problem>fourBoxes</problem>
+    <datetime>2018.03.23 21:21:49.138 周五</datetime>
     <planner id="2">
         <name>Blackbox</name>
         <version>42 Windows</version>
@@ -47,7 +47,7 @@ requirement: negative-preconditions is not supported
 </consoleOutput>
     </planner>
     <statistics>
-        <toolTime>0.062</toolTime>
+        <toolTime>0.186</toolTime>
         <time/>
         <parsingTime/>
         <nrActions>0</nrActions>

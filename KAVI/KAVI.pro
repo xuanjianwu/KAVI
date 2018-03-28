@@ -171,3 +171,5 @@ FORMS += \
 RESOURCES += \
     res/KAVIIcons.qrc \
     res/KAVIImages.qrc
+
+DISTFILES +=

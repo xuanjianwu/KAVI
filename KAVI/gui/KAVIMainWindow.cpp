@@ -178,6 +178,12 @@ void KAVIMainWindow::createActionFromPlanningDialog(PlanAction action, QString i
     }
 
     ui.actionEdit->defineOperatorFromPlanningDialog(predicateName, variableName, variableClass, targetEffectAdvice);
+    ui.actionEdit->setChanged(true);
+}
+
+void KAVIMainWindow::modifyActionsFromPlanningDialog()
+{
+    ui.tabWidget->setCurrentIndex(TAB_INDEX_OPERATORS);
 }
 
 void KAVIMainWindow::exportDomainPDDL()
@@ -1668,6 +1674,7 @@ void KAVIMainWindow::on_actionPlanning_triggered()
     //connect(dialog, SIGNAL(exportDefaultPDDL), this, SLOT(exportProblemPDDL()));
 
     connect(dialog, SIGNAL(createNewAction(PlanAction, QString)), this, SLOT(createActionFromPlanningDialog(PlanAction, QString)));
+    connect(dialog, SIGNAL(modifyOldActions()), this, SLOT(modifyActionsFromPlanningDialog()));
 
     dialog->exec();
 }
