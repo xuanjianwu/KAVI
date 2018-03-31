@@ -3,21 +3,21 @@
     <toolInformation>
         <name>KAVI</name>
         <version>1.0</version>
-        <message>Planner did not generate any solution!</message>
+        <message>Planner generated a solution.</message>
     </toolInformation>
     <name/>
     <description/>
     <project/>
-    <domain>Blockworld</domain>
-    <problem>fourBoxes</problem>
-    <datetime>2018.03.23 21:21:49.138 周五</datetime>
-    <planner id="2">
-        <name>Blackbox</name>
-        <version>42 Windows</version>
-        <date>11 Jan 2006</date>
+    <domain>logistics</domain>
+    <problem>logistics-4-0</problem>
+    <datetime>2018.03.31 16:35:10.707 周六</datetime>
+    <planner id="1">
+        <name>Metric-FF</name>
+        <version>Windows</version>
+        <date>2002</date>
         <institution/>
-        <author>Henry Kautz</author>
-        <link>https://www.cs.rochester.edu/u/kautz/satplan/blackbox/</link>
+        <author>J. Hoffmann</author>
+        <link>http://fai.cs.uni-saarland.de/hoffmann/metric-ff.html</link>
         <description/>
         <platform>
             <windows/>
@@ -28,33 +28,68 @@
             <typing/>
             <rewards/>
             <strips/>
+            <fluents/>
             <equality/>
             <conditional-effects/>
             <disjunctive-preconditions/>
+            <duration-inequalities/>
+            <durative-actions/>
+            <existential-preconditions/>
             <negative-preconditions/>
+            <numeric-fluents/>
+            <quantified-preconditions/>
+            <universal-preconditions/>
         </requirements>
-        <consoleOutput>blackbox version 42
-command line:  /cygdrive/e/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPlanners/blackbox -o E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPDDL/DefaultDomain.pddl -f E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPDDL/DefaultProblem.pddl
+        <consoleOutput>
+ff: parsing domain file
+domain 'LOGISTICS' defined
+ ... done.
+ff: parsing problem file
+problem 'LOGISTICS-4-0' defined
+ ... done.
 
-Begin solver specification
-    -maxint        0   -maxsec 10.000000  graphplan
-    -maxint        0   -maxsec 0.000000  chaff
-End solver specification
-Loading domain file: E:/plan-lab/PlanTool/KAVIProject/KAVI/KAVIPDDL/DefaultDomain.pddl
-requirement: negative-preconditions is not supported
+
+no metric specified. plan length assumed.
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is  best-first on 1*g(s) + 5*h(s) where
+    metric is  plan length
+
+advancing to distance:    8
+                          7
+                          6
+                          5
+                          4
+                          3
+                          2
+                          1
+                          0
+
+ff: found legal plan
+The pert-value:  11
+
+time spent:    0.00 seconds instantiating 164 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 48 facts and 84 actions
+               0.00 seconds creating final representation with 48 relevant facts, 0 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.31 seconds searching, evaluating 2895 states, to a max depth of 0
+               0.31 seconds total time
 
 
 </consoleOutput>
     </planner>
     <statistics>
-        <toolTime>0.186</toolTime>
-        <time/>
+        <toolTime>0.094</toolTime>
+        <time>0.31</time>
         <parsingTime/>
-        <nrActions>0</nrActions>
-        <makeSpan/>
-        <metricValue/>
+        <nrActions>23</nrActions>
+        <makeSpan></makeSpan>
+        <metricValue></metricValue>
         <planningTechnique/>
-        <additional/>
+        <additional>ParsingTime 
+</additional>
         <forcedQuit/>
     </statistics>
     <validity isValid=""/>
@@ -62,6 +97,264 @@ requirement: negative-preconditions is not supported
     <evaluation value="">
         <rationales/>
     </evaluation>
-    <plan/>
+    <plan>
+        <action id="LOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ21"/>
+                <parameter id="TRU2"/>
+                <parameter id="POS2"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>0</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="LOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ23"/>
+                <parameter id="TRU2"/>
+                <parameter id="POS2"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>1</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="DRIVE-TRUCK">
+            <parameters>
+                <parameter id="TRU2"/>
+                <parameter id="POS2"/>
+                <parameter id="APT2"/>
+                <parameter id="CIT2"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>2</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="FLY-AIRPLANE">
+            <parameters>
+                <parameter id="APN1"/>
+                <parameter id="APT2"/>
+                <parameter id="APT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>3</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="UNLOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ23"/>
+                <parameter id="TRU2"/>
+                <parameter id="APT2"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>4</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="UNLOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ21"/>
+                <parameter id="TRU2"/>
+                <parameter id="APT2"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>5</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="FLY-AIRPLANE">
+            <parameters>
+                <parameter id="APN1"/>
+                <parameter id="APT1"/>
+                <parameter id="APT2"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>6</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="LOAD-AIRPLANE">
+            <parameters>
+                <parameter id="OBJ23"/>
+                <parameter id="APN1"/>
+                <parameter id="APT2"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>7</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="LOAD-AIRPLANE">
+            <parameters>
+                <parameter id="OBJ21"/>
+                <parameter id="APN1"/>
+                <parameter id="APT2"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>8</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="LOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ11"/>
+                <parameter id="TRU1"/>
+                <parameter id="POS1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>9</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="DRIVE-TRUCK">
+            <parameters>
+                <parameter id="TRU1"/>
+                <parameter id="POS1"/>
+                <parameter id="APT1"/>
+                <parameter id="CIT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>10</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="FLY-AIRPLANE">
+            <parameters>
+                <parameter id="APN1"/>
+                <parameter id="APT2"/>
+                <parameter id="APT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>11</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="UNLOAD-AIRPLANE">
+            <parameters>
+                <parameter id="OBJ21"/>
+                <parameter id="APN1"/>
+                <parameter id="APT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>12</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="LOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ21"/>
+                <parameter id="TRU1"/>
+                <parameter id="APT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>13</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="UNLOAD-AIRPLANE">
+            <parameters>
+                <parameter id="OBJ23"/>
+                <parameter id="APN1"/>
+                <parameter id="APT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>14</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="LOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ23"/>
+                <parameter id="TRU1"/>
+                <parameter id="APT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>15</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="DRIVE-TRUCK">
+            <parameters>
+                <parameter id="TRU1"/>
+                <parameter id="APT1"/>
+                <parameter id="POS1"/>
+                <parameter id="CIT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>16</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="LOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ13"/>
+                <parameter id="TRU1"/>
+                <parameter id="POS1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>17</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="UNLOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ23"/>
+                <parameter id="TRU1"/>
+                <parameter id="POS1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>18</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="UNLOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ21"/>
+                <parameter id="TRU1"/>
+                <parameter id="POS1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>19</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="DRIVE-TRUCK">
+            <parameters>
+                <parameter id="TRU1"/>
+                <parameter id="POS1"/>
+                <parameter id="APT1"/>
+                <parameter id="CIT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>20</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="UNLOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ13"/>
+                <parameter id="TRU1"/>
+                <parameter id="APT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>21</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+        <action id="UNLOAD-TRUCK">
+            <parameters>
+                <parameter id="OBJ11"/>
+                <parameter id="TRU1"/>
+                <parameter id="APT1"/>
+                <parameter id=""/>
+            </parameters>
+            <startTime>22</startTime>
+            <duration>1</duration>
+            <notes/>
+        </action>
+    </plan>
     <comments/>
 </xmlPlan>

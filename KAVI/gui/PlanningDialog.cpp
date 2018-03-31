@@ -749,4 +749,5 @@ void PlanningDialog::on_editPlanFile_clicked()
 void PlanningDialog::on_clearConsoleLog_clicked()
 {
     ui->consoleLog->clear();
+    ui->plannerOutput->clear();
 }

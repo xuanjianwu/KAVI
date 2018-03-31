@@ -1,39 +1,88 @@
-; Testing
+; logistics domain Typed version.
 
-(define (domain Blockworld )
+(define (domain logistics )
     (:requirements :strips :typing :negative-preconditions)
     (:types
-        Robot Box - object
+        physobj place city - object
+        vehicle package - physobj
+        location airport - place
+        airplane truck - vehicle
     )
     (:predicates
-        (empty ?a - Robot)
-        (holding ?a - Robot ?b - Box)
-        (clear ?a - Box)
-        (on ?a - Box ?b - Box)
-        (onground ?a - Box)
+        (in ?a - package ?b - vehicle)
+        (at ?a - physobj ?b - place)
+        (in-city ?a - place ?b - city)
     )
-    (:action stack
-        :parameters (?R1 - Robot ?B1 - Box ?B2 - Box )
+    (:action LOAD-TRUCK
+        :parameters (?pkg - package ?truck - truck ?loc - place )
         :precondition (and 
-            (clear ?B1)
-            (not (holding ?R1 ?B2))
-        )
-        :effect (and 
-            (on ?B2 ?B1)
-            (empty ?R1)
-            (clear ?B2)
-            (not (clear ?B1))
-        )
-    )
-    (:action caonima
-        :parameters (?a - Box)
-        :precondition (and 
-            
+            (at ?pkg ?loc)
+            (at ?truck ?loc)
             
         )
         :effect (and 
-            (clear ?a)
+            (in ?pkg ?truck)
+            (not (at ?pkg ?loc))
+        )
+    )
+    (:action LOAD-AIRPLANE
+        :parameters (?pkg - package ?airplane - airplane ?loc - place )
+        :precondition (and 
+            (at ?airplane ?loc)
+            (at ?pkg ?loc)
             
+        )
+        :effect (and 
+            (in ?pkg ?airplane)
+            (not (at ?pkg ?loc))
+        )
+    )
+    (:action UNLOAD-TRUCK
+        :parameters (?pkg - package ?truck - truck ?loc - place )
+        :precondition (and 
+            (at ?truck ?loc)
+            (in ?pkg ?truck)
+            
+        )
+        :effect (and 
+            (at ?pkg ?loc)
+            (not (in ?pkg ?truck))
+        )
+    )
+    (:action UNLOAD-AIRPLANE
+        :parameters (?pkg - package ?airplane - airplane ?loc - place )
+        :precondition (and 
+            (in ?pkg ?airplane)
+            (at ?airplane ?loc)
+            
+        )
+        :effect (and 
+            (at ?pkg ?loc)
+            (not (in ?pkg ?airplane))
+        )
+    )
+    (:action DRIVE-TRUCK
+        :parameters (?truck - truck ?loc-from - place ?loc-to - place ?city - city )
+        :precondition (and 
+            (in-city ?loc-to ?city)
+            (in-city ?loc-from ?city)
+            (at ?truck ?loc-from)
+            
+        )
+        :effect (and 
+            (at ?truck ?loc-to)
+            (not (at ?truck ?loc-from))
+        )
+    )
+    (:action FLY-AIRPLANE
+        :parameters (?airplane - airplane ?loc-from - airport ?loc-to - airport )
+        :precondition (and 
+            (at ?airplane ?loc-from)
+            
+        )
+        :effect (and 
+            (at ?airplane ?loc-to)
+            (not (at ?airplane ?loc-from))
         )
     )
 )

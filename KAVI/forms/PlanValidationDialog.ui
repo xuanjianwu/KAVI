@@ -70,7 +70,11 @@
        </widget>
       </item>
       <item row="0" column="0" colspan="3">
-       <widget class="QListWidget" name="advice"/>
+       <widget class="QListWidget" name="advice">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
