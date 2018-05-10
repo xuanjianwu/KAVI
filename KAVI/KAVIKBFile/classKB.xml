@@ -9,4 +9,5 @@
     <class>vehicle</class>
     <class>truck</class>
     <class>airplane</class>
+    <class>box</class>
 </classes>

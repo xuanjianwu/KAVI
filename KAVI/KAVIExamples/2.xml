@@ -1,0 +1,16 @@
+<domain>
+    <definition>
+        <diagram>
+            <node id="6334">
+                <label>empty</label>
+                <type>predicate</type>
+                <pos>
+                    <x>-404</x>
+                    <y>-188</y>
+                </pos>
+            </node>
+        </diagram>
+    </definition>
+    <operators/>
+    <problems/>
+</domain>

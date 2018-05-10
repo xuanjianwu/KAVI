@@ -3,4 +3,5 @@
     <predicate>in-city place city</predicate>
     <predicate>at physobj place</predicate>
     <predicate>in package vehicle</predicate>
+    <predicate>empty box</predicate>
 </predicates>

@@ -9,15 +9,15 @@
         airplane truck - vehicle
     )
     (:predicates
-        (at ?a - physobj ?b - place)
         (in ?a - package ?b - vehicle)
         (in-city ?a - place ?b - city)
+        (at ?a - physobj ?b - place)
     )
     (:action LOAD-TRUCK
         :parameters (?pkg - package ?truck - truck ?loc - place )
         :precondition (and 
-            (at ?truck ?loc)
             (at ?pkg ?loc)
+            (at ?truck ?loc)
             
         )
         :effect (and 
@@ -28,8 +28,8 @@
     (:action LOAD-AIRPLANE
         :parameters (?pkg - package ?airplane - airplane ?loc - place )
         :precondition (and 
-            (at ?airplane ?loc)
             (at ?pkg ?loc)
+            (at ?airplane ?loc)
             
         )
         :effect (and 
@@ -40,8 +40,8 @@
     (:action UNLOAD-TRUCK
         :parameters (?pkg - package ?truck - truck ?loc - place )
         :precondition (and 
-            (in ?pkg ?truck)
             (at ?truck ?loc)
+            (in ?pkg ?truck)
             
         )
         :effect (and 
@@ -64,9 +64,9 @@
     (:action DRIVE-TRUCK
         :parameters (?truck - truck ?loc-from - place ?loc-to - place ?city - city )
         :precondition (and 
-            (at ?truck ?loc-from)
-            (in-city ?loc-to ?city)
             (in-city ?loc-from ?city)
+            (in-city ?loc-to ?city)
+            (at ?truck ?loc-from)
             
         )
         :effect (and 
