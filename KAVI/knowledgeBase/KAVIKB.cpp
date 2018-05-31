@@ -12,7 +12,6 @@ KAVIKB::~KAVIKB()
    predicates.clear();
 }
 
-
 bool KAVIKB::createFile(QString filePath, QString fileName)
 {
     QDir tempDir;
