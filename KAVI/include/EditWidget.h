@@ -59,7 +59,11 @@ public:
     */
     const DataWidget* xmlDataPointer();
 
-
+    /*
+     * init the interactive view
+     * @params: N/A
+     * @return: N/A
+    */
     void initInteractiveView();
 
     // 平移速度
@@ -93,9 +97,18 @@ signals:
     void updateInfoPanel(QWidget* infoWidget);
 
 public slots:
-
+    /*
+     * handle the view zoom in event
+     * @params: N/A
+     * @return: N/A
+    */
     void handleZoomIn();
 
+    /*
+     * handle the view zoom out event
+     * @params: N/A
+     * @return: N/A
+    */
     void handleZoomOut();
 
     void zoomIn();  // 放大
