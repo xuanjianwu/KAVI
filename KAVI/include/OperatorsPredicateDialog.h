@@ -65,6 +65,12 @@ private slots:
     */
     void on_precondPosCheck_toggled(bool checked);
 
+    /*
+    * handle the negative precondition set check for the new add predicate
+    * @params:
+    *       checked - check flag
+    * @return: void
+    */
     void on_precondNegCheck_toggled(bool checked);
 
 private:

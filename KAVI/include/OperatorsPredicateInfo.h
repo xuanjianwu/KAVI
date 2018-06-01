@@ -86,6 +86,14 @@ private slots:
     */
     void on_effectNegCheck_toggled(bool checked);
 
+    /*
+    * handle precondition check toggle, update predicate's set in DataWidget
+    * and refresh the predicate node in DiagramWidget
+    * emit madeChange(PredicateSetChanged)
+    * @params:
+    *       checked - check flag
+    * @return: void
+    */
     void on_precondNegCheck_toggled(bool checked);
 
 private:

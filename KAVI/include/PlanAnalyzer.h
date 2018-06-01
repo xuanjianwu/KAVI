@@ -13,6 +13,13 @@
 
 class PlanAnalyzer {
 public:
+    /*
+     * generate html report from the plan in xml format
+     * @params:
+     *      planners - all planners' infomation
+     *      xmlPlan  - the plan in xml format
+     * @return: html in string
+    */
     static QString generateHTMLSinglePlanReport(QDomElement planners, QDomElement xmlPlan);
 };
 
