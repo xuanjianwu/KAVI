@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<predicates>
+    <predicate>in-city place city</predicate>
+    <predicate>at physobj place</predicate>
+    <predicate>in package vehicle</predicate>
+</predicates>
