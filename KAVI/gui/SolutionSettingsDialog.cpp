@@ -8,7 +8,7 @@ SolutionSettingsDialog::SolutionSettingsDialog(QWidget *parent) :
     ui(new Ui::SolutionSettingsDialog)
 {
     ui->setupUi(this);
-    KAVIRunMode = Debug;
+    KAVIRunMode = Release;
     selectdPlanner = QDomElement();
     //customRootElement = false;
 
@@ -22,7 +22,7 @@ SolutionSettingsDialog::SolutionSettingsDialog(QDomElement rootElement, QWidget 
     ui(new Ui::SolutionSettingsDialog)
 {
     ui->setupUi(this);
-    KAVIRunMode = Debug;
+    KAVIRunMode = Release;
     selectdPlanner = QDomElement();
     //customRootElement = true;
 
