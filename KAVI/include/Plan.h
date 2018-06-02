@@ -2,7 +2,7 @@
  * @author: liYc
  * @date  : 2018/3/4
  * @brief : This class implements a plan. For each action we store a unique
- *          action ID - implemented as HashMap<Integer,PlanAction>
+ *          action ID - implemented as HashMap<Integer, PlanAction>
 */
 
 #ifndef PLAN_H
@@ -25,6 +25,7 @@ public:
     int getActionId() const;
     void setActionId(int value);
 
+    // get the actions' count
     int getPlanSize() const;
 
     QMap<int, PlanAction> getActions() const;
@@ -34,8 +35,13 @@ public:
     void setInterruptActionId(int value);
 
 private:
+    // the new actions's id to add
     int actionId;
+
+    // sequence of actions
     QMap<int, PlanAction> actions;
+
+    // the flawed action's id
     int interruptActionId;
 };
 

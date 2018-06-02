@@ -27,9 +27,16 @@ public:
     void setAfterActionFacts(const QSet<QString> &value);
 
 private:
+    // facts before action execution
     QSet<QString> beforeActionFacts;
+
+    // facts after action execution
     QSet<QString> afterActionFacts;
+
+    // new added facts
     QSet<QString> includeFacts;
+
+    // deleted facts
     QSet<QString> excludeFacts;
 };
 

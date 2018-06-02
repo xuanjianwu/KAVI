@@ -18,20 +18,33 @@ public:
 
     ~StateHistory();
 
+    /*
+     * init state history from plan
+     * @params:
+     *      plan - the associated plan
+     * @return: N/A
+    */
     void initStateHistoryFromPlan(Plan* plan);
 
     void clearStateHistory();
 
     void setPlan(Plan* plan);
 
+    /*
+     * build state history from plan
+     * @params: N/A
+     * @return: N/A
+    */
     void buildStateHistoryFromPlan();
 
     QList<State> getStatesList() const;
     void setStatesList(const QList<State> &value);
 
 private:
+    // list of states
     QList<State> statesList;
 
+    // the associated plan
     Plan* plan;
 };
 

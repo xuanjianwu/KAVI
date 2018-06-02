@@ -18,9 +18,20 @@ class RepairDialog : public QDialog
     Q_OBJECT
 
 public:
+    /*
+     * construct function with repair options
+     * @params:
+     *      options - all available repair options
+     * @return: N/A
+    */
     explicit RepairDialog(QStringList options, QWidget *parent = 0);
     ~RepairDialog();
 
+    /*
+     * get the selected option
+     * @params: N/A
+     * @return: N/A
+    */
     int getOption();
 
 private slots:

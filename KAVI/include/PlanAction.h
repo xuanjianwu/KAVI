@@ -1,8 +1,7 @@
 /*
  * @author: liYc
  * @date  : 2018/3/4
- * @brief : This class implements an action from plan. Save the states before and after the
- *          action, and the action's positive effects, negative effects of the world state
+ * @brief : This class implements an action from plan. Save the action's preconditions, effects and so on.
 */
 
 #ifndef PLANACTION_H
@@ -12,6 +11,11 @@
 
 class PlanAction{
 public:
+    /*
+     * construct function
+     * @params: N/A
+     * @return: N/A
+    */
     PlanAction();
 
     QString getFormula() const;
@@ -37,6 +41,14 @@ public:
 
     QMap<QString, bool> getRepairAdvice() const;
     void setRepairAdvice(const QMap<QString, bool> &value);
+
+    /*
+     * add repair advice to the action
+     * @params:
+     *      precondition - the target precondition
+     *      advice       - the bool advice for the precondition
+     * @return: N/A
+    */
     void addRepairAdvice(const QString precondition, const bool advice);
     int getRepairAdviceSize() const;
 
@@ -59,23 +71,46 @@ public:
     void setArgumentTypePair(const QMap<QString, QString> &value);
 
 private:
+    // the formula of the action
     QString formula;
+
+    // the time of the action
     double time;
+
+    // action's id
     int id;
+
+    // action's name
     QString actioName;
+
+    // action's [argument, type] pairs
     QMap<QString, QString> argumentTypePair;
 
+    // positive preconditions
     QSet<QString> positivePreconditions;
+
+    // negative preconditions
     QSet<QString> negativePreconditions;
+
+    // positive effects
     QSet<QString> positiveEffects;
+
+    // negative effects
     QSet<QString> negativeEffects;
 
+    // repair advice against the action
     QMap<QString, bool> repairAdvice;
 
+    // positive preconditions dependers
     QMap<int, QSet<QString> > positivePreconditionsDependers;
+
+    // negative preconditions dependers
     QMap<int, QSet<QString> > negativePreconditionsDependers;
 
+    // positive effects dependers
     QMap<int, QSet<QString> > positiveEffectsDependers;
+
+    // negative effects dependers
     QMap<int, QSet<QString> > negativeEffectsDependers;
 };
 

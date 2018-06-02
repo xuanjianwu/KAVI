@@ -50,6 +50,12 @@ public:
     */
     void crash();
 
+    /*
+     * the create action triggered by PlanningDialog
+     * @params:
+     *      newOperatorName - the new action's name
+     * @return: N/A
+    */
     void createActionTriggeredByPlanningDialog(QString &newOperatorName);
 
 signals:
@@ -57,7 +63,20 @@ signals:
     void loadDefaultProblemPDDL(QString problemPDDL);
 
 public slots:
+    /*
+     * the slot called by PlanningDialog to create new action
+     * @params:
+     *      action - the new action
+     *      index  - the flawed action's index
+     * @return: N/A
+    */
     void createActionFromPlanningDialog(PlanAction action, QString index);
+
+    /*
+     * the slot called by PlanningDialog to modify old actions
+     * @params: N/A
+     * @return: N/A
+    */
     void modifyActionsFromPlanningDialog();
 
     // slots for the planning dialog
